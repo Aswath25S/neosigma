@@ -1,99 +1,279 @@
 company,domain,ats,board_token,segment,employee_band,size_source_url
-Abridge,abridge.com,ashby,abridge,vertical_ai,unknown,
-Affirm,affirm.com,greenhouse,affirm,enterprise_cx,unknown,
-Airbnb,airbnb.com,greenhouse,airbnb,enterprise_cx,unknown,
-AlphaSense,alpha-sense.com,greenhouse,alphasense,vertical_ai,unknown,
-Ambience Healthcare,ambiencehealthcare.com,ashby,ambiencehealthcare,vertical_ai,unknown,
-Artisan,artisan.co,ashby,artisan,agent_native,unknown,
-Asana,asana.com,greenhouse,asana,saas_copilot,unknown,
-Assort Health,assorthealth.com,ashby,assorthealth,vertical_ai,unknown,
-Basis,getbasis.ai,lever,basis,vertical_ai,unknown,
-Bland AI,bland.ai,ashby,bland,agent_native,unknown,
-Bolt (StackBlitz),bolt.new,greenhouse,stackblitz,agent_native,unknown,
-Box,box.com,greenhouse,boxinc,saas_copilot,unknown,
-Brex,brex.com,greenhouse,brex,saas_copilot,unknown,
-Cartesia,cartesia.ai,ashby,cartesia,agent_native,unknown,
-Character.AI,character.ai,ashby,character,agent_native,unknown,
-Chime,chime.com,greenhouse,chime,enterprise_cx,unknown,
-Clay,clay.com,ashby,claylabs,saas_copilot,unknown,
-Cognition,cognition.ai,ashby,cognition,agent_native,unknown,
-Cohere,cohere.com,ashby,cohere,agent_platform,unknown,
-Cohere Health,coherehealth.com,greenhouse,coherehealth,vertical_ai,unknown,
-Coinbase,coinbase.com,greenhouse,coinbase,enterprise_cx,unknown,
-Commure,commure.com,ashby,commure,vertical_ai,unknown,
-Cresta,cresta.com,greenhouse,cresta,agent_native,unknown,
-Cursor (Anysphere),cursor.com,ashby,cursor,agent_native,unknown,
-Decagon,decagon.ai,ashby,decagon,agent_native,unknown,
-Deepgram,deepgram.com,ashby,deepgram,agent_native,unknown,
-Dialpad,dialpad.com,greenhouse,dialpad,saas_copilot,unknown,
-Discord,discord.com,greenhouse,discord,enterprise_cx,unknown,
-Distyl AI,distyl.ai,ashby,distyl,agent_platform,unknown,
-DoorDash,doordash.com,greenhouse,doordashusa,enterprise_cx,unknown,
-ElevenLabs,elevenlabs.io,ashby,elevenlabs,agent_native,unknown,
-Ema,ema.co,ashby,ema,agent_platform,unknown,
-Eudia,eudia.com,greenhouse,eudia,vertical_ai,unknown,
-Factory,factory.ai,ashby,factory,agent_native,unknown,
-Faire,faire.com,greenhouse,faire,enterprise_cx,unknown,
-Fieldguide,fieldguide.io,ashby,fieldguide,vertical_ai,unknown,
-Figma,figma.com,greenhouse,figma,saas_copilot,unknown,
-Fin (Intercom),intercom.com,greenhouse,intercom,agent_native,unknown,
-Gamma,gamma.app,ashby,gamma,saas_copilot,unknown,
-Giga,giga.ai,ashby,gigaml,agent_native,unknown,
-GitLab,gitlab.com,greenhouse,gitlab,saas_copilot,unknown,
-Glean,glean.com,greenhouse,gleanwork,agent_native,unknown,
-Gusto,gusto.com,greenhouse,gusto,saas_copilot,unknown,
-Harvey,harvey.ai,ashby,harvey,vertical_ai,unknown,
-Hebbia,hebbia.ai,ashby,hebbia-ai,vertical_ai,unknown,
-Hex,hex.tech,ashby,hex,saas_copilot,unknown,
-Infinitus,infinitus.ai,ashby,infinitus,vertical_ai,unknown,
-Instacart,instacart.com,greenhouse,instacart,enterprise_cx,unknown,
-Ironclad,ironcladapp.com,ashby,ironcladhq,vertical_ai,unknown,
-Legora,legora.com,ashby,legora,vertical_ai,unknown,
-Level AI,thelevel.ai,lever,levelai,agent_native,unknown,
-Linear,linear.app,ashby,linear,saas_copilot,unknown,
-Lovable,lovable.dev,ashby,lovable,agent_native,unknown,
-Lyft,lyft.com,greenhouse,lyft,enterprise_cx,unknown,
-Mercor,mercor.com,ashby,mercor,agent_native,unknown,
-Mercury,mercury.com,greenhouse,mercury,saas_copilot,unknown,
-n8n,n8n.io,ashby,n8n,agent_platform,unknown,
-Navan,navan.com,greenhouse,tripactions,enterprise_cx,unknown,
-Netomi,netomi.com,lever,netomi,agent_native,unknown,
-Notion,notion.so,ashby,notion,saas_copilot,unknown,
-Nubank,nubank.com.br,ashby,nubank,enterprise_cx,unknown,
-Observe.AI,observe.ai,greenhouse,observeai,agent_native,unknown,
-Oscar Health,hioscar.com,greenhouse,oscar,enterprise_cx,unknown,
-Outreach,outreach.io,lever,outreach,saas_copilot,unknown,
-Parloa,parloa.com,ashby,parloa,agent_native,unknown,
-Perplexity,perplexity.ai,ashby,perplexity,agent_native,unknown,
-Pinterest,pinterest.com,greenhouse,pinterest,enterprise_cx,unknown,
-Plain,plain.com,ashby,plain,agent_native,unknown,
-Pylon,usepylon.com,ashby,pylon,agent_native,unknown,
-Ramp,ramp.com,ashby,ramp,saas_copilot,unknown,
-Reddit,reddit.com,greenhouse,reddit,enterprise_cx,unknown,
-Replicant,replicant.com,ashby,replicant,agent_native,unknown,
-Replit,replit.com,ashby,replit,agent_native,unknown,
-Retell AI,retellai.com,ashby,retell-ai,agent_native,unknown,
-Robinhood,robinhood.com,greenhouse,robinhood,enterprise_cx,unknown,
-Rogo,rogo.ai,ashby,rogo,vertical_ai,unknown,
-Sardine,sardine.ai,ashby,sardine,vertical_ai,unknown,
-Siena AI,siena.cx,ashby,siena,agent_native,unknown,
-Sierra,sierra.ai,ashby,sierra,agent_native,unknown,
-SoFi,sofi.com,greenhouse,sofi,enterprise_cx,unknown,
-Sola,sola.ai,ashby,sola,agent_native,unknown,
-Sourcegraph,sourcegraph.com,greenhouse,sourcegraph91,agent_native,unknown,
-Speak,speak.com,ashby,speak,agent_native,unknown,
-Spotify,spotify.com,lever,spotify,enterprise_cx,unknown,
-Suki,suki.ai,greenhouse,suki,vertical_ai,unknown,
-Sword Health,swordhealth.com,greenhouse,swordhealth,vertical_ai,unknown,
-Tavus,tavus.io,ashby,tavus,agent_native,unknown,
-Tennr,tennr.com,ashby,tennr,vertical_ai,unknown,
-Tines,tines.com,greenhouse,tines,agent_platform,unknown,
-Toast,toasttab.com,greenhouse,toast,enterprise_cx,unknown,
-Typeface,typeface.ai,greenhouse,typeface,saas_copilot,unknown,
-Unify,unifygtm.com,ashby,unify,agent_native,unknown,
-Vapi,vapi.ai,ashby,vapi,agent_native,unknown,
-Vercel,vercel.com,greenhouse,vercel,agent_platform,unknown,
-Webflow,webflow.com,ashby,webflow,saas_copilot,unknown,
-Writer,writer.com,ashby,writer,agent_platform,unknown,
-You.com,you.com,greenhouse,youcom,agent_native,unknown,
-Zip,ziphq.com,ashby,zip,saas_copilot,unknown,
+Abridge,abridge.com,ashby,abridge,vertical_ai,201-1000,https://www.reveliolabs.com/companies/abridge-ai/employees/
+Ada,ada.cx,greenhouse,ada18,agent_native,unknown,
+Adobe,adobe.com,workday,adobe/wd5/external_experienced,saas_copilot,5001+,https://www.sec.gov/Archives/edgar/data/796343/000079634325000004/adbe-20241129.htm
+Affirm,affirm.com,greenhouse,affirm,enterprise_cx,1001-5000,https://en.wikipedia.org/wiki/Affirm_Holdings
+Ai2,,greenhouse,thealleninstitute,agent_platform,unknown,
+Airbnb,airbnb.com,greenhouse,airbnb,enterprise_cx,5001+,https://www.sec.gov/Archives/edgar/data/1559720/000155972025000010/abnb-20241231.htm
+Airtable,airtable.com,greenhouse,airtable,saas_copilot,unknown,
+AKASA,akasa.com,ashby,akasa,vertical_ai,unknown,
+Alex,alex.com,ashby,alexai,agent_native,unknown,
+Alloy,alloy.com,ashby,alloy,vertical_ai,unknown,
+AlphaSense,alpha-sense.com,greenhouse,alphasense,vertical_ai,1001-5000,https://www.reveliolabs.com/companies/alphasense/employees
+Ambience Healthcare,ambiencehealthcare.com,ashby,ambiencehealthcare,vertical_ai,201-1000,https://pitchbook.com/profiles/company/442685-89
+Amplemarket,amplemarket.com,greenhouse,amplemarket,agent_native,unknown,
+Anterior,anterior.com,ashby,anterior,vertical_ai,unknown,
+Apollo.io,apollo.io,greenhouse,apolloio,saas_copilot,unknown,
+Aristotle,heyaristotle.com,workable,aristotle,agent_native,unknown,
+Articulate,,lever,articulate,saas_copilot,unknown,
+Artisan,artisan.co,ashby,artisan,agent_native,1-50,https://www.ycombinator.com/companies/artisan
+Asana,asana.com,greenhouse,asana,saas_copilot,1001-5000,https://www.sec.gov/Archives/edgar/data/1477720/000147772025000045/asan-20250131.htm
+AssemblyAI,assemblyai.com,greenhouse,assemblyai,agent_platform,unknown,
+Assort Health,assorthealth.com,ashby,assorthealth,vertical_ai,51-200,https://pitchbook.com/profiles/company/529085-26
+AT&T,att.com,workday,att/wd1/ATTGeneral,enterprise_cx,unknown,
+Attention,attention.com,ashby,attention,agent_native,unknown,
+Attio,attio.com,ashby,attio,saas_copilot,unknown,
+Basis,getbasis.ai,lever,basis,vertical_ai,51-200,https://www.crunchbase.com/organization/basis-d271
+Beam AI,beam.ai,greenhouse,beam,agent_platform,unknown,
+Betterment,betterment.com,greenhouse,betterment,enterprise_cx,unknown,
+Bland AI,bland.ai,ashby,bland,agent_native,51-200,https://www.ycombinator.com/companies/bland-ai
+Bolt (StackBlitz),bolt.new,greenhouse,stackblitz,agent_native,1-50,https://www.lennysnewsletter.com/p/inside-bolt-eric-simons
+Box,box.com,greenhouse,boxinc,saas_copilot,1001-5000,https://www.macrotrends.net/stocks/charts/BOX/box/number-of-employees
+Brex,brex.com,greenhouse,brex,saas_copilot,1001-5000,https://en.wikipedia.org/wiki/Brex
+Calendly,calendly.com,greenhouse,calendly,saas_copilot,unknown,
+Campfire,campfire.ai,ashby,campfire,vertical_ai,unknown,
+Capital One,capitalone.com,workday,capitalone/wd12/Capital_One,enterprise_cx,unknown,
+Caribou,caribou.care,greenhouse,caribou,saas_copilot,unknown,
+Cartesia,cartesia.ai,ashby,cartesia,agent_native,1-50,https://pitchbook.com/profiles/company/568890-82
+Carvana,carvana.com,greenhouse,carvana,enterprise_cx,unknown,
+Cedar,cedar.com,ashby,cedar,vertical_ai,unknown,
+Character.AI,character.ai,ashby,character,agent_native,201-1000,https://www.demandsage.com/character-ai-statistics/
+Chariot Claims,chariotclaims.com,ashby,chariotclaims,vertical_ai,unknown,
+Chime,chime.com,greenhouse,chime,enterprise_cx,1001-5000,https://www.sec.gov/Archives/edgar/data/1795586/000179558626000013/chym-20251231.htm
+Clay,clay.com,ashby,claylabs,saas_copilot,201-1000,https://www.builtinnyc.com/articles/clay-secures-100m-20250808
+Cleo,meetcleo.com,greenhouse,cleo,vertical_ai,unknown,
+ClickUp,clickup.com,ashby,clickup,saas_copilot,unknown,
+Close,close.com,ashby,close,saas_copilot,unknown,
+Cloudflare,cloudflare.com,greenhouse,cloudflare,agent_platform,unknown,
+Coder,coder.com,ashby,coder,agent_platform,unknown,
+CodeRabbit,coderabbit.ai,ashby,coderabbit,agent_native,unknown,
+Cognition,cognition.ai,ashby,cognition,agent_native,51-200,https://en.wikipedia.org/wiki/Cognition_AI
+Cohere,cohere.com,ashby,cohere,agent_platform,201-1000,https://en.wikipedia.org/wiki/Cohere
+Cohere Health,coherehealth.com,greenhouse,coherehealth,vertical_ai,1001-5000,https://www.reveliolabs.com/companies/cohere-health/employees
+Coinbase,coinbase.com,greenhouse,coinbase,enterprise_cx,1001-5000,https://www.sec.gov/Archives/edgar/data/1679788/000167978826000015/coin-20251231.htm
+Commure,commure.com,ashby,commure,vertical_ai,1001-5000,https://pitchbook.com/profiles/company/187710-13
+Complement AI,complement.ai,ashby,complement,agent_native,unknown,
+Conductor,conductor.build,ashby,conductor,agent_native,unknown,
+Confido,,ashby,confido,saas_copilot,unknown,
+Counsel Health,counselhealth.com,ashby,counsel,vertical_ai,unknown,
+Credal,credal.ai,ashby,credal,agent_platform,unknown,
+Cresta,cresta.com,greenhouse,cresta,agent_native,201-1000,https://getlatka.com/companies/cresta
+CrewAI,crewai.com,workable,crewai,agent_platform,unknown,
+Crosby,crosby.ai,ashby,crosby,vertical_ai,1-50,https://graphiq.ai/dossier/crosby
+Curai,curaihealth.com,lever,curai,vertical_ai,unknown,
+Cursor (Anysphere),cursor.com,ashby,cursor,agent_native,201-1000,https://getlatka.com/companies/cursor.com
+CVS Health,cvshealth.com,workday,cvshealth/wd1/CVS_Health_Careers,enterprise_cx,unknown,
+Datadog,datadoghq.com,greenhouse,datadog,saas_copilot,5001+,https://www.sec.gov/Archives/edgar/data/1561550/000156155025000025/ddog-20241231.htm
+Decagon,decagon.ai,ashby,decagon,agent_native,201-1000,https://www.trueup.io/co/decagon-ai
+Deducta,,ashby,deducta,saas_copilot,unknown,
+Deepgram,deepgram.com,ashby,deepgram,agent_native,201-1000,https://www.reveliolabs.com/companies/deepgram/employees
+DeepJudge,deepjudge.ai,ashby,deepjudge,vertical_ai,unknown,
+DevRev,devrev.ai,greenhouse,devrev,agent_native,unknown,
+Dialpad,dialpad.com,greenhouse,dialpad,saas_copilot,1001-5000,https://www.reveliolabs.com/companies/dialpad/employees
+Discord,discord.com,greenhouse,discord,enterprise_cx,201-1000,https://corpdigest.com/company/discord/financials
+Distru,distru.com,lever,distru,saas_copilot,unknown,
+Distyl AI,distyl.ai,ashby,distyl,agent_platform,51-200,https://pitchbook.com/profiles/company/522970-21
+DoorDash,doordash.com,greenhouse,doordashusa,enterprise_cx,5001+,https://www.sec.gov/Archives/edgar/data/1792789/000162828025005715/dash-20241231.htm
+Dropbox,dropbox.com,greenhouse,dropbox,saas_copilot,unknown,
+Duolingo,duolingo.com,greenhouse,duolingo,saas_copilot,unknown,
+Dust,dust.tt,ashby,dust,agent_platform,51-200,https://getlatka.com/companies/dust.tt
+Electric Twin,,ashby,electric-twin,agent_native,unknown,
+ElevenLabs,elevenlabs.io,ashby,elevenlabs,agent_native,201-1000,https://pitchbook.com/profiles/company/509315-23
+Elicit,elicit.com,ashby,elicit,agent_native,unknown,
+EliseAI,eliseai.com,ashby,eliseai,vertical_ai,unknown,
+Ema,ema.co,ashby,ema,agent_platform,201-1000,https://profiles.crustdata.com/company/ema-unlimited
+Eudia,eudia.com,greenhouse,eudia,vertical_ai,51-200,https://tracxn.com/d/companies/eudia/__vI2X454Q0w-k8LeGRG4zi2okWCMB7dXJO4uDrcETXXw
+Eve,eve.legal,greenhouse,eve,vertical_ai,201-1000,https://tracxn.com/d/companies/eve/__b_adjUteJzrK7es3_zTViDgNlZ_Xayh_NgdNpH6Pn3E
+Exa,exa.ai,ashby,exa,agent_platform,unknown,
+Experian,experian.com,smartrecruiters,Experian,enterprise_cx,unknown,
+Factory,factory.ai,ashby,factory,agent_native,201-1000,https://www.crunchbase.com/organization/factory-19d8
+Faire,faire.com,greenhouse,faire,enterprise_cx,201-1000,https://www.trueup.io/co/faire
+Fathom,fathom.ai,ashby,fathom.video,saas_copilot,unknown,
+Fazeshift,,ashby,fazeshift,agent_native,unknown,
+Federato,federato.ai,greenhouse,federato,vertical_ai,unknown,
+Fieldguide,fieldguide.io,ashby,fieldguide,vertical_ai,51-200,https://pitchbook.com/profiles/company/437062-60
+Fig,growfig.ai,ashby,growfig,agent_native,unknown,
+Figma,figma.com,greenhouse,figma,saas_copilot,1001-5000,https://www.makerstations.io/figma-employee-statistics/
+Fin (Intercom),intercom.com,greenhouse,intercom,agent_native,1001-5000,https://www.intercom.com/blog/today-intercom-becomes-fin
+Footprint,,ashby,footprint,vertical_ai,unknown,
+Freed,getfreed.ai,ashby,freed,vertical_ai,unknown,
+FurtherAI,furtherai.com,ashby,furtherai,vertical_ai,1-50,https://www.ycombinator.com/companies/furtherai
+Gamma,gamma.app,ashby,gamma,saas_copilot,51-200,https://builtin.com/company/gamma-gammaapp/jobs
+GC AI,,ashby,gc-ai,vertical_ai,unknown,
+Giga,giga.ai,ashby,gigaml,agent_native,51-200,https://tracxn.com/d/companies/giga-ai/__Dt1Z7FUU-R5eXP5GOwbZzXWbY1vJaMzedgqQubxA8zk
+GitLab,gitlab.com,greenhouse,gitlab,saas_copilot,1001-5000,https://www.macrotrends.net/stocks/charts/GTLB/gitlab/number-of-employees
+Glean,glean.com,greenhouse,gleanwork,agent_native,201-1000,https://en.wikipedia.org/wiki/Glean_Technologies
+Gong,gong.io,greenhouse,gongio,saas_copilot,unknown,
+Gorgias,gorgias.com,ashby,gorgias,agent_native,unknown,
+Gradient Labs,gradient-labs.ai,ashby,gradient-labs,agent_native,51-200,https://dealroom.co/companies/gradient-labs/
+Grafana Labs,,greenhouse,grafanalabs,saas_copilot,unknown,
+Granola,granola.ai,ashby,granola,saas_copilot,unknown,
+Graphite,graphite.dev,ashby,graphite,agent_native,unknown,
+Greptile,greptile.com,ashby,greptile,agent_native,unknown,
+Gusto,gusto.com,greenhouse,gusto,saas_copilot,1001-5000,"https://en.wikipedia.org/wiki/Gusto,_Inc."
+Harmony AI,tryharmony.ai,ashby,harmony,agent_platform,unknown,
+Harvey,harvey.ai,ashby,harvey,vertical_ai,201-1000,https://www.trueup.io/co/harvey-ai
+Hebbia,hebbia.ai,ashby,hebbia-ai,vertical_ai,51-200,https://pitchbook.com/profiles/company/439260-40
+Hedge,,ashby,hedge,vertical_ai,unknown,
+Hello Patient,hellopatient.com,ashby,hellopatient,vertical_ai,unknown,
+Hex,hex.tech,ashby,hex,saas_copilot,51-200,https://getlatka.com/companies/hex
+HeyMilo,heymilo.ai,ashby,heymilo,agent_native,unknown,
+Hightouch,hightouch.com,ashby,hightouch,saas_copilot,unknown,
+Hiya,hiya.com,ashby,hiya,saas_copilot,unknown,
+Home Depot,homedepot.com,workday,homedepot/wd5/CareerDepot,enterprise_cx,unknown,
+HubSpot,hubspot.com,greenhouse,hubspotjobs,saas_copilot,unknown,
+Hume AI,hume.ai,greenhouse,humeai,agent_native,unknown,
+Hyperbound,hyperbound.ai,ashby,hyperbound,agent_native,unknown,
+Imbue,imbue.com,greenhouse,imbue,agent_native,unknown,
+Infinitus,infinitus.ai,ashby,infinitus,vertical_ai,51-200,https://pitchbook.com/profiles/company/267025-51
+Inkeep,inkeep.com,ashby,inkeep,agent_native,unknown,
+Instacart,instacart.com,greenhouse,instacart,enterprise_cx,1001-5000,https://www.sec.gov/Archives/edgar/data/1579091/000157909125000015/cart-20241231.htm
+Ironclad,ironcladapp.com,ashby,ironcladhq,vertical_ai,201-1000,https://en.wikipedia.org/wiki/Ironclad_(software)
+Jasper,jasper.ai,workable,jasper,saas_copilot,unknown,
+Juicebox,juicebox.ai,ashby,juicebox,agent_native,unknown,
+JUPUS,jupus.de,ashby,jupus,vertical_ai,unknown,
+Kepler,kepler.ai,ashby,kepler-ai,vertical_ai,unknown,
+Khan Academy,khanacademy.org,greenhouse,khanacademy,enterprise_cx,unknown,
+Klaviyo,klaviyo.com,greenhouse,klaviyo,saas_copilot,unknown,
+Komodo Health,,greenhouse,komodohealth,vertical_ai,unknown,
+Kustomer,kustomer.com,ashby,kustomer,saas_copilot,unknown,
+Langdock,langdock.com,ashby,langdock,agent_platform,unknown,
+Lantern,withlantern.com,ashby,lanternhq,agent_native,unknown,
+Lattice,lattice.com,greenhouse,lattice,saas_copilot,unknown,
+Lawhive,lawhive.co.uk,ashby,lawhive,vertical_ai,unknown,
+Legora,legora.com,ashby,legora,vertical_ai,201-1000,https://www.ycombinator.com/companies/legora
+Lemonade,lemonade.com,ashby,lemonade,vertical_ai,1001-5000,https://www.sec.gov/Archives/edgar/data/1691421/000169142126000016/lmnd-20251231.htm
+Level AI,thelevel.ai,lever,levelai,agent_native,201-1000,https://leadiq.com/c/level-ai/5d8d1696408f0cc3d90d4fca
+Liberate,liberate.ai,greenhouse,liberate,vertical_ai,unknown,
+Linear,linear.app,ashby,linear,saas_copilot,51-200,https://getlatka.com/companies/linear.app
+LiveKit,livekit.io,ashby,livekit,agent_platform,unknown,
+Lorikeet,lorikeetcx.ai,ashby,lorikeet,agent_native,unknown,
+Lovable,lovable.dev,ashby,lovable,agent_native,201-1000,https://pitchbook.com/profiles/company/600908-32
+Lyft,lyft.com,greenhouse,lyft,enterprise_cx,1001-5000,https://www.sec.gov/Archives/edgar/data/1759509/000175950925000025/lyft-20241231.htm
+Mason,thisismason.com,ashby,masonai,agent_native,unknown,
+Mastercard,mastercard.com,workday,mastercard/wd1/CorporateCareers,enterprise_cx,5001+,https://www.sec.gov/Archives/edgar/data/1141391/000114139124000078/mastercard2024proxystateme.pdf
+Maven AGI,mavenagi.com,ashby,maven-agi,agent_native,unknown,
+Mercor,mercor.com,ashby,mercor,agent_native,201-1000,https://pitchbook.com/profiles/company/534425-05
+Mercury,mercury.com,greenhouse,mercury,saas_copilot,201-1000,https://techcrunch.com/2024/04/17/fintech-banking-startup-mercury-is-expanding-into-consumer-banking/
+Middesk,middesk.com,ashby,middesk,vertical_ai,unknown,
+Mintlify,mintlify.com,ashby,mintlify,agent_native,51-200,https://pitchbook.com/profiles/company/493338-16
+Miro,miro.com,ashby,miro,saas_copilot,unknown,
+MongoDB,mongodb.com,greenhouse,mongodb,saas_copilot,unknown,
+Monk,monk.com,ashby,monk,vertical_ai,unknown,
+Monzo,monzo.com,greenhouse,monzo,enterprise_cx,unknown,
+N26,n26.com,greenhouse,n26,enterprise_cx,unknown,
+n8n,n8n.io,ashby,n8n,agent_platform,201-1000,https://www.reveliolabs.com/companies/n8n/employees/
+Nabla,nabla.com,ashby,nabla,vertical_ai,unknown,
+Navan,navan.com,greenhouse,tripactions,enterprise_cx,1001-5000,"https://en.wikipedia.org/wiki/Navan,_Inc."
+Netomi,netomi.com,lever,netomi,agent_native,51-200,https://pitchbook.com/profiles/company/119931-58
+New Lantern,newlantern.ai,ashby,newlantern,vertical_ai,unknown,
+Nirvana Insurance,nirvanatech.com,ashby,nirvana,vertical_ai,unknown,
+Norm Ai,norm.ai,ashby,norm-ai,vertical_ai,unknown,
+Notable,notablehealth.com,ashby,notable,vertical_ai,unknown,
+Notion,notion.so,ashby,notion,saas_copilot,1001-5000,https://www.reveliolabs.com/companies/notion-labs/employees
+Nubank,nubank.com.br,ashby,nubank,enterprise_cx,5001+,https://pitchbook.com/profiles/company/97782-40
+Numeric,numeric.io,ashby,numeric,vertical_ai,unknown,
+Observe.AI,observe.ai,greenhouse,observeai,agent_native,201-1000,https://getlatka.com/companies/observeaiobserveai
+Ojin,,greenhouse,ojin,agent_native,unknown,
+OpenEvidence,openevidence.com,ashby,openevidence,vertical_ai,unknown,
+Oscar Health,hioscar.com,greenhouse,oscar,enterprise_cx,1001-5000,https://www.sec.gov/Archives/edgar/data/1568651/000156865125000008/oscr-20241231.htm
+Otter.ai,otter.ai,greenhouse,otter,saas_copilot,unknown,
+Outreach,outreach.io,lever,outreach,saas_copilot,1001-5000,https://getlatka.com/companies/outreach
+PagerDuty,pagerduty.com,greenhouse,pagerduty,saas_copilot,unknown,
+Parabola,,ashby,parabola-io,saas_copilot,unknown,
+Paradox,paradox.ai,ashby,paradox,agent_native,unknown,
+Parloa,parloa.com,ashby,parloa,agent_native,201-1000,https://www.reveliolabs.com/companies/parloa/employees
+Pathos AI,pathos.com,ashby,pathos,vertical_ai,unknown,
+PayPal,paypal.com,workday,paypal/wd1/jobs,enterprise_cx,unknown,
+Peloton,onepeloton.com,greenhouse,peloton,enterprise_cx,unknown,
+Perplexity,perplexity.ai,ashby,perplexity,agent_native,201-1000,https://www.reveliolabs.com/companies/perplexity-ai/employees
+Phaselaw,phase.law,ashby,Pear-VC,vertical_ai,unknown,
+Phonely,phonely.ai,ashby,phonely,agent_platform,unknown,
+Pigment,pigment.com,lever,pigment,saas_copilot,unknown,
+Pinterest,pinterest.com,greenhouse,pinterest,enterprise_cx,5001+,https://www.sec.gov/Archives/edgar/data/1506293/000150629326000021/pins-20251231.htm
+Plain,plain.com,ashby,plain,agent_native,1-50,https://tracxn.com/d/companies/plain/__9U-jwJNykOCYSmu60UxL0AC_cq57J79qTd-6KcAzAWE
+PolyAI,poly.ai,greenhouse,polyai,agent_native,unknown,
+Poolside,poolside.ai,ashby,poolside,agent_native,unknown,
+Portswigger,portswigger.net,workable,portswigger,saas_copilot,201-1000,https://getlatka.com/companies/portswigger.net
+PostHog,posthog.com,ashby,posthog,saas_copilot,unknown,
+Prompt,,ashby,prompt,vertical_ai,unknown,
+Proton,proton.me,greenhouse,proton,saas_copilot,unknown,
+Pylon,usepylon.com,ashby,pylon,agent_native,51-200,https://www.ycombinator.com/companies/pylon-2
+Rad AI,radai.com,ashby,radai,vertical_ai,unknown,
+Ramp,ramp.com,ashby,ramp,saas_copilot,1001-5000,https://en.wikipedia.org/wiki/Ramp_(company)
+Rasa,rasa.com,ashby,rasa,agent_platform,unknown,
+Read AI,read.ai,ashby,read-ai,saas_copilot,unknown,
+Reddit,reddit.com,greenhouse,reddit,enterprise_cx,1001-5000,https://www.sec.gov/Archives/edgar/data/1713445/000171344525000018/rddt-20241231.htm
+Regard,withregard.com,ashby,regard,vertical_ai,unknown,
+Relevance AI,relevanceai.com,ashby,relevanceai,agent_platform,unknown,
+Replicant,replicant.com,ashby,replicant,agent_native,51-200,https://www.choppingblock.ai/companies/replicant
+Replit,replit.com,ashby,replit,agent_native,201-1000,https://www.reveliolabs.com/companies/replit/employees
+ResortPass,resortpass.com,greenhouse,resortpass,saas_copilot,unknown,
+Retell AI,retellai.com,ashby,retell-ai,agent_native,1-50,https://www.ycombinator.com/companies/retell-ai
+Ribbon,ribbon.ai,lever,ribbon,agent_native,unknown,
+Rillet,rillet.com,ashby,rillet,vertical_ai,unknown,
+River,rivergtm.com,ashby,river,agent_native,unknown,
+Robinhood,robinhood.com,greenhouse,robinhood,enterprise_cx,1001-5000,https://www.fintechfutures.com/job-cuts-new-hires/robinhood-to-cut-full-time-workforce-by-10-percent
+Rogo,rogo.ai,ashby,rogo,vertical_ai,51-200,https://www.forbes.com/companies/rogo/
+Salesforce,salesforce.com,workday,salesforce/wd12/External_Career_Site,agent_platform,5001+,https://www.sec.gov/Archives/edgar/data/1108524/000110852425000006/crm-20250131.htm
+Sardine,sardine.ai,ashby,sardine,vertical_ai,201-1000,https://www.sardine.ai/careers
+Seeq,seeq.com,workable,seeq,saas_copilot,unknown,
+ServiceNow,servicenow.com,smartrecruiters,ServiceNow,agent_platform,unknown,
+Sesame,sesame.com,ashby,sesame,agent_native,unknown,
+Shared Context Lab,sharedcontextlab.com,ashby,sharedcontextlab,agent_native,unknown,
+Shepherd,,ashby,shepherd,vertical_ai,unknown,
+Siena AI,siena.cx,ashby,siena,agent_native,51-200,https://crustdata.com/profiles/company/siena-ai
+Sierra,sierra.ai,ashby,sierra,agent_native,201-1000,https://getlatka.com/companies/sierra
+Sixfold,sixfold.ai,greenhouse,sixfold,vertical_ai,unknown,
+Slang AI,slang.ai,lever,slangai,agent_native,unknown,
+SmarterDx,smarterdx.com,greenhouse,smarterdx,vertical_ai,unknown,
+Snowflake,snowflake.com,ashby,snowflake,saas_copilot,5001+,https://www.sec.gov/Archives/edgar/data/1640147/000164014725000052/snow-20250131.htm
+SoFi,sofi.com,greenhouse,sofi,enterprise_cx,1001-5000,https://www.sec.gov/Archives/edgar/data/1818874/000181887425000016/sofi-20241231.htm
+Sola,sola.ai,ashby,sola,agent_native,1-50,https://pitchbook.com/profiles/company/532981-18
+Sourcegraph,sourcegraph.com,greenhouse,sourcegraph91,agent_native,51-200,https://pitchbook.com/profiles/company/92365-12
+Speak,speak.com,ashby,speak,agent_native,51-200,https://pitchbook.com/profiles/company/178888-96
+Spotify,spotify.com,lever,spotify,enterprise_cx,5001+,https://www.sec.gov/Archives/edgar/data/1639920/000163992025000003/ck0001639920-20241231.htm
+Squarespace,squarespace.com,greenhouse,squarespace,saas_copilot,unknown,
+Stack AI,stack-ai.com,ashby,stack-ai,agent_platform,unknown,
+Starbridge,starbridge.ai,ashby,starbridge,saas_copilot,unknown,
+Stealth,,ashby,stealth,agent_native,unknown,
+Stellar,stellarcs.ai,ashby,stellar,agent_platform,unknown,
+Strix,strix.ai,ashby,strix,agent_native,unknown,
+Suki,suki.ai,greenhouse,suki,vertical_ai,201-1000,https://pitchbook.com/profiles/company/227471-23
+Sword Health,swordhealth.com,greenhouse,swordhealth,vertical_ai,201-1000,https://en.wikipedia.org/wiki/Sword_Health
+T-Mobile,t-mobile.com,workday,tmobile/wd1/External,enterprise_cx,unknown,
+Taktile,taktile.com,ashby,taktile,vertical_ai,unknown,
+Tandem Health,,ashby,tandem-health,vertical_ai,unknown,
+Target,target.com,workday,target/wd5/targetcareers,enterprise_cx,unknown,
+Tavus,tavus.io,ashby,tavus,agent_native,51-200,https://www.ycombinator.com/companies/tavus
+telli,telli.com,ashby,telli,agent_native,unknown,
+Tennr,tennr.com,ashby,tennr,vertical_ai,201-1000,https://pitchbook.com/profiles/company/509386-15
+Thumbtack,thumbtack.com,ashby,thumbtack,enterprise_cx,unknown,
+Tines,tines.com,greenhouse,tines,agent_platform,201-1000,https://getlatka.com/companies/tines
+Toast,toasttab.com,greenhouse,toast,enterprise_cx,5001+,https://www.sec.gov/Archives/edgar/data/1650164/000165016425000072/tost-20241231.htm
+Twilio,twilio.com,greenhouse,twilio,agent_platform,unknown,
+Typeface,typeface.ai,greenhouse,typeface,saas_copilot,51-200,https://pitchbook.com/profiles/company/520808-59
+Typeform,typeform.com,greenhouse,typeform,saas_copilot,unknown,
+Udemy,udemy.com,greenhouse,udemy,enterprise_cx,unknown,
+Unify,unifygtm.com,ashby,unify,agent_native,51-200,https://builtin.com/company/unify-unifygtmcom
+Unit,unit.inc,ashby,unit,agent_platform,unknown,
+Vapi,vapi.ai,ashby,vapi,agent_native,1-50,https://www.ycombinator.com/companies/vapi
+Vercel,vercel.com,greenhouse,vercel,agent_platform,201-1000,https://en.wikipedia.org/wiki/Vercel
+Verizon,verizon.com,workday,verizon/wd12/verizon-careers,enterprise_cx,unknown,
+Warp,warp.dev,ashby,warp,agent_native,unknown,
+Wealthsimple,wealthsimple.com,ashby,wealthsimple,enterprise_cx,unknown,
+Weave Bio,weave.bio,greenhouse,weave,agent_native,unknown,
+Webflow,webflow.com,ashby,webflow,saas_copilot,1001-5000,https://www.reveliolabs.com/companies/webflow/employees/
+Wells Fargo,wellsfargo.com,workday,wf/wd1/WellsFargoJobs,enterprise_cx,unknown,
+Wise,wise.com,smartrecruiters,Wise,enterprise_cx,5001+,https://wise.com/imaginary-v2/images/7225a78f5d177b9bba2c8152e664ee7e-Wiseplc-FY2025.pdf
+Wonderful,wonderful.ai,ashby,wonderful,agent_native,unknown,
+Workday,workday.com,workday,workday/wd5/Workday,saas_copilot,5001+,https://www.sec.gov/Archives/edgar/data/1327811/000132781125000056/wday-20250131.htm
+WorkHero,workhero.pro,ashby,workhero,vertical_ai,unknown,
+Writer,writer.com,ashby,writer,agent_platform,201-1000,https://pitchbook.com/profiles/company/439866-01
+You.com,you.com,greenhouse,youcom,agent_native,51-200,https://www.crunchbase.com/organization/you-com-523e
+Yuma AI,yuma.ai,greenhouse,yuma,agent_native,unknown,
+Zapier,zapier.com,ashby,zapier,saas_copilot,unknown,
+Zendesk,zendesk.com,workday,zendesk/wd1/Zendesk,agent_platform,5001+,https://www.reveliolabs.com/companies/zendesk/employees
+Zip,ziphq.com,ashby,zip,saas_copilot,201-1000,https://siliconvalleyinvestclub.com/companies/ziphq/
+Zocdoc,zocdoc.com,greenhouse,zocdoc,enterprise_cx,unknown,
+Zowie,getzowie.com,ashby,zowie,agent_native,unknown,

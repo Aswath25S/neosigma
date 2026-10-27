@@ -1,8 +1,9 @@
 // npm run sizes [-- --all]
 // Fills employee_band and size_source_url in config/sources.csv from a public
 // source found with Claude's web search tool. LinkedIn, Glassdoor and Indeed
-// are excluded. By default only lead and rejected companies are looked up,
-// since fit only matters for them. Rows that already have a band are skipped.
+// are excluded. By default only lead companies are looked up, since fit only
+// matters for them (--all for every company). Rows that already have a band
+// are skipped.
 
 import { eq } from "drizzle-orm";
 import { getDb, schema } from "../src/lib/db/client";
@@ -24,11 +25,14 @@ async function main() {
   }
   const db = getDb();
   const all = process.argv.includes("--all");
-  const statusBySlug = new Map(db.select().from(schema.companies).all().map((c) => [c.slug, c.status]));
+  // Leads are companies with a posting that passed both gates (scores may
+  // not have been recomputed yet in this run).
+  const leadIds = new Set(db.select({ id: schema.postings.companyId }).from(schema.postings).where(eq(schema.postings.passedGates, true)).all().map((r) => r.id));
+  const leadSlugs = new Set(db.select().from(schema.companies).all().filter((c) => leadIds.has(c.id)).map((c) => c.slug));
   const sources = readSources();
   for (const s of sources) {
     if (s.employee_band && s.employee_band !== "unknown") continue;
-    if (!all && statusBySlug.get(slugify(s.company)) === "no_roles") continue;
+    if (!all && !leadSlugs.has(slugify(s.company))) continue;
     const user = `Company: ${s.company}\nWebsite: ${s.domain}`;
     try {
       const r = await cached("size", [MODELS.sizes, SYSTEM, user], () =>

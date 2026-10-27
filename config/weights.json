@@ -56,7 +56,10 @@
     "min_same_title_postings": 5
   },
   "fetch": {
-    "max_posting_age_days": 60,
-    "dedupe_similarity": 0.9
+    "max_posting_age_days": 180,
+    "dedupe_similarity": 0.9,
+    "regions": "global",
+    "english_only": true,
+    "max_details_per_board": 150
   }
 }

@@ -1,6 +1,6 @@
-import { applyGates, classifyTitle, extractPosting, FAIL_REASON_TEXT, type FailReason, type TitleResult } from "@/lib/analyze";
+import { applyGates, extractPosting, FAIL_REASON_TEXT, judgePosting, type FailReason } from "@/lib/analyze";
+import { stage1Note } from "@/lib/report";
 import { hasApiKey } from "@/lib/claude";
-import { matchTitle } from "@/lib/filters";
 import { normalizeWhitespace } from "@/lib/text";
 import type { ReportData } from "@/components/PostingReport";
 
@@ -63,7 +63,10 @@ export async function POST(req: Request) {
       };
       try {
         stage("reading", "running");
-        let title: TitleResult | null = guessTitle ? await classifyTitle(guessTitle, { cache: false }) : null;
+        // Stage 1 runs alongside extraction: Drop-list titles drop, keep and
+        // conditional titles pass, anything else is judged on its description.
+        const stage1Promise = judgePosting(guessTitle, text, { cache: false });
+        stage1Promise.catch(() => {}); // awaited below; avoids an unhandled rejection if extraction fails first
 
         const result = await extractPosting(text, guessTitle, company, {
           cache: false,
@@ -78,15 +81,13 @@ export async function POST(req: Request) {
         advance("scoring");
 
         const extractedTitle = result.extraction.title || guessTitle;
-        if (!title && extractedTitle) title = await classifyTitle(extractedTitle, { cache: false });
-        const titleList = title?.list ?? (matchTitle(extractedTitle).list === "none" ? "irrelevant" : "keep");
+        const { list: titleList, stage1 } = await stage1Promise;
         const g = applyGates(titleList === "conditional" ? "conditional" : "keep", result.duties, result.evidence);
 
         let failReason: FailReason | null = null;
-        if (titleList === "drop") failReason = "title_drop_list";
-        else if (titleList === "irrelevant") failReason = "title_irrelevant";
+        if (titleList === "drop") failReason = stage1.via === "title" ? "title_drop_list" : "screen_not_main_job";
         else failReason = g.failReason;
-        const failDetail = failReason === g.failReason ? g.failDetail : null;
+        const failDetail = failReason === g.failReason ? g.failDetail : stage1.screen?.reason ?? null;
         const ex = result.extraction;
 
         const data: ReportData = {
@@ -109,7 +110,7 @@ export async function POST(req: Request) {
           gates: {
             ...g,
             titleList,
-            titleNote: title?.check ? `Claude title check: ${title.check.decision}. ${title.check.reason}` : title ? `Matched the ${title.list} list.` : "Title not on any list.",
+            titleNote: stage1Note(stage1),
             passed: failReason === null,
             failReason,
             failDetail,

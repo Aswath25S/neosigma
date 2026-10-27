@@ -1,11 +1,12 @@
 // npm run extract [-- --limit 20] [-- --force] [-- --ids a,b]
-// Stage 1 (Claude title check for titles that only mention AI), then one
+// Stage 1, Claude part: every posting not selected by a keep/conditional
+// title is judged on its description by the Claude screen. Then one
 // extraction call per posting, span verification, stage 2 and the two gates.
 // Claude results are cached by posting hash, so re-runs are cheap.
 
 import { and, eq, isNull } from "drizzle-orm";
 import { getDb, schema } from "../src/lib/db/client";
-import { applyGates, classifyTitle, extractPosting } from "../src/lib/analyze";
+import { applyGates, extractPosting, screenDescription, type Stage1 } from "../src/lib/analyze";
 import { hasApiKey } from "../src/lib/claude";
 import { setMeta } from "../src/lib/meta";
 
@@ -16,6 +17,9 @@ const opt = (name: string) => {
   return i >= 0 ? args[i + 1] : undefined;
 };
 const RED_TEAM = /\bred[\s-]*team/i;
+// Postings that failed a gate are re-checked with --force (for example after
+// a threshold change in config/roles.json); their extraction is cached.
+const GATE_REASONS = new Set(["stage2_too_few_duties", "conditional_too_few_tasks", "gate_overlap", "gate_live_agent"]);
 
 async function main() {
   if (!hasApiKey()) {
@@ -26,26 +30,32 @@ async function main() {
   const limit = opt("limit") ? Number(opt("limit")) : Infinity;
   const ids = opt("ids")?.split(",");
 
-  // ---- Stage 1, Claude part ----
-  const ambiguous = db.select().from(schema.postings)
-    .where(and(eq(schema.postings.titleList, "ambiguous"), isNull(schema.postings.failReason))).all();
-  console.log(`title check: ${ambiguous.length} titles`);
-  const titleQueue = [...ambiguous];
-  await Promise.all(Array.from({ length: 6 }, async () => {
-    while (titleQueue.length) {
-      const p = titleQueue.shift()!;
+  // ---- Stage 1, Claude part: description screen ----
+  const pending = db.select().from(schema.postings)
+    .where(and(eq(schema.postings.titleList, "screen"), isNull(schema.postings.failReason))).all();
+  console.log(`description screen: ${pending.length} postings`);
+  const tally = { keep: 0, conditional: 0, drop: 0 };
+  const screenQueue = [...pending];
+  await Promise.all(Array.from({ length: 8 }, async () => {
+    while (screenQueue.length) {
+      const p = screenQueue.shift()!;
       try {
-        const r = await classifyTitle(p.title);
-        if (!r) continue;
-        const failReason = r.list === "drop" ? "title_drop_list" : r.list === "irrelevant" ? "title_irrelevant" : null;
-        db.update(schema.postings).set({ titleList: r.list, titleCheck: r.check, failReason })
-          .where(eq(schema.postings.id, p.id)).run();
-        console.log(`  [${r.list}] ${p.title}`);
+        const screen = await screenDescription(p.title, p.rawText);
+        const stage1 = { ...(p.titleCheck as Stage1), via: "description" as const, screen };
+        tally[screen.decision]++;
+        db.update(schema.postings).set({
+          titleList: screen.decision === "drop" ? "screen" : screen.decision,
+          titleCheck: stage1,
+          failReason: screen.decision === "drop" ? "screen_not_main_job" : null,
+          failDetail: screen.decision === "drop" ? screen.reason : null,
+        }).where(eq(schema.postings.id, p.id)).run();
+        if (screen.decision !== "drop") console.log(`  [${screen.decision}] ${p.title} (${Math.round(screen.t1_t6_share * 100)}%)`);
       } catch (err) {
-        console.warn(`  title check failed for "${p.title}": ${(err as Error).message}`);
+        console.warn(`  screen failed for "${p.title}": ${(err as Error).message}`);
       }
     }
   }));
+  console.log(`description screen: ${tally.keep} keep, ${tally.conditional} conditional, ${tally.drop} drop`);
 
   // ---- Extraction ----
   let rows = db.select({ p: schema.postings, companyName: schema.companies.name })
@@ -53,7 +63,7 @@ async function main() {
     .innerJoin(schema.companies, eq(schema.postings.companyId, schema.companies.id))
     .all()
     .filter(({ p }) =>
-      (p.titleList === "keep" || p.titleList === "conditional") && !p.failReason?.startsWith("out_of") && p.failReason !== "too_old" ||
+      ((p.titleList === "keep" || p.titleList === "conditional") && (!p.failReason || GATE_REASONS.has(p.failReason))) ||
       (p.failReason === "title_drop_list" && RED_TEAM.test(p.title)))
     .filter(({ p }) => flag("force") || !p.extractedAt)
     .filter(({ p }) => !ids || ids.includes(p.id));
@@ -65,7 +75,7 @@ async function main() {
   let done = 0;
   let failed = 0;
   const queue = [...rows];
-  await Promise.all(Array.from({ length: 4 }, async () => {
+  await Promise.all(Array.from({ length: 8 }, async () => {
     while (queue.length) {
       const { p, companyName } = queue.shift()!;
       const gapsOnly = p.failReason === "title_drop_list";

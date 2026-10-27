@@ -1,19 +1,12 @@
-// Builds the seed list: tries likely board tokens for each candidate company
-// on Ashby, Greenhouse and Lever, keeps the boards that exist, and counts
-// postings whose titles match the stage-1 lists (US/remote only). Output goes
-// to data/seed_probe.json for review before it is written to sources.csv.
-//
-//   npx tsx scripts/probe-seeds.ts            (first batch)
-//   npx tsx scripts/probe-seeds.ts --extra    (second batch, merged)
+// Candidate companies for the seed list, with likely board tokens. The
+// discovery script tries each token on every supported board and keeps the
+// ones that exist. Segments are this list's best guess.
 
-import fs from "node:fs";
-import { fetchAshby, fetchGreenhouse, fetchLever } from "../src/lib/fetchers/boards";
-import type { Ats, RawPosting, Segment, Source } from "../src/lib/fetchers/types";
-import { ageInDays, locationInScope, matchTitle } from "../src/lib/filters";
+import type { Segment } from "../src/lib/fetchers/types";
 
-type Cand = [name: string, domain: string, segment: Segment, tokens: string[]];
+export type Cand = [name: string, domain: string, segment: Segment, tokens: string[]];
 
-const CANDIDATES: Cand[] = [
+export const CANDIDATES: Cand[] = [
   // agent_native
   ["Sierra", "sierra.ai", "agent_native", ["sierra"]],
   ["Decagon", "decagon.ai", "agent_native", ["decagon"]],
@@ -164,7 +157,7 @@ const CANDIDATES: Cand[] = [
 ];
 
 // Second batch, probed with --extra and merged into the existing output.
-const EXTRA: Cand[] = [
+export const EXTRA: Cand[] = [
   ["Cartesia", "cartesia.ai", "agent_native", ["cartesia"]],
   ["Deepgram", "deepgram.com", "agent_native", ["deepgram"]],
   ["Rasa", "rasa.com", "agent_platform", ["rasa"]],
@@ -207,79 +200,145 @@ const EXTRA: Cand[] = [
   ["Hightouch", "hightouch.com", "saas_copilot", ["hightouch"]],
 ];
 
-const FETCHERS: Record<"ashby" | "greenhouse" | "lever", (s: Source) => Promise<RawPosting[]>> = {
-  ashby: fetchAshby,
-  greenhouse: fetchGreenhouse,
-  lever: fetchLever,
-};
+// Third batch: more agent-native and vertical-AI companies.
+export const EXTRA2: Cand[] = [
+  ["Fini", "usefini.com", "agent_native", ["fini", "usefini"]],
+  ["Yuma AI", "yuma.ai", "agent_native", ["yuma", "yumaai"]],
+  ["Zowie", "getzowie.com", "agent_native", ["zowie"]],
+  ["Kapa.ai", "kapa.ai", "agent_native", ["kapa", "kapaai"]],
+  ["Inkeep", "inkeep.com", "agent_native", ["inkeep"]],
+  ["Gladly", "gladly.com", "agent_native", ["gladly"]],
+  ["Dixa", "dixa.com", "agent_native", ["dixa"]],
+  ["Tidio", "tidio.com", "agent_native", ["tidio"]],
+  ["Leena AI", "leena.ai", "agent_platform", ["leenaai", "leena"]],
+  ["Lorikeet", "lorikeetcx.ai", "agent_native", ["lorikeet", "lorikeetcx"]],
+  ["Gradient Labs", "gradient-labs.ai", "agent_native", ["gradient-labs", "gradientlabs"]],
+  ["Wonderful", "wonderful.ai", "agent_native", ["wonderful"]],
+  ["DevRev", "devrev.ai", "agent_native", ["devrev"]],
+  ["Hello Patient", "hellopatient.com", "vertical_ai", ["hellopatient", "hello-patient"]],
+  ["EliseAI", "eliseai.com", "vertical_ai", ["eliseai"]],
+  ["Slang AI", "slang.ai", "agent_native", ["slang", "slangai"]],
+  ["Goodcall", "goodcall.com", "agent_native", ["goodcall"]],
+  ["Thoughtly", "thoughtly.com", "agent_native", ["thoughtly"]],
+  ["AssemblyAI", "assemblyai.com", "agent_platform", ["assemblyai"]],
+  ["Sesame", "sesame.com", "agent_native", ["sesame"]],
+  ["Toma", "toma.com", "agent_native", ["toma"]],
+  ["Leaping AI", "leapingai.com", "agent_native", ["leapingai", "leaping-ai"]],
+  ["LiveKit", "livekit.io", "agent_platform", ["livekit"]],
+  ["Daily", "daily.co", "agent_platform", ["daily"]],
+  ["Augment Code", "augmentcode.com", "agent_native", ["augmentcode", "augment", "augment-computing"]],
+  ["Windsurf", "windsurf.com", "agent_native", ["windsurf", "codeium", "exafunction"]],
+  ["Poolside", "poolside.ai", "agent_native", ["poolside"]],
+  ["Tabnine", "tabnine.com", "agent_native", ["tabnine"]],
+  ["Qodo", "qodo.ai", "agent_native", ["qodo", "codium"]],
+  ["CodeRabbit", "coderabbit.ai", "agent_native", ["coderabbit"]],
+  ["Graphite", "graphite.dev", "agent_native", ["graphite", "withgraphite"]],
+  ["Warp", "warp.dev", "agent_native", ["warp", "warpdotdev"]],
+  ["All Hands AI", "all-hands.dev", "agent_native", ["allhands", "all-hands-ai"]],
+  ["Greptile", "greptile.com", "agent_native", ["greptile"]],
+  ["Mintlify", "mintlify.com", "agent_native", ["mintlify"]],
+  ["Elicit", "elicit.com", "agent_native", ["elicit"]],
+  ["Consensus", "consensus.app", "agent_native", ["consensus"]],
+  ["Exa", "exa.ai", "agent_platform", ["exa"]],
+  ["Granola", "granola.ai", "saas_copilot", ["granola"]],
+  ["Read AI", "read.ai", "saas_copilot", ["readai", "read-ai"]],
+  ["Amplemarket", "amplemarket.com", "agent_native", ["amplemarket"]],
+  ["Apollo.io", "apollo.io", "saas_copilot", ["apolloio", "apollo"]],
+  ["Attention", "attention.com", "agent_native", ["attention"]],
+  ["Rox", "rox.com", "agent_native", ["rox"]],
+  ["Juicebox", "juicebox.ai", "agent_native", ["juicebox"]],
+  ["Ribbon", "ribbon.ai", "agent_native", ["ribbon", "ribbonai"]],
+  ["Alex", "alex.com", "agent_native", ["alex", "alexai"]],
+  ["Eve", "eve.legal", "vertical_ai", ["eve", "evelegal"]],
+  ["Supio", "supio.com", "vertical_ai", ["supio"]],
+  ["Crosby", "crosby.ai", "vertical_ai", ["crosby"]],
+  ["DeepJudge", "deepjudge.ai", "vertical_ai", ["deepjudge"]],
+  ["Lawhive", "lawhive.co.uk", "vertical_ai", ["lawhive"]],
+  ["Darrow", "darrow.ai", "vertical_ai", ["darrow"]],
+  ["Notable", "notablehealth.com", "vertical_ai", ["notable", "notablehealth"]],
+  ["Freed", "getfreed.ai", "vertical_ai", ["freed", "getfreed"]],
+  ["Heidi Health", "heidihealth.com", "vertical_ai", ["heidi", "heidihealth"]],
+  ["OpenEvidence", "openevidence.com", "vertical_ai", ["openevidence"]],
+  ["Regard", "withregard.com", "vertical_ai", ["regard", "withregard"]],
+  ["AKASA", "akasa.com", "vertical_ai", ["akasa"]],
+  ["SmarterDx", "smarterdx.com", "vertical_ai", ["smarterdx"]],
+  ["Cedar", "cedar.com", "vertical_ai", ["cedar"]],
+  ["Zocdoc", "zocdoc.com", "enterprise_cx", ["zocdoc"]],
+  ["Counsel Health", "counselhealth.com", "vertical_ai", ["counselhealth", "counsel"]],
+  ["Numeric", "numeric.io", "vertical_ai", ["numeric"]],
+  ["Rillet", "rillet.com", "vertical_ai", ["rillet"]],
+  ["Campfire", "campfire.ai", "vertical_ai", ["campfire"]],
+  ["Pigment", "pigment.com", "saas_copilot", ["pigment"]],
+  ["Daloopa", "daloopa.com", "vertical_ai", ["daloopa"]],
+  ["Alloy", "alloy.com", "vertical_ai", ["alloy"]],
+  ["Unit21", "unit21.ai", "vertical_ai", ["unit21"]],
+  ["Greenlite", "greenlite.ai", "vertical_ai", ["greenlite"]],
+  ["Parcha", "parcha.com", "vertical_ai", ["parcha"]],
+  ["Taktile", "taktile.com", "vertical_ai", ["taktile"]],
+  ["Sixfold", "sixfold.ai", "vertical_ai", ["sixfold"]],
+  ["Federato", "federato.ai", "vertical_ai", ["federato"]],
+  ["Nirvana Insurance", "nirvanatech.com", "vertical_ai", ["nirvanatech", "nirvana"]],
+  ["Liberate", "liberate.ai", "vertical_ai", ["liberate"]],
+  ["Lyzr", "lyzr.ai", "agent_platform", ["lyzr"]],
+  ["Beam AI", "beam.ai", "agent_platform", ["beamai", "beam"]],
+  ["Stack AI", "stack-ai.com", "agent_platform", ["stackai", "stack-ai"]],
+  ["Langdock", "langdock.com", "agent_platform", ["langdock"]],
+  ["Orby", "orby.ai", "agent_platform", ["orby", "orbyai"]],
+  ["Credal", "credal.ai", "agent_platform", ["credal"]],
+  ["ClickUp", "clickup.com", "saas_copilot", ["clickup"]],
+  ["Coda", "coda.io", "saas_copilot", ["coda"]],
+  ["Lattice", "lattice.com", "saas_copilot", ["lattice"]],
+  ["Calendly", "calendly.com", "saas_copilot", ["calendly"]],
+  ["Typeform", "typeform.com", "saas_copilot", ["typeform"]],
+  ["Klaviyo", "klaviyo.com", "saas_copilot", ["klaviyo"]],
+  ["Squarespace", "squarespace.com", "saas_copilot", ["squarespace"]],
+  ["Datadog", "datadoghq.com", "saas_copilot", ["datadog"]],
+  ["Twilio", "twilio.com", "agent_platform", ["twilio"]],
+  ["Cloudflare", "cloudflare.com", "agent_platform", ["cloudflare"]],
+  ["MongoDB", "mongodb.com", "saas_copilot", ["mongodb"]],
+  ["PagerDuty", "pagerduty.com", "saas_copilot", ["pagerduty"]],
+  ["Monday.com", "monday.com", "saas_copilot", ["mondaycom", "monday"]],
+  ["Udemy", "udemy.com", "enterprise_cx", ["udemy"]],
+  ["Chegg", "chegg.com", "enterprise_cx", ["chegg"]],
+  ["Quizlet", "quizlet.com", "enterprise_cx", ["quizlet"]],
+  ["Khan Academy", "khanacademy.org", "enterprise_cx", ["khanacademy"]],
+  ["Expedia", "expediagroup.com", "enterprise_cx", ["expedia", "expediagroup"]],
+  ["Booking.com", "booking.com", "enterprise_cx", ["bookingcom"]],
+  ["Uber", "uber.com", "enterprise_cx", ["uber"]],
+  ["Grubhub", "grubhub.com", "enterprise_cx", ["grubhub"]],
+  ["Wayfair", "wayfair.com", "enterprise_cx", ["wayfair"]],
+  ["Etsy", "etsy.com", "enterprise_cx", ["etsy"]],
+  ["Carvana", "carvana.com", "enterprise_cx", ["carvana"]],
+  ["Opendoor", "opendoor.com", "enterprise_cx", ["opendoor"]],
+  ["Betterment", "betterment.com", "enterprise_cx", ["betterment"]],
+  ["Monzo", "monzo.com", "enterprise_cx", ["monzo"]],
+  ["Revolut", "revolut.com", "enterprise_cx", ["revolut"]],
+  ["N26", "n26.com", "enterprise_cx", ["n26"]],
+  ["Klarna", "klarna.com", "enterprise_cx", ["klarnaab", "klarna-bank"]],
+];
 
-interface Found {
-  company: string; domain: string; segment: Segment; ats: Ats; token: string;
-  jobs: number; inScope: number; recent: number;
-  matches: { title: string; list: string; ageDays: number | null; location: string }[];
-}
-
-async function probe(c: Cand): Promise<Found | null> {
-  const [company, domain, segment, tokens] = c;
-  for (const token of tokens) {
-    // Try all three hosts at once; politeFetch spaces requests per host.
-    const results = await Promise.all(
-      (Object.keys(FETCHERS) as (keyof typeof FETCHERS)[]).map(async (ats) => {
-        try {
-          const src: Source = { company, domain, ats, board_token: token, segment, employee_band: "", size_source_url: "" };
-          return { ats, jobs: await FETCHERS[ats](src) };
-        } catch {
-          return { ats, jobs: [] as RawPosting[] };
-        }
-      }),
-    );
-    const best = results.sort((a, b) => b.jobs.length - a.jobs.length)[0];
-    if (best.jobs.length > 0) {
-      const inScope = best.jobs.filter((j) => locationInScope(j.locations, j.remote));
-      const matches = inScope
-        .map((j) => ({ j, m: matchTitle(j.title) }))
-        .filter(({ m }) => m.list !== "none")
-        .map(({ j, m }) => ({
-          title: j.title, list: m.list, ageDays: ageInDays(j.postedAt) && Math.round(ageInDays(j.postedAt)!),
-          location: j.locations.join(" / "),
-        }));
-      return {
-        company, domain, segment, ats: best.ats, token, jobs: best.jobs.length, inScope: inScope.length,
-        recent: inScope.filter((j) => (ageInDays(j.postedAt) ?? 0) <= 60).length, matches,
-      };
-    }
-  }
-  return null;
-}
-
-async function main() {
-  const extra = process.argv.includes("--extra");
-  const prev = extra && fs.existsSync("data/seed_probe.json")
-    ? JSON.parse(fs.readFileSync("data/seed_probe.json", "utf8"))
-    : { found: [], missing: [] };
-  const out: Found[] = prev.found;
-  const missing: string[] = prev.missing;
-  const queue = [...(extra ? EXTRA : CANDIDATES)];
-  // Several companies in flight; per-host spacing is enforced in politeFetch.
-  await Promise.all(Array.from({ length: 4 }, async () => {
-    while (queue.length) {
-      const c = queue.shift()!;
-      const f = await probe(c);
-      if (f) {
-        if (out.some((o) => o.ats === f.ats && o.token === f.token)) continue;
-        out.push(f);
-        const i = missing.indexOf(f.company);
-        if (i >= 0) missing.splice(i, 1);
-        const kc = f.matches.filter((m) => m.list === "keep" || m.list === "conditional").length;
-        console.log(`✓ ${f.company} ${f.ats}/${f.token} jobs=${f.jobs} inScope=${f.inScope} keep/cond=${kc} ambiguous=${f.matches.length - kc}`);
-      } else {
-        missing.push(c[0]);
-        console.log(`✗ ${c[0]}`);
-      }
-    }
-  }));
-  fs.writeFileSync("data/seed_probe.json", JSON.stringify({ found: out, missing }, null, 2));
-  console.log(`\nfound ${out.length}, missing ${missing.length}`);
-}
-
-main();
+// Large companies on Workday or SmartRecruiters. Token: "tenant/wdN/site"
+// for Workday, the company identifier for SmartRecruiters.
+export const ENTERPRISE: [name: string, domain: string, segment: Segment, ats: "workday" | "smartrecruiters", token: string][] = [
+  ["Salesforce", "salesforce.com", "agent_platform", "workday", "salesforce/wd12/External_Career_Site"],
+  ["Walmart", "walmart.com", "enterprise_cx", "workday", "walmart/wd5/WalmartExternal"],
+  ["Capital One", "capitalone.com", "enterprise_cx", "workday", "capitalone/wd12/Capital_One"],
+  ["Target", "target.com", "enterprise_cx", "workday", "target/wd5/targetcareers"],
+  ["Verizon", "verizon.com", "enterprise_cx", "workday", "verizon/wd12/verizon-careers"],
+  ["Comcast", "comcast.com", "enterprise_cx", "workday", "comcast/wd5/Comcast_Careers"],
+  ["T-Mobile", "t-mobile.com", "enterprise_cx", "workday", "tmobile/wd1/External"],
+  ["PayPal", "paypal.com", "enterprise_cx", "workday", "paypal/wd1/jobs"],
+  ["Mastercard", "mastercard.com", "enterprise_cx", "workday", "mastercard/wd1/CorporateCareers"],
+  ["Adobe", "adobe.com", "saas_copilot", "workday", "adobe/wd5/external_experienced"],
+  ["Workday", "workday.com", "saas_copilot", "workday", "workday/wd5/Workday"],
+  ["Intuit", "intuit.com", "saas_copilot", "workday", "intuit/wd1/Intuit"],
+  ["AT&T", "att.com", "enterprise_cx", "workday", "att/wd1/ATTGeneral"],
+  ["Home Depot", "homedepot.com", "enterprise_cx", "workday", "homedepot/wd5/CareerDepot"],
+  ["CVS Health", "cvshealth.com", "enterprise_cx", "workday", "cvshealth/wd1/CVS_Health_Careers"],
+  ["Wells Fargo", "wellsfargo.com", "enterprise_cx", "workday", "wf/wd1/WellsFargoJobs"],
+  ["Zendesk", "zendesk.com", "agent_platform", "workday", "zendesk/wd1/Zendesk"],
+  ["Five9", "five9.com", "agent_platform", "workday", "five9/wd1/Five9"],
+  ["ServiceNow", "servicenow.com", "agent_platform", "smartrecruiters", "ServiceNow"],
+  ["Wise", "wise.com", "enterprise_cx", "smartrecruiters", "Wise"],
+  ["Experian", "experian.com", "enterprise_cx", "smartrecruiters", "Experian"],
+];

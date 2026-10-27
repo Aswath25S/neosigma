@@ -31,7 +31,7 @@ export function taskShort(id: string | null | undefined): string {
 
 export const MODELS = {
   extract: "claude-sonnet-5-5",
-  titleCheck: "claude-haiku-5-5",
+  screen: "claude-haiku-5-5",
   newsCheck: "claude-haiku-5-5",
   themes: "claude-opus-5-5",
   briefs: "claude-opus-5-5",

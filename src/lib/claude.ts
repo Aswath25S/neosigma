@@ -34,7 +34,21 @@ function supportsFallback(model: string): boolean {
   return /sonnet-5-5|opus-5-5|opus-5$|fable/.test(model);
 }
 
+// Waits out rate limits beyond the SDK's own retries: a large pipeline run
+// can saturate a tokens-per-minute limit for a while.
 export async function structuredCall<S extends z.ZodType>(call: StructuredCall<S>): Promise<z.infer<S>> {
+  for (let attempt = 0; ; attempt++) {
+    try {
+      return await structuredCallOnce(call);
+    } catch (err) {
+      if (!(err instanceof Anthropic.RateLimitError) || attempt >= 8) throw err;
+      const wait = Math.min(120, 15 * 2 ** Math.min(attempt, 3)) * 1000 * (0.75 + Math.random() / 2);
+      await new Promise((r) => setTimeout(r, wait));
+    }
+  }
+}
+
+async function structuredCallOnce<S extends z.ZodType>(call: StructuredCall<S>): Promise<z.infer<S>> {
   const anthropic = getClient();
   let lastError: unknown;
   for (let attempt = 0; attempt < 2; attempt++) {
@@ -59,7 +73,18 @@ export async function structuredCall<S extends z.ZodType>(call: StructuredCall<S
         call.onText!(soFar);
       });
     }
-    const msg = await stream.finalMessage();
+    let msg: Anthropic.Beta.BetaMessage;
+    try {
+      msg = await stream.finalMessage();
+    } catch (err) {
+      // The SDK validates structured output itself; a malformed answer is
+      // retried like any other invalid JSON.
+      if (err instanceof Error && /Failed to parse structured output/.test(err.message)) {
+        lastError = err;
+        continue;
+      }
+      throw err;
+    }
     if (msg.stop_reason === "refusal") {
       throw new ClaudeOutputError("Claude declined to process this text.");
     }

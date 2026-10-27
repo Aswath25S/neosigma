@@ -3,6 +3,7 @@ import { PostingEvidence, type EvDuty, type EvQuote } from "./PostingEvidence";
 import { OverlapBar, TaskLegend } from "./ui";
 import { money, pct, shortDate } from "@/lib/format";
 import { LIVE_STRENGTH_TEXT } from "@/lib/scoring";
+import roles from "../../config/roles.json";
 
 export interface ReportGates {
   titleList: string;
@@ -131,12 +132,12 @@ export function PostingReport({ data }: { data: ReportData }) {
         <section>
           <h3 className="label mb-3">Filter checks</h3>
           <div className="rounded-[14px] border border-line px-4">
-            <Check ok={true} label={`Title list: ${g.titleList}`} detail={g.titleNote ?? "Matched by the stage-1 title lists."} />
+            <Check ok={g.titleList !== "drop" && g.titleList !== "screen"} label={`Stage 1: ${g.titleList === "screen" ? "screened out" : g.titleList}`} detail={g.titleNote ?? "Matched by the stage-1 title lists."} />
             {hasDuties && (
               <>
                 <Check ok={g.stage2} label="Stage 2: at least 3 duties Covered or Assisted" detail={`${g.counts.covered + g.counts.assisted} of ${g.counts.total} duties.`} />
-                <Check ok={g.conditional} label="Conditional title: at least 3 of T1–T6" detail={`Tasks present: ${g.distinctTasks.join(", ") || "none"}.`} />
-                <Check ok={g.overlapGate} label="Gate 1: at least half the duties Covered or Assisted" detail={`${pct(g.coveredOrAssistedShare)} of duties.`} />
+                <Check ok={g.conditional} label={`Conditional title: at least ${roles.conditional.min_distinct_tasks} of T1–T6`} detail={`Tasks present: ${g.distinctTasks.join(", ") || "none"}.`} />
+                <Check ok={g.overlapGate} label={`Gate 1: at least ${Math.round(roles.gate_overlap_min_share * 100)}% of duties Covered or Assisted`} detail={`${pct(g.coveredOrAssistedShare)} of duties.`} />
                 <Check ok={g.liveGate} label="Gate 2: an agent already used by real customers" detail={data.quotes.length ? `${data.quotes.length} verified quote${data.quotes.length > 1 ? "s" : ""}.` : "No verified quote."} />
               </>
             )}

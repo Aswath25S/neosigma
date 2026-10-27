@@ -1,4 +1,4 @@
-import { fetchJson, politeFetch } from "../http";
+import { fetchJson, politeFetch, userAgent, waitForHost } from "../http";
 import { htmlToText, normalizeWhitespace } from "../text";
 import type { RawPosting, SalaryRange, Source } from "./types";
 
@@ -209,11 +209,161 @@ export async function fetchCareersPage(src: Source): Promise<RawPosting[]> {
   return out;
 }
 
-export async function fetchBoard(src: Source): Promise<RawPosting[]> {
+
+// ---------- Workable ----------
+// Public widget API; `details=true` includes the description HTML.
+
+interface WorkableJob {
+  title: string; shortcode: string; url: string; published_on?: string; created_at?: string;
+  telecommuting?: boolean | string; country?: string; city?: string; state?: string;
+  locations?: { country?: string; city?: string; region?: string }[];
+  description?: string; requirements?: string; benefits?: string;
+}
+
+export async function fetchWorkable(src: Source): Promise<RawPosting[]> {
+  const api = `https://apply.workable.com/api/v1/widget/accounts/${src.board_token}?details=true`;
+  const data = await fetchJson<{ jobs: WorkableJob[] }>(api);
+  if (!data?.jobs) return [];
+  const fetchedAt = new Date().toISOString();
+  return data.jobs.map((j) => {
+    const locs = (j.locations?.length ? j.locations : [{ city: j.city, region: j.state, country: j.country }])
+      .map((l) => [l.city, l.region, l.country].filter(Boolean).join(", "))
+      .filter(Boolean);
+    const remote = j.telecommuting === true || j.telecommuting === "true" || j.telecommuting === "True";
+    return {
+      externalId: j.shortcode,
+      ats: "workable",
+      companyName: src.company,
+      title: j.title.trim(),
+      url: j.url,
+      sourceUrl: api,
+      fetchedAt,
+      postedAt: j.published_on ? new Date(j.published_on).toISOString() : j.created_at ? new Date(j.created_at).toISOString() : null,
+      locations: remote ? [...locs, "Remote"] : locs,
+      remote,
+      text: htmlToText([j.description, j.requirements, j.benefits].filter(Boolean).join("\n")),
+      salaries: [],
+    };
+  });
+}
+
+// ---------- SmartRecruiters ----------
+// The list endpoint has titles only, so descriptions are fetched one by one
+// for postings the board's own search returns for AI and eval terms.
+
+const SEARCH_TERMS = ["AI", "LLM", "agent", "evaluation", "conversational", "machine learning", "quality"];
+
+interface SrPosting {
+  id: string; name: string; releasedDate?: string; ref: string;
+  location?: { city?: string; region?: string; country?: string; remote?: boolean };
+  language?: { code?: string };
+}
+interface SrDetail extends SrPosting {
+  postingUrl?: string;
+  jobAd?: { sections?: Record<string, { title?: string; text?: string }> };
+}
+
+export async function fetchSmartRecruiters(src: Source, maxDetails = 150): Promise<RawPosting[]> {
+  const base = `https://api.smartrecruiters.com/v1/companies/${src.board_token}/postings`;
+  const found = new Map<string, SrPosting>();
+  for (const q of SEARCH_TERMS) {
+    const data = await fetchJson<{ content: SrPosting[] }>(`${base}?q=${encodeURIComponent(q)}&limit=100`);
+    for (const p of data?.content ?? []) found.set(p.id, p);
+  }
+  const fetchedAt = new Date().toISOString();
+  const out: RawPosting[] = [];
+  for (const p of [...found.values()].filter((p) => !p.language?.code || p.language.code.startsWith("en")).slice(0, maxDetails)) {
+    const d = await fetchJson<SrDetail>(`${base}/${p.id}`);
+    if (!d) continue;
+    const sections = d.jobAd?.sections ?? {};
+    const text = ["jobDescription", "qualifications", "additionalInformation", "companyDescription"]
+      .map((k) => sections[k]?.text).filter(Boolean).join("\n");
+    const l = d.location ?? {};
+    out.push({
+      externalId: d.id,
+      ats: "smartrecruiters",
+      companyName: src.company,
+      title: d.name.trim(),
+      url: d.postingUrl ?? `https://jobs.smartrecruiters.com/${src.board_token}/${d.id}`,
+      sourceUrl: `${base}/${d.id}`,
+      fetchedAt,
+      postedAt: d.releasedDate ?? null,
+      locations: [[l.city, l.region, l.country?.toUpperCase()].filter(Boolean).join(", ")].filter(Boolean).concat(l.remote ? ["Remote"] : []),
+      remote: l.remote ?? null,
+      text: htmlToText(text),
+      salaries: [],
+    });
+  }
+  return out;
+}
+
+// ---------- Workday ----------
+// board_token is "tenant/wdN/site", e.g. "salesforce/wd12/External_Career_Site".
+// The board's search narrows thousands of jobs to AI and eval terms; each
+// description is then fetched one by one.
+
+interface WdListItem { title: string; externalPath: string; locationsText?: string }
+interface WdDetail {
+  jobPostingInfo: {
+    title: string; jobDescription?: string; location?: string; startDate?: string; externalUrl?: string;
+    remoteType?: string; additionalLocations?: string[]; country?: { descriptor?: string };
+  };
+}
+
+export async function fetchWorkday(src: Source, maxDetails = 150): Promise<RawPosting[]> {
+  const [tenant, wd, site] = src.board_token.split("/");
+  const host = `https://${tenant}.${wd}.myworkdayjobs.com`;
+  const api = `${host}/wday/cxs/${tenant}/${site}`;
+  const found = new Map<string, WdListItem>();
+  for (const q of SEARCH_TERMS) {
+    for (let offset = 0; offset < 100; offset += 20) {
+      await waitForHost(new URL(host).host);
+      const res = await fetch(`${api}/jobs`, {
+        method: "POST",
+        headers: { "User-Agent": userAgent(), "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ limit: 20, offset, searchText: q, appliedFacets: {} }),
+        signal: AbortSignal.timeout(30000),
+      });
+      if (!res.ok) break;
+      const data = (await res.json()) as { jobPostings?: WdListItem[]; total?: number };
+      for (const j of data.jobPostings ?? []) found.set(j.externalPath, j);
+      if (!data.jobPostings?.length || offset + 20 >= (data.total ?? 0)) break;
+    }
+  }
+  const fetchedAt = new Date().toISOString();
+  const out: RawPosting[] = [];
+  for (const j of [...found.values()].slice(0, maxDetails)) {
+    const d = await fetchJson<WdDetail>(`${api}${j.externalPath}`);
+    const info = d?.jobPostingInfo;
+    if (!info) continue;
+    const locations = [info.location, ...(info.additionalLocations ?? [])].filter((x): x is string => !!x)
+      .map((l) => (info.country?.descriptor && !l.includes(info.country.descriptor) ? `${l} (${info.country.descriptor})` : l));
+    out.push({
+      externalId: j.externalPath,
+      ats: "workday",
+      companyName: src.company,
+      title: info.title.trim(),
+      url: info.externalUrl ?? `${host}/${site}${j.externalPath}`,
+      sourceUrl: `${api}${j.externalPath}`,
+      fetchedAt,
+      postedAt: info.startDate ? new Date(info.startDate).toISOString() : null,
+      locations,
+      remote: info.remoteType ? /remote/i.test(info.remoteType) : null,
+      text: htmlToText(info.jobDescription ?? ""),
+      salaries: [],
+    });
+  }
+  return out;
+}
+
+export async function fetchBoard(src: Source, maxDetails = 150): Promise<RawPosting[]> {
   switch (src.ats) {
     case "greenhouse": return fetchGreenhouse(src);
     case "lever": return fetchLever(src);
     case "ashby": return fetchAshby(src);
+    case "workable": return fetchWorkable(src);
+    case "smartrecruiters": return fetchSmartRecruiters(src, maxDetails);
+    case "workday": return fetchWorkday(src, maxDetails);
     case "careers": return fetchCareersPage(src);
     default: return [];
   }

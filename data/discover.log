@@ -1,0 +1,179 @@
+
+> eval-hiring-radar@0.1.0 seeds
+> tsx --env-file-if-exists=.env.local scripts/discover.ts
+
+existing sources: 98
+after earlier probes: 129
+  + Jasper workable/jasper (1)
+  + CrewAI workable/crewai (4)
+  + Zowie ashby/zowie (8)
+  + Yuma AI greenhouse/yuma (1)
+  + Inkeep ashby/inkeep (3)
+  + Lorikeet ashby/lorikeet (11)
+  + Gradient Labs ashby/gradient-labs (7)
+  + Wonderful ashby/wonderful (123)
+  + DevRev greenhouse/devrev (41)
+  + Hello Patient ashby/hellopatient (17)
+  + EliseAI ashby/eliseai (120)
+  + AssemblyAI greenhouse/assemblyai (18)
+  + Slang AI lever/slangai (4)
+  + Sesame ashby/sesame (25)
+  + LiveKit ashby/livekit (30)
+  + Poolside ashby/poolside (2)
+  + CodeRabbit ashby/coderabbit (46)
+  + Graphite ashby/graphite (4)
+  + Warp ashby/warp (20)
+  + Greptile ashby/greptile (19)
+  + Mintlify ashby/mintlify (16)
+  + Elicit ashby/elicit (12)
+  + Exa ashby/exa (55)
+  + Granola ashby/granola (22)
+  + Amplemarket greenhouse/amplemarket (16)
+  + Apollo.io greenhouse/apolloio (53)
+  + Attention ashby/attention (2)
+  + Read AI ashby/read-ai (18)
+  + Juicebox ashby/juicebox (35)
+  + Ribbon lever/ribbon (3)
+  + Eve greenhouse/eve (19)
+  + Crosby ashby/crosby (24)
+  + DeepJudge ashby/deepjudge (20)
+  + Lawhive ashby/lawhive (8)
+  + Alex ashby/alexai (2)
+  + Notable ashby/notable (10)
+  + Freed ashby/freed (2)
+  + OpenEvidence ashby/openevidence (8)
+  + Regard ashby/regard (7)
+  + SmarterDx greenhouse/smarterdx (3)
+  + Cedar ashby/cedar (1)
+  + AKASA ashby/akasa (9)
+  + Zocdoc greenhouse/zocdoc (62)
+  + Numeric ashby/numeric (23)
+  + Rillet ashby/rillet (40)
+  + Campfire ashby/campfire (51)
+  + Counsel Health ashby/counsel (11)
+  + Pigment lever/pigment (50)
+  + Alloy ashby/alloy (29)
+  + Taktile ashby/taktile (34)
+  + Sixfold greenhouse/sixfold (3)
+  + Federato greenhouse/federato (8)
+  + Liberate greenhouse/liberate (18)
+  + Beam AI greenhouse/beam (6)
+  + Stack AI ashby/stack-ai (23)
+  + Nirvana Insurance ashby/nirvana (8)
+  + Credal ashby/credal (5)
+  + Langdock ashby/langdock (10)
+  + ClickUp ashby/clickup (49)
+  + Lattice greenhouse/lattice (9)
+  + Typeform greenhouse/typeform (10)
+  + Calendly greenhouse/calendly (8)
+  + Squarespace greenhouse/squarespace (27)
+  + Twilio greenhouse/twilio (136)
+  + Cloudflare greenhouse/cloudflare (461)
+  + Datadog greenhouse/datadog (428)
+  + MongoDB greenhouse/mongodb (367)
+  + PagerDuty greenhouse/pagerduty (50)
+  + Udemy greenhouse/udemy (3)
+  + Khan Academy greenhouse/khanacademy (5)
+  + Klaviyo greenhouse/klaviyo (162)
+  + Carvana greenhouse/carvana (1677)
+  + Betterment greenhouse/betterment (26)
+  + Monzo greenhouse/monzo (70)
+  + N26 greenhouse/n26 (38)
+curated: 75 of 164 new boards found
+  + Salesforce workday (1578)
+  ✗ Walmart workday/walmart/wd5/WalmartExternal
+  + Capital One workday (1995)
+  + Target workday (2000)
+  + Verizon workday (1255)
+  ✗ Comcast workday/comcast/wd5/Comcast_Careers
+  + T-Mobile workday (2000)
+  + PayPal workday (328)
+  + Mastercard workday (1140)
+  + Adobe workday (291)
+  + Workday workday (373)
+  ✗ Intuit workday/intuit/wd1/Intuit
+  + AT&T workday (1144)
+  + Home Depot workday (972)
+  + CVS Health workday (19629)
+  + Wells Fargo workday (1453)
+  + Zendesk workday (147)
+  ✗ Five9 workday/five9/wd1/Five9
+  + ServiceNow smartrecruiters (688)
+  + Wise smartrecruiters (413)
+  + Experian smartrecruiters (368)
+HN: 6 threads, 944 AI-related posts
+HN: 172 new agent companies to locate
+  + Shepherd ashby/shepherd [vertical_ai]
+  + Fazeshift ashby/fazeshift [agent_native]
+  + Hedge ashby/hedge [vertical_ai]
+  + Curai lever/curai [vertical_ai]
+  + Tandem Health ashby/tandem-health [vertical_ai]
+  + Portswigger workable/portswigger [saas_copilot]
+  + Komodo Health greenhouse/komodohealth [vertical_ai]
+  + Fig ashby/growfig [agent_native]
+  + Seeq workable/seeq [saas_copilot]
+  + JUPUS ashby/jupus [vertical_ai]
+  + Middesk ashby/middesk [vertical_ai]
+  + New Lantern ashby/newlantern [vertical_ai]
+  + Footprint ashby/footprint [vertical_ai]
+  + GC AI ashby/gc-ai [vertical_ai]
+  + Close ashby/close [saas_copilot]
+  + Ojin greenhouse/ojin [agent_native]
+  + PostHog ashby/posthog [saas_copilot]
+  + Starbridge ashby/starbridge [saas_copilot]
+  + WorkHero ashby/workhero [vertical_ai]
+  + Conductor ashby/conductor [agent_native]
+  + Shared Context Lab ashby/sharedcontextlab [agent_native]
+  + Chariot Claims ashby/chariotclaims [vertical_ai]
+  + Pathos AI ashby/pathos [vertical_ai]
+  + telli ashby/telli [agent_native]
+  + Distru lever/distru [saas_copilot]
+  + FurtherAI ashby/furtherai [vertical_ai]
+  + Snowflake ashby/snowflake [saas_copilot]
+  + Phaselaw ashby/Pear-VC [vertical_ai]
+  + Harmony AI ashby/harmony [agent_platform]
+  + Phonely ashby/phonely [agent_platform]
+  + Confido ashby/confido [saas_copilot]
+  + River ashby/river [agent_native]
+  + Ai2 greenhouse/thealleninstitute [agent_platform]
+  + Grafana Labs greenhouse/grafanalabs [saas_copilot]
+  + Aristotle workable/aristotle [agent_native]
+  + Stealth ashby/stealth [agent_native]
+  + Complement AI ashby/complement [agent_native]
+  + Lantern ashby/lanternhq [agent_native]
+  + Weave Bio greenhouse/weave [agent_native]
+  + Electric Twin ashby/electric-twin [agent_native]
+  + ResortPass greenhouse/resortpass [saas_copilot]
+  + Proton greenhouse/proton [saas_copilot]
+  + Prompt ashby/prompt [vertical_ai]
+  + Kepler ashby/kepler-ai [vertical_ai]
+  + Caribou greenhouse/caribou [saas_copilot]
+  + Fathom ashby/fathom.video [saas_copilot]
+  + Hiya ashby/hiya [saas_copilot]
+  + Mason ashby/masonai [agent_native]
+  + Articulate lever/articulate [saas_copilot]
+  + Monk ashby/monk [vertical_ai]
+  + Strix ashby/strix [agent_native]
+  + Stellar ashby/stellar [agent_platform]
+  + Deducta ashby/deducta [saas_copilot]
+  + Unit ashby/unit [agent_platform]
+  + Rad AI ashby/radai [vertical_ai]
+  + Parabola ashby/parabola-io [saas_copilot]
+  + Coder ashby/coder [agent_platform]
+HN: 57 boards found
+
+wrote 278 companies to config/sources.csv {
+  vertical_ai: 66,
+  agent_native: 81,
+  saas_copilot: 62,
+  enterprise_cx: 40,
+  agent_platform: 29
+} {
+  ashby: 158,
+  greenhouse: 87,
+  workday: 14,
+  workable: 5,
+  lever: 11,
+  smartrecruiters: 3
+}
+exit 0

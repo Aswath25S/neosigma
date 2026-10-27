@@ -1,6 +1,7 @@
 import { eq, isNull, or, inArray } from "drizzle-orm";
 import { getDb, schema } from "./db/client";
 import { weights } from "./config";
+import { getMeta } from "./meta";
 import { midpoints, yearlyCost, type Midpoint } from "./cost";
 import type { Breakdown, ScoreTrigger } from "./scoring";
 import type { VerifiedEvidence } from "./analyze";
@@ -48,6 +49,7 @@ export function allMidpoints(): Map<string, Midpoint> {
       salaryMin: p.salaryMin, salaryMax: p.salaryMax, currency: p.currency, overlap: p.overlap ?? 0,
     })),
     weights.cost.min_same_title_postings,
+    getMeta<{ rates: Record<string, number> }>("fx")?.rates ?? {},
   );
   midpointCache = { at: Date.now(), map };
   return map;

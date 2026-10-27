@@ -14,7 +14,7 @@ const lastHit = new Map<string, number>();
 const hostQueues = new Map<string, Promise<void>>();
 const MIN_GAP_MS = 1000;
 
-async function waitForHost(host: string): Promise<void> {
+export async function waitForHost(host: string): Promise<void> {
   const prev = hostQueues.get(host) ?? Promise.resolve();
   const next = prev.then(async () => {
     const wait = (lastHit.get(host) ?? 0) + MIN_GAP_MS - Date.now();

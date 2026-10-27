@@ -1,4 +1,4 @@
-import { roles } from "./config";
+import { roles, weights } from "./config";
 
 export type TitleList = "keep" | "conditional" | "drop";
 export type TitleMatch =
@@ -34,8 +34,10 @@ const US_WORDS = /\b(united states|usa|u\.s\.a?\.?|us|america|americas|north ame
 const NON_US = /\b(uk|united kingdom|london|england|ireland|dublin|germany|berlin|munich|france|paris|spain|madrid|barcelona|portugal|lisbon|netherlands|amsterdam|poland|warsaw|india|bengaluru|bangalore|hyderabad|pune|mumbai|delhi|singapore|japan|tokyo|korea|seoul|australia|sydney|melbourne|canada|toronto|vancouver|montreal|mexico|brazil|são paulo|sao paulo|argentina|colombia|israel|tel aviv|emea|apac|latam|europe|eu|switzerland|zurich|sweden|stockholm|denmark|copenhagen|norway|finland|italy|milan|czech|prague|romania|ukraine|serbia|philippines|manila|vietnam|china|hong kong|taiwan|uae|dubai|south africa|nigeria|kenya|egypt|new zealand)\b/i;
 const STATE_RE = new RegExp(`(,\\s*|\\b)(${US_STATES.join("|")})\\b(?!\\.)`);
 
-// Scope rule for v1: US or remote-from-the-US postings only.
+// Scope rule: every region when config says "global", otherwise US or
+// remote-from-the-US postings only.
 export function locationInScope(locations: string[], remote: boolean | null): boolean {
+  if (weights.fetch.regions === "global") return true;
   if (!locations.length) return remote !== false;
   return locations.some((raw) => {
     const loc = raw.trim();
@@ -49,4 +51,30 @@ export function ageInDays(postedAt: string | null, now = new Date()): number | n
   if (!postedAt) return null;
   const t = Date.parse(postedAt);
   return Number.isNaN(t) ? null : (now.getTime() - t) / 86_400_000;
+}
+
+const EN_WORDS = new Set(["the", "and", "to", "of", "a", "in", "you", "with", "for", "our", "we", "will", "on", "is", "are", "your", "as", "or", "be", "this"]);
+
+// English-only rule: share of common English words among the first 400 words.
+export function isEnglish(text: string): boolean {
+  const words = text.toLowerCase().match(/[a-zà-ÿ]+/g)?.slice(0, 400) ?? [];
+  if (words.length < 40) return true;
+  const hits = words.filter((w) => EN_WORDS.has(w)).length;
+  return hits / words.length >= 0.12;
+}
+
+const screen = {
+  ai: roles.description_screen.ai_context.map((p) => new RegExp(p, "i")),
+  phrases: roles.description_screen.phrases.map((p) => new RegExp(p, "i")),
+};
+
+// Free keyword pre-screen on the description: it must mention AI and at
+// least `min_hits` distinct duty phrases before Claude reads it.
+export function descriptionHits(text: string): string[] {
+  if (!screen.ai.some((re) => re.test(text))) return [];
+  return roles.description_screen.phrases.filter((_, i) => screen.phrases[i].test(text));
+}
+
+export function passesPrescreen(text: string): boolean {
+  return descriptionHits(text).length >= roles.description_screen.min_hits;
 }

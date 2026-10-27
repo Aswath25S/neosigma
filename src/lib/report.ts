@@ -1,4 +1,4 @@
-import { applyGates, FAIL_REASON_TEXT, type FailReason, type VerifiedDuty } from "./analyze";
+import { applyGates, FAIL_REASON_TEXT, type FailReason, type Stage1, type VerifiedDuty } from "./analyze";
 import type { ReportData } from "@/components/PostingReport";
 import { extractionOf, type DutyRow, type Posting } from "./data";
 import type { Midpoint } from "./cost";
@@ -18,7 +18,7 @@ export function reportFromStored(posting: Posting, companyName: string, companyS
   const list = posting.titleList === "keep" || posting.titleList === "conditional" ? posting.titleList : "keep";
   const g = applyGates(list, vDuties, evidence);
   const reason = posting.failReason as FailReason | null;
-  const titleCheck = posting.titleCheck as { decision: string; reason: string } | null;
+  const stage1 = posting.titleCheck as Stage1 | null;
   return {
     company: companyName,
     companySlug,
@@ -54,11 +54,21 @@ export function reportFromStored(posting: Posting, companyName: string, companyS
     gates: {
       ...g,
       titleList: posting.titleList,
-      titleNote: titleCheck ? `Claude title check: ${titleCheck.decision}. ${titleCheck.reason}` : null,
+      titleNote: stage1Note(stage1),
       passed: posting.passedGates,
       failReason: reason,
       failDetail: posting.failDetail ?? (reason ? null : g.failDetail),
       failText: reason ? FAIL_REASON_TEXT[reason] ?? reason : null,
     },
   };
+}
+
+export function stage1Note(s: Stage1 | null): string | null {
+  if (!s) return null;
+  const hits = s.prescreen_hits?.length ? ` Pre-screen matched ${s.prescreen_hits.length} duty phrases.` : "";
+  if (s.via === "description" && s.screen) {
+    return `Selected on its description. Claude screen: ${s.screen.decision} (${Math.round(s.screen.t1_t6_share * 100)}% of duties are T1–T6). ${s.screen.reason}${hits}`;
+  }
+  if (s.via === "description") return `Selected on its description; awaiting the Claude screen.${hits}`;
+  return `Selected by its title on the stage-1 lists.${hits}`;
 }

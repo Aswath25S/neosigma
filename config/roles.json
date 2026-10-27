@@ -1,5 +1,5 @@
 {
-  "_note": "Patterns are case-insensitive regular expressions matched against the posting title. Lists are checked in order: keep, drop, conditional. Titles that match none but contain one of ai_keywords go to a Claude title check.",
+  "_note": "Patterns are case-insensitive regular expressions matched against the posting title. Drop-list titles are always discarded. Every other posting is judged on its description: a free keyword pre-screen, then a Claude description screen, then extraction and the gates.",
   "keep": {
     "rule": "Send to stage 2",
     "titles": [
@@ -37,8 +37,8 @@
     ]
   },
   "conditional": {
-    "rule": "Send to stage 2; kept only if at least 3 of T1–T6 appear as Covered or Assisted",
-    "min_distinct_tasks": 3,
+    "rule": "Send to stage 2; kept only if at least 2 of T1–T6 appear as Covered or Assisted",
+    "min_distinct_tasks": 2,
     "titles": [
       "Applied AI engineer",
       "forward deployed engineer (AI / agents)",
@@ -96,7 +96,7 @@
     "\\bml\\b"
   ],
   "stage2_min_covered_or_assisted": 3,
-  "gate_overlap_min_share": 0.5,
+  "gate_overlap_min_share": 0.35,
   "search_words": {
     "titles": [
       "evaluation engineer",
@@ -133,6 +133,52 @@
       "building our first agent",
       "prototype",
       "0 to 1"
+    ]
+  },
+  "description_screen": {
+    "rule": "A posting with no keep/conditional title is screened on its description when it mentions AI and at least min_hits distinct duty phrases.",
+    "min_hits": 2,
+    "ai_context": [
+      "\\bai\\b",
+      "\\bllms?\\b",
+      "\\bagents?\\b",
+      "\\bagentic\\b",
+      "\\bconversational\\b",
+      "\\bgenai\\b",
+      "\\bgenerative\\b",
+      "\\bchatbots?\\b",
+      "\\bvirtual assistant",
+      "\\bmodels?\\b"
+    ],
+    "phrases": [
+      "\\bevals?\\b",
+      "\\bevaluation (sets?|suites?|frameworks?|pipelines?|harness|datasets?|criteria|metrics)\\b",
+      "\\bgolden (data ?sets?|sets?)\\b",
+      "\\btest cases?\\b",
+      "\\bregression(s| tests?| testing| suites?)?\\b",
+      "\\btranscripts?\\b",
+      "\\b(agent|bot|ai|customer) conversations?\\b",
+      "\\bconversation (review|quality|analysis)\\b",
+      "\\bfailure (analysis|modes?|patterns?|cases?)\\b",
+      "\\broot[- ]cause\\b",
+      "\\berror analysis\\b",
+      "\\bhallucinat",
+      "\\b(production )?traces\\b",
+      "\\bllm[- ]as[- ]a[- ]judge\\b",
+      "\\bllm judges?\\b",
+      "\\bmodel (comparisons?|selection|migrations?|benchmarking)\\b",
+      "\\bbenchmark(s|ing)? (new )?models?\\b",
+      "\\bprompt (engineering|tuning|iteration|optimi[sz]ation)\\b",
+      "\\biterate on prompts?\\b",
+      "\\b(resolution|escalation|deflection|containment) rates?\\b",
+      "\\bquality (assurance|reviews?|audits?|scores?|metrics|bar)\\b",
+      "\\brubrics?\\b",
+      "\\bannotat",
+      "\\bred[- ]team",
+      "\\b(agent|ai|llm|model) (quality|reliability|performance|behaviou?r)\\b",
+      "\\bguardrails?\\b",
+      "\\bobservability\\b",
+      "\\blangfuse|langsmith|braintrust|arize|galileo|patronus|promptfoo\\b"
     ]
   }
 }

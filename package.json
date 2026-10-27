@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "seeds": "tsx --env-file-if-exists=.env.local scripts/probe-seeds.ts && tsx --env-file-if-exists=.env.local scripts/probe-seeds.ts --extra && tsx --env-file-if-exists=.env.local scripts/build-sources.ts",
+    "seeds": "tsx --env-file-if-exists=.env.local scripts/discover.ts",
     "fetch": "tsx --env-file-if-exists=.env.local scripts/fetch.ts",
     "extract": "tsx --env-file-if-exists=.env.local scripts/extract.ts",
     "news": "tsx --env-file-if-exists=.env.local scripts/news.ts",

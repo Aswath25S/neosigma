@@ -2,8 +2,8 @@ import fs from "node:fs";
 import path from "node:path";
 import { coverageMap, MODELS, roles, weights, TASK_IDS } from "./config";
 import { cached, structuredCall } from "./claude";
-import { matchTitle, type TitleList } from "./filters";
-import { ExtractionSchema, TitleCheckSchema, type Duty, type Extraction, type LiveEvidence, type TitleCheck } from "./schemas";
+import { descriptionHits, matchTitle, type TitleList } from "./filters";
+import { ExtractionSchema, ScreenSchema, type Duty, type Extraction, type LiveEvidence, type Screen } from "./schemas";
 import { findSpan, sha256 } from "./text";
 
 // ---------- prompts ----------
@@ -22,38 +22,42 @@ export function extractionSystemPrompt(): string {
   return readPrompt("extract.md").replace("{{COVERAGE_MAP}}", coverageMapText());
 }
 
-function titleCheckSystemPrompt(): string {
-  return readPrompt("title_check.md")
-    .replace("{{KEEP}}", roles.keep.titles.join("; "))
-    .replace("{{CONDITIONAL}}", roles.conditional.titles.join("; "))
-    .replace("{{DROP}}", roles.drop.titles.join("; "));
+// ---------- stage 1: description screen ----------
+
+function screenSystemPrompt(): string {
+  return readPrompt("screen.md").replace("{{COVERAGE_MAP}}", coverageMapText());
 }
 
-// ---------- stage 1: title ----------
+const SCREEN_CHARS = 8000;
 
-export interface TitleResult {
-  list: TitleList | "irrelevant";
-  via: "pattern" | "claude";
+export async function screenDescription(title: string, text: string, opts: { cache?: boolean } = {}): Promise<Screen> {
+  const system = screenSystemPrompt();
+  const user = `Title: ${title || "unknown"}\n\n<posting>\n${text.slice(0, SCREEN_CHARS)}\n</posting>`;
+  const run = () => structuredCall({ model: MODELS.screen, system, user, schema: ScreenSchema, effort: "low", maxTokens: 4000 });
+  const r = opts.cache === false ? await run() : await cached("screen", [MODELS.screen, sha256(system), user], run);
+  return { ...r, t1_t6_share: Math.max(0, Math.min(1, r.t1_t6_share)) };
+}
+
+// How a posting entered the pipeline and what stage 1 decided. Stored in
+// postings.title_check.
+export interface Stage1 {
+  via: "title" | "description";
   pattern: string | null;
-  check: TitleCheck | null;
+  prescreen_hits: string[];
+  screen: Screen | null;
 }
 
-export async function classifyTitle(title: string, opts: { cache?: boolean } = {}): Promise<TitleResult | null> {
+// Stage 1 as the live demo runs it: Drop-list titles are dropped and
+// keep/conditional titles pass; every other posting is judged on its
+// description by Claude.
+export async function judgePosting(title: string, text: string, opts: { cache?: boolean } = {}): Promise<{ list: TitleList; stage1: Stage1 }> {
   const m = matchTitle(title);
-  if (m.list === "none") return null;
-  if (m.list !== "ambiguous") return { list: m.list, via: "pattern", pattern: m.pattern, check: null };
-  const system = titleCheckSystemPrompt();
-  const run = () =>
-    structuredCall({
-      model: MODELS.titleCheck,
-      system,
-      user: `Title: ${title}`,
-      schema: TitleCheckSchema,
-      effort: "low",
-      maxTokens: 2000,
-    });
-  const check = opts.cache === false ? await run() : await cached("title", [MODELS.titleCheck, sha256(system), title], run);
-  return { list: check.decision, via: "claude", pattern: null, check };
+  const hits = descriptionHits(text);
+  if (m.list === "keep" || m.list === "conditional" || m.list === "drop") {
+    return { list: m.list, stage1: { via: "title", pattern: m.pattern, prescreen_hits: hits, screen: null } };
+  }
+  const screen = await screenDescription(title, text, opts);
+  return { list: screen.decision, stage1: { via: "description", pattern: null, prescreen_hits: hits, screen } };
 }
 
 // ---------- extraction ----------
@@ -138,6 +142,8 @@ export function verify(extraction: Extraction, text: string): ExtractResult {
 
 export type FailReason =
   | "title_drop_list"
+  | "screen_not_main_job"
+  | "not_english"
   | "title_irrelevant"
   | "out_of_scope_location"
   | "too_old"
@@ -149,12 +155,14 @@ export type FailReason =
 
 export const FAIL_REASON_TEXT: Record<FailReason, string> = {
   title_drop_list: "The title is on the Drop list.",
+  screen_not_main_job: "The description shows the role's main job is not NeoSigma's work.",
+  not_english: "The posting is not in English.",
   title_irrelevant: "The title is not an AI quality role.",
-  out_of_scope_location: "The role is outside the US and not remote from the US.",
-  too_old: "The posting is older than 60 days.",
+  out_of_scope_location: "The role is outside the regions in scope.",
+  too_old: `The posting is older than ${weights.fetch.max_posting_age_days} days.`,
   stage2_too_few_duties: "Fewer than 3 duties are Covered or Assisted.",
-  conditional_too_few_tasks: "A conditional title needs at least 3 of T1–T6 as Covered or Assisted.",
-  gate_overlap: "Fewer than half of the duties are Covered or Assisted.",
+  conditional_too_few_tasks: `A conditional title needs at least ${roles.conditional.min_distinct_tasks} of T1–T6 as Covered or Assisted.`,
+  gate_overlap: `Fewer than ${Math.round(roles.gate_overlap_min_share * 100)}% of the duties are Covered or Assisted.`,
   gate_live_agent: "The posting shows no agent already used by real customers or users.",
   extraction_error: "The posting could not be read.",
 };
@@ -217,7 +225,7 @@ export function applyGates(titleList: TitleList | "irrelevant", duties: Verified
     failDetail = `Only ${distinctTasks.length} of T1–T6 appear (${distinctTasks.join(", ") || "none"}); a conditional title needs ${roles.conditional.min_distinct_tasks}.`;
   } else if (!overlapGate) {
     failReason = "gate_overlap";
-    failDetail = `${coveredOrAssisted} of ${total} duties (${Math.round(share * 100)}%) are Covered or Assisted; at least half are needed.`;
+    failDetail = `${coveredOrAssisted} of ${total} duties (${Math.round(share * 100)}%) are Covered or Assisted; at least ${Math.round(roles.gate_overlap_min_share * 100)}% are needed.`;
   } else if (!liveGate) {
     failReason = "gate_live_agent";
     failDetail = "No quote in the posting shows an agent already used by real customers or users.";

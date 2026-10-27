@@ -52,12 +52,12 @@ export type Extraction = z.infer<typeof ExtractionSchema>;
 export type Duty = z.infer<typeof DutySchema>;
 export type LiveEvidence = z.infer<typeof LiveEvidenceSchema>;
 
-export const TitleCheckSchema = z.object({
-  decision: z.enum(["keep", "conditional", "drop", "irrelevant"]),
-  closest_title: z.string().nullable().describe("The list title this one is closest to, or null"),
+export const ScreenSchema = z.object({
+  decision: z.enum(["keep", "conditional", "drop"]),
+  t1_t6_share: z.number(),
   reason: z.string(),
 });
-export type TitleCheck = z.infer<typeof TitleCheckSchema>;
+export type Screen = z.infer<typeof ScreenSchema>;
 
 export const NewsCheckSchema = z.object({
   items: z.array(z.object({

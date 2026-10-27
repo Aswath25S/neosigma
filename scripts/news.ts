@@ -25,7 +25,7 @@ const NEWS_SYSTEM = `You check news headlines for a sales research tool. For eac
 - agent_launch: the company launched a new AI agent product or a major agent feature.
 - acquisition: the company was acquired, or acquired another company.
 - public_complaints: public complaints or reporting about the quality of the company's AI agent.
-- none: anything else.
+- none: anything else, including company profile or database pages (Tracxn, Crunchbase, PitchBook, CB Insights "funding rounds" or "investors" listings), rumours of talks that have not closed, and opinion pieces.
 Judge from the headline only. Reply with JSON only.`;
 
 const MODEL_SYSTEM = `You check AI lab news headlines. For each, decide whether it announces the release of a major new frontier AI model generally available to developers (for example a new GPT, Claude, Gemini, Llama, Mistral or Grok model). Product features, research papers, partnerships, pricing changes and minor updates are not major model releases. Reply with JSON only.`;

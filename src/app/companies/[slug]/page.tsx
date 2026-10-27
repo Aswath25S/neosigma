@@ -62,7 +62,10 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
   const tw = taskWeights(v);
   const proofKey = rendered?.proofKey ?? pickProof(tw);
   const proof = coverageMap.proofs[proofKey];
-  const active = activeTriggers(v.triggers.map((t) => ({ id: t.id, kind: t.kind, date: t.date, title: t.title, url: t.url, source: t.source })), DEFAULT_WEIGHTS, new Date());
+  const allActive = activeTriggers(v.triggers.map((t) => ({ id: t.id, kind: t.kind, date: t.date, title: t.title, url: t.url, source: t.source })), DEFAULT_WEIGHTS, new Date());
+  // Model releases apply to every lead; show only the newest one here.
+  const newestRelease = allActive.filter((t) => t.kind === "model_release").sort((a, b) => b.date.localeCompare(a.date))[0];
+  const active = allActive.filter((t) => t.kind !== "model_release" || t === newestRelease);
   const qualIds = new Set(qualifying.map((p) => p.id));
   const byTask = TASK_IDS.map((t) => ({
     t,

@@ -1,0 +1,492 @@
+
+> eval-hiring-radar@0.1.0 extract
+> tsx --env-file-if-exists=.env.local scripts/extract.ts --force
+
+description screen: 2 postings
+description screen: 0 keep, 0 conditional, 2 drop
+extraction: 352 postings
+  PASS                     21% Abridge — Member of Product Staff, AI/ML (Evals) (15/15 spans)
+  PASS                     58% Cohere — Member of Technical Staff, North Modelling (Evals) (6/6 spans)
+  PASS                     56% Glean — AI Engineer - Data and Evals (8/8 spans)
+  stage2_too_few_duties    5% Glean — Product Manager, AI Quality (12/12 spans)
+  gate_overlap             15% Glean — Software Engineer, Evals (11/11 spans)
+  PASS                     42% Glean — Tech Lead Manager, AI Evaluations (26/26 spans)
+  PASS                     50% Legora — Technical Legal Engineer - Evals (10/10 spans)
+  PASS                     42% Lovable — Data Scientist, Agent (6/6 spans)
+  PASS                     50% Mercor — Member of Technical Staff, Enterprise Evals Platform (9/9 spans)
+  stage2_too_few_duties    0% Mercor — Senior PMM, Evals (10/10 spans)
+  PASS                     59% Perplexity — Member of Technical Staff (Software Engineer, Enterprise Agent Evals & Efficiency) (11/11 spans)
+  gate_live_agent          30% Elicit — Model Behavior Engineer, Reasoning and Decision Making (15/15 spans)
+  gate_overlap             19% Exa — Product Manager, Evals (10/10 spans)
+  PASS                     70% FurtherAI — Senior / Staff AI Engineer — Evals & Model Quality (10/10 spans)
+  stage2_too_few_duties    6% Capital One — Senior Product Manager – Conversational AI Servicing Quality Assurance (11/11 spans)
+  stage2_too_few_duties    4% Capital One — Sr. Manager, AI Engineer (Gen AI Platform Services: Agentic AI, Guardrails, Evaluation) (12/12 spans)
+  PASS                     55% Mastercard — Senior AI Product Ops (10/10 spans)
+  PASS                     70% Mastercard — Lead AI Ops Engineer (10/10 spans)
+  stage2_too_few_duties    0% ServiceNow — Staff Inbound Product Manager - AI Evaluation Tools (8/8 spans)
+  gate_live_agent          35% ServiceNow — Staff Technical Product Manager – AI/LLM expertise + AI Evaluation Science (11/11 spans)
+  stage2_too_few_duties    10% ServiceNow — Senior Research Scientist, Agent Evaluation (5/5 spans)
+  gate_overlap             19% ServiceNow — Senior Machine Learning Engineer, Agent Eval Platform (14/14 spans)
+  gate_overlap             7% ServiceNow — Tech Lead, Agent Eval Platform (22/22 spans)
+  gate_overlap             10% ServiceNow — Staff Software Engineer, Agent Eval Platform (20/20 spans)
+  gate_overlap             15% Airbnb — Staff UX Writer, AI (15/15 spans)
+  stage2_too_few_duties    6% AlphaSense — Senior Product Manager - AI Workflows (Expert Research) (10/10 spans)
+  stage2_too_few_duties    7% Basis — Staff Software Engineer, AI (18/18 spans)
+  stage2_too_few_duties    8% Assort Health — Agent Product Manager (9/9 spans)
+  stage2_too_few_duties    8% Assort Health — Forward Deployed Engineer (13/13 spans)
+  gate_overlap             15% Assort Health — Senior Agent Product Manager (11/11 spans)
+  stage2_too_few_duties    0% Asana — Forward Deployed Engineer, Command by Asana (10/10 spans)
+  stage2_too_few_duties    0% Asana — Senior Product Manager, AI Context (8/8 spans)
+  stage2_too_few_duties    0% Asana — Senior Product Manager, AI Studio (10/10 spans)
+  stage2_too_few_duties    8% Bland AI — Agent Solutions Engineer (12/12 spans)
+  stage2_too_few_duties    7% Brex — Manager, CX AI Strategy (16/16 spans)
+  PASS                     32% Brex — Senior Product Manager, AI (18/18 spans)
+  PASS                     43% Clay — Software Engineer, Applied AI (15/15 spans)
+  stage2_too_few_duties    0% Cognition — Forward Deployed Engineer - US (9/9 spans)
+  stage2_too_few_duties    0% Cognition — Applied AI Engineer (11/11 spans)
+  stage2_too_few_duties    0% Cognition — Forward Deployed Engineer - Japan (9/9 spans)
+  stage2_too_few_duties    0% Cohere Health — Sr. Forward Deployed Engineer (12/12 spans)
+  stage2_too_few_duties    0% Cohere — Forward Deployed Engineer, Infrastructure Specialist (Middle East) (6/6 spans)
+  stage2_too_few_duties    0% Cohere — Forward Deployed Engineer, Agentic Platform (Europe) (8/8 spans)
+  stage2_too_few_duties    0% Cohere — Forward Deployed Engineer, Sovereign AI (5/5 spans)
+  gate_overlap             17% Cohere — Forward Deployed Engineer, Agentic Platform (Korea) (14/14 spans)
+  stage2_too_few_duties    0% Cohere — Forward Deployed Engineer, Infrastructure Specialist (Public Sector) (7/7 spans)
+  stage2_too_few_duties    0% Coinbase — Forward Deployed Engineer, Finance [Office of the CTO] (9/9 spans)
+  stage2_too_few_duties    0% Coinbase — Forward Deployed Engineer Intern (HR Technology) (10/10 spans)
+  stage2_too_few_duties    0% Coinbase — Group Product Manager, Compliance Agent Experience (8/8 spans)
+  stage2_too_few_duties    0% Commure — Forward Deployed Engineer (10/10 spans)
+  gate_overlap             9% Commure — Senior Software Engineer, Agent Platform (17/17 spans)
+  stage2_too_few_duties    4% Cresta — Conversational Designer, APAC (13/13 spans)
+  gate_overlap             13% Cursor (Anysphere) — Forward Deployed Engineer (18/18 spans)
+  stage2_too_few_duties    11% Cursor (Anysphere) — Forward Deployed Engineer - India (9/9 spans)
+  stage2_too_few_duties    0% Decagon — Senior Agent Product Manager (12/12 spans)
+  gate_overlap             12% Decagon — Agent Deployment Engineer (14/14 spans)
+  stage2_too_few_duties    14% Decagon — Conversation Designer (8/8 spans)
+  stage2_too_few_duties    0% Decagon — Product Manager, Enterprise Agent Platform (4/4 spans)
+  stage2_too_few_duties    0% Decagon — Senior Agent Product Manager, Healthcare (11/11 spans)
+  stage2_too_few_duties    14% Decagon — Agent Experience Designer (8/8 spans)
+  stage2_too_few_duties    17% Decagon — Agent Data Scientist (8/8 spans)
+  PASS                     20% Decagon — Agent UX Designer (10/10 spans)
+  stage2_too_few_duties    14% Deepgram — Forward-Deployed Engineer (FDE), Strategic Accounts (7/7 spans)
+  stage2_too_few_duties    6% Deepgram — Senior Forward Deployed Engineer (FDE), Strategic Accounts (8/8 spans)
+  gate_overlap             14% Deepgram — Staff Conversational Designer (14/14 spans)
+  stage2_too_few_duties    0% Deepgram — Staff Product Manager, AI Applications (16/16 spans)
+  stage2_too_few_duties    0% DoorDash — Engineering Manager, Red Team (10/10 spans)
+  PASS                     44% DoorDash — Senior Machine Learning Engineer, New Verticals Agentic Foundations (9/9 spans)
+  stage2_too_few_duties    0% Eudia — Forward Deployed Engineer - Eudia for Government (11/11 spans)
+  gate_overlap             20% Distyl AI — AI Engineer (13/13 spans)
+  stage2_too_few_duties    14% Distyl AI — AI Engineer, Lead (10/10 spans)
+  stage2_too_few_duties    13% Faire — Senior Applied AI/ML Scientist - Compass (9/9 spans)
+  stage2_too_few_duties    0% ElevenLabs — Forward Deployed Engineer - Software Engineer - USA (5/5 spans)
+  stage2_too_few_duties    0% ElevenLabs — Applied AI Engineer (4/4 spans)
+  PASS                     50% Ema — AI Application Engineer (Contractor role) (4/4 spans)
+  stage2_too_few_duties    7% Figma — Forward Deployed Engineer (16/16 spans)
+  stage2_too_few_duties    0% Figma — Product Manager, AI Growth (5/5 spans)
+  stage2_too_few_duties    0% Fin (Intercom) — Forward Deployed Engineer (9/9 spans)
+  stage2_too_few_duties    0% Fin (Intercom) — Senior Product Manager (Service Agent Team) (13/13 spans)
+  gate_overlap             22% Fieldguide — Software Engineer, Agents (Internal Audit) (10/10 spans)
+  PASS                     25% Fieldguide — Senior Software Engineer, Agents (Foundation Agents) (8/8 spans)
+  stage2_too_few_duties    0% Fieldguide — Lead/Principal Product Manager, Audit Agents (7/7 spans)
+  stage2_too_few_duties    0% Fieldguide — Lead/Principal Product Manager, Tax Agents (8/8 spans)
+  PASS                     33% Fieldguide — Software Engineer, Agents (Foundation Agents) (7/7 spans)
+  stage2_too_few_duties    0% GitLab — Forward Deployed Engineer - EMEA (9/9 spans)
+  stage2_too_few_duties    0% GitLab — Principal Product Manager, AI Software Factory (8/8 spans)
+  PASS                     68% Glean — AI Data Analyst (11/11 spans)
+  stage2_too_few_duties    0% Glean — Product Manager, Agent Security & Governance (8/8 spans)
+  gate_overlap             10% Giga — Forward Deployed Engineer I/II (15/15 spans)
+  stage2_too_few_duties    4% Giga — Senior Forward Deployed Engineer (15/15 spans)
+  gate_live_agent          36% Harvey — Senior Software Engineer, Agents (12/12 spans)
+  gate_live_agent          35% Harvey — Staff Software Engineer, Agents (11/11 spans)
+  stage2_too_few_duties    0% Harvey — Forward Deployed Finance Engineer, Private Credit (7/7 spans)
+  stage2_too_few_duties    0% Harvey — Forward Deployed Finance Engineer, Buyout (7/7 spans)
+  stage2_too_few_duties    0% Harvey — Forward Deployed Finance Engineer, Real Estate (7/7 spans)
+  stage2_too_few_duties    0% Harvey — Staff Product Manager, Agents (10/10 spans)
+  stage2_too_few_duties    0% Instacart — Senior Product Manager, AI Control Studio (6/6 spans)
+  stage2_too_few_duties    7% Level AI — Forward Deployed Engineer - Agents(Remote) (8/8 spans)
+  gate_overlap             13% Infinitus — Product Manager, Payor Agents (15/15 spans)
+  stage2_too_few_duties    4% Ironclad — Staff Product Manager, AI Data Experience (13/13 spans)
+  gate_overlap             12% Ironclad — Staff Product Manager - Procurement AI (13/13 spans)
+  gate_overlap             25% Lyft — Senior Product Manager, Customer Care AI (10/10 spans)
+  stage2_too_few_duties    6% Lyft — Senior Product Manager, Rider ML/AI (10/10 spans)
+  stage2_too_few_duties    0% Legora — Senior / Staff Forward Deployed Engineer (13/13 spans)
+  stage2_too_few_duties    8% Legora — Applied AI Engineer (9/9 spans)
+  stage2_too_few_duties    0% Legora — Junior/Mid-level Forward Deployed Engineer (10/10 spans)
+  gate_live_agent          27% Navan — Conversation Designer, Agent Voice & Personality (14/14 spans)
+  gate_overlap             29% Navan — Product Manager - Book with AI (15/15 spans)
+  gate_overlap             12% Netomi — Agentic Product Manager (20/20 spans)
+  PASS                     36% Netomi — Senior Technical PM, Applied AI (23/23 spans)
+  PASS                     28% Lovable — Product Manager (Agents) (18/18 spans)
+  gate_live_agent          29% Mercor — Software Engineer, Agents (14/14 spans)
+  stage2_too_few_duties    0% Mercor — Product Manager, Applied AI (17/17 spans)
+  gate_overlap             16% Observe.AI — AI Agent Engineer (23/23 spans)
+  gate_overlap             16% Observe.AI — AI Agent Engineer, Client Facing (16/16 spans)
+  stage2_too_few_duties    0% n8n — Forward Deployed Engineer - US East Coast (13/13 spans)
+  conditional_too_few_tasks 9% Outreach — Senior Forward Deployed Engineer,  Managed Services (19/19 spans)
+  stage2_too_few_duties    0% Notion — Forward Deployed Engineer (9/9 spans)
+  stage2_too_few_duties    0% Notion — Forward Deployed Engineer, India (6/6 spans)
+  stage2_too_few_duties    0% Notion — Forward Deployed Engineer, Manager -London (12/12 spans)
+  stage2_too_few_duties    0% Notion — AI Product Manager, Growth Marketing (9/9 spans)
+  stage2_too_few_duties    0% Parloa — TEST - Forward Deployed Engineer - Alex (8/8 spans)
+  stage2_too_few_duties    0% Parloa — TEST - Forward Deployed Engineer (8/8 spans)
+  stage2_too_few_duties    0% Parloa — Staff/Principal Product Manager, Agent Management Platform (6/6 spans)
+  stage2_too_few_duties    8% Perplexity — Product Manager, AI Capabilities (10/10 spans)
+  gate_overlap             18% Perplexity — Member of Technical Staff (Applied AI Engineer, Agent Capabilities) (17/17 spans)
+  stage2_too_few_duties    5% Reddit — Lead Forward Deployed Engineer (AI Enablement) (20/20 spans)
+  stage2_too_few_duties    8% Reddit — Senior Forward Deployed Engineer (AI Enablement) (14/14 spans)
+  stage2_too_few_duties    0% Plain — Forward Deployed Engineer (7/7 spans)
+  stage2_too_few_duties    0% Ramp — AI Solutions Engineer (13/13 spans)
+  stage2_too_few_duties    0% Ramp — Applied AI Engineer, Fullstack (5/5 spans)
+  PASS                     37% Replicant — Senior Software Engineer, Agents (16/16 spans)
+  stage2_too_few_duties    0% Replit — Forward Deployed Engineer (12/12 spans)
+  stage2_too_few_duties    5% Retell AI — Senior Forward Deployed Engineer (Mandarin Fluency Required) (13/13 spans)
+  stage2_too_few_duties    0% Retell AI — Senior Forward Deployed Engineer (Singapore) (12/12 spans)
+  stage2_too_few_duties    8% Rogo — Product Manager | Agents (17/17 spans)
+  stage2_too_few_duties    5% SoFi — Sr Staff Forward Deployed Engineer, Enterprise AI (12/12 spans)
+  PASS                     25% Sardine — Forward Deployed AI Engineer (11/11 spans)
+  stage2_too_few_duties    0% Sardine — Forward Deployed Engineer, Integrations - EU/UK (7/7 spans)
+  stage2_too_few_duties    6% Siena AI — Product Manager, Agent Platform (9/9 spans)
+  PASS                     20% Spotify — Senior Product Quality Analyst - AI Voice (10/10 spans)
+  stage2_too_few_duties    0% Sierra — Product Manager, Agent Development (7/7 spans)
+  stage2_too_few_duties    6% Sierra — Software Engineer, Agent (9/9 spans)
+  gate_overlap             15% Sierra — Strategist, Agent Development (10/10 spans)
+  stage2_too_few_duties    0% Sierra — Engineering Manager, Agent (12/12 spans)
+  stage2_too_few_duties    0% Sierra — Product Manager, Agent Development - Financial Services (7/7 spans)
+  PASS                     25% Sierra — Agent Strategist (10/10 spans)
+  stage2_too_few_duties    0% Sierra — Product Manager, Agent Development - Public Sector (15/15 spans)
+  gate_overlap             10% Sierra — Strategist, Agent Development - Flagship Deployment (15/15 spans)
+  gate_overlap             17% Sierra — Strategist, Agent Development - Retail (9/9 spans)
+  stage2_too_few_duties    5% Sierra — Software Engineer, Agent - Financial Services (13/13 spans)
+  PASS                     20% Sierra — Strategist, Agent Development - Travel, Transportation and Hospitality (10/10 spans)
+  stage2_too_few_duties    13% Sierra — Strategist, Agent Development - Financial Services (8/8 spans)
+  stage2_too_few_duties    17% Sierra — Strategist, Agent Development - Healthcare (7/7 spans)
+  stage2_too_few_duties    0% Sierra — Strategist, Agent Development - Public Sector (9/9 spans)
+  stage2_too_few_duties    6% Sierra — Software Engineer, Agent - Insurance (10/10 spans)
+  stage2_too_few_duties    13% Sierra — Strategist, Agent Development - Tech, Media & Telecom (9/9 spans)
+  gate_overlap             21% Sword Health — Senior ML Engineer, AI Solutions (Greek-speaking) (11/11 spans)
+  PASS                     36% Sword Health — Senior QA Analyst, AI Solutions (17/17 spans)
+  stage2_too_few_duties    8% Sword Health — Staff AI Product Manager, Phoenix Platform (7/7 spans)
+  stage2_too_few_duties    19% Sola — Forward Deployed Engineer (10/10 spans)
+  stage2_too_few_duties    0% Tines — Senior Forward Deployed Engineer - Public Sector (11/11 spans)
+  gate_live_agent          19% Speak — Product Manager - AI Content Generation (8/8 spans)
+  gate_overlap             17% Toast — Staff Software Engineer - AI/Agent Engineer, Care Automation (10/10 spans)
+  stage2_too_few_duties    0% Tennr — Sr. Forward Deployed Engineer (Post-Sales) (12/12 spans)
+  gate_overlap             21% Unify — Applied AI Engineer (12/12 spans)
+  stage2_too_few_duties    8% Webflow — Staff Product Manager, AI (14/14 spans)
+  stage2_too_few_duties    0% Writer — AI deployment engineer (Central) (10/10 spans)
+  gate_overlap             21% Zip — Principal Product Manager, AI (15/15 spans)
+  stage2_too_few_duties    10% AKASA — Forward Deployed Engineer (6/6 spans)
+  stage2_too_few_duties    6% Alex — Forward-Deployed Engineer (8/8 spans)
+  stage2_too_few_duties    0% Alloy — Founding Forward Deployed Engineer (7/7 spans)
+  PASS                     44% Ambience Healthcare — Senior Machine Learning Engineer (9/9 spans)
+  stage2_too_few_duties    11% AssemblyAI — Forward Deployed Engineer, Triage (NYC) (15/15 spans)
+  PASS                     19% Box — Machine Learning Engineer III, Metadata Extraction (14/14 spans)
+  stage2_too_few_duties    10% Campfire — AI Engineer - Agents (6/6 spans)
+  stage2_too_few_duties    0% Campfire — Forward Deployed Engineer (10/10 spans)
+  stage2_too_few_duties    0% Calendly — Staff Product Manager, AI Assistant (6/6 spans)
+  gate_overlap             15% Calendly — Staff Product Manager, Intelligent Customer Experience (11/11 spans)
+  stage2_too_few_duties    0% Cloudflare — AI Security Research & Red Team Engineer (16/16 spans)
+  stage2_too_few_duties    0% Cloudflare — Forward Deployed Engineer, Professional Services (7/7 spans)
+  gate_overlap             17% Cloudflare — Model Operations Lead, AI Gateway (23/23 spans)
+  stage2_too_few_duties    0% Cloudflare — Senior Forward Deployed Engineer (10/10 spans)
+  stage2_too_few_duties    0% Cloudflare — Senior Forward Deployed Engineer (12/12 spans)
+  stage2_too_few_duties    0% Cloudflare — Senior Forward Deployed Engineer (10/10 spans)
+  stage2_too_few_duties    0% Cloudflare — Senior Forward Deployed Engineer (12/12 spans)
+  stage2_too_few_duties    0% Cloudflare — Senior Forward Deployed Infrastructure Engineer (11/11 spans)
+  gate_overlap             10% Cloudflare — Software Engineer, AI Agents (17/17 spans)
+  stage2_too_few_duties    13% Cohere — Member of Technical Staff - RL Environments (9/9 spans)
+  stage2_too_few_duties    0% Coinbase — Embedded Engineer, Compliance [Office of the CTO] (8/8 spans)
+  stage2_too_few_duties    17% Coinbase — Machine Learning Engineer, CX Intelligence (6/6 spans)
+  gate_overlap             19% Counsel Health — Physician AI Engineer (16/16 spans)
+  stage2_too_few_duties    0% Credal — Forward Deployed Software Engineer (2/2 spans)
+  PASS                     29% Crosby — Product Manager (9/9 spans)
+  PASS                     36% Cursor (Anysphere) — Software Engineer, Model Lifecycle and Signals (7/7 spans)
+  PASS                     22% Adobe — AI Engineer 4 (10/10 spans)
+  stage2_too_few_duties    0% Adobe — Principal Forward Deployed Engineer, Creative AI (2/2 spans)
+  stage2_too_few_duties    0% Adobe — Lead Forward Deployed Engineer, Creative AI (3/3 spans)
+  stage2_too_few_duties    0% Adobe — Principal Product Manager, AI Brand Visibility (6/6 spans)
+  stage2_too_few_duties    0% Adobe — Forward Deployed AI Engineer, Marketing Intelligence & Consumer Insights (4/4 spans)
+  stage2_too_few_duties    0% Datadog — Product Manager II - Agent Observability (6/6 spans)
+  stage2_too_few_duties    0% Datadog — Product Manager II, AI & Data Security (9/9 spans)
+  stage2_too_few_duties    0% Datadog — Senior Platform Product Manager - AI SDLC Trusted Throughput (7/7 spans)
+  stage2_too_few_duties    0% Datadog — Senior Product Manager - Bits Agent Builder (13/13 spans)
+  PASS                     30% Datadog — Staff Applied Scientist - Agentic Interfaces (11/11 spans)
+  gate_live_agent          50% Datadog — Staff Applied Scientist - Dashboards (9/9 spans)
+  stage2_too_few_duties    0% DeepJudge — Forward Deployed Engineer (11/11 spans)
+  gate_overlap             13% DeepJudge — Agentic Product Manager (14/14 spans)
+  gate_overlap             10% DevRev — Customer Engineer (20/20 spans)
+  stage2_too_few_duties    12% DevRev — Forward Deployed Architect { Mumbai} (13/13 spans)
+  stage2_too_few_duties    4% DevRev — Forward Deployed Architect { Noida} (13/13 spans)
+  stage2_too_few_duties    5% DevRev — Forward Deployed Engineer (10/10 spans)
+  stage2_too_few_duties    4% DevRev — Forward Deployed Engineer {Chennai} (16/16 spans)
+  stage2_too_few_duties    4% DevRev — Forward Deployed Engineer {Mumbai} (13/13 spans)
+  stage2_too_few_duties    0% Distru — Senior AI Product Manager | REMOTE (10/10 spans)
+  stage2_too_few_duties    14% DoorDash — Senior Manager, Performance Excellence (9/9 spans)
+  PASS                     21% Dust — Senior AI Support Engineer (Paris) (13/13 spans)
+  PASS                     29% Dust — Global Head of Support Engineering (US) (20/20 spans)
+  PASS                     29% Ema — Senior Support Specialist- UK (15/15 spans)
+  PASS                     32% Eve — Solutions Architect, AI Intake (17/17 spans)
+  stage2_too_few_duties    6% Exa — Forward Deployed Engineer (8/8 spans)
+  stage2_too_few_duties    0% Exa — Forward Deployed Engineer, EMEA (10/10 spans)
+  stage2_too_few_duties    11% Footprint — Forward Deployed Engineer (9/9 spans)
+  stage2_too_few_duties    0% GC AI — Member of Technical Staff, Founding Forward Deployed Engineer (8/8 spans)
+  stage2_too_few_duties    17% Glean — Machine Learning Engineer, Assistant Quality (6/6 spans)
+  PASS                     25% Gradient Labs — Senior AI Engineer (15/15 spans)
+  stage2_too_few_duties    0% Greptile — Forward Deployed Engineer (8/8 spans)
+  PASS                     22% Gusto — Staff Software Engineer, Gustie Assist (11/11 spans)
+  stage2_too_few_duties    0% Harmony AI — Forward Deployed Engineer - New York (10/10 spans)
+  gate_live_agent          36% Harvey — Senior Product Operations Manager, Evaluation Quality (15/15 spans)
+  gate_overlap             13% Hello Patient — AI Agent Product Manager (18/18 spans)
+  stage2_too_few_duties    0% Hiya — Senior Product Manager- Voice AI for Operators (11/11 spans)
+  stage2_too_few_duties    8% Capital One — Senior Manager, Conversation Design (Product Design) (6/6 spans)
+  stage2_too_few_duties    13% Hyperbound — Machine Learning Engineer (5/5 spans)
+  gate_overlap             13% Infinitus — Forward Deployed Product Manager (17/17 spans)
+  stage2_too_few_duties    8% Klaviyo — Engineering Manager, Marketing Engineering & AI Agents - Amplify (14/14 spans)
+  stage2_too_few_duties    6% Klaviyo — Lead Engineer, Applied AI (Customer Agent) (11/11 spans)
+  stage2_too_few_duties    0% Komodo Health — Principal Product Manager, AI Products (16/16 spans)
+  stage2_too_few_duties    0% Langdock — Forward Deployed Infrastructure Engineer - m/f/d (18/18 spans)
+  stage2_too_few_duties    0% Langdock — Forward Deployed Engineer - m/f/d (10/10 spans)
+  PASS                     22% Lemonade — Senior Backend Engineer, GenAI (9/9 spans)
+  conditional_too_few_tasks 12% Liberate — Agent Product Manager (18/18 spans)
+  stage2_too_few_duties    0% Liberate — AI Agent Engineer (16/16 spans)
+  conditional_too_few_tasks 13% Liberate — Group Agent Product Manager (17/17 spans)
+  stage2_too_few_duties    0% LiveKit — Forward Deployed Engineer (10/10 spans)
+  stage2_too_few_duties    8% Lorikeet — Forward Deployed Engineer Intern (9/9 spans)
+  stage2_too_few_duties    0% CVS Health — Product Manager - AI Healthcare Claims (7/7 spans)
+  stage2_too_few_duties    17% Middesk — Forward Deployed Engineer (7/7 spans)
+  gate_live_agent          33% Mintlify — Applied AI Engineer (6/6 spans)
+  PASS                     29% Mintlify — Senior Applied AI Engineer (8/8 spans)
+  stage2_too_few_duties    0% MongoDB — Forward Deployed Engineer, Industry Solutions (8/8 spans)
+  stage2_too_few_duties    0% MongoDB — Forward Deployed Engineer, Industry Solutions (7/7 spans)
+  stage2_too_few_duties    0% MongoDB — Senior Product Manager, Atlas Agent Engine (6/6 spans)
+  gate_live_agent          20% MongoDB — Senior Technical Services Engineer (11/11 spans)
+  stage2_too_few_duties    0% MongoDB — Staff Product Manager, AI Builder Experience (11/11 spans)
+  stage2_too_few_duties    0% MongoDB — Staff Product Manager, AI Builder Experience (11/11 spans)
+  stage2_too_few_duties    5% Monk — Forward Deployed Engineer (12/12 spans)
+  gate_overlap             7% Netomi — Senior Customer Architect (28/28 spans)
+  stage2_too_few_duties    0% Notable — Senior AI Product Manager (10/10 spans)
+  stage2_too_few_duties    7% PagerDuty — Forward Deployed Engineer (SDEV) (14/14 spans)
+  stage2_too_few_duties    10% Perplexity — Member of Technical Staff (Search Quality Analyst) (5/5 spans)
+  PASS                     60% Perplexity — Member of Technical Staff (Model Behavior) (7/7 spans)
+  stage2_too_few_duties    0% Phaselaw — Founding Forward Deployed Engineer (9/9 spans)
+  gate_live_agent          30% Phaselaw — Clinical Physician (Full-time or Part time) (10/10 spans)
+  gate_live_agent          19% Pinterest — Staff Machine Learning Engineer, Shopping Ads (17/17 spans)
+  PASS                     39% Portswigger — AI Support Operations Specialist (17/17 spans)
+  gate_overlap             18% Rad AI — Head of Quality Engineering (24/24 spans)
+  gate_overlap             19% Ramp — Compliance Innovation Senior Strategist (9/9 spans)
+  stage2_too_few_duties    14% Replicant — Sales Engineer (12/12 spans)
+  gate_overlap             13% Retell AI — Support Engineer (Contract) (16/16 spans)
+  stage2_too_few_duties    0% Mastercard — Lead Forward Deployed Engineer (AI) (13/13 spans)
+  gate_overlap             25% Shepherd — AI Product Manager (13/13 spans)
+  gate_overlap             17% Siena AI — Software Engineer, Platform Experience (10/10 spans)
+  stage2_too_few_duties    0% Snowflake — Staff Product Manager - AI FDE (13/13 spans)
+  gate_overlap             24% Snowflake — Staff Applied AI Engineer (FDE) (20/20 spans)
+  stage2_too_few_duties    9% Snowflake — Forward Deployed Engineer, Applied AI (12/12 spans)
+  stage2_too_few_duties    0% Snowflake — Lead Forward Deployed Engineer - Migration (9/9 spans)
+  stage2_too_few_duties    0% Snowflake — Senior Product Manager - AI Migrations (15/15 spans)
+  stage2_too_few_duties    0% Snowflake — Senior Product Manager - Enterprise AI (10/10 spans)
+  PASS                     54% Snowflake — Senior Software Engineer, Cortex Quality (15/15 spans)
+  stage2_too_few_duties    11% Snowflake — Staff/Principal AI Software Engineer - Snowflake CoWork (11/11 spans)
+  stage2_too_few_duties    6% Snowflake — Principal Forward Deployed Engineer I, Frontier Engineering (11/11 spans)
+  stage2_too_few_duties    7% Snowflake — Senior Principal Forward Deployed Engineer, Frontier Engineering (18/18 spans)
+  stage2_too_few_duties    5% Snowflake — Senior Product Manager – Agent Marketplace (11/11 spans)
+  gate_overlap             31% Snowflake — Forward Deployed Engineer, Frontier Engineering (15/15 spans)
+  stage2_too_few_duties    0% Stack AI — Forward Deployed AI Engineer (11/11 spans)
+  stage2_too_few_duties    0% Stack AI — Forward Deployed Engineer (Spain) (10/10 spans)
+  stage2_too_few_duties    13% Strix — Forward-Deployed Security Engineer (5/5 spans)
+  PASS                     27% Sword Health — Head of Clinical Development, Pulse (16/16 spans)
+  stage2_too_few_duties    0% Taktile — Forward Deployed Engineer (9/9 spans)
+  stage2_too_few_duties    0% Taktile — Forward Deployed Engineer (9/9 spans)
+  stage2_too_few_duties    0% Taktile — Forward Deployed Engineer (Ops) (6/6 spans)
+  stage2_too_few_duties    0% Salesforce — Lead AI Forward Deployed Engineer (11/11 spans)
+  stage2_too_few_duties    0% Salesforce — Forward Deployed Engineer - Greek (10/10 spans)
+  stage2_too_few_duties    0% Salesforce — Forward Deployed Engineer (12/12 spans)
+  stage2_too_few_duties    5% Salesforce — Senior Forward Deployed Engineer (10/10 spans)
+  stage2_too_few_duties    6% Salesforce — Lead, Forward Deployed Engineer (9/9 spans)
+  stage2_too_few_duties    5% Salesforce — Principal, Forward Deployed Engineer (12/12 spans)
+  gate_overlap             12% Salesforce — Software Engineer, AI Systems (PMTS) (13/13 spans)
+  stage2_too_few_duties    0% Salesforce — Principal AI Solutions Engineer - Salesforce AI Labs (8/8 spans)
+  stage2_too_few_duties    4% Salesforce — Forward Deployed Engineer (15/15 spans)
+  PASS                     31% Salesforce — Senior Product Manager, Piper (9/9 spans)
+  gate_overlap             15% Toast — GTM Engineer, Web (17/17 spans)
+  stage2_too_few_duties    0% ServiceNow — Senior Staff Inbound Product Manager, AI/Super Intelligence Control Tower Observability (6/6 spans)
+  stage2_too_few_duties    0% ServiceNow — Senior Staff Inbound Product Manager, AI/Super Intelligence Control Tower - End to End Experience (9/9 spans)
+  stage2_too_few_duties    0% ServiceNow — Forward Deployed Solution Engineer – Applied AI FDE (10/10 spans)
+  stage2_too_few_duties    11% ServiceNow — Staff Inbound Product Manager - Hill Climbing Product and Customer Instance Program (9/9 spans)
+  stage2_too_few_duties    7% ServiceNow — Staff AI Product Manager (11/11 spans)
+  gate_overlap             13% ServiceNow — Technical Product Manager, Legal AI and Platforms (16/16 spans)
+  stage2_too_few_duties    0% ServiceNow — Sr Staff Outbound Product Manager - AI Assistant (10/10 spans)
+  stage2_too_few_duties    0% ServiceNow — Forward Deployed Solution Engineer – Applied AI FDE (10/10 spans)
+  stage2_too_few_duties    4% ServiceNow — Product Success Technical Director (15/15 spans)
+  stage2_too_few_duties    4% ServiceNow — Product Success Technical Director (15/15 spans)
+  stage2_too_few_duties    5% ServiceNow — Senior Principal Inbound Product Manager, CRM Voice AI (10/10 spans)
+  stage2_too_few_duties    6% ServiceNow — Senior Principal Inbound Product Manager, CRM Voice AI (9/9 spans)
+  stage2_too_few_duties    0% ServiceNow — Senior Staff AI Agent Engineer – Moveworks | Customer Deployment (12/12 spans)
+  stage2_too_few_duties    0% ServiceNow — Staff Inbound Product Manager - Agentic AI EmployeeWorks (5/5 spans)
+  stage2_too_few_duties    0% ServiceNow — Staff AI Agent Engineer – Moveworks | Customer Deployment (6/6 spans)
+  stage2_too_few_duties    6% Warp — Applied AI Engineer (9/9 spans)
+  stage2_too_few_duties    0% Weave Bio — Forward Deployed Engineer (4/4 spans)
+  stage2_too_few_duties    0% T-Mobile — Product Manager, Technical - AI Enablement (9/9 spans)
+  stage2_too_few_duties    6% T-Mobile — Product Manager, Technical: Responsible AI (10/10 spans)
+  stage2_too_few_duties    8% T-Mobile — Product Manager, Technical: AI Chatbots (13/13 spans)
+  stage2_too_few_duties    0% T-Mobile — Sr Technical Product Manager, AI Programs & Operating Cadence (12/12 spans)
+  stage2_too_few_duties    0% T-Mobile — Sr Product Manager, Technical: Enterprise AI Training & Adoption Programs (11/11 spans)
+  gate_overlap             19% T-Mobile — Principal Conversation Designer (14/14 spans)
+  stage2_too_few_duties    8% Target — Sr Engineer - Forward Deployed Engineer (FDE) AI Platforms team (14/14 spans)
+  stage2_too_few_duties    0% Target — Senior Engineer - Red Team Operator (11/11 spans)
+  stage2_too_few_duties    0% Target — Senior Engineer - Red Team Operator (9/9 spans)
+  stage2_too_few_duties    7% Wonderful — Forward Deployed Engineer (9/9 spans)
+  stage2_too_few_duties    6% Wonderful — Forward Deployed Engineer (9/9 spans)
+  gate_live_agent          40% Wonderful — Conversation Experience Designer (5/5 spans)
+  stage2_too_few_duties    0% Verizon — Senior Technical Product Manager – AI & Network Infrastructure (8/8 spans)
+  stage2_too_few_duties    13% WorkHero — Senior Product Manager (12/12 spans)
+  PASS                     32% Wise — Lead Data Scientist - AML Handling (14/14 spans)
+  gate_overlap             13% Wells Fargo — Lead AI Workflow Designer & Prompt Architect (16/16 spans)
+  stage2_too_few_duties    3% Wells Fargo — Lead Digital Product Manager- Future Autonomous Marketing (FAM) Experience Optimization Agent (20/20 spans)
+  stage2_too_few_duties    6% Workday — Senior AI Engineer - Da Nang (Paradox) (10/10 spans)
+  stage2_too_few_duties    10% Workday — Sr AI Engineer - Evisort Agentic Dev (5/5 spans)
+  stage2_too_few_duties    0% Workday — Senior AI Deployment Engineer (9/9 spans)
+  PASS                     46% Workday — AI Product Manager - Paradox (12/12 spans)
+  stage2_too_few_duties    0% Workday — Sr Product Manager - Evisort AI (9/9 spans)
+  stage2_too_few_duties    0% Workday — Product Manager - Activation & Deployment, Evisort AI (10/10 spans)
+  stage2_too_few_duties    7% Workday — Principal Product Manager - Workday AI - Agent Factory (8/8 spans)
+  stage2_too_few_duties    8% Workday — Sr / Principal Product Manager - AI Agent Products (6/6 spans)
+  PASS                     27% Workday — Customer Support Analyst, AI ML Application Support (11/11 spans)
+  gate_overlap             17% Workday — Sr Associate Support Engineer, Adaptive Planning AI, ML & Platform Operations (15/15 spans)
+  stage2_too_few_duties    4% Zendesk — Vice President, Global AI-Powered Support (32/32 spans)
+  stage2_too_few_duties    0% Zendesk — Forward Deployed Engineer (7/7 spans)
+  PASS                     29% Zendesk — Senior Engineering Manager, Machine Learning (19/19 spans)
+  extraction failed for Workday — Senior Applied AI Engineer (Paradox): Failed to parse structured output: Error: Failed to parse structured output: [
+  {
+    "code": "invalid_value",
+    "values": [
+      "support",
+      "voice",
+      "coding",
+      "research",
+      "sales",
+      "healthcare",
+      "legal",
+      "finance",
+      "internal",
+      "other"
+    ],
+    "path": [
+      "agent_type"
+    ],
+    "message": "Invalid option: expected one of \"support\"|\"voice\"|\"coding\"|\"research\"|\"sales\"|\"healthcare\"|\"legal\"|\"finance\"|\"internal\"|\"other\""
+  }
+] cause: [object Object]
+  extraction failed for Toast — AI Operations Lead, Toast IQ: Failed to parse structured output: Error: Failed to parse structured output: [
+  {
+    "code": "invalid_value",
+    "values": [
+      "intern",
+      "junior",
+      "mid",
+      "senior",
+      "staff",
+      "principal",
+      "manager",
+      "director",
+      "unknown"
+    ],
+    "path": [
+      "seniority"
+    ],
+    "message": "Invalid option: expected one of \"intern\"|\"junior\"|\"mid\"|\"senior\"|\"staff\"|\"principal\"|\"manager\"|\"director\"|\"unknown\""
+  }
+] cause: [object Object]
+
+extracted 350, failed 2; spans found verbatim: 3900/3900
+
+> eval-hiring-radar@0.1.0 news
+> tsx --env-file-if-exists=.env.local scripts/news.ts
+
+news for 39 lead companies
+  Abridge: 1 triggers from 10 headlines
+  Ambience Healthcare: 2 triggers from 4 headlines
+  Box: 0 triggers from 25 headlines
+  Brex: 2 triggers from 25 headlines
+  Clay: 6 triggers from 25 headlines
+  Cohere: 8 triggers from 24 headlines
+  Cursor (Anysphere): 12 triggers from 25 headlines
+  Decagon: 3 triggers from 16 headlines
+  DoorDash: 5 triggers from 25 headlines
+  Ema: 3 triggers from 25 headlines
+  Fieldguide: 3 triggers from 3 headlines
+  Glean: 3 triggers from 11 headlines
+  Gusto: 2 triggers from 9 headlines
+  Legora: 7 triggers from 25 headlines
+  Lovable: 6 triggers from 23 headlines
+  Mercor: 2 triggers from 25 headlines
+  Netomi: 0 triggers from 3 headlines
+  Perplexity: 6 triggers from 25 headlines
+  Replicant: 0 triggers from 9 headlines
+  Sardine: 0 triggers from 6 headlines
+  Sierra: 3 triggers from 25 headlines
+  Spotify: 5 triggers from 24 headlines
+  Sword Health: 5 triggers from 12 headlines
+  Adobe: 7 triggers from 17 headlines
+  Crosby: 0 triggers from 20 headlines
+  Datadog: 1 triggers from 15 headlines
+  Dust: 0 triggers from 18 headlines
+  Eve: 0 triggers from 25 headlines
+  FurtherAI: 0 triggers from 2 headlines
+  Gradient Labs: 2 triggers from 6 headlines
+  Lemonade: 0 triggers from 21 headlines
+  Mastercard: 4 triggers from 25 headlines
+  Mintlify: 0 triggers from 4 headlines
+  Portswigger: 1 triggers from 2 headlines
+  Salesforce: 11 triggers from 25 headlines
+  Snowflake: 2 triggers from 25 headlines
+  Wise: 0 triggers from 25 headlines
+  Workday: 9 triggers from 25 headlines
+  Zendesk: 5 triggers from 25 headlines
+model releases in the last 30 days: 22
+
+> eval-hiring-radar@0.1.0 sizes
+> tsx --env-file-if-exists=.env.local scripts/sizes.ts
+
+  Adobe: 5001+ https://www.sec.gov/Archives/edgar/data/796343/000079634325000004/adbe-20241129.htm
+  Crosby: 1-50 https://graphiq.ai/dossier/crosby
+  Datadog: 5001+ https://www.sec.gov/Archives/edgar/data/1561550/000156155025000025/ddog-20241231.htm
+  Dust: 51-200 https://getlatka.com/companies/dust.tt
+  Eve: 201-1000 https://tracxn.com/d/companies/eve/__b_adjUteJzrK7es3_zTViDgNlZ_Xayh_NgdNpH6Pn3E
+  Gradient Labs: 51-200 https://dealroom.co/companies/gradient-labs/
+  Lemonade: 1001-5000 https://www.sec.gov/Archives/edgar/data/1691421/000169142126000016/lmnd-20251231.htm
+  Mintlify: 51-200 https://pitchbook.com/profiles/company/493338-16
+  Portswigger: 201-1000 https://getlatka.com/companies/portswigger.net
+  Salesforce: 5001+ https://www.sec.gov/Archives/edgar/data/1108524/000110852425000006/crm-20250131.htm
+  Zendesk: 5001+ https://www.reveliolabs.com/companies/zendesk/employees
+
+> eval-hiring-radar@0.1.0 score
+> tsx --env-file-if-exists=.env.local scripts/score.ts
+
+{ lead: 39, rejected: 195, no_roles: 44, Hot: 2, Warm: 31, Watch: 6 }
+
+> eval-hiring-radar@0.1.0 themes
+> tsx --env-file-if-exists=.env.local scripts/themes.ts
+
+{ kind: 'possible_gap', themes: 31, duties: 1083, unassigned: 0 }
+{ kind: 'human_work', themes: 17, duties: 1631, unassigned: 0 }
+
+> eval-hiring-radar@0.1.0 score
+> tsx --env-file-if-exists=.env.local scripts/score.ts
+
+{ lead: 39, rejected: 195, no_roles: 44, Hot: 2, Warm: 31, Watch: 6 }
+
+> eval-hiring-radar@0.1.0 briefs
+> tsx --env-file-if-exists=.env.local scripts/briefs.ts
+
+briefs for 10 companies
+  Glean: ok
+  Lovable: ok
+  Perplexity: ok
+  Sword Health: ok
+  Fieldguide: ok
+  Mastercard: ok
+  Cohere: ok
+  Workday: ok
+  Sierra: ok
+  Snowflake: ok
+exit 0

@@ -76,11 +76,14 @@ export function buildEvidence(view: CompanyView) {
     });
   }
 
-  const active = activeTriggers(
+  // Model releases apply to every lead, so only the newest one is worth a line.
+  const allActive = activeTriggers(
     triggers.map((t) => ({ id: t.id, kind: t.kind, date: t.date, title: t.title, url: t.url, source: t.source })),
     DEFAULT_WEIGHTS,
     new Date(),
   );
+  const newestRelease = allActive.filter((t) => t.kind === "model_release").sort((a, b) => b.date.localeCompare(a.date))[0];
+  const active = allActive.filter((t) => t.kind !== "model_release" || t === newestRelease);
   const globalIds = new Set(triggers.filter((t) => t.companyId == null).map((t) => t.id));
   lines.push("\nActive timing triggers (last 90 days; model releases last 30 days):");
   if (!active.length) lines.push("None.");

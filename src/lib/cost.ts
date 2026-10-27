@@ -26,27 +26,34 @@ function median(xs: number[]): number {
   return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
 }
 
-function postedMidpoint(p: CostPosting): number | null {
-  if (p.currency && p.currency !== "USD") return null;
+// Rates are units of currency per 1 USD; a salary in a currency with no
+// rate is left out rather than guessed.
+export type FxRates = Record<string, number>;
+
+function postedMidpoint(p: CostPosting, fx: FxRates): number | null {
   if (p.salaryMin == null && p.salaryMax == null) return null;
   const lo = p.salaryMin ?? p.salaryMax!;
   const hi = p.salaryMax ?? p.salaryMin!;
-  return (lo + hi) / 2;
+  const cur = (p.currency ?? "USD").toUpperCase();
+  if (cur === "USD") return (lo + hi) / 2;
+  const rate = fx[cur];
+  return rate ? (lo + hi) / 2 / rate : null;
 }
 
 // Postings without a salary use the median of same-title postings in the
 // dataset, marked "estimated", and only when at least `minSameTitle` exist.
-export function midpoints(postings: CostPosting[], minSameTitle: number): Map<string, Midpoint> {
+export function midpoints(postings: CostPosting[], minSameTitle: number, fx: FxRates = {}): Map<string, Midpoint> {
   const byTitle = new Map<string, number[]>();
   for (const p of postings) {
-    const m = postedMidpoint(p);
+    const m = postedMidpoint(p, fx);
     if (m != null) byTitle.set(p.normalizedTitle, [...(byTitle.get(p.normalizedTitle) ?? []), m]);
   }
   const out = new Map<string, Midpoint>();
   for (const p of postings) {
-    const m = postedMidpoint(p);
+    const m = postedMidpoint(p, fx);
     if (m != null) {
-      out.set(p.id, { value: m, estimated: false, basis: "posted range" });
+      const cur = (p.currency ?? "USD").toUpperCase();
+      out.set(p.id, { value: m, estimated: false, basis: cur === "USD" ? "posted range" : `posted range in ${cur}, converted to USD` });
       continue;
     }
     const peers = byTitle.get(p.normalizedTitle) ?? [];

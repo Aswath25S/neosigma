@@ -95,17 +95,17 @@ export default function MethodPage() {
                 </div>
               ))}
             </div>
-            <p className="text-[14px] mt-4">Titles that match no list but mention AI, LLM, agent or conversational are sorted by a Claude title check (claude-haiku-5-5). Lists are checked keep → drop → conditional, so “Founding Evals Engineer” stays while “Founding AI Engineer” is dropped.</p>
+            <p className="text-[14px] mt-4">Lists are checked keep → drop → conditional, so “Founding Evals Engineer” stays while “Founding AI Engineer” is dropped. Drop-list titles are always discarded. <span className="text-ink">Every other posting is judged on its description, not its title:</span> if the title mentions AI, or the description mentions AI and at least {roles.description_screen.min_hits} of {roles.description_screen.phrases.length} duty phrases (eval sets, transcripts, failure analysis, regression, resolution rate…), a Claude screen (claude-haiku-5-5) reads the description and decides keep, conditional or drop.</p>
           </section>
 
           <section>
             <SectionHeading id="gates" num="03" title="Filters and gates" />
             <ol className="flex flex-col gap-4 text-[15px]">
-              <li><span className="text-ink">Scope.</span> US or remote-from-the-US postings, English, posted in the last {weights.fetch.max_posting_age_days} days. Duplicates (same company, same normalized title, descriptions ≥ {weights.fetch.dedupe_similarity * 100}% similar) are merged, keeping every location&apos;s salary.</li>
-              <li><span className="text-ink">Stage 1, title.</span> The lists above, plus the Claude title check.</li>
+              <li><span className="text-ink">Scope.</span> {weights.fetch.regions === "global" ? "All regions" : "US or remote-from-the-US postings"}, English only, posted in the last {weights.fetch.max_posting_age_days} days. Duplicates (same company, same normalized title, descriptions ≥ {weights.fetch.dedupe_similarity * 100}% similar) are merged, keeping every location&apos;s salary.</li>
+              <li><span className="text-ink">Stage 1, title and description.</span> The lists above; then the keyword pre-screen and the Claude description screen for every posting not selected by its title.</li>
               <li><span className="text-ink">Extraction.</span> One claude-sonnet-5-5 call per posting splits it into single duties, quotes each exact source span, and labels it. Output is validated with zod; every span is checked word for word against the posting.</li>
               <li><span className="text-ink">Stage 2, duty check.</span> Dropped if fewer than {roles.stage2_min_covered_or_assisted} duties are Covered or Assisted. Conditional titles also need {roles.conditional.min_distinct_tasks} of T1–T6.</li>
-              <li><span className="text-ink">Gate 1, overlap.</span> At least {roles.gate_overlap_min_share * 100}% of all listed duties are Covered or Assisted.</li>
+              <li><span className="text-ink">Gate 1, overlap.</span> At least {Math.round(roles.gate_overlap_min_share * 100)}% of all listed duties are Covered or Assisted. (The spec set 50%; lowered to {Math.round(roles.gate_overlap_min_share * 100)}% and conditional titles to {roles.conditional.min_distinct_tasks} of T1–T6 to widen the lead list. The live-agent gate is unchanged.)</li>
               <li><span className="text-ink">Gate 2, live agent.</span> A verbatim quote showing an agent already used by real customers: {roles.live_agent_evidence.counts.join("; ")}. Not counted: {roles.live_agent_evidence.does_not_count.join("; ")}. Quotes not found verbatim are discarded.</li>
             </ol>
             <div className="rounded-[14px] border border-line bg-surface p-5 mt-6 font-mono text-[14px] text-ink">
@@ -170,8 +170,8 @@ export default function MethodPage() {
           <section>
             <SectionHeading id="sources" num="07" title="Data sources" />
             <ul className="flex flex-col gap-2 text-[15px]">
-              <li><span className="text-ink">{sources.length} seed companies</span> in <code className="mono text-ink">config/sources.csv</code>: {Object.entries(byAts).map(([k, v]) => `${v} ${k}`).join(", ")}. Built by probing public boards and keeping companies with AI-related titles.</li>
-              <li><span className="text-ink">Job boards:</span> Greenhouse (<code className="mono text-[13px]">boards-api.greenhouse.io/v1/boards/&#123;token&#125;/jobs?content=true</code>), Lever (<code className="mono text-[13px]">api.lever.co/v0/postings/&#123;site&#125;?mode=json</code>), Ashby (<code className="mono text-[13px]">api.ashbyhq.com/posting-api/job-board/&#123;name&#125;?includeCompensation=true</code>), plus manual imports in <code className="mono text-[13px]">data/raw/manual/</code>.</li>
+              <li><span className="text-ink">{sources.length} seed companies</span> in <code className="mono text-ink">config/sources.csv</code>: {Object.entries(byAts).map(([k, v]) => `${v} ${k}`).join(", ")}. Built from a curated list of agent and vertical-AI companies probed on public boards, large companies on Workday and SmartRecruiters, and Hacker News “Who is hiring?” posts from the last six months (a Claude check keeps companies running a customer-facing agent).</li>
+              <li><span className="text-ink">Job boards:</span> Greenhouse (<code className="mono text-[13px]">boards-api.greenhouse.io/v1/boards/&#123;token&#125;/jobs?content=true</code>), Lever (<code className="mono text-[13px]">api.lever.co/v0/postings/&#123;site&#125;?mode=json</code>), Ashby (<code className="mono text-[13px]">api.ashbyhq.com/posting-api/job-board/&#123;name&#125;?includeCompensation=true</code>), Workable (<code className="mono text-[13px]">apply.workable.com/api/v1/widget/accounts/&#123;name&#125;?details=true</code>), SmartRecruiters (<code className="mono text-[13px]">api.smartrecruiters.com/v1/companies/&#123;id&#125;/postings</code>), Workday (<code className="mono text-[13px]">&#123;tenant&#125;.wdN.myworkdayjobs.com/wday/cxs/…/jobs</code>), plus manual imports in <code className="mono text-[13px]">data/raw/manual/</code>.</li>
               <li><span className="text-ink">News:</span> Google News RSS per lead company, company blog feeds in <code className="mono text-[13px]">config/company_feeds.json</code>, and lab feeds for model releases ({modelReleaseFeeds.feeds.map((f) => f.lab).join(", ")}). Headlines are confirmed by a claude-haiku-5-5 check.</li>
               <li><span className="text-ink">Company size:</span> a public source found with Claude web search (LinkedIn, Glassdoor and Indeed excluded), linked on each company page.</li>
               <li><span className="text-ink">Fetching rules:</span> one request per second per host, an honest user agent, robots.txt respected on HTML pages, source URL and fetch time stored with every record. No names, emails or profiles of individuals are stored. LinkedIn, Indeed and Glassdoor are never scraped.</li>
@@ -182,14 +182,16 @@ export default function MethodPage() {
           <section>
             <SectionHeading id="limits" num="08" title="Known limits" />
             <ul className="flex flex-col gap-2 text-[15px] list-disc pl-5">
-              <li>Only companies on the seed list are seen. Roles posted on unsupported boards (Workday, iCIMS and others) are missed unless imported by hand.</li>
-              <li>The 60-day cut-off uses the board&apos;s first-published date, so long-open roles drop out even while still open.</li>
+              <li>Only companies on the seed list are seen. Boards other than Ashby, Greenhouse, Lever, Workable, SmartRecruiters and Workday (iCIMS, Taleo and others) are missed unless imported by hand.</li>
+              <li>On Workday and SmartRecruiters, descriptions are read only for jobs the board&apos;s own search returns for AI and eval terms (at most {weights.fetch.max_details_per_board} per board), to keep request volume polite.</li>
+              <li>A posting is only read by Claude when its title mentions AI or its description passes the keyword pre-screen; eval work described in unusual words can be missed.</li>
+              <li>The {weights.fetch.max_posting_age_days}-day cut-off uses the board&apos;s first-published date, so long-open roles drop out even while still open.</li>
               <li>Duty labels come from the posting&apos;s words. Postings that describe the work vaguely score lower than the job may really be.</li>
               <li>The cost is a minimum estimate of manual work, from posted salary ranges only. Many postings have no salary, so totals undercount.</li>
               <li>News triggers come from headlines only; funding amounts and launch details are not read.</li>
               <li>Public complaints about agent quality are a manual flag in v1 (<code className="mono text-[13px]">config/manual_triggers.json</code>).</li>
               <li>Size bands come from a web search and may be out of date; each links its source.</li>
-              <li>US and remote postings only; NeoSigma&apos;s Bengaluru presence is not covered in v1.</li>
+              <li>English-language postings only. Non-USD salaries are converted at the European Central Bank reference rate fetched on each run.</li>
             </ul>
           </section>
         </div>

@@ -1,4 +1,4 @@
-export type Ats = "greenhouse" | "lever" | "ashby" | "careers" | "manual";
+export type Ats = "greenhouse" | "lever" | "ashby" | "workable" | "smartrecruiters" | "workday" | "careers" | "manual";
 
 export interface SalaryRange {
   min: number | null;
