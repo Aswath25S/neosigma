@@ -1,0 +1,145 @@
+✓ Sierra ashby/sierra jobs=210 inScope=119 keep/cond=6 ambiguous=28
+✓ Decagon ashby/decagon jobs=133 inScope=101 keep/cond=10 ambiguous=22
+✓ Fin (Intercom) greenhouse/intercom jobs=99 inScope=33 keep/cond=4 ambiguous=2
+✓ Cresta greenhouse/cresta jobs=88 inScope=50 keep/cond=2 ambiguous=14
+✓ Parloa ashby/parloa jobs=53 inScope=1 keep/cond=1 ambiguous=0
+✓ PolyAI greenhouse/polyai jobs=1 inScope=0 keep/cond=0 ambiguous=0
+✓ Bland AI ashby/bland jobs=15 inScope=15 keep/cond=1 ambiguous=2
+✓ Ada greenhouse/ada18 jobs=7 inScope=1 keep/cond=0 ambiguous=0
+✓ Vapi ashby/vapi jobs=6 inScope=6 keep/cond=0 ambiguous=2
+✓ Retell AI ashby/retell-ai jobs=28 inScope=26 keep/cond=3 ambiguous=1
+✗ Synthflow
+✓ ElevenLabs ashby/elevenlabs jobs=148 inScope=78 keep/cond=1 ambiguous=7
+✓ Cognition ashby/cognition jobs=105 inScope=58 keep/cond=4 ambiguous=6
+✓ Replit ashby/replit jobs=36 inScope=33 keep/cond=1 ambiguous=4
+✓ Factory ashby/factory jobs=64 inScope=61 keep/cond=2 ambiguous=2
+✓ Cursor (Anysphere) ashby/cursor jobs=124 inScope=84 keep/cond=4 ambiguous=10
+✗ 11x
+✗ Lindy
+✓ Artisan ashby/artisan jobs=4 inScope=4 keep/cond=1 ambiguous=1
+✓ Mercor ashby/mercor jobs=110 inScope=106 keep/cond=9 ambiguous=15
+✗ Crescendo
+✓ Siena AI ashby/siena jobs=13 inScope=8 keep/cond=1 ambiguous=0
+✓ Giga ashby/gigaml jobs=33 inScope=31 keep/cond=3 ambiguous=0
+✓ Maven AGI ashby/maven-agi jobs=15 inScope=15 keep/cond=0 ambiguous=0
+✓ Observe.AI greenhouse/observeai jobs=8 inScope=3 keep/cond=1 ambiguous=0
+✗ Forethought
+✗ ASAPP
+✓ Perplexity ashby/perplexity jobs=131 inScope=112 keep/cond=6 ambiguous=13
+✓ Hume AI greenhouse/humeai jobs=5 inScope=5 keep/cond=0 ambiguous=2
+✓ Gorgias ashby/gorgias jobs=20 inScope=0 keep/cond=0 ambiguous=0
+✗ Assembled
+✓ You.com greenhouse/youcom jobs=8 inScope=8 keep/cond=0 ambiguous=1
+✗ Micro1
+✓ Paradox ashby/paradox jobs=5 inScope=3 keep/cond=0 ambiguous=0
+✓ Character.AI ashby/character jobs=13 inScope=13 keep/cond=2 ambiguous=4
+✓ Glean greenhouse/gleanwork jobs=132 inScope=103 keep/cond=8 ambiguous=10
+✓ Writer ashby/writer jobs=46 inScope=34 keep/cond=3 ambiguous=12
+✓ Harvey ashby/harvey jobs=366 inScope=255 keep/cond=5 ambiguous=12
+✗ Jasper
+✗ Spellbook
+✓ Legora ashby/legora jobs=305 inScope=139 keep/cond=2 ambiguous=1
+✓ Eudia greenhouse/eudia jobs=21 inScope=17 keep/cond=3 ambiguous=1
+✗ Clio
+✓ Abridge ashby/abridge jobs=40 inScope=40 keep/cond=2 ambiguous=1
+✗ EvenUp
+✓ Ambience Healthcare ashby/ambiencehealthcare jobs=19 inScope=19 keep/cond=0 ambiguous=2
+✓ HeyMilo ashby/heymilo jobs=6 inScope=4 keep/cond=0 ambiguous=0
+✓ Suki greenhouse/suki jobs=7 inScope=6 keep/cond=0 ambiguous=1
+✓ Tennr ashby/tennr jobs=28 inScope=28 keep/cond=1 ambiguous=1
+✓ Infinitus ashby/infinitus jobs=6 inScope=6 keep/cond=2 ambiguous=1
+✗ Hippocratic AI
+✓ Assort Health ashby/assorthealth jobs=31 inScope=31 keep/cond=5 ambiguous=10
+✗ Hebbia
+✓ Rogo ashby/rogo jobs=99 inScope=61 keep/cond=11 ambiguous=0
+✓ AlphaSense greenhouse/alphasense jobs=212 inScope=105 keep/cond=1 ambiguous=7
+✓ Hyperbound ashby/hyperbound jobs=9 inScope=9 keep/cond=0 ambiguous=1
+✓ Commure ashby/commure jobs=80 inScope=63 keep/cond=3 ambiguous=19
+✓ Norm Ai ashby/norm-ai jobs=21 inScope=20 keep/cond=0 ambiguous=0
+✓ Nabla ashby/nabla jobs=9 inScope=7 keep/cond=0 ambiguous=0
+✓ Sword Health greenhouse/swordhealth jobs=58 inScope=27 keep/cond=0 ambiguous=3
+✗ Hinge Health
+✓ Lemonade ashby/lemonade jobs=40 inScope=13 keep/cond=0 ambiguous=0
+✗ Corgi
+✗ Pilot
+✗ Truebill / Rocket Money
+✓ Cleo greenhouse/cleo jobs=6 inScope=6 keep/cond=0 ambiguous=0
+✗ Klarna
+✓ Wealthsimple ashby/wealthsimple jobs=40 inScope=4 keep/cond=0 ambiguous=0
+✗ Aisera
+✓ Basis lever/basis jobs=5 inScope=5 keep/cond=0 ambiguous=1
+✗ Kore.ai
+✗ Moveworks
+✗ Yellow.ai
+✓ Relevance AI ashby/relevanceai jobs=1 inScope=0 keep/cond=0 ambiguous=0
+✗ CrewAI
+✓ Dust ashby/dust jobs=25 inScope=7 keep/cond=0 ambiguous=0
+✓ Distyl AI ashby/distyl jobs=27 inScope=25 keep/cond=0 ambiguous=18
+✓ Cohere ashby/cohere jobs=116 inScope=64 keep/cond=3 ambiguous=17
+✗ Sana
+✗ Writer
+✓ Tines greenhouse/tines jobs=35 inScope=26 keep/cond=2 ambiguous=0
+✗ Contextual AI
+✓ Zapier ashby/zapier jobs=12 inScope=10 keep/cond=0 ambiguous=0
+✗ Retool
+✓ Vercel greenhouse/vercel jobs=93 inScope=74 keep/cond=1 ambiguous=3
+✓ n8n ashby/n8n jobs=38 inScope=13 keep/cond=1 ambiguous=0
+✓ Clay ashby/claylabs jobs=58 inScope=49 keep/cond=1 ambiguous=2
+✓ Unify ashby/unify jobs=11 inScope=11 keep/cond=1 ambiguous=0
+✗ Qualified
+✗ Talkdesk
+✓ Dialpad greenhouse/dialpad jobs=17 inScope=12 keep/cond=0 ambiguous=2
+✗ Regal
+✓ Outreach lever/outreach jobs=22 inScope=20 keep/cond=1 ambiguous=5
+✓ Gong greenhouse/gongio jobs=90 inScope=54 keep/cond=0 ambiguous=0
+✓ Notion ashby/notion jobs=140 inScope=77 keep/cond=3 ambiguous=5
+✓ Airtable greenhouse/airtable jobs=4 inScope=4 keep/cond=0 ambiguous=0
+✓ Figma greenhouse/figma jobs=140 inScope=98 keep/cond=2 ambiguous=14
+✗ Grammarly
+✓ Duolingo greenhouse/duolingo jobs=60 inScope=52 keep/cond=0 ambiguous=2
+✓ Asana greenhouse/asana jobs=111 inScope=51 keep/cond=4 ambiguous=6
+✓ Miro ashby/miro jobs=21 inScope=11 keep/cond=1 ambiguous=0
+✓ Webflow ashby/webflow jobs=17 inScope=11 keep/cond=1 ambiguous=2
+✗ Canva
+✓ Linear ashby/linear jobs=33 inScope=19 keep/cond=1 ambiguous=0
+✓ Ramp ashby/ramp jobs=173 inScope=151 keep/cond=5 ambiguous=2
+✓ Brex greenhouse/brex jobs=266 inScope=252 keep/cond=4 ambiguous=7
+✓ Mercury greenhouse/mercury jobs=77 inScope=77 keep/cond=0 ambiguous=2
+✗ Rippling
+✓ Gusto greenhouse/gusto jobs=97 inScope=97 keep/cond=0 ambiguous=8
+✗ Deel
+✓ Dropbox greenhouse/dropbox jobs=20 inScope=14 keep/cond=0 ambiguous=0
+✓ Box greenhouse/boxinc jobs=113 inScope=60 keep/cond=0 ambiguous=3
+✗ Atlassian
+✗ Zendesk
+✗ Freshworks
+✓ HubSpot greenhouse/hubspotjobs jobs=66 inScope=12 keep/cond=0 ambiguous=0
+✗ Sprinklr
+✗ Superhuman
+✓ Attio ashby/attio jobs=30 inScope=11 keep/cond=0 ambiguous=0
+✓ Instacart greenhouse/instacart jobs=100 inScope=90 keep/cond=2 ambiguous=4
+✓ Sourcegraph greenhouse/sourcegraph91 jobs=8 inScope=8 keep/cond=0 ambiguous=1
+✓ Lyft greenhouse/lyft jobs=179 inScope=93 keep/cond=3 ambiguous=3
+✓ GitLab greenhouse/gitlab jobs=238 inScope=125 keep/cond=2 ambiguous=10
+✓ DoorDash greenhouse/doordashusa jobs=447 inScope=446 keep/cond=1 ambiguous=12
+✓ Airbnb greenhouse/airbnb jobs=189 inScope=103 keep/cond=1 ambiguous=6
+✓ Robinhood greenhouse/robinhood jobs=155 inScope=138 keep/cond=0 ambiguous=6
+✓ Chime greenhouse/chime jobs=74 inScope=74 keep/cond=0 ambiguous=6
+✓ Coinbase greenhouse/coinbase jobs=226 inScope=179 keep/cond=3 ambiguous=4
+✓ SoFi greenhouse/sofi jobs=59 inScope=59 keep/cond=2 ambiguous=3
+✓ Affirm greenhouse/affirm jobs=223 inScope=160 keep/cond=0 ambiguous=6
+✓ Discord greenhouse/discord jobs=46 inScope=45 keep/cond=0 ambiguous=1
+✓ Reddit greenhouse/reddit jobs=161 inScope=142 keep/cond=2 ambiguous=10
+✓ Spotify lever/spotify jobs=89 inScope=33 keep/cond=0 ambiguous=4
+✓ Peloton greenhouse/peloton jobs=58 inScope=41 keep/cond=0 ambiguous=0
+✓ Thumbtack ashby/thumbtack jobs=49 inScope=21 keep/cond=0 ambiguous=2
+✓ Faire greenhouse/faire jobs=69 inScope=61 keep/cond=13 ambiguous=1
+✗ Turo
+✓ Toast greenhouse/toast jobs=333 inScope=266 keep/cond=2 ambiguous=2
+✗ Zillow
+✓ Oscar Health greenhouse/oscar jobs=229 inScope=229 keep/cond=0 ambiguous=2
+✓ Navan greenhouse/tripactions jobs=222 inScope=137 keep/cond=0 ambiguous=2
+✓ Nubank ashby/nubank jobs=93 inScope=42 keep/cond=0 ambiguous=5
+✓ Pinterest greenhouse/pinterest jobs=160 inScope=125 keep/cond=0 ambiguous=6
+
+found 101, missing 42

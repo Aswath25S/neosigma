@@ -1,0 +1,107 @@
+{
+  "as_of": "2026-10-26",
+  "source_site": "https://www.neosigma.ai/",
+  "tasks": [
+    {
+      "id": "T1",
+      "short": "Finds failures",
+      "does": "Finds where the live agent is failing",
+      "by_hand": "Reads conversations or logs from real users to spot mistakes",
+      "phrasing": ["Review agent transcripts", "analyze production failures", "monitor agent quality"],
+      "sources": [
+        { "title": "Self-Improving Agentic Systems", "url": "https://www.neosigma.ai/blog/self-improving-agentic-systems" },
+        { "title": "Calibrated Confidence, Wider Coverage", "url": "https://www.neosigma.ai/blog/calibrated-confidence-wider-coverage" }
+      ]
+    },
+    {
+      "id": "T2",
+      "short": "Groups failures",
+      "does": "Groups failures into recurring problems",
+      "by_hand": "Tags and sorts mistakes into categories, decides which matter most",
+      "phrasing": ["Categorize failure modes", "root-cause analysis", "triage issues by severity"],
+      "sources": [
+        { "title": "Self-Improving Agentic Systems", "url": "https://www.neosigma.ai/blog/self-improving-agentic-systems" }
+      ]
+    },
+    {
+      "id": "T3",
+      "short": "Failures to tests",
+      "does": "Turns failures into tests",
+      "by_hand": "Writes and updates test cases from real problems",
+      "phrasing": ["Build and maintain evaluation sets", "turn customer issues into test cases", "golden datasets"],
+      "sources": [
+        { "title": "The Most Important Eval isn't on a Leaderboard", "url": "https://www.neosigma.ai/blog/the-most-important-eval-isnt-on-a-leaderboard" }
+      ]
+    },
+    {
+      "id": "T4",
+      "short": "Regression checks",
+      "does": "Checks every change doesn't break old fixes",
+      "by_hand": "Re-runs tests before each release and signs off",
+      "phrasing": ["Regression testing", "catch quality drops before release", "release gating"],
+      "sources": [
+        { "title": "Self-Improving Agentic Systems", "url": "https://www.neosigma.ai/blog/self-improving-agentic-systems" }
+      ]
+    },
+    {
+      "id": "T5",
+      "short": "Model testing",
+      "does": "Tests new AI models before switching",
+      "by_hand": "Compares models on the company's own tasks, adjusts setup for each",
+      "phrasing": ["Benchmark new models", "run model comparisons", "lead model migrations"],
+      "sources": [
+        { "title": "The Scaffolding Tax", "url": "https://www.neosigma.ai/blog/investigating-the-optimal-harness-for-a-model" }
+      ]
+    },
+    {
+      "id": "T6",
+      "short": "Fixes setup",
+      "does": "Proposes and checks fixes to the agent's setup",
+      "by_hand": "Rewrites instructions, tool rules or examples, then checks the result",
+      "phrasing": ["Iterate on prompts to improve accuracy", "tune agent instructions", "improve resolution rate"],
+      "sources": [
+        { "title": "Self-Improving Agentic Systems", "url": "https://www.neosigma.ai/blog/self-improving-agentic-systems" }
+      ]
+    }
+  ],
+  "labels": [
+    {
+      "id": "covered",
+      "name": "Covered",
+      "definition": "The duty is one of T1–T6 done in a repeatable way.",
+      "example": "Review a sample of agent conversations each week and log failures."
+    },
+    {
+      "id": "assisted",
+      "name": "Assisted",
+      "definition": "NeoSigma prepares it, a person decides. Use this whenever a duty only partly matches a task.",
+      "example": "Define what a good answer looks like with our clinical team; decide which failures to prioritize."
+    },
+    {
+      "id": "not_covered",
+      "name": "Not covered",
+      "definition": "Human work (managing people, customer calls, roadmap) or something outside T1–T6.",
+      "example": "Present findings to leadership; manage a team of annotators."
+    }
+  ],
+  "proofs": {
+    "verification": {
+      "name": "The verification study",
+      "for_tasks": ["T1", "T2"],
+      "claim": "Calibrated checking reached a 0.768 failure-detection score at $1.30 per 900 sessions, about 47 times more sessions than the strongest single judge for the same budget.",
+      "url": "https://www.neosigma.ai/blog/calibrated-confidence-wider-coverage"
+    },
+    "self_improvement": {
+      "name": "The self-improvement study",
+      "for_tasks": ["T3", "T4", "T6"],
+      "claim": "Agent score rose from 0.56 to 0.78 on a customer-service benchmark with no model change.",
+      "url": "https://www.neosigma.ai/blog/self-improving-agentic-systems"
+    },
+    "scaffolding_tax": {
+      "name": "The Scaffolding Tax study",
+      "for_tasks": ["T5"],
+      "claim": "The best harness depends on the model, so a model switch needs the setup re-tuned on the company's own tasks.",
+      "url": "https://www.neosigma.ai/blog/investigating-the-optimal-harness-for-a-model"
+    }
+  }
+}

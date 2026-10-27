@@ -1,0 +1,4 @@
+{
+  "_note": "Optional blog or changelog RSS feeds per company (company name as in sources.csv). Used for agent-launch triggers.",
+  "feeds": {}
+}

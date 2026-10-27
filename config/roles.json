@@ -1,0 +1,138 @@
+{
+  "_note": "Patterns are case-insensitive regular expressions matched against the posting title. Lists are checked in order: keep, drop, conditional. Titles that match none but contain one of ai_keywords go to a Claude title check.",
+  "keep": {
+    "rule": "Send to stage 2",
+    "titles": [
+      "AI evaluation engineer",
+      "evals engineer",
+      "agent evaluation engineer",
+      "LLM evaluation engineer",
+      "AI quality engineer",
+      "AI QA engineer",
+      "LLM QA / testing engineer",
+      "agent reliability engineer",
+      "AI reliability engineer",
+      "AI quality analyst",
+      "AI conversation reviewer",
+      "agent transcript reviewer",
+      "AI agent operations specialist / manager",
+      "conversational AI operations",
+      "agent optimization engineer"
+    ],
+    "patterns": [
+      "\\bevals?\\b",
+      "\\bevaluations?\\b.*\\b(engineer|scientist|lead|manager|analyst|specialist)\\b",
+      "\\b(ai|llm|agent|model)\\s+evaluations?\\b",
+      "\\b(engineer|scientist)\\b.*\\bevaluations?\\b",
+      "\\b(ai|llm|agent|model)\\s+(quality|qa|testing|test)\\b",
+      "\\b(llm|ai|agent)\\b.*\\b(qa|quality assurance)\\b",
+      "\\b(agent|ai|llm)\\s+reliability\\b",
+      "\\b(ai|agent)\\s+(conversation|transcript)\\s+(reviewer|analyst)\\b",
+      "\\b(conversation|transcript)\\s+(quality|review)\\b",
+      "\\b(ai\\s+)?agent\\s+operations\\b",
+      "\\bai\\s+operations\\s+(specialist|manager|analyst|lead)\\b",
+      "\\bconversational\\s+ai\\s+operations\\b",
+      "\\bagent\\s+optimi[sz]ation\\b",
+      "\\b(ai|llm|model)\\s+behaviou?r\\s+(analyst|specialist|engineer)\\b"
+    ]
+  },
+  "conditional": {
+    "rule": "Send to stage 2; kept only if at least 3 of T1–T6 appear as Covered or Assisted",
+    "min_distinct_tasks": 3,
+    "titles": [
+      "Applied AI engineer",
+      "forward deployed engineer (AI / agents)",
+      "prompt engineer",
+      "conversation designer",
+      "AI product manager",
+      "clinical / legal / financial AI reviewer"
+    ],
+    "patterns": [
+      "\\bapplied\\s+(ai|llm|genai)\\s+engineer",
+      "\\bforward[\\s-]+deployed\\b.*\\bengineer\\b",
+      "\\bprompt\\s+engineer",
+      "\\bconversation(al)?\\s+design",
+      "\\b(ai|agent|agents|llm)\\s+product\\s+manager\\b",
+      "\\bproduct\\s+manager\\b.*\\b(ai|agents?|llm)\\b",
+      "\\b(clinical|legal|financial|medical)\\b.*\\b(ai|llm|model)\\b.*\\b(reviewer|specialist|analyst)\\b",
+      "\\b(ai|agent)\\s+(solutions|deployment)\\s+engineer\\b",
+      "\\b(ai\\s+)?agent\\s+engineer\\b"
+    ]
+  },
+  "drop": {
+    "rule": "Discard. Red-teaming duties are logged only for the gaps view.",
+    "titles": [
+      "Founding AI engineer",
+      "head of AI",
+      "AI platform / infrastructure engineer",
+      "ML researcher",
+      "model training / pretraining roles",
+      "data labeler for training data",
+      "AI tutor",
+      "general software QA",
+      "safety red teamer"
+    ],
+    "patterns": [
+      "\\bfounding\\s+(ai|ml|llm)\\s+engineer\\b",
+      "\\bhead\\s+of\\s+(ai|ml|machine learning)\\b",
+      "\\b(ai|ml|llm)\\s+(platform|infrastructure|infra)\\b",
+      "\\b(ml|machine learning|ai)\\s+research(er)?\\b",
+      "\\bresearch\\s+(scientist|engineer)\\b",
+      "\\b(pre-?training|post-?training|model training)\\b",
+      "\\b(data\\s+)?(labell?er|annotator)\\b",
+      "\\bai\\s+(tutor|trainer)\\b",
+      "\\bred[\\s-]*team",
+      "^(senior\\s+|staff\\s+|lead\\s+)?(software\\s+)?qa\\s+(engineer|analyst)\\b(?!.*\\b(ai|llm|agent)\\b)",
+      "^(senior\\s+|staff\\s+)?(sdet|test automation engineer|quality assurance engineer)\\b(?!.*\\b(ai|llm|agent)\\b)"
+    ]
+  },
+  "ai_keywords": [
+    "\\bai\\b",
+    "\\bllms?\\b",
+    "\\bagents?\\b",
+    "\\bagentic\\b",
+    "\\bconversational\\b",
+    "\\bgenai\\b",
+    "\\bml\\b"
+  ],
+  "stage2_min_covered_or_assisted": 3,
+  "gate_overlap_min_share": 0.5,
+  "search_words": {
+    "titles": [
+      "evaluation engineer",
+      "evals",
+      "AI quality",
+      "LLM QA",
+      "agent reliability",
+      "AI conversation reviewer",
+      "AI agent operations"
+    ],
+    "duties": [
+      "evaluation sets",
+      "regression",
+      "review agent conversations",
+      "failure analysis",
+      "model comparison",
+      "hallucination",
+      "production traces",
+      "escalation rate",
+      "resolution rate"
+    ]
+  },
+  "live_agent_evidence": {
+    "counts": [
+      "in production",
+      "live",
+      "our customers use",
+      "a named agent product",
+      "volume numbers (millions of conversations, 10,000 tickets a week)",
+      "production traces / transcripts"
+    ],
+    "does_not_count": [
+      "exploring AI",
+      "building our first agent",
+      "prototype",
+      "0 to 1"
+    ]
+  }
+}

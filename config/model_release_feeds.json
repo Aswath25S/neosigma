@@ -1,0 +1,13 @@
+{
+  "_note": "Lab news feeds checked for the 'new model just shipped' trigger. Labs without a public RSS feed are covered by a Google News query. Every candidate item is confirmed as a major model release by a Claude check before it becomes a trigger.",
+  "feeds": [
+    { "lab": "OpenAI", "kind": "rss", "url": "https://openai.com/news/rss.xml" },
+    { "lab": "Google", "kind": "rss", "url": "https://blog.google/technology/ai/rss/" },
+    { "lab": "Anthropic", "kind": "google_news", "query": "Anthropic releases new Claude model" },
+    { "lab": "Google DeepMind", "kind": "google_news", "query": "Google DeepMind releases Gemini model" },
+    { "lab": "Meta", "kind": "google_news", "query": "Meta releases Llama model" },
+    { "lab": "Mistral", "kind": "google_news", "query": "Mistral AI releases new model" },
+    { "lab": "xAI", "kind": "google_news", "query": "xAI releases Grok model" }
+  ],
+  "title_hint": "\\b(gpt|o\\d|claude|opus|sonnet|haiku|fable|gemini|llama|mistral|grok|model|release|launch|introduc)"
+}

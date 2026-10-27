@@ -1,0 +1,5631 @@
+{
+  "found": [
+    {
+      "company": "Sierra",
+      "domain": "sierra.ai",
+      "segment": "agent_native",
+      "ats": "ashby",
+      "token": "sierra",
+      "jobs": 210,
+      "inScope": 119,
+      "recent": 67,
+      "matches": [
+        {
+          "title": "Product Manager, Agent Development",
+          "list": "conditional",
+          "ageDays": 228,
+          "location": "San Francisco, CA (United States) / New York, NY (United States)"
+        },
+        {
+          "title": "Software Engineer, Agent",
+          "list": "ambiguous",
+          "ageDays": 556,
+          "location": "San Francisco, CA (United States) / New York, NY (United States) / Atlanta, GA (United States)"
+        },
+        {
+          "title": "Research Engineer, Applied Research",
+          "list": "drop",
+          "ageDays": 21,
+          "location": "San Francisco, CA (United States)"
+        },
+        {
+          "title": "Strategist, Agent Development",
+          "list": "ambiguous",
+          "ageDays": 455,
+          "location": "San Francisco, CA (United States) / New York, NY (United States)"
+        },
+        {
+          "title": "Engineering Manager, Agent",
+          "list": "ambiguous",
+          "ageDays": 76,
+          "location": "New York, NY (United States) / San Francisco, CA (United States)"
+        },
+        {
+          "title": "Product Manager, Agent Development - Financial Services",
+          "list": "conditional",
+          "ageDays": 57,
+          "location": "San Francisco, CA (United States) / New York, NY (United States)"
+        },
+        {
+          "title": "Software Engineer, Agent - Healthcare",
+          "list": "ambiguous",
+          "ageDays": 33,
+          "location": "New York, NY (United States) / San Francisco, CA (United States)"
+        },
+        {
+          "title": "GTM Operations, Agent Development",
+          "list": "ambiguous",
+          "ageDays": 98,
+          "location": "San Francisco, CA (United States)"
+        },
+        {
+          "title": "Product Manager, Agent Development - Healthcare",
+          "list": "conditional",
+          "ageDays": 241,
+          "location": "San Francisco, CA (United States) / New York, NY (United States)"
+        },
+        {
+          "title": "Product Manager, Agent Development (Brazilian Portuguese speaking)",
+          "list": "conditional",
+          "ageDays": 130,
+          "location": "San Francisco, CA (United States) / New York, NY (United States)"
+        },
+        {
+          "title": "Software Engineer, Agent (Brazilian Portuguese speaking)",
+          "list": "ambiguous",
+          "ageDays": 126,
+          "location": "San Francisco, CA (United States) / New York, NY (United States)"
+        },
+        {
+          "title": "Product Manager, Agent Development (Spanish speaking)",
+          "list": "conditional",
+          "ageDays": 95,
+          "location": "San Francisco, CA (United States) / New York, NY (United States)"
+        },
+        {
+          "title": "Software Engineer, Agent (New Grad 2027)",
+          "list": "ambiguous",
+          "ageDays": 56,
+          "location": "San Francisco, CA (United States) / New York, NY (United States)"
+        },
+        {
+          "title": "Product Manager, Agent Development - Public Sector",
+          "list": "conditional",
+          "ageDays": 63,
+          "location": "San Francisco, CA (United States) / New York, NY (United States)"
+        },
+        {
+          "title": "Software Engineer Intern, Agent (Summer 2027)",
+          "list": "ambiguous",
+          "ageDays": 56,
+          "location": "San Francisco, CA (United States) / New York, NY (United States)"
+        },
+        {
+          "title": "Strategist, Agent Development (Spanish speaking)",
+          "list": "ambiguous",
+          "ageDays": 48,
+          "location": "San Francisco, CA (United States) / New York, NY (United States)"
+        },
+        {
+          "title": "Strategist, Agent Development (Brazilian Portuguese speaking)",
+          "list": "ambiguous",
+          "ageDays": 39,
+          "location": "San Francisco, CA (United States) / New York, NY (United States)"
+        },
+        {
+          "title": "Strategist, Agent Development - Flagship Deployment",
+          "list": "ambiguous",
+          "ageDays": 38,
+          "location": "San Francisco, CA (United States) / New York, NY (United States)"
+        },
+        {
+          "title": "Software Engineer, Agent Runtime",
+          "list": "ambiguous",
+          "ageDays": 5,
+          "location": "San Francisco, CA (United States)"
+        },
+        {
+          "title": "Software Engineer, Agent Builder",
+          "list": "ambiguous",
+          "ageDays": 5,
+          "location": "San Francisco, CA (United States)"
+        },
+        {
+          "title": "Strategist, Agent Development - Retail",
+          "list": "ambiguous",
+          "ageDays": 33,
+          "location": "San Francisco, CA (United States) / New York, NY (United States)"
+        },
+        {
+          "title": "Software Engineer, Agent - Financial Services",
+          "list": "ambiguous",
+          "ageDays": 33,
+          "location": "San Francisco, CA (United States) / New York, NY (United States) / Atlanta, GA (United States)"
+        },
+        {
+          "title": "Strategist, Agent Development - Travel, Transportation and Hospitality",
+          "list": "ambiguous",
+          "ageDays": 25,
+          "location": "San Francisco, CA (United States) / New York, NY (United States)"
+        },
+        {
+          "title": "Software Engineer, Agent - Public Sector",
+          "list": "ambiguous",
+          "ageDays": 33,
+          "location": "San Francisco, CA (United States) / New York, NY (United States) / Washington, D.C. (United States of America)"
+        },
+        {
+          "title": "Software Engineer, Agent - Retail",
+          "list": "ambiguous",
+          "ageDays": 33,
+          "location": "San Francisco, CA (United States) / New York, NY (United States) / Atlanta, GA (United States) / Toronto (Canada)"
+        },
+        {
+          "title": "Strategist, Agent Development - Financial Services",
+          "list": "ambiguous",
+          "ageDays": 33,
+          "location": "San Francisco, CA (United States) / New York, NY (United States)"
+        },
+        {
+          "title": "Software Engineer, Agent - Travel & Hospitality",
+          "list": "ambiguous",
+          "ageDays": 33,
+          "location": "San Francisco, CA (United States) / New York, NY (United States) / Atlanta, GA (United States)"
+        },
+        {
+          "title": "Strategist, Agent Development - Healthcare",
+          "list": "ambiguous",
+          "ageDays": 33,
+          "location": "San Francisco, CA (United States) / New York, NY (United States)"
+        },
+        {
+          "title": "Strategist, Agent Development - Public Sector",
+          "list": "ambiguous",
+          "ageDays": 33,
+          "location": "San Francisco, CA (United States) / New York, NY (United States) / Washington, D.C. (United States of America)"
+        },
+        {
+          "title": "Software Engineer, Agent - Insurance",
+          "list": "ambiguous",
+          "ageDays": 33,
+          "location": "San Francisco, CA (United States) / New York, NY (United States) / Atlanta, GA (United States)"
+        },
+        {
+          "title": "Strategist, Agent Development - Tech, Media & Telecom",
+          "list": "ambiguous",
+          "ageDays": 33,
+          "location": "San Francisco, CA (United States) / New York, NY (United States)"
+        },
+        {
+          "title": "Software Engineer, Agent - Tech, Media & Telecom",
+          "list": "ambiguous",
+          "ageDays": 33,
+          "location": "San Francisco, CA (United States) / New York, NY (United States)"
+        },
+        {
+          "title": "Strategist, Agent Development (MBA Grad 2027)",
+          "list": "ambiguous",
+          "ageDays": 18,
+          "location": "San Francisco, CA (United States) / New York, NY (United States)"
+        },
+        {
+          "title": "Software Engineer, Agent (Spanish speaking)",
+          "list": "ambiguous",
+          "ageDays": 19,
+          "location": "San Francisco, CA (United States) / New York, NY (United States) / Toronto (Canada)"
+        }
+      ]
+    },
+    {
+      "company": "Decagon",
+      "domain": "decagon.ai",
+      "segment": "agent_native",
+      "ats": "ashby",
+      "token": "decagon",
+      "jobs": 133,
+      "inScope": 101,
+      "recent": 32,
+      "matches": [
+        {
+          "title": "Senior Research Engineer",
+          "list": "drop",
+          "ageDays": 430,
+          "location": "San Francisco (United States) / New York City (United States)"
+        },
+        {
+          "title": "Senior Agent Product Manager",
+          "list": "conditional",
+          "ageDays": 215,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Engineering Manager, Agent Orchestration",
+          "list": "ambiguous",
+          "ageDays": 258,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Senior Agent Product Manager",
+          "list": "conditional",
+          "ageDays": 426,
+          "location": "New York City (United States)"
+        },
+        {
+          "title": "Agent Development Manager",
+          "list": "ambiguous",
+          "ageDays": 278,
+          "location": "New York City (United States)"
+        },
+        {
+          "title": "Staff Software Engineer, Agent Platform",
+          "list": "ambiguous",
+          "ageDays": 329,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Staff Software Engineer, Voice Agent",
+          "list": "ambiguous",
+          "ageDays": 329,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Senior Software Engineer, Agent Platform",
+          "list": "ambiguous",
+          "ageDays": 341,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Agent Strategy Manager",
+          "list": "ambiguous",
+          "ageDays": 201,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Director of Agent Deployment Engineering",
+          "list": "ambiguous",
+          "ageDays": 262,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Agent Deployment Engineer",
+          "list": "conditional",
+          "ageDays": 279,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Senior Software Engineer, AI Platform",
+          "list": "drop",
+          "ageDays": 258,
+          "location": "San Francisco (United States) / New York City (United States)"
+        },
+        {
+          "title": "Engineering Manager, Agent Product",
+          "list": "ambiguous",
+          "ageDays": 91,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Agent Deployment Engineer",
+          "list": "conditional",
+          "ageDays": 167,
+          "location": "New York City (United States)"
+        },
+        {
+          "title": "Agent Development Manager",
+          "list": "ambiguous",
+          "ageDays": 151,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Agent Deployment Engineer - Spanish Speaking",
+          "list": "conditional",
+          "ageDays": 97,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Research Engineer",
+          "list": "drop",
+          "ageDays": 96,
+          "location": "San Francisco (United States) / New York City (United States)"
+        },
+        {
+          "title": "Conversation Designer",
+          "list": "conditional",
+          "ageDays": 96,
+          "location": "San Francisco (United States) / New York City (United States)"
+        },
+        {
+          "title": "Agent Strategy Manager",
+          "list": "ambiguous",
+          "ageDays": 201,
+          "location": "New York City (United States)"
+        },
+        {
+          "title": "Senior Research Engineer, Audio and Speech",
+          "list": "drop",
+          "ageDays": 161,
+          "location": "San Francisco (United States) / New York City (United States)"
+        },
+        {
+          "title": "Product Manager, Enterprise Agent Platform",
+          "list": "conditional",
+          "ageDays": 80,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Senior Agent Product Manager, Healthcare",
+          "list": "conditional",
+          "ageDays": 77,
+          "location": "New York City (United States) / San Francisco (United States)"
+        },
+        {
+          "title": "Agent Strategy Manager",
+          "list": "ambiguous",
+          "ageDays": 74,
+          "location": "Dallas (United States)"
+        },
+        {
+          "title": "Agent Experience Designer",
+          "list": "ambiguous",
+          "ageDays": 74,
+          "location": "San Francisco (United States) / New York City (United States)"
+        },
+        {
+          "title": "Agent Data Scientist",
+          "list": "ambiguous",
+          "ageDays": 67,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "AI Acceleration Engineer",
+          "list": "ambiguous",
+          "ageDays": 55,
+          "location": "San Francisco (United States) / New York City (United States)"
+        },
+        {
+          "title": "Research Engineer, Safety",
+          "list": "drop",
+          "ageDays": 52,
+          "location": "San Francisco (United States) / New York City (United States)"
+        },
+        {
+          "title": "Research Engineer, Audio and Speech",
+          "list": "drop",
+          "ageDays": 52,
+          "location": "San Francisco (United States) / New York City (United States)"
+        },
+        {
+          "title": "Senior Research Engineer, Safety",
+          "list": "drop",
+          "ageDays": 52,
+          "location": "San Francisco (United States) / New York City (United States)"
+        },
+        {
+          "title": "Senior Agent Product Manager - Spanish Speaking",
+          "list": "conditional",
+          "ageDays": 42,
+          "location": "New York City (United States)"
+        },
+        {
+          "title": "Agent Product Manager",
+          "list": "conditional",
+          "ageDays": 11,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Agent UX Designer",
+          "list": "ambiguous",
+          "ageDays": 26,
+          "location": "San Francisco (United States) / New York City (United States)"
+        }
+      ]
+    },
+    {
+      "company": "Fin (Intercom)",
+      "domain": "intercom.com",
+      "segment": "agent_native",
+      "ats": "greenhouse",
+      "token": "intercom",
+      "jobs": 99,
+      "inScope": 33,
+      "recent": 12,
+      "matches": [
+        {
+          "title": "Forward Deployed Data Scientist",
+          "list": "conditional",
+          "ageDays": 42,
+          "location": "San Francisco, California / San Francisco, CA, United States"
+        },
+        {
+          "title": "Forward Deployed Engineer",
+          "list": "conditional",
+          "ageDays": 42,
+          "location": "Chicago, Illinois; San Francisco, California / Chicago, IL, United States / San Francisco, CA, United States"
+        },
+        {
+          "title": "Senior AI Deployment Consultant",
+          "list": "ambiguous",
+          "ageDays": 69,
+          "location": "Chicago, Illinois / San Francisco, CA, United States"
+        },
+        {
+          "title": "Senior AI Deployment Consultant",
+          "list": "ambiguous",
+          "ageDays": 69,
+          "location": "San Francisco, California / San Francisco, CA, United States"
+        },
+        {
+          "title": "Senior Forward Deployed Engineer",
+          "list": "conditional",
+          "ageDays": 88,
+          "location": "Chicago, Illinois; San Francisco, California / Chicago, IL, United States / San Francisco, CA, United States"
+        },
+        {
+          "title": "Senior Manager, Forward Deployed Engineering",
+          "list": "conditional",
+          "ageDays": 213,
+          "location": "San Francisco, California / San Francisco, CA, United States"
+        }
+      ]
+    },
+    {
+      "company": "Cresta",
+      "domain": "cresta.com",
+      "segment": "agent_native",
+      "ats": "greenhouse",
+      "token": "cresta",
+      "jobs": 88,
+      "inScope": 50,
+      "recent": 12,
+      "matches": [
+        {
+          "title": "AI Deployment Manager",
+          "list": "ambiguous",
+          "ageDays": 279,
+          "location": "United States (Remote) / US (Remote)"
+        },
+        {
+          "title": "AI Engineer, GTM",
+          "list": "ambiguous",
+          "ageDays": 251,
+          "location": "United States (Remote) / US (Remote)"
+        },
+        {
+          "title": "AI Strategist",
+          "list": "ambiguous",
+          "ageDays": 20,
+          "location": "United States (Remote) / US (Remote)"
+        },
+        {
+          "title": "AI Success Manager",
+          "list": "ambiguous",
+          "ageDays": 538,
+          "location": "United States (Remote) / US (Remote)"
+        },
+        {
+          "title": "Director of Enterprise AI Success.",
+          "list": "ambiguous",
+          "ageDays": 56,
+          "location": "United States (Remote) / US (Remote)"
+        },
+        {
+          "title": "Embedded AI Expert",
+          "list": "ambiguous",
+          "ageDays": 410,
+          "location": "United States (Remote) / US (Remote)"
+        },
+        {
+          "title": "Forward Deployed Product Manager, AI Agent",
+          "list": "conditional",
+          "ageDays": 511,
+          "location": "United States (Remote) / Ontario, Canada / US (Remote)"
+        },
+        {
+          "title": "Lead Engineer - AI Agent Voice Experience",
+          "list": "ambiguous",
+          "ageDays": 223,
+          "location": "United States (Remote) / US (Remote)"
+        },
+        {
+          "title": "Senior Forward Deployed Engineer (AI Agent)",
+          "list": "conditional",
+          "ageDays": 501,
+          "location": "United States (Remote) / US (Remote)"
+        },
+        {
+          "title": "Senior Product Designer, AI Builders",
+          "list": "ambiguous",
+          "ageDays": 208,
+          "location": "United States (Remote) / US (Remote)"
+        },
+        {
+          "title": "Senior Software Engineer, Backend (AI Agent)",
+          "list": "ambiguous",
+          "ageDays": 239,
+          "location": "United States (Remote) / US (Remote)"
+        },
+        {
+          "title": "Senior Technical Product Marketing Manager, AI Agent",
+          "list": "ambiguous",
+          "ageDays": 5,
+          "location": "New York, United, States (Hybrid); San Francisco, United, States (Hybrid); United States (Remote) / US (Remote)"
+        },
+        {
+          "title": "Solutions Engineer, AI Agent",
+          "list": "ambiguous",
+          "ageDays": 67,
+          "location": "United States (Remote) / US (Remote)"
+        },
+        {
+          "title": "Solutions Engineer, AI Agent",
+          "list": "ambiguous",
+          "ageDays": 95,
+          "location": "United States (Remote) / US (Remote)"
+        },
+        {
+          "title": "Special Projects, AI Agents Team",
+          "list": "ambiguous",
+          "ageDays": 61,
+          "location": "United States (Remote) / Ontario, Canada / US (Remote)"
+        },
+        {
+          "title": "Sr. Director, Product Marketing - Cresta Agents",
+          "list": "ambiguous",
+          "ageDays": 233,
+          "location": "United States (Remote) / US (Remote)"
+        }
+      ]
+    },
+    {
+      "company": "Parloa",
+      "domain": "parloa.com",
+      "segment": "agent_native",
+      "ats": "ashby",
+      "token": "parloa",
+      "jobs": 53,
+      "inScope": 1,
+      "recent": 1,
+      "matches": [
+        {
+          "title": "TEST - Forward Deployed Engineer",
+          "list": "conditional",
+          "ageDays": 8,
+          "location": "New York (USA)"
+        }
+      ]
+    },
+    {
+      "company": "PolyAI",
+      "domain": "poly.ai",
+      "segment": "agent_native",
+      "ats": "greenhouse",
+      "token": "polyai",
+      "jobs": 1,
+      "inScope": 0,
+      "recent": 0,
+      "matches": []
+    },
+    {
+      "company": "Bland AI",
+      "domain": "bland.ai",
+      "segment": "agent_native",
+      "ats": "ashby",
+      "token": "bland",
+      "jobs": 15,
+      "inScope": 15,
+      "recent": 2,
+      "matches": [
+        {
+          "title": "Machine Learning Researcher, Audio",
+          "list": "drop",
+          "ageDays": 189,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Machine Learning Researcher, Multimodal LLMs",
+          "list": "drop",
+          "ageDays": 189,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Agent Solutions Engineer",
+          "list": "conditional",
+          "ageDays": 151,
+          "location": "San Francisco (United States)"
+        }
+      ]
+    },
+    {
+      "company": "Ada",
+      "domain": "ada.cx",
+      "segment": "agent_native",
+      "ats": "greenhouse",
+      "token": "ada18",
+      "jobs": 7,
+      "inScope": 1,
+      "recent": 1,
+      "matches": []
+    },
+    {
+      "company": "Vapi",
+      "domain": "vapi.ai",
+      "segment": "agent_native",
+      "ats": "ashby",
+      "token": "vapi",
+      "jobs": 6,
+      "inScope": 6,
+      "recent": 3,
+      "matches": [
+        {
+          "title": "Product Designer — AI UX / Product Experience",
+          "list": "ambiguous",
+          "ageDays": 103,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Member of Technical Staff, Agentic Developer Experience",
+          "list": "ambiguous",
+          "ageDays": 62,
+          "location": "San Francisco (United States)"
+        }
+      ]
+    },
+    {
+      "company": "Retell AI",
+      "domain": "retellai.com",
+      "segment": "agent_native",
+      "ats": "ashby",
+      "token": "retell-ai",
+      "jobs": 28,
+      "inScope": 26,
+      "recent": 13,
+      "matches": [
+        {
+          "title": "Senior Forward Deployed Engineer",
+          "list": "conditional",
+          "ageDays": 614,
+          "location": "San Francisco Bay Area (United States)"
+        },
+        {
+          "title": "Founders Initiatives, AI Agents",
+          "list": "ambiguous",
+          "ageDays": 138,
+          "location": "San Francisco Bay Area (United States)"
+        },
+        {
+          "title": "Senior Forward Deployed Engineer (Mandarin Fluency Required)",
+          "list": "conditional",
+          "ageDays": 82,
+          "location": "San Francisco Bay Area (United States)"
+        },
+        {
+          "title": "Senior Forward Deployed Engineer (Spanish Fluency Required)",
+          "list": "conditional",
+          "ageDays": 75,
+          "location": "San Francisco Bay Area (United States)"
+        }
+      ]
+    },
+    {
+      "company": "ElevenLabs",
+      "domain": "elevenlabs.io",
+      "segment": "agent_native",
+      "ats": "ashby",
+      "token": "elevenlabs",
+      "jobs": 148,
+      "inScope": 78,
+      "recent": 66,
+      "matches": [
+        {
+          "title": "Forward Deployed Engineer - Software Engineer - USA",
+          "list": "conditional",
+          "ageDays": 13,
+          "location": "San Francisco (United States) / United States / New York (United States)"
+        },
+        {
+          "title": "Research Engineer",
+          "list": "drop",
+          "ageDays": 15,
+          "location": "Poland / United States / Germany / United Kingdom / Bulgaria"
+        },
+        {
+          "title": "Engineering - Internal AI Transformation",
+          "list": "ambiguous",
+          "ageDays": 4,
+          "location": "London (United Kingdom) / Dublin (Ireland) / New York (United States) / Germany / Poland / Sweden / Italy / Poland / United Kingdom / Canada / Berlin (Germany)"
+        },
+        {
+          "title": "Research Engineer - Inference",
+          "list": "drop",
+          "ageDays": 60,
+          "location": "United Kingdom / United States / Poland / Bulgaria"
+        },
+        {
+          "title": "Research Engineer - Web Crawlers",
+          "list": "drop",
+          "ageDays": 60,
+          "location": "United Kingdom / United States / Poland / Bulgaria"
+        },
+        {
+          "title": "Research Engineer - Data Infrastructure",
+          "list": "drop",
+          "ageDays": 7,
+          "location": "United Kingdom / United States / Poland / Bulgaria"
+        },
+        {
+          "title": "Full-Stack Engineer (Backend Leaning) - Creative Agents",
+          "list": "ambiguous",
+          "ageDays": 20,
+          "location": "Remote"
+        },
+        {
+          "title": "Full-Stack Engineer - Creative Agents",
+          "list": "ambiguous",
+          "ageDays": 19,
+          "location": "Remote"
+        }
+      ]
+    },
+    {
+      "company": "Cognition",
+      "domain": "cognition.ai",
+      "segment": "agent_native",
+      "ats": "ashby",
+      "token": "cognition",
+      "jobs": 105,
+      "inScope": 58,
+      "recent": 15,
+      "matches": [
+        {
+          "title": "Research Engineer, Post-Training",
+          "list": "drop",
+          "ageDays": 81,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Forward Deployed Engineer - US",
+          "list": "conditional",
+          "ageDays": 473,
+          "location": "San Francisco (United States) / New York City (United States) / Austin, Texas (United States)"
+        },
+        {
+          "title": "Applied AI Transformation Manager",
+          "list": "conditional",
+          "ageDays": 473,
+          "location": "San Francisco (United States) / New York City (United States)"
+        },
+        {
+          "title": "AI Support Engineer",
+          "list": "ambiguous",
+          "ageDays": 194,
+          "location": "San Francisco (United States) / New York City (United States)"
+        },
+        {
+          "title": "Applied AI Engineer",
+          "list": "conditional",
+          "ageDays": 368,
+          "location": "San Francisco (United States) / New York City (United States) / London (United Kingdom)"
+        },
+        {
+          "title": "Forward Deployed Engineer - Federal",
+          "list": "conditional",
+          "ageDays": 273,
+          "location": "Washington DC (United States) / San Francisco (United States)"
+        },
+        {
+          "title": "Research Engineer, ML Infrastructure",
+          "list": "drop",
+          "ageDays": 81,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Research Engineer, Mid-Training",
+          "list": "drop",
+          "ageDays": 81,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "AI Support Engineer",
+          "list": "ambiguous",
+          "ageDays": 124,
+          "location": "Tokyo (Japan) / New York City (United States)"
+        },
+        {
+          "title": "Research Engineer, Safety & Alignment",
+          "list": "drop",
+          "ageDays": 17,
+          "location": "San Francisco (United States)"
+        }
+      ]
+    },
+    {
+      "company": "Replit",
+      "domain": "replit.com",
+      "segment": "agent_native",
+      "ats": "ashby",
+      "token": "replit",
+      "jobs": 36,
+      "inScope": 33,
+      "recent": 14,
+      "matches": [
+        {
+          "title": "Staff Software Engineer, Agentic Commerce & Payments",
+          "list": "ambiguous",
+          "ageDays": 35,
+          "location": "Foster City, CA (USA)"
+        },
+        {
+          "title": "Staff Software Engineer, Agent Platform",
+          "list": "ambiguous",
+          "ageDays": 195,
+          "location": "Foster City, CA (USA)"
+        },
+        {
+          "title": "AI Agent Security Architect",
+          "list": "ambiguous",
+          "ageDays": 56,
+          "location": "Foster City, CA (USA)"
+        },
+        {
+          "title": "Forward Deployed Engineer",
+          "list": "conditional",
+          "ageDays": 63,
+          "location": "Foster City, CA (USA) / NYC (SoHo) (United States)"
+        },
+        {
+          "title": "Staff Software Engineer, Agentic Ads",
+          "list": "ambiguous",
+          "ageDays": 31,
+          "location": "Foster City, CA (USA)"
+        }
+      ]
+    },
+    {
+      "company": "Factory",
+      "domain": "factory.ai",
+      "segment": "agent_native",
+      "ats": "ashby",
+      "token": "factory",
+      "jobs": 64,
+      "inScope": 61,
+      "recent": 26,
+      "matches": [
+        {
+          "title": "Software Engineer, AI",
+          "list": "ambiguous",
+          "ageDays": 581,
+          "location": "San Francisco, CA (United States)"
+        },
+        {
+          "title": "Research Engineer",
+          "list": "drop",
+          "ageDays": 907,
+          "location": "San Francisco, CA (United States)"
+        },
+        {
+          "title": "Member of Deployed Staff, Forward Deployed Engineer",
+          "list": "conditional",
+          "ageDays": 277,
+          "location": "San Francisco, CA (United States) / New York, NY (United States) / London, UK (United Kingdom) / Washington, DC / Australia"
+        },
+        {
+          "title": "Member of Deployed Staff, Applied AI",
+          "list": "conditional",
+          "ageDays": 130,
+          "location": "San Francisco, CA (United States) / New York, NY (United States) / London, UK (United Kingdom) / Washington, DC / Australia"
+        }
+      ]
+    },
+    {
+      "company": "Cursor (Anysphere)",
+      "domain": "cursor.com",
+      "segment": "agent_native",
+      "ats": "ashby",
+      "token": "cursor",
+      "jobs": 124,
+      "inScope": 84,
+      "recent": 32,
+      "matches": [
+        {
+          "title": "Software Engineer, ML Research",
+          "list": "drop",
+          "ageDays": 272,
+          "location": "San Francisco (United States) / New York (United States)"
+        },
+        {
+          "title": "AI Deployment Manager",
+          "list": "ambiguous",
+          "ageDays": 227,
+          "location": "San Francisco (United States) / New York (United States)"
+        },
+        {
+          "title": "Research Scientist",
+          "list": "drop",
+          "ageDays": 272,
+          "location": "San Francisco (United States) / New York (United States)"
+        },
+        {
+          "title": "Regional Director, AI Deployment",
+          "list": "ambiguous",
+          "ageDays": 284,
+          "location": "San Francisco (United States) / New York (United States)"
+        },
+        {
+          "title": "Software Engineer, ML Infrastructure",
+          "list": "drop",
+          "ageDays": 272,
+          "location": "San Francisco (United States) / New York (United States)"
+        },
+        {
+          "title": "Forward Deployed Engineer",
+          "list": "conditional",
+          "ageDays": 20,
+          "location": "San Francisco (United States) / New York (United States) / Remote (United States)"
+        },
+        {
+          "title": "Regional Director, Forward Deployed Engineering",
+          "list": "conditional",
+          "ageDays": 126,
+          "location": "San Francisco (United States) / New York (United States) / Austin (United States)"
+        },
+        {
+          "title": "Engineering Manager, Agent & Product Security",
+          "list": "ambiguous",
+          "ageDays": 104,
+          "location": "New York (United States) / San Francisco (United States)"
+        },
+        {
+          "title": "Forward Deployed Strategist",
+          "list": "conditional",
+          "ageDays": 95,
+          "location": "Remote (United States) / New York (United States) / San Francisco (United States) / Remote (United States)"
+        },
+        {
+          "title": "Software Engineer, Pretraining Data",
+          "list": "drop",
+          "ageDays": 63,
+          "location": "Palo Alto, CA (United States)"
+        },
+        {
+          "title": "Research Engineer, Synthetic Data",
+          "list": "drop",
+          "ageDays": 41,
+          "location": "Palo Alto, CA (United States)"
+        },
+        {
+          "title": "Software Engineer, ML Platform",
+          "list": "drop",
+          "ageDays": 56,
+          "location": "Palo Alto, CA (United States)"
+        },
+        {
+          "title": "Forward Deployed Strategist",
+          "list": "conditional",
+          "ageDays": 33,
+          "location": "London (United Kingdom) / New York (United States) / Remote (United States)"
+        },
+        {
+          "title": "AI Deployment Manager, Scale",
+          "list": "ambiguous",
+          "ageDays": 32,
+          "location": "Remote (United States)"
+        }
+      ]
+    },
+    {
+      "company": "Artisan",
+      "domain": "artisan.co",
+      "segment": "agent_native",
+      "ats": "ashby",
+      "token": "artisan",
+      "jobs": 4,
+      "inScope": 4,
+      "recent": 3,
+      "matches": [
+        {
+          "title": "Forward Deployed GTM Architect",
+          "list": "conditional",
+          "ageDays": 81,
+          "location": "San Francisco (United States) / New York (United States)"
+        },
+        {
+          "title": "Staff AI Engineer - Agent Architecture & Behavior",
+          "list": "ambiguous",
+          "ageDays": 44,
+          "location": "San Francisco (United States)"
+        }
+      ]
+    },
+    {
+      "company": "Mercor",
+      "domain": "mercor.com",
+      "segment": "agent_native",
+      "ats": "ashby",
+      "token": "mercor",
+      "jobs": 110,
+      "inScope": 106,
+      "recent": 39,
+      "matches": [
+        {
+          "title": "Software Engineer, Systems & Platform Applied AI",
+          "list": "conditional",
+          "ageDays": 32,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Software Engineer, Agents",
+          "list": "ambiguous",
+          "ageDays": 404,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Research Engineer - Environments, Data and Post-Training",
+          "list": "drop",
+          "ageDays": 216,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Enterprise AI Lead",
+          "list": "ambiguous",
+          "ageDays": 153,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Engineering Manager, Applied AI",
+          "list": "conditional",
+          "ageDays": 129,
+          "location": "San Francisco (United States) / New York City (United States)"
+        },
+        {
+          "title": "Software Engineer, Applied AI - Frontier Engineering",
+          "list": "conditional",
+          "ageDays": 189,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Software Engineer, Enterprise Applied AI",
+          "list": "conditional",
+          "ageDays": 139,
+          "location": "San Francisco (United States) / New York City (United States)"
+        },
+        {
+          "title": "Enterprise AI Associate",
+          "list": "ambiguous",
+          "ageDays": 174,
+          "location": "San Francisco (United States) / New York City (United States)"
+        },
+        {
+          "title": "Enterprise AI Lead",
+          "list": "ambiguous",
+          "ageDays": 153,
+          "location": "New York City (United States)"
+        },
+        {
+          "title": "Research Engineer, Real Environments",
+          "list": "drop",
+          "ageDays": 95,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Product Manager, Applied AI",
+          "list": "conditional",
+          "ageDays": 94,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Fullstack Software Engineer, Agent Platform",
+          "list": "ambiguous",
+          "ageDays": 76,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Member of Technical Staff, Enterprise Evals Platform",
+          "list": "keep",
+          "ageDays": 73,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Research Engineer – Benchmarking",
+          "list": "drop",
+          "ageDays": 70,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Software Engineer, Agents",
+          "list": "ambiguous",
+          "ageDays": 60,
+          "location": "New York City (United States)"
+        },
+        {
+          "title": "Research Scientist, APEX Benchmarks",
+          "list": "drop",
+          "ageDays": 60,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Member of Technical Staff, Agentic Systems",
+          "list": "ambiguous",
+          "ageDays": 56,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Software Engineer, Applied AI - Frontier Engineering (NYC)",
+          "list": "conditional",
+          "ageDays": 52,
+          "location": "New York City (United States)"
+        },
+        {
+          "title": "Mercor AI Safety Fund Grants",
+          "list": "ambiguous",
+          "ageDays": 41,
+          "location": "San Francisco (United States) / Mexico | Mexico City / New York City (United States) / London (United Kingdom)"
+        },
+        {
+          "title": "Research Scientist - Environments, Data and Post-Training",
+          "list": "drop",
+          "ageDays": 38,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Mercor AI Research Fund Grants: Benchmarks",
+          "list": "drop",
+          "ageDays": 34,
+          "location": "San Francisco (United States) / Mexico | Mexico City / New York City (United States) / London (United Kingdom)"
+        },
+        {
+          "title": "Tech Lead, Systems & Platform Applied AI",
+          "list": "conditional",
+          "ageDays": 32,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Senior PMM, Evals",
+          "list": "keep",
+          "ageDays": 19,
+          "location": "Mercor HQ, 181 Fremont Street (United States)"
+        },
+        {
+          "title": "Mercor AI Research Fund Grants: Economics of AI",
+          "list": "drop",
+          "ageDays": 7,
+          "location": "San Francisco (United States) / Mexico | Mexico City / New York City (United States) / London (United Kingdom)"
+        }
+      ]
+    },
+    {
+      "company": "Siena AI",
+      "domain": "siena.cx",
+      "segment": "agent_native",
+      "ats": "ashby",
+      "token": "siena",
+      "jobs": 13,
+      "inScope": 8,
+      "recent": 4,
+      "matches": [
+        {
+          "title": "Product Manager, Agent Platform",
+          "list": "conditional",
+          "ageDays": 38,
+          "location": "Remote - Europe (United Kingdom) / Lisbon (Portugal) / Finland / Romania / New York (United States) / London (United Kingdom) / Spain"
+        }
+      ]
+    },
+    {
+      "company": "Giga",
+      "domain": "giga.ai",
+      "segment": "agent_native",
+      "ats": "ashby",
+      "token": "gigaml",
+      "jobs": 33,
+      "inScope": 31,
+      "recent": 3,
+      "matches": [
+        {
+          "title": "Senior / Staff Forward Deployed Engineer",
+          "list": "conditional",
+          "ageDays": 481,
+          "location": "San Francisco (United States) / New York"
+        },
+        {
+          "title": "Forward Deployed Engineer I/II",
+          "list": "conditional",
+          "ageDays": 136,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Senior Forward Deployed Engineer",
+          "list": "conditional",
+          "ageDays": 90,
+          "location": "San Francisco (United States)"
+        }
+      ]
+    },
+    {
+      "company": "Maven AGI",
+      "domain": "mavenagi.com",
+      "segment": "agent_native",
+      "ats": "ashby",
+      "token": "maven-agi",
+      "jobs": 15,
+      "inScope": 15,
+      "recent": 12,
+      "matches": []
+    },
+    {
+      "company": "Observe.AI",
+      "domain": "observe.ai",
+      "segment": "agent_native",
+      "ats": "greenhouse",
+      "token": "observeai",
+      "jobs": 8,
+      "inScope": 3,
+      "recent": 0,
+      "matches": [
+        {
+          "title": "AI Agent Engineer, Client Facing",
+          "list": "conditional",
+          "ageDays": 136,
+          "location": "Redwood City, CA (Hybrid) / Redwood City, California, United States"
+        }
+      ]
+    },
+    {
+      "company": "Perplexity",
+      "domain": "perplexity.ai",
+      "segment": "agent_native",
+      "ats": "ashby",
+      "token": "perplexity",
+      "jobs": 131,
+      "inScope": 112,
+      "recent": 57,
+      "matches": [
+        {
+          "title": "Member of Technical Staff (AI Inference Engineer)",
+          "list": "ambiguous",
+          "ageDays": 196,
+          "location": "San Francisco (United States) / Palo Alto (United States) / New York City (United States)"
+        },
+        {
+          "title": "Member of Technical Staff (AI Infrastructure Engineer)",
+          "list": "drop",
+          "ageDays": 196,
+          "location": "San Francisco (United States) / Palo Alto (United States)"
+        },
+        {
+          "title": "Member of Technical Staff (AI Researcher)",
+          "list": "drop",
+          "ageDays": 62,
+          "location": "San Francisco (United States) / Palo Alto (United States) / London (United Kingdom) / Berlin (Germany) / New York City (United States)"
+        },
+        {
+          "title": "Member of Technical Staff (Software Engineer, Applied AI)",
+          "list": "conditional",
+          "ageDays": 402,
+          "location": "San Francisco (United States) / Palo Alto (United States) / New York City (United States)"
+        },
+        {
+          "title": "Member of Technical Staff (Answer Quality & Evals)",
+          "list": "keep",
+          "ageDays": 196,
+          "location": "San Francisco (United States) / Palo Alto (United States)"
+        },
+        {
+          "title": "Member of Technical Staff (ML Engineer, Recommendations & User Modeling)",
+          "list": "ambiguous",
+          "ageDays": 143,
+          "location": "San Francisco (United States) / Palo Alto (United States)"
+        },
+        {
+          "title": "Technical Recruiter, AI",
+          "list": "ambiguous",
+          "ageDays": 13,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Member of Technical Staff (Software Engineer, Enterprise AI Products)",
+          "list": "ambiguous",
+          "ageDays": 109,
+          "location": "San Francisco (United States) / Seattle (United States) / New York City (United States)"
+        },
+        {
+          "title": "AI Strategist, Legal",
+          "list": "ambiguous",
+          "ageDays": 95,
+          "location": "San Francisco (United States) / New York City (United States)"
+        },
+        {
+          "title": "AI Strategist, Financial Services",
+          "list": "ambiguous",
+          "ageDays": 95,
+          "location": "San Francisco (United States) / New York City (United States)"
+        },
+        {
+          "title": "Member of Technical Staff (Software Engineer, Enterprise Agent Evals & Efficiency)",
+          "list": "keep",
+          "ageDays": 8,
+          "location": "San Francisco (United States) / Seattle (United States) / New York City (United States)"
+        },
+        {
+          "title": "Technical Sourcer, AI",
+          "list": "ambiguous",
+          "ageDays": 75,
+          "location": "San Francisco (United States) / Palo Alto (United States)"
+        },
+        {
+          "title": "Applied AI Architect, Perplexity Computer",
+          "list": "conditional",
+          "ageDays": 61,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Strategic Finance Lead - AI",
+          "list": "ambiguous",
+          "ageDays": 55,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Product Manager, AI Capabilities",
+          "list": "conditional",
+          "ageDays": 54,
+          "location": "San Francisco (United States) / New York City (United States)"
+        },
+        {
+          "title": "Member of Technical Staff (Applied AI Engineer, Agent Capabilities)",
+          "list": "conditional",
+          "ageDays": 46,
+          "location": "San Francisco (United States) / New York City (United States)"
+        },
+        {
+          "title": "Member of Technical Staff, AI Products (Early Career - Industry)",
+          "list": "ambiguous",
+          "ageDays": 33,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Member of Technical Staff (AI Software Engineer, Agent Engine)",
+          "list": "ambiguous",
+          "ageDays": 1,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Member of Technical Staff (AI Policy and Strategic Initiatives)",
+          "list": "ambiguous",
+          "ageDays": 3,
+          "location": "San Francisco (United States) / Washington D.C. (United States)"
+        }
+      ]
+    },
+    {
+      "company": "Hume AI",
+      "domain": "hume.ai",
+      "segment": "agent_native",
+      "ats": "greenhouse",
+      "token": "humeai",
+      "jobs": 5,
+      "inScope": 5,
+      "recent": 0,
+      "matches": [
+        {
+          "title": "AI Researcher",
+          "list": "drop",
+          "ageDays": 493,
+          "location": "NYC, San Jose, or Remote / New York, New York, United States / Remote / San Jose, California, United States"
+        },
+        {
+          "title": "Senior/Staff AI Research Engineer",
+          "list": "drop",
+          "ageDays": 976,
+          "location": "NYC, San Jose, or Remote / New York, New York, United States / Remote / San Jose, California, United States"
+        }
+      ]
+    },
+    {
+      "company": "Gorgias",
+      "domain": "gorgias.com",
+      "segment": "agent_native",
+      "ats": "ashby",
+      "token": "gorgias",
+      "jobs": 20,
+      "inScope": 0,
+      "recent": 0,
+      "matches": []
+    },
+    {
+      "company": "You.com",
+      "domain": "you.com",
+      "segment": "agent_native",
+      "ats": "greenhouse",
+      "token": "youcom",
+      "jobs": 8,
+      "inScope": 8,
+      "recent": 3,
+      "matches": [
+        {
+          "title": "Senior AI Engineer, Product Engineering",
+          "list": "ambiguous",
+          "ageDays": 133,
+          "location": "San Francisco (Remote) / New York, New York, United States / San Francisco, California, United States / United States - Remote"
+        }
+      ]
+    },
+    {
+      "company": "Paradox",
+      "domain": "paradox.ai",
+      "segment": "agent_native",
+      "ats": "ashby",
+      "token": "paradox",
+      "jobs": 5,
+      "inScope": 3,
+      "recent": 0,
+      "matches": []
+    },
+    {
+      "company": "Character.AI",
+      "domain": "character.ai",
+      "segment": "agent_native",
+      "ats": "ashby",
+      "token": "character",
+      "jobs": 13,
+      "inScope": 13,
+      "recent": 0,
+      "matches": [
+        {
+          "title": "Research Engineer, Post-Training (All Industry Levels)",
+          "list": "drop",
+          "ageDays": 1007,
+          "location": "Redwood City or New York City (United States)"
+        },
+        {
+          "title": "Software Engineer, Backend/Applied ML (Safety & Integrity)",
+          "list": "conditional",
+          "ageDays": 292,
+          "location": "Redwood City, CA (United States)"
+        },
+        {
+          "title": "Principal Research Engineer, Post-Training",
+          "list": "drop",
+          "ageDays": 126,
+          "location": "Redwood City, CA (United States)"
+        },
+        {
+          "title": "Research Engineer, AI Safety & Alignment",
+          "list": "drop",
+          "ageDays": 388,
+          "location": "Redwood City, CA (United States)"
+        },
+        {
+          "title": "Software Engineer, Applied ML (Discovery, Recommendation & Search)",
+          "list": "conditional",
+          "ageDays": 313,
+          "location": "Redwood City, CA (United States)"
+        },
+        {
+          "title": "Technical Program Manager, AI Infrastructure",
+          "list": "drop",
+          "ageDays": 189,
+          "location": "Redwood City, CA (United States)"
+        }
+      ]
+    },
+    {
+      "company": "Glean",
+      "domain": "glean.com",
+      "segment": "agent_native",
+      "ats": "greenhouse",
+      "token": "gleanwork",
+      "jobs": 132,
+      "inScope": 103,
+      "recent": 34,
+      "matches": [
+        {
+          "title": "AI Engineer - Data and Evals",
+          "list": "keep",
+          "ageDays": 4,
+          "location": "San Francisco Bay Area / Mountain View, California, United States"
+        },
+        {
+          "title": "AI Engineer - Quality and Post-Training",
+          "list": "drop",
+          "ageDays": 4,
+          "location": "San Francisco Bay Area / Mountain View, California, United States / San Francisco, California, United States"
+        },
+        {
+          "title": "AI Success Manager, East",
+          "list": "ambiguous",
+          "ageDays": 255,
+          "location": "New York, NY / Remote - US"
+        },
+        {
+          "title": "AI Success Manager, East",
+          "list": "ambiguous",
+          "ageDays": 255,
+          "location": "Remote - US / New York, NY"
+        },
+        {
+          "title": "AI Success Manager, West",
+          "list": "ambiguous",
+          "ageDays": 164,
+          "location": "Mountain View, CA / San Francisco, California, United States"
+        },
+        {
+          "title": "AI Success Manager, West",
+          "list": "ambiguous",
+          "ageDays": 164,
+          "location": "San Francisco, CA / San Francisco, California, United States"
+        },
+        {
+          "title": "Founding Forward Deployed Engineer",
+          "list": "conditional",
+          "ageDays": 278,
+          "location": "Remote - US / Mountain View, California, United States / San Francisco, California, United States"
+        },
+        {
+          "title": "Founding Forward Deployed Engineer",
+          "list": "conditional",
+          "ageDays": 259,
+          "location": "New York, NY / Mountain View, California, United States / Remote - US / San Francisco, California, United States"
+        },
+        {
+          "title": "Founding Forward Deployed Engineer",
+          "list": "conditional",
+          "ageDays": 278,
+          "location": "Mountain View, CA / Mountain View, California, United States / Remote - US / San Francisco, California, United States"
+        },
+        {
+          "title": "Principal Product Marketing Manager, Glean Agents",
+          "list": "ambiguous",
+          "ageDays": 46,
+          "location": "Mountain View, CA; San Francisco, CA / Mountain View, California, United States / San Francisco, California, United States"
+        },
+        {
+          "title": "Product Manager, Agent Security & Governance",
+          "list": "conditional",
+          "ageDays": 167,
+          "location": "San Francisco, CA / Mountain View, California, United States"
+        },
+        {
+          "title": "Product Manager, Agent Security & Governance",
+          "list": "conditional",
+          "ageDays": 489,
+          "location": "Mountain View, CA / Mountain View, California, United States"
+        },
+        {
+          "title": "Product Manager, AI Quality",
+          "list": "keep",
+          "ageDays": 167,
+          "location": "Mountain View, CA / Mountain View, California, United States"
+        },
+        {
+          "title": "Product Manager, AI Quality",
+          "list": "keep",
+          "ageDays": 628,
+          "location": "San Francisco Bay Area / Mountain View, California, United States"
+        },
+        {
+          "title": "Software Engineer, Agentic Runtime",
+          "list": "ambiguous",
+          "ageDays": 14,
+          "location": "Mountain View, CA / Mountain View, California, United States"
+        },
+        {
+          "title": "Software Engineer, AI/ML Infrastructure",
+          "list": "drop",
+          "ageDays": 699,
+          "location": "Mountain View, CA / Mountain View, California, United States"
+        },
+        {
+          "title": "Software Engineer, AI & Security",
+          "list": "ambiguous",
+          "ageDays": 417,
+          "location": "Mountain View, CA / Mountain View, California, United States"
+        },
+        {
+          "title": "Tech Lead Manager, AI Evaluations",
+          "list": "ambiguous",
+          "ageDays": 14,
+          "location": "Mountain View, CA; San Francisco, CA / Mountain View, California, United States / San Francisco, California, United States"
+        }
+      ]
+    },
+    {
+      "company": "Writer",
+      "domain": "writer.com",
+      "segment": "agent_platform",
+      "ats": "ashby",
+      "token": "writer",
+      "jobs": 46,
+      "inScope": 34,
+      "recent": 34,
+      "matches": [
+        {
+          "title": "AI deployment engineer (Central)",
+          "list": "conditional",
+          "ageDays": 34,
+          "location": "Chicago, IL (United States) / Austin, TX (United States)"
+        },
+        {
+          "title": "AI deployment engineer (West)",
+          "list": "conditional",
+          "ageDays": 34,
+          "location": "San Francisco, CA (United States) / Seattle, WA (United States)"
+        },
+        {
+          "title": "AI deployment engineer (East)",
+          "list": "conditional",
+          "ageDays": 34,
+          "location": "New York City, NY (United States)"
+        },
+        {
+          "title": "AI engineer",
+          "list": "ambiguous",
+          "ageDays": 34,
+          "location": "San Francisco, CA (United States) / New York City, NY (United States)"
+        },
+        {
+          "title": "AI research scientist",
+          "list": "drop",
+          "ageDays": 34,
+          "location": "San Francisco, CA (United States) / Seattle, WA (United States) / New York City, NY (United States)"
+        },
+        {
+          "title": "Software engineer, agents",
+          "list": "ambiguous",
+          "ageDays": 34,
+          "location": "New York City, NY (United States) / Seattle, WA (United States) / San Francisco, CA (United States)"
+        },
+        {
+          "title": "Software engineer, generative AI",
+          "list": "ambiguous",
+          "ageDays": 34,
+          "location": "San Francisco, CA (United States) / Seattle, WA (United States) / New York City, NY (United States)"
+        },
+        {
+          "title": "Senior AI transformation lead (East)",
+          "list": "ambiguous",
+          "ageDays": 18,
+          "location": "New York City, NY (United States)"
+        },
+        {
+          "title": "AI transformation lead (West)",
+          "list": "ambiguous",
+          "ageDays": 18,
+          "location": "San Francisco, CA (United States) / Seattle, WA (United States)"
+        },
+        {
+          "title": "Senior AI transformation lead (West)",
+          "list": "ambiguous",
+          "ageDays": 18,
+          "location": "San Francisco, CA (United States) / Seattle, WA (United States)"
+        },
+        {
+          "title": "AI transformation lead (Central)",
+          "list": "ambiguous",
+          "ageDays": 18,
+          "location": "Chicago, IL (United States) / Austin, TX (United States)"
+        },
+        {
+          "title": "AI transformation lead (East)",
+          "list": "ambiguous",
+          "ageDays": 18,
+          "location": "New York City, NY (United States)"
+        },
+        {
+          "title": "Senior AI transformation lead (Central)",
+          "list": "ambiguous",
+          "ageDays": 18,
+          "location": "Chicago, IL (United States) / Austin, TX (United States)"
+        },
+        {
+          "title": "Senior AI adoption lead (West)",
+          "list": "ambiguous",
+          "ageDays": 12,
+          "location": "San Francisco, CA (United States) / Seattle, WA (United States)"
+        },
+        {
+          "title": "AI adoption lead (West)",
+          "list": "ambiguous",
+          "ageDays": 12,
+          "location": "San Francisco, CA (United States) / Seattle, WA (United States)"
+        }
+      ]
+    },
+    {
+      "company": "Harvey",
+      "domain": "harvey.ai",
+      "segment": "vertical_ai",
+      "ats": "ashby",
+      "token": "harvey",
+      "jobs": 366,
+      "inScope": 255,
+      "recent": 138,
+      "matches": [
+        {
+          "title": "Staff Software Engineer, AI Platform",
+          "list": "drop",
+          "ageDays": 185,
+          "location": "San Francisco (USA)"
+        },
+        {
+          "title": "Senior Software Engineer, Agents",
+          "list": "ambiguous",
+          "ageDays": 269,
+          "location": "San Francisco (USA)"
+        },
+        {
+          "title": "Senior Software Engineer, Agents",
+          "list": "ambiguous",
+          "ageDays": 201,
+          "location": "New York (USA)"
+        },
+        {
+          "title": "Senior Software Engineer, AI Platform",
+          "list": "drop",
+          "ageDays": 229,
+          "location": "San Francisco (USA)"
+        },
+        {
+          "title": "Research Engineer, Post-Training",
+          "list": "drop",
+          "ageDays": 122,
+          "location": "San Francisco (USA)"
+        },
+        {
+          "title": "Staff Software Engineer, Agents",
+          "list": "ambiguous",
+          "ageDays": 178,
+          "location": "San Francisco (USA)"
+        },
+        {
+          "title": "Senior Software Engineer, AI Platform",
+          "list": "drop",
+          "ageDays": 102,
+          "location": "New York (USA)"
+        },
+        {
+          "title": "Staff Software Engineer, AI Platform",
+          "list": "drop",
+          "ageDays": 102,
+          "location": "New York (USA)"
+        },
+        {
+          "title": "Staff Software Engineer, Agents",
+          "list": "ambiguous",
+          "ageDays": 96,
+          "location": "New York (USA)"
+        },
+        {
+          "title": "Senior Software Engineer, Agents",
+          "list": "ambiguous",
+          "ageDays": 96,
+          "location": "New York (USA)"
+        },
+        {
+          "title": "Business Development Manager, Cloud & AI",
+          "list": "ambiguous",
+          "ageDays": 6,
+          "location": "San Francisco (USA)"
+        },
+        {
+          "title": "Forward Deployed Finance Engineer, Private Credit",
+          "list": "conditional",
+          "ageDays": 20,
+          "location": "New York (USA)"
+        },
+        {
+          "title": "Forward Deployed Finance Engineer, Buyout",
+          "list": "conditional",
+          "ageDays": 20,
+          "location": "New York (USA)"
+        },
+        {
+          "title": "Forward Deployed Finance Engineer, Real Estate",
+          "list": "conditional",
+          "ageDays": 20,
+          "location": "New York (USA)"
+        },
+        {
+          "title": "Engineering Manager, AI Platform",
+          "list": "drop",
+          "ageDays": 6,
+          "location": "San Francisco (USA)"
+        },
+        {
+          "title": "Staff Product Manager, Agents",
+          "list": "conditional",
+          "ageDays": 12,
+          "location": "San Francisco (USA)"
+        },
+        {
+          "title": "Staff Product Manager, Agents",
+          "list": "conditional",
+          "ageDays": 12,
+          "location": "New York (USA)"
+        }
+      ]
+    },
+    {
+      "company": "Legora",
+      "domain": "legora.com",
+      "segment": "vertical_ai",
+      "ats": "ashby",
+      "token": "legora",
+      "jobs": 305,
+      "inScope": 139,
+      "recent": 65,
+      "matches": [
+        {
+          "title": "Senior / Staff Forward Deployed Engineer",
+          "list": "conditional",
+          "ageDays": 45,
+          "location": "New York City (United States)"
+        },
+        {
+          "title": "Director, Cloud & AI Partnerships",
+          "list": "ambiguous",
+          "ageDays": 122,
+          "location": "New York City (United States)"
+        },
+        {
+          "title": "Junior/Mid-level Forward Deployed Engineer",
+          "list": "conditional",
+          "ageDays": 15,
+          "location": "New York City (United States)"
+        }
+      ]
+    },
+    {
+      "company": "Eudia",
+      "domain": "eudia.com",
+      "segment": "vertical_ai",
+      "ats": "greenhouse",
+      "token": "eudia",
+      "jobs": 21,
+      "inScope": 17,
+      "recent": 4,
+      "matches": [
+        {
+          "title": "AI Engineer Intern",
+          "list": "ambiguous",
+          "ageDays": 48,
+          "location": "Palo Alto, CA / Palo Alto, California, United States"
+        },
+        {
+          "title": "Forward Deployed Engineer - Eudia for Government",
+          "list": "conditional",
+          "ageDays": 96,
+          "location": "Washington, DC, Remote / Remote / Washington, District of Columbia, United States"
+        },
+        {
+          "title": "Forward Deployed Lawyer",
+          "list": "conditional",
+          "ageDays": 181,
+          "location": "On Site, Palo Alto / Palo Alto, California, United States"
+        },
+        {
+          "title": "Forward Deployed Lawyer - Eudia for Government",
+          "list": "conditional",
+          "ageDays": 119,
+          "location": "Washington, DC, Remote / Remote / Washington, District of Columbia, United States"
+        }
+      ]
+    },
+    {
+      "company": "Abridge",
+      "domain": "abridge.com",
+      "segment": "vertical_ai",
+      "ats": "ashby",
+      "token": "abridge",
+      "jobs": 40,
+      "inScope": 40,
+      "recent": 23,
+      "matches": [
+        {
+          "title": "Member of Product Staff, Forward Deployed",
+          "list": "conditional",
+          "ageDays": 126,
+          "location": "SF Office (USA) / NYC Office (USA)"
+        },
+        {
+          "title": "Member of Product Staff, AI/ML (Evals)",
+          "list": "keep",
+          "ageDays": 126,
+          "location": "SF Office (USA)"
+        },
+        {
+          "title": "Member of Product Staff, Foundation Models & Post-Training",
+          "list": "drop",
+          "ageDays": 61,
+          "location": "SF Office (USA)"
+        }
+      ]
+    },
+    {
+      "company": "Ambience Healthcare",
+      "domain": "ambiencehealthcare.com",
+      "segment": "vertical_ai",
+      "ats": "ashby",
+      "token": "ambiencehealthcare",
+      "jobs": 19,
+      "inScope": 19,
+      "recent": 12,
+      "matches": [
+        {
+          "title": "Staff ML Engineer, Frontier AI",
+          "list": "ambiguous",
+          "ageDays": 224,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Clinical AI Researcher",
+          "list": "drop",
+          "ageDays": 132,
+          "location": "San Francisco (United States)"
+        }
+      ]
+    },
+    {
+      "company": "HeyMilo",
+      "domain": "heymilo.ai",
+      "segment": "agent_native",
+      "ats": "ashby",
+      "token": "heymilo",
+      "jobs": 6,
+      "inScope": 4,
+      "recent": 4,
+      "matches": []
+    },
+    {
+      "company": "Suki",
+      "domain": "suki.ai",
+      "segment": "vertical_ai",
+      "ats": "greenhouse",
+      "token": "suki",
+      "jobs": 7,
+      "inScope": 6,
+      "recent": 3,
+      "matches": [
+        {
+          "title": "Senior AI Engineer",
+          "list": "ambiguous",
+          "ageDays": 550,
+          "location": "Redwood City, CA / 1823 El Camino Real, Redwood City, CA 94063"
+        }
+      ]
+    },
+    {
+      "company": "Tennr",
+      "domain": "tennr.com",
+      "segment": "vertical_ai",
+      "ats": "ashby",
+      "token": "tennr",
+      "jobs": 28,
+      "inScope": 28,
+      "recent": 17,
+      "matches": [
+        {
+          "title": "Sr. Forward Deployed Engineer (Post-Sales)",
+          "list": "conditional",
+          "ageDays": 34,
+          "location": "New York City Office (USA)"
+        },
+        {
+          "title": "Senior Backend Engineer (ML)",
+          "list": "ambiguous",
+          "ageDays": 27,
+          "location": "New York City Office (USA)"
+        }
+      ]
+    },
+    {
+      "company": "Infinitus",
+      "domain": "infinitus.ai",
+      "segment": "vertical_ai",
+      "ats": "ashby",
+      "token": "infinitus",
+      "jobs": 6,
+      "inScope": 6,
+      "recent": 4,
+      "matches": [
+        {
+          "title": "AI Full Stack Engineer",
+          "list": "ambiguous",
+          "ageDays": 105,
+          "location": "San Francisco Office (U.S.A)"
+        },
+        {
+          "title": "Forward Deployed Product Manager",
+          "list": "conditional",
+          "ageDays": 3,
+          "location": "San Francisco Office (U.S.A)"
+        },
+        {
+          "title": "Product Manager, Payor Agents",
+          "list": "conditional",
+          "ageDays": 5,
+          "location": "San Francisco Office (U.S.A)"
+        }
+      ]
+    },
+    {
+      "company": "Assort Health",
+      "domain": "assorthealth.com",
+      "segment": "vertical_ai",
+      "ats": "ashby",
+      "token": "assorthealth",
+      "jobs": 31,
+      "inScope": 31,
+      "recent": 19,
+      "matches": [
+        {
+          "title": "Agent Product Manager",
+          "list": "conditional",
+          "ageDays": 113,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Senior Software Engineer - Agent Platform",
+          "list": "ambiguous",
+          "ageDays": 329,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Forward Deployed Engineer",
+          "list": "conditional",
+          "ageDays": 195,
+          "location": "San Francisco (United States) / New York (United States)"
+        },
+        {
+          "title": "Principal Agent Strategy Manager",
+          "list": "ambiguous",
+          "ageDays": 31,
+          "location": "San Francisco (United States) / New York (United States)"
+        },
+        {
+          "title": "Senior Agent Product Manager",
+          "list": "conditional",
+          "ageDays": 108,
+          "location": "San Francisco (United States) / New York (United States)"
+        },
+        {
+          "title": "Senior Forward Deployed Engineer",
+          "list": "conditional",
+          "ageDays": 66,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Head of Forward Deployed Engineering",
+          "list": "conditional",
+          "ageDays": 52,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Agent Support Engineer",
+          "list": "ambiguous",
+          "ageDays": 10,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Senior Agent Strategy Manager",
+          "list": "ambiguous",
+          "ageDays": 32,
+          "location": "San Francisco (United States) / New York (United States)"
+        },
+        {
+          "title": "Research Engineer",
+          "list": "drop",
+          "ageDays": 33,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Senior Agent Strategy Manager, Health Systems",
+          "list": "ambiguous",
+          "ageDays": 31,
+          "location": "San Francisco (United States) / New York (United States)"
+        },
+        {
+          "title": "Principal Agent Strategy Manager, Health Systems",
+          "list": "ambiguous",
+          "ageDays": 30,
+          "location": "San Francisco (United States) / New York (United States)"
+        },
+        {
+          "title": "Director of Agent Product Management, Enterprise & Strategic Accounts",
+          "list": "ambiguous",
+          "ageDays": 20,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Director of Agent Product Management, Mid-Market Accounts",
+          "list": "ambiguous",
+          "ageDays": 20,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Manager, Agent Strategy Team",
+          "list": "ambiguous",
+          "ageDays": 12,
+          "location": "San Francisco (United States) / New York"
+        }
+      ]
+    },
+    {
+      "company": "Rogo",
+      "domain": "rogo.ai",
+      "segment": "vertical_ai",
+      "ats": "ashby",
+      "token": "rogo",
+      "jobs": 99,
+      "inScope": 61,
+      "recent": 23,
+      "matches": [
+        {
+          "title": "Forward Deployed, Equity Research",
+          "list": "conditional",
+          "ageDays": 126,
+          "location": "New York City (USA)"
+        },
+        {
+          "title": "Product Manager | Agents",
+          "list": "conditional",
+          "ageDays": 144,
+          "location": "New York City (USA) / London (United Kingdom) / San Francisco (United States)"
+        },
+        {
+          "title": "Forward Deployed, Sales & Trading",
+          "list": "conditional",
+          "ageDays": 126,
+          "location": "New York City (USA)"
+        },
+        {
+          "title": "Forward Deployed, Corporate Banking",
+          "list": "conditional",
+          "ageDays": 126,
+          "location": "New York City (USA)"
+        },
+        {
+          "title": "Forward Deployed Investor",
+          "list": "conditional",
+          "ageDays": 111,
+          "location": "New York City (USA)"
+        },
+        {
+          "title": "Forward Deployed Banker",
+          "list": "conditional",
+          "ageDays": 111,
+          "location": "New York City (USA)"
+        },
+        {
+          "title": "Forward Deployed, Wealth Management",
+          "list": "conditional",
+          "ageDays": 99,
+          "location": "New York City (USA)"
+        },
+        {
+          "title": "Forward Deployed, Asset Management",
+          "list": "conditional",
+          "ageDays": 56,
+          "location": "New York City (USA)"
+        },
+        {
+          "title": "Forward Deployed, Corporate Development",
+          "list": "conditional",
+          "ageDays": 54,
+          "location": "New York City (USA)"
+        },
+        {
+          "title": "Forward Deployed, Alliances",
+          "list": "conditional",
+          "ageDays": 54,
+          "location": "New York City (USA)"
+        },
+        {
+          "title": "Forward Deployed, Asset Management (EMEA)",
+          "list": "conditional",
+          "ageDays": 7,
+          "location": "New York City (USA)"
+        }
+      ]
+    },
+    {
+      "company": "AlphaSense",
+      "domain": "alpha-sense.com",
+      "segment": "vertical_ai",
+      "ats": "greenhouse",
+      "token": "alphasense",
+      "jobs": 212,
+      "inScope": 105,
+      "recent": 60,
+      "matches": [
+        {
+          "title": "AI Deployment Lead, Hedge Funds",
+          "list": "ambiguous",
+          "ageDays": 81,
+          "location": "New York, New York, United States / Remote - United States"
+        },
+        {
+          "title": "AI Deployment Lead, Investment Banking",
+          "list": "ambiguous",
+          "ageDays": 81,
+          "location": "New York, New York, United States / Remote - United States"
+        },
+        {
+          "title": "Director, Product Design (AI Experience)",
+          "list": "ambiguous",
+          "ageDays": 83,
+          "location": "New York, New York, United States; Remote - United States / Remote - United States"
+        },
+        {
+          "title": "Principal Software Engineer, Financial Data Platform & GenSearch Agent",
+          "list": "ambiguous",
+          "ageDays": 248,
+          "location": "Remote - United States / Remote - Canada"
+        },
+        {
+          "title": "Senior Engineering Manager, AI",
+          "list": "ambiguous",
+          "ageDays": 82,
+          "location": "Remote - United States"
+        },
+        {
+          "title": "Senior Product Manager - AI Workflows (Expert Research)",
+          "list": "conditional",
+          "ageDays": 123,
+          "location": "New York, New York, United States; Remote - United States / Remote - United States"
+        },
+        {
+          "title": "Staff AI Platform Engineer",
+          "list": "drop",
+          "ageDays": 376,
+          "location": "San Francisco, California, United States / New York, New York, United States"
+        },
+        {
+          "title": "Staff AI Platform Engineer",
+          "list": "drop",
+          "ageDays": 377,
+          "location": "New York, New York, United States / San Francisco, California, United States"
+        }
+      ]
+    },
+    {
+      "company": "Hyperbound",
+      "domain": "hyperbound.ai",
+      "segment": "agent_native",
+      "ats": "ashby",
+      "token": "hyperbound",
+      "jobs": 9,
+      "inScope": 9,
+      "recent": 8,
+      "matches": [
+        {
+          "title": "QA Engineer",
+          "list": "drop",
+          "ageDays": 18,
+          "location": "San Francisco (United States)"
+        }
+      ]
+    },
+    {
+      "company": "Commure",
+      "domain": "commure.com",
+      "segment": "vertical_ai",
+      "ats": "ashby",
+      "token": "commure",
+      "jobs": 80,
+      "inScope": 63,
+      "recent": 41,
+      "matches": [
+        {
+          "title": "Staff Software Engineer, Billing Agents",
+          "list": "ambiguous",
+          "ageDays": 104,
+          "location": "Mountain View, CA (USA) / Los Angeles, CA (United States) / New York City, NY (United States) / San Francisco, CA (United States)"
+        },
+        {
+          "title": "Senior Software Engineer, Applied AI (RCM)",
+          "list": "conditional",
+          "ageDays": 4,
+          "location": "Mountain View, CA (USA) / Los Angeles, CA (United States) / New York City, NY (United States) / San Francisco, CA (United States)"
+        },
+        {
+          "title": "Forward Deployed Engineer",
+          "list": "conditional",
+          "ageDays": 122,
+          "location": "Mountain View, CA (USA) / Phoenix, AZ (United States) / Austin, TX (United States) / Los Angeles, CA (United States) / Boston, MA (United States) / New York City, NY (United States) / San Francisco, CA (United States)"
+        },
+        {
+          "title": "Senior Fullstack Engineer, Ambient AI",
+          "list": "ambiguous",
+          "ageDays": 68,
+          "location": "Mountain View, CA (USA) / San Francisco, CA (United States)"
+        },
+        {
+          "title": "Software Engineer, AI Integrations",
+          "list": "ambiguous",
+          "ageDays": 20,
+          "location": "Mountain View, CA (USA)"
+        },
+        {
+          "title": "Senior Software Engineer, Air AI",
+          "list": "ambiguous",
+          "ageDays": 31,
+          "location": "Mountain View, CA (USA) / Los Angeles, CA (United States) / New York City, NY (United States) / San Francisco, CA (United States)"
+        },
+        {
+          "title": "Senior Forward Deployed Engineer",
+          "list": "conditional",
+          "ageDays": 124,
+          "location": "Mountain View, CA (USA) / Phoenix, AZ (United States) / Austin, TX (United States) / Los Angeles, CA (United States) / Boston, MA (United States) / New York City, NY (United States) / San Francisco, CA (United States)"
+        },
+        {
+          "title": "Senior Backend Engineer, Ambient AI",
+          "list": "ambiguous",
+          "ageDays": 68,
+          "location": "Mountain View, CA (USA)"
+        },
+        {
+          "title": "Fullstack Engineer, Ambient AI",
+          "list": "ambiguous",
+          "ageDays": 68,
+          "location": "Mountain View, CA (USA)"
+        },
+        {
+          "title": "Senior Software Engineer, AI Integrations",
+          "list": "ambiguous",
+          "ageDays": 20,
+          "location": "Mountain View, CA (USA) / Los Angeles, CA (United States) / New York City, NY (United States) / San Francisco, CA (United States)"
+        },
+        {
+          "title": "Senior Software Engineer, AI Billing",
+          "list": "ambiguous",
+          "ageDays": 125,
+          "location": "Mountain View, CA (USA) / Los Angeles, CA (United States) / San Francisco, CA (United States)"
+        },
+        {
+          "title": "Software Engineer, AI Billing",
+          "list": "ambiguous",
+          "ageDays": 89,
+          "location": "Mountain View, CA (USA)"
+        },
+        {
+          "title": "Software Engineer, Billing Agents",
+          "list": "ambiguous",
+          "ageDays": 101,
+          "location": "Mountain View, CA (USA)"
+        },
+        {
+          "title": "Sales Engineer, Ambient AI",
+          "list": "ambiguous",
+          "ageDays": 46,
+          "location": "United States"
+        },
+        {
+          "title": "Engineering Manager, AI Orchestrator",
+          "list": "ambiguous",
+          "ageDays": 54,
+          "location": "Mountain View, CA (USA) / San Francisco, CA (United States)"
+        },
+        {
+          "title": "Senior iOS Engineer, Ambient AI",
+          "list": "ambiguous",
+          "ageDays": 21,
+          "location": "Mountain View, CA (USA) / San Francisco, CA (United States)"
+        },
+        {
+          "title": "Senior Software Engineer, Billing Agents",
+          "list": "ambiguous",
+          "ageDays": 47,
+          "location": "Mountain View, CA (USA) / Los Angeles, CA (United States) / San Francisco, CA (United States)"
+        },
+        {
+          "title": "Software Engineer, Scribe AI",
+          "list": "ambiguous",
+          "ageDays": 33,
+          "location": "Mountain View, CA (USA)"
+        },
+        {
+          "title": "Senior Software Engineer, Voice Agents",
+          "list": "ambiguous",
+          "ageDays": 4,
+          "location": "Mountain View, CA (USA)"
+        },
+        {
+          "title": "Senior Engineering Manager, AI Accounting & Ledger Systems",
+          "list": "ambiguous",
+          "ageDays": 11,
+          "location": "Mountain View, CA (USA) / Los Angeles, CA (United States) / San Francisco, CA (United States)"
+        },
+        {
+          "title": "Staff Backend Engineer, Ambient AI",
+          "list": "ambiguous",
+          "ageDays": 21,
+          "location": "Mountain View, CA (USA) / San Francisco, CA (United States)"
+        },
+        {
+          "title": "Sales Strategy & Operations, Agents",
+          "list": "ambiguous",
+          "ageDays": 4,
+          "location": "San Francisco, CA (United States) / New York City, NY (United States)"
+        }
+      ]
+    },
+    {
+      "company": "Norm Ai",
+      "domain": "norm.ai",
+      "segment": "vertical_ai",
+      "ats": "ashby",
+      "token": "norm-ai",
+      "jobs": 21,
+      "inScope": 20,
+      "recent": 12,
+      "matches": []
+    },
+    {
+      "company": "Nabla",
+      "domain": "nabla.com",
+      "segment": "vertical_ai",
+      "ats": "ashby",
+      "token": "nabla",
+      "jobs": 9,
+      "inScope": 7,
+      "recent": 3,
+      "matches": []
+    },
+    {
+      "company": "Sword Health",
+      "domain": "swordhealth.com",
+      "segment": "vertical_ai",
+      "ats": "greenhouse",
+      "token": "swordhealth",
+      "jobs": 58,
+      "inScope": 27,
+      "recent": 26,
+      "matches": [
+        {
+          "title": "Head of Go-to-Market, AI Care Operations",
+          "list": "ambiguous",
+          "ageDays": 27,
+          "location": "Remote - Europe; Remote - US; United Kingdom / Remote - Europe / Remote - US"
+        },
+        {
+          "title": "Senior Backend Engineer, AI Solutions (Greek-speaking)",
+          "list": "ambiguous",
+          "ageDays": 47,
+          "location": "Remote - Greece"
+        },
+        {
+          "title": "Senior ML Engineer, AI Solutions (Greek-speaking)",
+          "list": "ambiguous",
+          "ageDays": 47,
+          "location": "Remote - Greece"
+        }
+      ]
+    },
+    {
+      "company": "Lemonade",
+      "domain": "lemonade.com",
+      "segment": "vertical_ai",
+      "ats": "ashby",
+      "token": "lemonade",
+      "jobs": 40,
+      "inScope": 13,
+      "recent": 12,
+      "matches": []
+    },
+    {
+      "company": "Cleo",
+      "domain": "meetcleo.com",
+      "segment": "vertical_ai",
+      "ats": "greenhouse",
+      "token": "cleo",
+      "jobs": 6,
+      "inScope": 6,
+      "recent": 5,
+      "matches": []
+    },
+    {
+      "company": "Wealthsimple",
+      "domain": "wealthsimple.com",
+      "segment": "enterprise_cx",
+      "ats": "ashby",
+      "token": "wealthsimple",
+      "jobs": 40,
+      "inScope": 4,
+      "recent": 4,
+      "matches": []
+    },
+    {
+      "company": "Basis",
+      "domain": "getbasis.ai",
+      "segment": "vertical_ai",
+      "ats": "lever",
+      "token": "basis",
+      "jobs": 5,
+      "inScope": 5,
+      "recent": 5,
+      "matches": [
+        {
+          "title": "Staff Software Engineer, AI",
+          "list": "ambiguous",
+          "ageDays": 11,
+          "location": "United States (US) / Ontario (US)"
+        }
+      ]
+    },
+    {
+      "company": "Relevance AI",
+      "domain": "relevanceai.com",
+      "segment": "agent_platform",
+      "ats": "ashby",
+      "token": "relevanceai",
+      "jobs": 1,
+      "inScope": 0,
+      "recent": 0,
+      "matches": []
+    },
+    {
+      "company": "Dust",
+      "domain": "dust.tt",
+      "segment": "agent_platform",
+      "ats": "ashby",
+      "token": "dust",
+      "jobs": 25,
+      "inScope": 7,
+      "recent": 3,
+      "matches": []
+    },
+    {
+      "company": "Distyl AI",
+      "domain": "distyl.ai",
+      "segment": "agent_platform",
+      "ats": "ashby",
+      "token": "distyl",
+      "jobs": 27,
+      "inScope": 25,
+      "recent": 8,
+      "matches": [
+        {
+          "title": "Applied AI Researcher, System Discovery",
+          "list": "drop",
+          "ageDays": 375,
+          "location": "San Francisco (USA) / New York (USA)"
+        },
+        {
+          "title": "Applied AI Researcher, Post-Training",
+          "list": "drop",
+          "ageDays": 375,
+          "location": "San Francisco (USA) / New York (USA)"
+        },
+        {
+          "title": "AI Strategist",
+          "list": "ambiguous",
+          "ageDays": 278,
+          "location": "San Francisco (USA) / New York (USA)"
+        },
+        {
+          "title": "AI Strategist, Healthcare Solutions",
+          "list": "ambiguous",
+          "ageDays": 165,
+          "location": "San Francisco (USA) / New York (USA)"
+        },
+        {
+          "title": "AI Engineer",
+          "list": "ambiguous",
+          "ageDays": 130,
+          "location": "San Francisco (USA) / New York (USA)"
+        },
+        {
+          "title": "AI Engineer, Lead",
+          "list": "ambiguous",
+          "ageDays": 130,
+          "location": "San Francisco (USA) / New York (USA)"
+        },
+        {
+          "title": "AI Engineer, Enterprise Lead",
+          "list": "ambiguous",
+          "ageDays": 130,
+          "location": "San Francisco (USA) / New York (USA)"
+        },
+        {
+          "title": "Lead AI Strategist",
+          "list": "ambiguous",
+          "ageDays": 111,
+          "location": "San Francisco (USA) / New York (USA)"
+        },
+        {
+          "title": "Research Engineers, Agents",
+          "list": "ambiguous",
+          "ageDays": 111,
+          "location": "San Francisco (USA) / New York (USA)"
+        },
+        {
+          "title": "Applied AI Researcher, System Self-Construction",
+          "list": "drop",
+          "ageDays": 375,
+          "location": "San Francisco (USA) / New York (USA)"
+        },
+        {
+          "title": "Applied AI Researcher, AI Systems",
+          "list": "drop",
+          "ageDays": 375,
+          "location": "San Francisco (USA) / New York (USA)"
+        },
+        {
+          "title": "Applied AI Researcher, Multi-Agent Systems",
+          "list": "drop",
+          "ageDays": 161,
+          "location": "San Francisco (USA) / New York (USA)"
+        },
+        {
+          "title": "Applied AI Researcher, System Self-Improvement",
+          "list": "drop",
+          "ageDays": 375,
+          "location": "San Francisco (USA) / New York (USA)"
+        },
+        {
+          "title": "Applied AI Researcher, Benchmarking",
+          "list": "drop",
+          "ageDays": 375,
+          "location": "San Francisco (USA) / New York (USA)"
+        },
+        {
+          "title": "Research Engineers, Post-Training",
+          "list": "drop",
+          "ageDays": 111,
+          "location": "San Francisco (USA) / New York (USA)"
+        },
+        {
+          "title": "Enterprise AI Architect",
+          "list": "ambiguous",
+          "ageDays": 41,
+          "location": "San Francisco (USA) / New York (USA)"
+        },
+        {
+          "title": "AI Engineer (French Speaking)",
+          "list": "ambiguous",
+          "ageDays": 39,
+          "location": "New York (USA)"
+        },
+        {
+          "title": "Infrastructure Engineer, Agentic DevSecOps",
+          "list": "ambiguous",
+          "ageDays": 13,
+          "location": "San Francisco (USA) / New York (USA)"
+        }
+      ]
+    },
+    {
+      "company": "Cohere",
+      "domain": "cohere.com",
+      "segment": "agent_platform",
+      "ats": "ashby",
+      "token": "cohere",
+      "jobs": 116,
+      "inScope": 64,
+      "recent": 30,
+      "matches": [
+        {
+          "title": "Senior Member of Technical Staff, Multimodal AI",
+          "list": "ambiguous",
+          "ageDays": 692,
+          "location": "San Francisco (United States) / New York (United States) / San Francisco (United States) / Paris (France) / Toronto (Canada) / Montreal (Canada)"
+        },
+        {
+          "title": "Member of Technical Staff, Post-Training",
+          "list": "drop",
+          "ageDays": 500,
+          "location": "London (United Kingdom) / San Francisco (United States) / New York (United States) / Paris (France) / Toronto (Canada) / Montreal (Canada)"
+        },
+        {
+          "title": "Member of Technical Staff, Pre-Training Data",
+          "list": "drop",
+          "ageDays": 489,
+          "location": "Toronto (Canada) / San Francisco (United States) / London (United Kingdom) / New York (United States) / Paris (France) / Montreal (Canada)"
+        },
+        {
+          "title": "Member of Technical Staff, Integration/RL Team (Research Engineer)",
+          "list": "drop",
+          "ageDays": 434,
+          "location": "Paris (France) / London (United Kingdom) / New York (United States) / Toronto (Canada) / Montreal (Canada)"
+        },
+        {
+          "title": "Member of Technical Staff, Agent Code",
+          "list": "ambiguous",
+          "ageDays": 406,
+          "location": "London (United Kingdom) / Europe (European Union) / New York (United States) / Paris (France) / Toronto (Canada)"
+        },
+        {
+          "title": "Senior Research Scientist, Model Evaluation",
+          "list": "keep",
+          "ageDays": 369,
+          "location": "Toronto (Canada) / San Francisco (United States) / Canada / Seattle (United States) / London (United Kingdom) / United States / New York (United States)"
+        },
+        {
+          "title": "Forward Deployed Engineer, Agentic Platform",
+          "list": "conditional",
+          "ageDays": 55,
+          "location": "United States / New Jersey / Boston (United States) / Canada / New York (United States) / Washington, DC (United States) / Ottawa (Canada) / Toronto (Canada) / Montreal (Canada)"
+        },
+        {
+          "title": "Staff Research Engineer, Model Efficiency",
+          "list": "drop",
+          "ageDays": 353,
+          "location": "New York (United States) / San Francisco (United States) / Toronto (Canada) / Montreal (Canada)"
+        },
+        {
+          "title": "Senior ML Systems Engineer, Frameworks & Tooling",
+          "list": "ambiguous",
+          "ageDays": 330,
+          "location": "London (United Kingdom) / San Francisco (United States) / New York (United States) / Paris (France) / Toronto (Canada) / Montreal (Canada)"
+        },
+        {
+          "title": "Product Manager, Agent Harness & Modelling",
+          "list": "conditional",
+          "ageDays": 222,
+          "location": "Toronto (Canada) / London (United Kingdom) / New York (United States) / Montreal (Canada)"
+        },
+        {
+          "title": "Senior Member of Technical Staff, Safety and Security for Agents",
+          "list": "ambiguous",
+          "ageDays": 217,
+          "location": "London (United Kingdom) / New York (United States) / Edinburgh (United Kingdom) / Paris (France) / Toronto (Canada) / Montreal (Canada)"
+        },
+        {
+          "title": "Senior Research Engineer - Safety Tooling and Data",
+          "list": "drop",
+          "ageDays": 122,
+          "location": "New York (United States)"
+        },
+        {
+          "title": "Staff/Senior Staff Software Engineer, Agent Infrastructure",
+          "list": "ambiguous",
+          "ageDays": 5,
+          "location": "Toronto (Canada) / Canada / United States"
+        },
+        {
+          "title": "Member of Technical Staff, Agentic Environments",
+          "list": "ambiguous",
+          "ageDays": 75,
+          "location": "Europe (European Union) / Canada / New York (United States)"
+        },
+        {
+          "title": "Global Public Policy Manager, Compute, Infrastructure & Sovereign AI",
+          "list": "ambiguous",
+          "ageDays": 54,
+          "location": "United States"
+        },
+        {
+          "title": "Engineering Manager, FDE Agentic Platform",
+          "list": "ambiguous",
+          "ageDays": 55,
+          "location": "Toronto (Canada) / New York (United States)"
+        },
+        {
+          "title": "Technical Program Manager, AI Delivery",
+          "list": "ambiguous",
+          "ageDays": 53,
+          "location": "United States / Canada"
+        },
+        {
+          "title": "Software Engineer, Security Agents",
+          "list": "ambiguous",
+          "ageDays": 42,
+          "location": "United States / Canada"
+        },
+        {
+          "title": "Member of Technical Staff - Post-Training (Reinforcement Learning & Generalization)",
+          "list": "drop",
+          "ageDays": 13,
+          "location": "Europe (European Union) / New York (United States) / Toronto (Canada)"
+        },
+        {
+          "title": "Member of Technical Staff - Post-training (Data Infrastructure)",
+          "list": "drop",
+          "ageDays": 13,
+          "location": "United States / Canada"
+        }
+      ]
+    },
+    {
+      "company": "Tines",
+      "domain": "tines.com",
+      "segment": "agent_platform",
+      "ats": "greenhouse",
+      "token": "tines",
+      "jobs": 35,
+      "inScope": 26,
+      "recent": 21,
+      "matches": [
+        {
+          "title": "Senior Forward Deployed Engineer - Public Sector",
+          "list": "conditional",
+          "ageDays": 24,
+          "location": "North America (Remote)"
+        },
+        {
+          "title": "Senior Forward Deployed Engineer - West",
+          "list": "conditional",
+          "ageDays": 54,
+          "location": "North America (Remote)"
+        }
+      ]
+    },
+    {
+      "company": "Zapier",
+      "domain": "zapier.com",
+      "segment": "saas_copilot",
+      "ats": "ashby",
+      "token": "zapier",
+      "jobs": 12,
+      "inScope": 10,
+      "recent": 8,
+      "matches": []
+    },
+    {
+      "company": "Vercel",
+      "domain": "vercel.com",
+      "segment": "agent_platform",
+      "ats": "greenhouse",
+      "token": "vercel",
+      "jobs": 93,
+      "inScope": 74,
+      "recent": 30,
+      "matches": [
+        {
+          "title": "DevRel Engineer, Agentic Infrastructure",
+          "list": "ambiguous",
+          "ageDays": 96,
+          "location": "Hybrid - San Francisco, New York City, Austin / San Francisco, California, United States"
+        },
+        {
+          "title": "Forward-Deployed Engineer",
+          "list": "conditional",
+          "ageDays": 292,
+          "location": "Hybrid - San Francisco, New York City, Austin / Remote - AMER"
+        },
+        {
+          "title": "Software Engineer, Agentic Infrastructure",
+          "list": "ambiguous",
+          "ageDays": 39,
+          "location": "Hybrid - San Francisco, New York City / San Francisco, California, United States"
+        },
+        {
+          "title": "Software Engineer, AI Gateway",
+          "list": "ambiguous",
+          "ageDays": 256,
+          "location": "Hybrid - San Francisco / San Francisco, California, United States"
+        }
+      ]
+    },
+    {
+      "company": "n8n",
+      "domain": "n8n.io",
+      "segment": "agent_platform",
+      "ats": "ashby",
+      "token": "n8n",
+      "jobs": 38,
+      "inScope": 13,
+      "recent": 10,
+      "matches": [
+        {
+          "title": "Forward Deployed Engineer - US East Coast",
+          "list": "conditional",
+          "ageDays": 41,
+          "location": "Boston (United States) / California (United States) / Pennsylvania (United States) / Florida (United States) / New York (United States) / Massachusetts (United States) / Virginia (United States) / Washington State (United States) / Colorado (United States) / New Jersey (United States) / Georgia (United States) / Texas (United States)"
+        }
+      ]
+    },
+    {
+      "company": "Clay",
+      "domain": "clay.com",
+      "segment": "saas_copilot",
+      "ats": "ashby",
+      "token": "claylabs",
+      "jobs": 58,
+      "inScope": 49,
+      "recent": 17,
+      "matches": [
+        {
+          "title": "Software Engineer, Developer Experience (AI)",
+          "list": "ambiguous",
+          "ageDays": 224,
+          "location": "New York (United States) / San Francisco (United States)"
+        },
+        {
+          "title": "GTME Ecosystem - GTME & AI Teacher",
+          "list": "ambiguous",
+          "ageDays": 174,
+          "location": "New York (United States)"
+        },
+        {
+          "title": "Software Engineer, Applied AI",
+          "list": "conditional",
+          "ageDays": 73,
+          "location": "New York (United States)"
+        }
+      ]
+    },
+    {
+      "company": "Unify",
+      "domain": "unifygtm.com",
+      "segment": "agent_native",
+      "ats": "ashby",
+      "token": "unify",
+      "jobs": 11,
+      "inScope": 11,
+      "recent": 9,
+      "matches": [
+        {
+          "title": "Applied AI Engineer",
+          "list": "conditional",
+          "ageDays": 6,
+          "location": "San Francisco Office (United States) / New York Office (United States)"
+        }
+      ]
+    },
+    {
+      "company": "Dialpad",
+      "domain": "dialpad.com",
+      "segment": "saas_copilot",
+      "ats": "greenhouse",
+      "token": "dialpad",
+      "jobs": 17,
+      "inScope": 12,
+      "recent": 4,
+      "matches": [
+        {
+          "title": "Agentic Transformation Advisor",
+          "list": "ambiguous",
+          "ageDays": 109,
+          "location": "Austin, US / Austin, Texas, United States"
+        },
+        {
+          "title": "AVP, Agentic Transformation Advisor",
+          "list": "ambiguous",
+          "ageDays": 95,
+          "location": "Austin, US / Austin, Texas, United States"
+        }
+      ]
+    },
+    {
+      "company": "Outreach",
+      "domain": "outreach.io",
+      "segment": "saas_copilot",
+      "ats": "lever",
+      "token": "outreach",
+      "jobs": 22,
+      "inScope": 20,
+      "recent": 11,
+      "matches": [
+        {
+          "title": "Director of Applied Science and Engineering - Knowledge Graphs & AI",
+          "list": "ambiguous",
+          "ageDays": 13,
+          "location": "Hyderabad (IN)"
+        },
+        {
+          "title": "Director, Product Management – Conversational Intelligence",
+          "list": "ambiguous",
+          "ageDays": 109,
+          "location": "Seattle, WA (US)"
+        },
+        {
+          "title": "Senior Applied Scientist - Knowledge Graphs & AI",
+          "list": "ambiguous",
+          "ageDays": 116,
+          "location": "Hyderabad (IN)"
+        },
+        {
+          "title": "Senior Forward Deployed Engineer,  Managed Services",
+          "list": "conditional",
+          "ageDays": 19,
+          "location": "Hyderabad (IN)"
+        },
+        {
+          "title": "Senior GTM AI Advisor (Customer Success Manager)",
+          "list": "ambiguous",
+          "ageDays": 89,
+          "location": "United States (US)"
+        },
+        {
+          "title": "Staff Applied Scientist - Knowledge Graphs & AI",
+          "list": "ambiguous",
+          "ageDays": 116,
+          "location": "Hyderabad (IN)"
+        }
+      ]
+    },
+    {
+      "company": "Gong",
+      "domain": "gong.io",
+      "segment": "saas_copilot",
+      "ats": "greenhouse",
+      "token": "gongio",
+      "jobs": 90,
+      "inScope": 54,
+      "recent": 25,
+      "matches": []
+    },
+    {
+      "company": "Notion",
+      "domain": "notion.so",
+      "segment": "saas_copilot",
+      "ats": "ashby",
+      "token": "notion",
+      "jobs": 140,
+      "inScope": 77,
+      "recent": 37,
+      "matches": [
+        {
+          "title": "Software Engineer, AI Connections (Developer Platform)",
+          "list": "ambiguous",
+          "ageDays": 63,
+          "location": "San Francisco, California (United States) / New York, New York (United States)"
+        },
+        {
+          "title": "Forward Deployed Engineer, GTM, AMER",
+          "list": "conditional",
+          "ageDays": 445,
+          "location": "San Francisco, California (United States) / New York, New York (United States)"
+        },
+        {
+          "title": "Engineering Manager, Mobile AI",
+          "list": "ambiguous",
+          "ageDays": 158,
+          "location": "New York, New York (United States)"
+        },
+        {
+          "title": "Software Engineer, Early Career (AI)",
+          "list": "ambiguous",
+          "ageDays": 112,
+          "location": "San Francisco, California (United States)"
+        },
+        {
+          "title": "Software Engineer, AI Product Security",
+          "list": "ambiguous",
+          "ageDays": 139,
+          "location": "San Francisco, California (United States) / New York, New York (United States)"
+        },
+        {
+          "title": "Forward Deployed Architect",
+          "list": "conditional",
+          "ageDays": 61,
+          "location": "New York, New York (United States) / San Francisco, California (United States)"
+        },
+        {
+          "title": "Strategic Finance, AI & Business Partnership",
+          "list": "ambiguous",
+          "ageDays": 26,
+          "location": "San Francisco, California (United States)"
+        },
+        {
+          "title": "AI Product Manager, Growth Marketing",
+          "list": "conditional",
+          "ageDays": 5,
+          "location": "New York, New York (United States) / San Francisco, California (United States)"
+        }
+      ]
+    },
+    {
+      "company": "Airtable",
+      "domain": "airtable.com",
+      "segment": "saas_copilot",
+      "ats": "greenhouse",
+      "token": "airtable",
+      "jobs": 4,
+      "inScope": 4,
+      "recent": 0,
+      "matches": []
+    },
+    {
+      "company": "Figma",
+      "domain": "figma.com",
+      "segment": "saas_copilot",
+      "ats": "greenhouse",
+      "token": "figma",
+      "jobs": 140,
+      "inScope": 98,
+      "recent": 42,
+      "matches": [
+        {
+          "title": "AI Applied Scientist",
+          "list": "ambiguous",
+          "ageDays": 313,
+          "location": "San Francisco, CA • New York, NY • United States / Canada / US"
+        },
+        {
+          "title": "Director, Product Design - AI & Context",
+          "list": "ambiguous",
+          "ageDays": 34,
+          "location": "San Francisco, CA • New York, NY • United States / Canada / US"
+        },
+        {
+          "title": "Forward Deployed Engineer",
+          "list": "conditional",
+          "ageDays": 62,
+          "location": "San Francisco, CA • New York, NY • United States / Canada / US"
+        },
+        {
+          "title": "Manager, Software Engineering - AI Infrastructure",
+          "list": "drop",
+          "ageDays": 7,
+          "location": "San Francisco, CA • New York, NY • United States / Canada / US"
+        },
+        {
+          "title": "Manager, Software Engineering - AI Observability",
+          "list": "ambiguous",
+          "ageDays": 241,
+          "location": "San Francisco, CA • New York, NY • United States / Canada / US"
+        },
+        {
+          "title": "Manager, Software Engineering - DevEx AI Tools",
+          "list": "ambiguous",
+          "ageDays": 145,
+          "location": "San Francisco, CA • New York, NY • United States / Canada / US"
+        },
+        {
+          "title": "PhD Intern, AI Applied Scientist (2027)",
+          "list": "ambiguous",
+          "ageDays": 21,
+          "location": "San Francisco, CA • New York, NY / US"
+        },
+        {
+          "title": "Product Builder, AI Insights",
+          "list": "ambiguous",
+          "ageDays": 5,
+          "location": "San Francisco, CA • New York, NY • United States / Canada / US"
+        },
+        {
+          "title": "Product Designer, AI Models",
+          "list": "ambiguous",
+          "ageDays": 339,
+          "location": "San Francisco, CA • New York, NY • United States / Canada / US"
+        },
+        {
+          "title": "Product Manager, AI Growth",
+          "list": "conditional",
+          "ageDays": 173,
+          "location": "San Francisco, CA • New York, NY • United States / Canada / US"
+        },
+        {
+          "title": "Researcher, Figma Agentic Experiences",
+          "list": "ambiguous",
+          "ageDays": 404,
+          "location": "San Francisco, CA • New York, NY • United States / Canada / US"
+        },
+        {
+          "title": "Software Engineer - AI Platforms",
+          "list": "ambiguous",
+          "ageDays": 359,
+          "location": "San Francisco, CA • New York, NY • United States / Canada / US"
+        },
+        {
+          "title": "Software Engineer - AI Product",
+          "list": "ambiguous",
+          "ageDays": 512,
+          "location": "San Francisco, CA • New York, NY • United States / Canada / US"
+        },
+        {
+          "title": "Strategic Finance, AI Innovation",
+          "list": "ambiguous",
+          "ageDays": 96,
+          "location": "San Francisco, CA • New York, NY • United States / US"
+        },
+        {
+          "title": "Support Engineer, AI Infrastructure & Tooling",
+          "list": "drop",
+          "ageDays": 256,
+          "location": "San Francisco, CA • New York, NY • United States / US"
+        },
+        {
+          "title": "Technical Program Manager - AI Tooling",
+          "list": "ambiguous",
+          "ageDays": 24,
+          "location": "San Francisco, CA • New York, NY • United States / US"
+        }
+      ]
+    },
+    {
+      "company": "Duolingo",
+      "domain": "duolingo.com",
+      "segment": "saas_copilot",
+      "ats": "greenhouse",
+      "token": "duolingo",
+      "jobs": 60,
+      "inScope": 52,
+      "recent": 23,
+      "matches": [
+        {
+          "title": "AI Research Engineer, New PhD Graduate",
+          "list": "drop",
+          "ageDays": 14,
+          "location": "New York, NY; Pittsburgh, PA / New York, New York, United States / Pittsburgh, Pennsylvania, United States"
+        },
+        {
+          "title": "Staff AI Research Engineer",
+          "list": "drop",
+          "ageDays": 122,
+          "location": "New York, NY; Pittsburgh, PA / New York, New York, United States / Pittsburgh, Pennsylvania, United States"
+        }
+      ]
+    },
+    {
+      "company": "Asana",
+      "domain": "asana.com",
+      "segment": "saas_copilot",
+      "ats": "greenhouse",
+      "token": "asana",
+      "jobs": 111,
+      "inScope": 51,
+      "recent": 40,
+      "matches": [
+        {
+          "title": "AI GTM Specialist",
+          "list": "ambiguous",
+          "ageDays": 19,
+          "location": "San Francisco / San Francisco, California, United States"
+        },
+        {
+          "title": "Forward Deployed Engineer, Command by Asana",
+          "list": "conditional",
+          "ageDays": 112,
+          "location": "San Francisco / San Francisco, California, United States"
+        },
+        {
+          "title": "Forward Deployed Engineer, Command by Asana",
+          "list": "conditional",
+          "ageDays": 112,
+          "location": "New York City / San Francisco, California, United States"
+        },
+        {
+          "title": "Senior Product Manager, AI Context",
+          "list": "conditional",
+          "ageDays": 75,
+          "location": "New York City"
+        },
+        {
+          "title": "Senior Product Manager, AI Studio",
+          "list": "conditional",
+          "ageDays": 24,
+          "location": "San Francisco / San Francisco, California, United States"
+        },
+        {
+          "title": "Senior Staff Engineer, AI",
+          "list": "ambiguous",
+          "ageDays": 20,
+          "location": "San Francisco / San Francisco, California, United States"
+        },
+        {
+          "title": "Software Engineer, AI Teammates Experience",
+          "list": "ambiguous",
+          "ageDays": 18,
+          "location": "San Francisco / San Francisco, California, United States"
+        },
+        {
+          "title": "Software Engineer - AI Teammates Platform",
+          "list": "ambiguous",
+          "ageDays": 12,
+          "location": "San Francisco / San Francisco, California, United States"
+        },
+        {
+          "title": "Staff Software Engineer, AI Developer Experience",
+          "list": "ambiguous",
+          "ageDays": 140,
+          "location": "New York City"
+        },
+        {
+          "title": "Staff Software Engineer, AI Teammates",
+          "list": "ambiguous",
+          "ageDays": 28,
+          "location": "San Francisco / San Francisco, California, United States"
+        }
+      ]
+    },
+    {
+      "company": "Miro",
+      "domain": "miro.com",
+      "segment": "saas_copilot",
+      "ats": "ashby",
+      "token": "miro",
+      "jobs": 21,
+      "inScope": 11,
+      "recent": 3,
+      "matches": [
+        {
+          "title": "Forward Deployed Consultant, Manufacturing",
+          "list": "conditional",
+          "ageDays": 55,
+          "location": "Austin"
+        }
+      ]
+    },
+    {
+      "company": "Webflow",
+      "domain": "webflow.com",
+      "segment": "saas_copilot",
+      "ats": "ashby",
+      "token": "webflow",
+      "jobs": 17,
+      "inScope": 11,
+      "recent": 6,
+      "matches": [
+        {
+          "title": "Staff Product Manager, AI",
+          "list": "conditional",
+          "ageDays": 108,
+          "location": "United States / Canada (BC & ON only)"
+        },
+        {
+          "title": "Staff Product Designer, Agentic CMS",
+          "list": "ambiguous",
+          "ageDays": 38,
+          "location": "United States / Canada (BC & ON only)"
+        },
+        {
+          "title": "Senior Manager, AI Customer Success",
+          "list": "ambiguous",
+          "ageDays": 17,
+          "location": "United States"
+        }
+      ]
+    },
+    {
+      "company": "Linear",
+      "domain": "linear.app",
+      "segment": "saas_copilot",
+      "ats": "ashby",
+      "token": "linear",
+      "jobs": 33,
+      "inScope": 19,
+      "recent": 4,
+      "matches": [
+        {
+          "title": "Senior / Staff Product Engineer, Applied AI",
+          "list": "conditional",
+          "ageDays": 473,
+          "location": "North America (United States)"
+        }
+      ]
+    },
+    {
+      "company": "Ramp",
+      "domain": "ramp.com",
+      "segment": "saas_copilot",
+      "ats": "ashby",
+      "token": "ramp",
+      "jobs": 173,
+      "inScope": 151,
+      "recent": 83,
+      "matches": [
+        {
+          "title": "Applied AI Engineer",
+          "list": "conditional",
+          "ageDays": 287,
+          "location": "New York, NY (HQ) (USA) / San Francisco, CA (USA)"
+        },
+        {
+          "title": "AI Solutions Engineer",
+          "list": "conditional",
+          "ageDays": 61,
+          "location": "New York, NY (HQ) (USA)"
+        },
+        {
+          "title": "AI Partnerships Manager",
+          "list": "ambiguous",
+          "ageDays": 20,
+          "location": "San Francisco, CA (USA)"
+        },
+        {
+          "title": "Applied AI Engineer, Fullstack",
+          "list": "conditional",
+          "ageDays": 124,
+          "location": "New York, NY (HQ) (USA) / San Francisco, CA (USA)"
+        },
+        {
+          "title": "Software Engineer, Forward Deployed AI Solutions",
+          "list": "conditional",
+          "ageDays": 90,
+          "location": "New York, NY (HQ) (USA)"
+        },
+        {
+          "title": "AI Solutions Strategist",
+          "list": "ambiguous",
+          "ageDays": 54,
+          "location": "New York, NY (HQ) (USA)"
+        },
+        {
+          "title": "Software Engineer, Forward Deployed",
+          "list": "conditional",
+          "ageDays": 4,
+          "location": "New York, NY (HQ) (USA) / San Francisco, CA (USA)"
+        }
+      ]
+    },
+    {
+      "company": "Brex",
+      "domain": "brex.com",
+      "segment": "saas_copilot",
+      "ats": "greenhouse",
+      "token": "brex",
+      "jobs": 266,
+      "inScope": 252,
+      "recent": 134,
+      "matches": [
+        {
+          "title": "AI Engineer, Workbench",
+          "list": "ambiguous",
+          "ageDays": 124,
+          "location": "San Francisco, California, United States"
+        },
+        {
+          "title": "Data Scientist II, Applied ML",
+          "list": "conditional",
+          "ageDays": 25,
+          "location": "San Francisco, California, United States / São Paulo, São Paulo, Brazil"
+        },
+        {
+          "title": "Manager, CX AI Strategy",
+          "list": "ambiguous",
+          "ageDays": 118,
+          "location": "Vancouver, British Columbia, Canada / New York, New York, United States / Salt Lake City, Utah, United States / San Francisco, California, United States / Seattle, Washington, United States"
+        },
+        {
+          "title": "Manager, CX AI Strategy",
+          "list": "ambiguous",
+          "ageDays": 118,
+          "location": "New York, New York, United States / Salt Lake City, Utah, United States / San Francisco, California, United States / Seattle, Washington, United States / Vancouver, British Columbia, Canada"
+        },
+        {
+          "title": "Manager, CX AI Strategy",
+          "list": "ambiguous",
+          "ageDays": 118,
+          "location": "San Francisco, California, United States / New York, New York, United States / Salt Lake City, Utah, United States / Seattle, Washington, United States / Vancouver, British Columbia, Canada"
+        },
+        {
+          "title": "Manager, CX AI Strategy",
+          "list": "ambiguous",
+          "ageDays": 118,
+          "location": "Seattle, Washington, United States / New York, New York, United States / Salt Lake City, Utah, United States / San Francisco, California, United States / Vancouver, British Columbia, Canada"
+        },
+        {
+          "title": "Manager, CX AI Strategy",
+          "list": "ambiguous",
+          "ageDays": 118,
+          "location": "Salt Lake City, Utah, United States / New York, New York, United States / San Francisco, California, United States / Seattle, Washington, United States / Vancouver, British Columbia, Canada"
+        },
+        {
+          "title": "Senior Product Manager, AI",
+          "list": "conditional",
+          "ageDays": 54,
+          "location": "Seattle, Washington, United States / New York, New York, United States / Remote / Salt Lake City, Utah, United States / San Francisco, California, United States / São Paulo, São Paulo, Brazil / Vancouver, British Columbia, Canada"
+        },
+        {
+          "title": "Senior Product Manager, AI",
+          "list": "conditional",
+          "ageDays": 54,
+          "location": "San Francisco, California, United States / New York, New York, United States / Remote / Salt Lake City, Utah, United States / São Paulo, São Paulo, Brazil / Seattle, Washington, United States / Vancouver, British Columbia, Canada"
+        },
+        {
+          "title": "Staff Product Designer, AI",
+          "list": "ambiguous",
+          "ageDays": 110,
+          "location": "San Francisco, California, United States / New York, New York, United States / Seattle, Washington, United States"
+        },
+        {
+          "title": "Staff Product Manager, AI",
+          "list": "conditional",
+          "ageDays": 54,
+          "location": "New York, New York, United States / Remote / Salt Lake City, Utah, United States / San Francisco, California, United States / São Paulo, São Paulo, Brazil / Seattle, Washington, United States / Vancouver, British Columbia, Canada"
+        }
+      ]
+    },
+    {
+      "company": "Mercury",
+      "domain": "mercury.com",
+      "segment": "saas_copilot",
+      "ats": "greenhouse",
+      "token": "mercury",
+      "jobs": 77,
+      "inScope": 77,
+      "recent": 62,
+      "matches": [
+        {
+          "title": "Lead Compliance Risk Manager, Product Compliance - AI",
+          "list": "ambiguous",
+          "ageDays": 20,
+          "location": "San Francisco, CA, New York, NY, Portland, OR, or Remote within Canada or United States / Any Office or Remote"
+        },
+        {
+          "title": "Senior Data Scientist - Risk ML",
+          "list": "ambiguous",
+          "ageDays": 54,
+          "location": "San Francisco, CA, New York, NY, Portland, OR, or Remote within Canada or United States / Any Office or Remote"
+        }
+      ]
+    },
+    {
+      "company": "Gusto",
+      "domain": "gusto.com",
+      "segment": "saas_copilot",
+      "ats": "greenhouse",
+      "token": "gusto",
+      "jobs": 97,
+      "inScope": 97,
+      "recent": 51,
+      "matches": [
+        {
+          "title": "AI Operations Program Manager, Benefits",
+          "list": "ambiguous",
+          "ageDays": 158,
+          "location": "Denver, CO - Hybrid"
+        },
+        {
+          "title": "Enterprise Application AI Engineer",
+          "list": "ambiguous",
+          "ageDays": 339,
+          "location": "San Francisco, CA - Hybrid"
+        },
+        {
+          "title": "FP&A AI Architect",
+          "list": "ambiguous",
+          "ageDays": 7,
+          "location": "San Francisco, CA - Hybrid"
+        },
+        {
+          "title": "Senior Staff Software Engineer, Gusto Agent & Partner Experiences (API)",
+          "list": "ambiguous",
+          "ageDays": 12,
+          "location": "Denver, CO - Hybrid; New York, NY - Hybrid; San Francisco, CA - Hybrid / San Francisco, CA - Hybrid"
+        },
+        {
+          "title": "Software Engineer, ML Platform",
+          "list": "drop",
+          "ageDays": 77,
+          "location": "Denver, CO - Hybrid; New York, NY - Hybrid; San Francisco, CA - Hybrid / San Francisco, CA - Hybrid"
+        },
+        {
+          "title": "Staff Software Engineer, AI Voice and Content",
+          "list": "ambiguous",
+          "ageDays": 130,
+          "location": "San Francisco, CA - Hybrid"
+        },
+        {
+          "title": "Staff Software Engineer, Core AI Platforms",
+          "list": "ambiguous",
+          "ageDays": 213,
+          "location": "San Francisco, CA - Hybrid; Denver, CO - Hybrid; New York, NY - Hybrid / Denver, CO - Hybrid / New York, NY - Hybrid / San Francisco, CA - Hybrid / United States"
+        },
+        {
+          "title": "Staff Software Engineer, Retirement AI",
+          "list": "ambiguous",
+          "ageDays": 126,
+          "location": "Denver, CO;San Francisco, CA;New York, NY / New York, NY - Hybrid"
+        }
+      ]
+    },
+    {
+      "company": "Dropbox",
+      "domain": "dropbox.com",
+      "segment": "saas_copilot",
+      "ats": "greenhouse",
+      "token": "dropbox",
+      "jobs": 20,
+      "inScope": 14,
+      "recent": 12,
+      "matches": []
+    },
+    {
+      "company": "Box",
+      "domain": "box.com",
+      "segment": "saas_copilot",
+      "ats": "greenhouse",
+      "token": "boxinc",
+      "jobs": 113,
+      "inScope": 60,
+      "recent": 43,
+      "matches": [
+        {
+          "title": "Engineering Manager II, Agent Runtime",
+          "list": "ambiguous",
+          "ageDays": 70,
+          "location": "Redwood City, CA, United States"
+        },
+        {
+          "title": "Product Manager II, AI Research",
+          "list": "drop",
+          "ageDays": 10,
+          "location": "Redwood City, CA, United States"
+        },
+        {
+          "title": "Senior Manager, AI Partnerships",
+          "list": "ambiguous",
+          "ageDays": 13,
+          "location": "Redwood City, CA, United States, San Francisco, CA, United States / Redwood City, CA, United States"
+        }
+      ]
+    },
+    {
+      "company": "HubSpot",
+      "domain": "hubspot.com",
+      "segment": "saas_copilot",
+      "ats": "greenhouse",
+      "token": "hubspotjobs",
+      "jobs": 66,
+      "inScope": 12,
+      "recent": 2,
+      "matches": []
+    },
+    {
+      "company": "Attio",
+      "domain": "attio.com",
+      "segment": "saas_copilot",
+      "ats": "ashby",
+      "token": "attio",
+      "jobs": 30,
+      "inScope": 11,
+      "recent": 4,
+      "matches": []
+    },
+    {
+      "company": "Instacart",
+      "domain": "instacart.com",
+      "segment": "enterprise_cx",
+      "ats": "greenhouse",
+      "token": "instacart",
+      "jobs": 100,
+      "inScope": 90,
+      "recent": 52,
+      "matches": [
+        {
+          "title": "Director, AI Solutions Strategy & Planning",
+          "list": "ambiguous",
+          "ageDays": 18,
+          "location": "United States - Remote / United States"
+        },
+        {
+          "title": "Director, AI Solutions Strategy & Planning",
+          "list": "ambiguous",
+          "ageDays": 18,
+          "location": "Canada - Remote (ON, AB, BC, or NS Only) / United States"
+        },
+        {
+          "title": "Senior AI Solution Sales Executive",
+          "list": "ambiguous",
+          "ageDays": 27,
+          "location": "United States - Remote / Remote - United States"
+        },
+        {
+          "title": "Senior AI Solution Sales Executive",
+          "list": "ambiguous",
+          "ageDays": 27,
+          "location": "Canada - Remote (ON, AB, BC, or NS Only) / Remote - United States"
+        },
+        {
+          "title": "Senior Product Manager, AI Control Studio",
+          "list": "conditional",
+          "ageDays": 40,
+          "location": "Canada - Remote (ON, AB, BC, or NS Only) / Remote - United States"
+        },
+        {
+          "title": "Senior Product Manager, AI Control Studio",
+          "list": "conditional",
+          "ageDays": 40,
+          "location": "United States - Remote / Remote - United States"
+        }
+      ]
+    },
+    {
+      "company": "Sourcegraph",
+      "domain": "sourcegraph.com",
+      "segment": "agent_native",
+      "ats": "greenhouse",
+      "token": "sourcegraph91",
+      "jobs": 8,
+      "inScope": 8,
+      "recent": 4,
+      "matches": [
+        {
+          "title": "ML & Agentic Systems Engineer [IC4]",
+          "list": "ambiguous",
+          "ageDays": 46,
+          "location": "Remote / Remote "
+        }
+      ]
+    },
+    {
+      "company": "Lyft",
+      "domain": "lyft.com",
+      "segment": "enterprise_cx",
+      "ats": "greenhouse",
+      "token": "lyft",
+      "jobs": 179,
+      "inScope": 93,
+      "recent": 64,
+      "matches": [
+        {
+          "title": "ML Software Engineer, ETA",
+          "list": "ambiguous",
+          "ageDays": 98,
+          "location": "San Francisco, CA / San Francisco, California, United States"
+        },
+        {
+          "title": "Senior AI Software Engineer, Risk - Insurance Claims Management",
+          "list": "ambiguous",
+          "ageDays": 42,
+          "location": "Seattle, WA / San Francisco, California, United States / Seattle, Washington, United States"
+        },
+        {
+          "title": "Senior AI Software Engineer, Risk - Insurance Claims Management",
+          "list": "ambiguous",
+          "ageDays": 42,
+          "location": "San Francisco, CA / San Francisco, California, United States / Seattle, Washington, United States"
+        },
+        {
+          "title": "Senior Product Manager, Customer Care AI",
+          "list": "conditional",
+          "ageDays": 48,
+          "location": "San Francisco, CA / San Francisco, California, United States"
+        },
+        {
+          "title": "Senior Product Manager, Customer Care AI",
+          "list": "conditional",
+          "ageDays": 38,
+          "location": "New York, NY / San Francisco, California, United States"
+        },
+        {
+          "title": "Senior Product Manager, Rider ML/AI",
+          "list": "conditional",
+          "ageDays": 0,
+          "location": "San Francisco, CA / San Francisco, California, United States"
+        }
+      ]
+    },
+    {
+      "company": "GitLab",
+      "domain": "gitlab.com",
+      "segment": "saas_copilot",
+      "ats": "greenhouse",
+      "token": "gitlab",
+      "jobs": 238,
+      "inScope": 125,
+      "recent": 90,
+      "matches": [
+        {
+          "title": "AI Transformation Owner, CRO",
+          "list": "ambiguous",
+          "ageDays": 96,
+          "location": "Remote, United States"
+        },
+        {
+          "title": "AI Transformation Owner, Product & Design",
+          "list": "ambiguous",
+          "ageDays": 68,
+          "location": "Remote, Canada; Remote, United Kingdom; Remote, United States"
+        },
+        {
+          "title": "Director of Product Management, Agentic Software Delivery",
+          "list": "ambiguous",
+          "ageDays": 42,
+          "location": "Remote, United States"
+        },
+        {
+          "title": "Principal Engineer, Duo Agent Platform",
+          "list": "ambiguous",
+          "ageDays": 45,
+          "location": "Remote, Canada; Remote, Poland; Remote, United Kingdom; Remote, United States"
+        },
+        {
+          "title": "Principal Product Manager, AI Software Factory",
+          "list": "conditional",
+          "ageDays": 84,
+          "location": "Remote, Canada; Remote, United States"
+        },
+        {
+          "title": "Senior AI Engineer",
+          "list": "ambiguous",
+          "ageDays": 151,
+          "location": "Remote, US / United States of America"
+        },
+        {
+          "title": "Senior Product Manager, Agentic Source Code",
+          "list": "ambiguous",
+          "ageDays": 111,
+          "location": "Remote, Canada; Remote, US"
+        },
+        {
+          "title": "Staff Forward Deployed Engineer",
+          "list": "conditional",
+          "ageDays": 98,
+          "location": "Remote, US / United States of America"
+        },
+        {
+          "title": "Staff Product Manager, Agentic Planning",
+          "list": "ambiguous",
+          "ageDays": 3,
+          "location": "Remote, United States"
+        },
+        {
+          "title": "Staff Product Manager, Agentic Test Intelligence",
+          "list": "ambiguous",
+          "ageDays": 13,
+          "location": "Remote, Canada; Remote, United States"
+        },
+        {
+          "title": "Staff Solutions Architect, AI Subject Matter Expert",
+          "list": "ambiguous",
+          "ageDays": 10,
+          "location": "Remote, United States / United States of America"
+        },
+        {
+          "title": "Strategic Account Executive - AI, San Francisco",
+          "list": "ambiguous",
+          "ageDays": 3,
+          "location": "Remote, United States / United States of America"
+        }
+      ]
+    },
+    {
+      "company": "DoorDash",
+      "domain": "doordash.com",
+      "segment": "enterprise_cx",
+      "ats": "greenhouse",
+      "token": "doordashusa",
+      "jobs": 447,
+      "inScope": 446,
+      "recent": 219,
+      "matches": [
+        {
+          "title": "AI Research Fellowship, (Summer and Fall 2026)",
+          "list": "drop",
+          "ageDays": 180,
+          "location": "San Francisco, CA"
+        },
+        {
+          "title": "Associate Manager, AI Research Lab Strategy & Operations",
+          "list": "drop",
+          "ageDays": 104,
+          "location": "San Francisco, CA; Sunnyvale, CA; Los Angeles, CA; Seattle, WA; New York, NY / San Francisco, CA"
+        },
+        {
+          "title": "Engineering Manager, Merchant, AI/ML",
+          "list": "ambiguous",
+          "ageDays": 321,
+          "location": "San Francisco, CA; Sunnyvale, CA; Seattle, WA; New York, NY / San Francisco, CA"
+        },
+        {
+          "title": "Engineering Manager, Red Team",
+          "list": "drop",
+          "ageDays": 188,
+          "location": "United States - Remote / San Francisco, CA"
+        },
+        {
+          "title": "Member of Technical Staff - Applied AI",
+          "list": "conditional",
+          "ageDays": 83,
+          "location": "San Francisco, CA; Sunnyvale, CA / San Francisco, CA"
+        },
+        {
+          "title": "Protective Services Agent",
+          "list": "ambiguous",
+          "ageDays": 61,
+          "location": "San Francisco, CA"
+        },
+        {
+          "title": "Senior Associate, AI Solutions Architect, Marketing Technology",
+          "list": "ambiguous",
+          "ageDays": 33,
+          "location": "New York, NY; San Francisco, CA; Seattle, WA; Los Angeles, CA; Sunnyvale, CA; Chicago, IL; Austin, TX; Denver, CO; Atlanta, GA; Miami, FL; Boston, MA; Washington, DC. / San Francisco, CA"
+        },
+        {
+          "title": "Senior Machine Learning Engineer, New Verticals Agentic Foundations",
+          "list": "ambiguous",
+          "ageDays": 13,
+          "location": "San Francisco, CA; Sunnyvale, CA; Seattle, WA; NewYork, NY / San Francisco, CA"
+        },
+        {
+          "title": "Software Engineer, Data and AI Platform",
+          "list": "drop",
+          "ageDays": 13,
+          "location": "San Francisco, CA; Sunnyvale, CA / San Francisco, CA"
+        },
+        {
+          "title": "Software Engineer, Machine Learning Platform - Gen AI",
+          "list": "ambiguous",
+          "ageDays": 18,
+          "location": "San Francisco, CA; Sunnyvale, CA; Seattle, WA / San Francisco, CA"
+        },
+        {
+          "title": "Software Engineer, ML Infrastructure (MDX)",
+          "list": "drop",
+          "ageDays": 12,
+          "location": "San Francisco, CA; Sunnyvale, CA; Seattle, WA / San Francisco, CA"
+        },
+        {
+          "title": "Software Engineer, ML Serving Platform",
+          "list": "ambiguous",
+          "ageDays": 18,
+          "location": "San Francisco, CA; Sunnyvale, CA; • Seattle, WA / San Francisco, CA"
+        },
+        {
+          "title": "Staff Security Engineer, Proactive Security - AI",
+          "list": "ambiguous",
+          "ageDays": 63,
+          "location": "United States - Remote / San Francisco, CA"
+        }
+      ]
+    },
+    {
+      "company": "Airbnb",
+      "domain": "airbnb.com",
+      "segment": "enterprise_cx",
+      "ats": "greenhouse",
+      "token": "airbnb",
+      "jobs": 189,
+      "inScope": 103,
+      "recent": 66,
+      "matches": [
+        {
+          "title": "Manager, Engineering, Dev AI",
+          "list": "ambiguous",
+          "ageDays": 4,
+          "location": "United States"
+        },
+        {
+          "title": "Principal Machine Learning Engineer- LLM Fine-tuning and Optimization",
+          "list": "ambiguous",
+          "ageDays": 155,
+          "location": "United States"
+        },
+        {
+          "title": "Senior Manager, Technical Program Management (Search & AI Foundations)",
+          "list": "ambiguous",
+          "ageDays": 97,
+          "location": "United States"
+        },
+        {
+          "title": "Senior Staff Data Scientist, Guest & Host Marketplace AI",
+          "list": "ambiguous",
+          "ageDays": 458,
+          "location": "Remote / United States"
+        },
+        {
+          "title": "Senior Staff Machine Learning Engineer, Data & Eval",
+          "list": "keep",
+          "ageDays": 575,
+          "location": "United States"
+        },
+        {
+          "title": "Staff Software Engineer, Marketplaces & Intelligence Data and AI",
+          "list": "ambiguous",
+          "ageDays": 287,
+          "location": "United States"
+        },
+        {
+          "title": "Staff UX Writer, AI",
+          "list": "ambiguous",
+          "ageDays": 25,
+          "location": "United States"
+        }
+      ]
+    },
+    {
+      "company": "Robinhood",
+      "domain": "robinhood.com",
+      "segment": "enterprise_cx",
+      "ats": "greenhouse",
+      "token": "robinhood",
+      "jobs": 155,
+      "inScope": 138,
+      "recent": 91,
+      "matches": [
+        {
+          "title": "Engineering Manager, AI Platform & Agentic Apps",
+          "list": "drop",
+          "ageDays": 28,
+          "location": "Menlo Park, CA / Bellevue, WA / New York, NY"
+        },
+        {
+          "title": "Head of AI/Data Science, Finance & Strategy",
+          "list": "drop",
+          "ageDays": 34,
+          "location": "Menlo Park, CA"
+        },
+        {
+          "title": "Senior Engineering Manager - Agent Experience",
+          "list": "ambiguous",
+          "ageDays": 54,
+          "location": "Menlo Park, CA"
+        },
+        {
+          "title": "Staff Data Scientist,  ML (Credit Risk)",
+          "list": "ambiguous",
+          "ageDays": 138,
+          "location": "Menlo Park, CA; New York, NY; Washington, DC / Menlo Park, CA / New York, NY / Washington, DC"
+        },
+        {
+          "title": "Staff Machine Learning Engineer, AI Platform & Agentic Apps",
+          "list": "drop",
+          "ageDays": 37,
+          "location": "Menlo Park, CA"
+        },
+        {
+          "title": "Staff Software Engineer, AI Security",
+          "list": "ambiguous",
+          "ageDays": 20,
+          "location": "Bellevue, WA; Menlo Park, CA / Bellevue, WA / Menlo Park, CA / Toronto, Canada"
+        }
+      ]
+    },
+    {
+      "company": "Chime",
+      "domain": "chime.com",
+      "segment": "enterprise_cx",
+      "ats": "greenhouse",
+      "token": "chime",
+      "jobs": 74,
+      "inScope": 74,
+      "recent": 50,
+      "matches": [
+        {
+          "title": "AI/ML Engineer",
+          "list": "ambiguous",
+          "ageDays": 140,
+          "location": "Chicago, IL, USA; New York, NY, USA; San Francisco, CA, USA / San Francisco, California, United States"
+        },
+        {
+          "title": "Senior Software Engineer, AI & App Experience",
+          "list": "ambiguous",
+          "ageDays": 104,
+          "location": "New York, NY, USA; San Francisco, CA, USA / San Francisco, California, United States"
+        },
+        {
+          "title": "Senior Software Engineer, AI Enablement",
+          "list": "ambiguous",
+          "ageDays": 41,
+          "location": "San Francisco, CA, USA / San Francisco, California, United States"
+        },
+        {
+          "title": "Software Engineer, AI Enablement",
+          "list": "ambiguous",
+          "ageDays": 84,
+          "location": "San Francisco, CA, USA / San Francisco, California, United States"
+        },
+        {
+          "title": "Staff AI/ML Engineer",
+          "list": "ambiguous",
+          "ageDays": 11,
+          "location": "San Francisco, CA, USA / San Francisco, California, United States"
+        },
+        {
+          "title": "Tech Lead Manager, Human Agent Tooling",
+          "list": "ambiguous",
+          "ageDays": 153,
+          "location": "San Francisco, CA, USA / Chicago, Illinois, United States"
+        }
+      ]
+    },
+    {
+      "company": "Coinbase",
+      "domain": "coinbase.com",
+      "segment": "enterprise_cx",
+      "ats": "greenhouse",
+      "token": "coinbase",
+      "jobs": 226,
+      "inScope": 179,
+      "recent": 114,
+      "matches": [
+        {
+          "title": "Forward Deployed Engineer, Finance [Office of the CTO]",
+          "list": "conditional",
+          "ageDays": 96,
+          "location": "Remote - USA / US - Remote Zone 1 (Job Requisitions Only)"
+        },
+        {
+          "title": "Forward Deployed Engineer Intern (HR Technology)",
+          "list": "conditional",
+          "ageDays": 17,
+          "location": "Hybrid - New York, NY / US - Remote Zone 1 (Job Requisitions Only)"
+        },
+        {
+          "title": "Group Product Manager, Compliance Agent Experience",
+          "list": "conditional",
+          "ageDays": 105,
+          "location": "Remote - USA / US - Remote Zone 1 (Job Requisitions Only)"
+        },
+        {
+          "title": "Senior Engineering Manager, AI Foundations",
+          "list": "ambiguous",
+          "ageDays": 14,
+          "location": "Remote - USA / US - Remote Zone 1 (Job Requisitions Only)"
+        },
+        {
+          "title": "Senior Software Engineer, Backend/Fullstack (Coinbase Advisor - Agentic Trading)",
+          "list": "ambiguous",
+          "ageDays": 18,
+          "location": "Remote - USA / US - Remote Zone 1 (Job Requisitions Only)"
+        },
+        {
+          "title": "Staff Software Engineer, Core AI Infrastructure",
+          "list": "drop",
+          "ageDays": 140,
+          "location": "Remote - USA / US - Remote Zone 1 (Job Requisitions Only)"
+        },
+        {
+          "title": "Technical Program Manager, CX Intelligence & AI",
+          "list": "ambiguous",
+          "ageDays": 130,
+          "location": "Remote - USA / US - Remote Zone 1 (Job Requisitions Only)"
+        }
+      ]
+    },
+    {
+      "company": "SoFi",
+      "domain": "sofi.com",
+      "segment": "enterprise_cx",
+      "ats": "greenhouse",
+      "token": "sofi",
+      "jobs": 59,
+      "inScope": 59,
+      "recent": 43,
+      "matches": [
+        {
+          "title": "Art Director, Generative AI (Contract)",
+          "list": "ambiguous",
+          "ageDays": 56,
+          "location": "CA - San Francisco HQ / CA - San Francisco"
+        },
+        {
+          "title": "Principal Software Engineer, Data Platform — Data Trust & AI Context",
+          "list": "ambiguous",
+          "ageDays": 3,
+          "location": "WA - Seattle; UT - Cottonwood Heights; CA - San Francisco  / WA - Seattle"
+        },
+        {
+          "title": "Senior Staff AI Engineer",
+          "list": "ambiguous",
+          "ageDays": 277,
+          "location": "CA - San Francisco / DE - Greenville"
+        },
+        {
+          "title": "Sr Director, Head of Enterprise Applied AI",
+          "list": "conditional",
+          "ageDays": 66,
+          "location": "CA - San Francisco"
+        },
+        {
+          "title": "Sr Staff Forward Deployed Engineer, Enterprise AI",
+          "list": "conditional",
+          "ageDays": 41,
+          "location": "WA - Seattle; CA - San Francisco; UT - Cottonwood Heights / WA - Seattle"
+        }
+      ]
+    },
+    {
+      "company": "Affirm",
+      "domain": "affirm.com",
+      "segment": "enterprise_cx",
+      "ats": "greenhouse",
+      "token": "affirm",
+      "jobs": 223,
+      "inScope": 160,
+      "recent": 100,
+      "matches": [
+        {
+          "title": "Machine Learning Engineer II (Underwriting ML)",
+          "list": "ambiguous",
+          "ageDays": 81,
+          "location": "Remote US / Remote Canada"
+        },
+        {
+          "title": "Machine Learning Engineer II (Underwriting ML)",
+          "list": "ambiguous",
+          "ageDays": 81,
+          "location": "Remote Canada / Remote US"
+        },
+        {
+          "title": "Senior Software Engineer, Backend (AI Platform)",
+          "list": "drop",
+          "ageDays": 0,
+          "location": "Remote Canada / Remote US"
+        },
+        {
+          "title": "Senior Software Engineer, Backend (AI Platform)",
+          "list": "drop",
+          "ageDays": 0,
+          "location": "Remote US / Remote Canada"
+        },
+        {
+          "title": "Staff Security Engineer, Enterprise AI",
+          "list": "ambiguous",
+          "ageDays": 41,
+          "location": "Remote US / Remote Canada"
+        },
+        {
+          "title": "Staff Security Engineer, Enterprise AI",
+          "list": "ambiguous",
+          "ageDays": 41,
+          "location": "Remote Canada / Remote US"
+        }
+      ]
+    },
+    {
+      "company": "Discord",
+      "domain": "discord.com",
+      "segment": "enterprise_cx",
+      "ats": "greenhouse",
+      "token": "discord",
+      "jobs": 46,
+      "inScope": 45,
+      "recent": 26,
+      "matches": [
+        {
+          "title": "Group Product Manager, Data/ML",
+          "list": "ambiguous",
+          "ageDays": 3,
+          "location": "San Francisco Bay Area / San Francisco, California, United States"
+        }
+      ]
+    },
+    {
+      "company": "Reddit",
+      "domain": "reddit.com",
+      "segment": "enterprise_cx",
+      "ats": "greenhouse",
+      "token": "reddit",
+      "jobs": 161,
+      "inScope": 142,
+      "recent": 73,
+      "matches": [
+        {
+          "title": "Lead Forward Deployed Engineer (AI Enablement)",
+          "list": "conditional",
+          "ageDays": 7,
+          "location": "Remote - United States"
+        },
+        {
+          "title": "Senior Client Account Manager, Global Strategic Accounts (Tech/AI)",
+          "list": "ambiguous",
+          "ageDays": 60,
+          "location": "San Francisco, CA / San Francisco, CA, United States"
+        },
+        {
+          "title": "Senior Forward Deployed Engineer (AI Enablement)",
+          "list": "conditional",
+          "ageDays": 7,
+          "location": "Remote - United States"
+        },
+        {
+          "title": "Senior Machine Learning Engineer, Ads ML Efficiency",
+          "list": "ambiguous",
+          "ageDays": 6,
+          "location": "Remote - United States"
+        },
+        {
+          "title": "Senior Machine Learning Systems Engineer, ML Platform",
+          "list": "drop",
+          "ageDays": 12,
+          "location": "Remote - United States"
+        },
+        {
+          "title": "Senior Software Engineer, Agentic Ads Experience",
+          "list": "ambiguous",
+          "ageDays": 145,
+          "location": "Remote - United States"
+        },
+        {
+          "title": "Senior Staff Machine Learning Engineer, GenAI Platform",
+          "list": "ambiguous",
+          "ageDays": 208,
+          "location": "Remote - United States"
+        },
+        {
+          "title": "Senior Staff Machine Learning Engineer, ML Understanding",
+          "list": "ambiguous",
+          "ageDays": 26,
+          "location": "Remote - United States"
+        },
+        {
+          "title": "Senior Staff Machine Learning Systems Engineer, Ads ML Platform",
+          "list": "drop",
+          "ageDays": 62,
+          "location": "Remote - United States / New York, NY, United States"
+        },
+        {
+          "title": "Staff Machine Learning Engineer, Ads ML Efficiency",
+          "list": "ambiguous",
+          "ageDays": 25,
+          "location": "Remote - United States"
+        },
+        {
+          "title": "Staff Machine Learning Engineer, AI Security",
+          "list": "ambiguous",
+          "ageDays": 42,
+          "location": "Remote - United States"
+        },
+        {
+          "title": "Staff Technical Product Manager, Ads ML Platform",
+          "list": "drop",
+          "ageDays": 157,
+          "location": "Remote - United States"
+        }
+      ]
+    },
+    {
+      "company": "Spotify",
+      "domain": "spotify.com",
+      "segment": "enterprise_cx",
+      "ats": "lever",
+      "token": "spotify",
+      "jobs": 89,
+      "inScope": 33,
+      "recent": 26,
+      "matches": [
+        {
+          "title": "Research Scientist - Generative Audio",
+          "list": "drop",
+          "ageDays": 108,
+          "location": "New York, NY (US)"
+        },
+        {
+          "title": "Research Scientist - Personalization",
+          "list": "drop",
+          "ageDays": 35,
+          "location": "New York, NY (US)"
+        },
+        {
+          "title": "Senior Applied Research Scientist - Personalization",
+          "list": "drop",
+          "ageDays": 35,
+          "location": "New York, NY (US)"
+        },
+        {
+          "title": "Senior Software Engineer - Enterprise AI",
+          "list": "ambiguous",
+          "ageDays": 74,
+          "location": "New York, NY (US)"
+        }
+      ]
+    },
+    {
+      "company": "Peloton",
+      "domain": "onepeloton.com",
+      "segment": "enterprise_cx",
+      "ats": "greenhouse",
+      "token": "peloton",
+      "jobs": 58,
+      "inScope": 41,
+      "recent": 28,
+      "matches": []
+    },
+    {
+      "company": "Thumbtack",
+      "domain": "thumbtack.com",
+      "segment": "enterprise_cx",
+      "ats": "ashby",
+      "token": "thumbtack",
+      "jobs": 49,
+      "inScope": 21,
+      "recent": 17,
+      "matches": [
+        {
+          "title": "Software Engineer, AI/ML Infrastructure (US-Based)",
+          "list": "drop",
+          "ageDays": 12,
+          "location": "Remote, United States"
+        },
+        {
+          "title": "Full-Stack Engineer, AI Platform",
+          "list": "drop",
+          "ageDays": 38,
+          "location": "Remote, United States"
+        }
+      ]
+    },
+    {
+      "company": "Faire",
+      "domain": "faire.com",
+      "segment": "enterprise_cx",
+      "ats": "greenhouse",
+      "token": "faire",
+      "jobs": 69,
+      "inScope": 61,
+      "recent": 38,
+      "matches": [
+        {
+          "title": "Applied AI/ML Scientist, Intern - Winter 2027",
+          "list": "conditional",
+          "ageDays": 20,
+          "location": "San Francisco, CA / San Francisco, California, United States"
+        },
+        {
+          "title": "Senior Applied AI/ML Scientist - Brand Growth",
+          "list": "conditional",
+          "ageDays": 45,
+          "location": "San Francisco, CA / San Francisco, California, United States"
+        },
+        {
+          "title": "Senior Applied AI/ML Scientist - Compass",
+          "list": "conditional",
+          "ageDays": 122,
+          "location": "Kitchener-Waterloo, ON; Toronto, ON / Waterloo, Ontario, Canada / New York, New York, United States / San Francisco, California, United States / Toronto, Ontario, Canada"
+        },
+        {
+          "title": "Senior Applied AI/ML Scientist - Compass",
+          "list": "conditional",
+          "ageDays": 122,
+          "location": "New York City, NY; San Francisco, CA / Waterloo, Ontario, Canada / New York, New York, United States / San Francisco, California, United States / Toronto, Ontario, Canada"
+        },
+        {
+          "title": "Senior Applied AI/ML Scientist - Listing Quality",
+          "list": "conditional",
+          "ageDays": 34,
+          "location": "San Francisco, CA / San Francisco, California, United States"
+        },
+        {
+          "title": "Senior Applied AI/ML Scientist - Marketplace Quality",
+          "list": "conditional",
+          "ageDays": 31,
+          "location": "San Francisco, CA / San Francisco, California, United States"
+        },
+        {
+          "title": "Senior Applied AI/ML Scientist - Retailer",
+          "list": "conditional",
+          "ageDays": 564,
+          "location": "San Francisco, CA / San Francisco, California, United States"
+        },
+        {
+          "title": "Senior Applied AI/ML Scientist - Retailer Growth",
+          "list": "conditional",
+          "ageDays": 34,
+          "location": "San Francisco, CA / San Francisco, California, United States"
+        },
+        {
+          "title": "Senior Applied AI/ML Scientist - Search Ranking",
+          "list": "conditional",
+          "ageDays": 27,
+          "location": "San Francisco, CA / San Francisco, California, United States"
+        },
+        {
+          "title": "Senior Applied ML/AI Scientist - Search",
+          "list": "conditional",
+          "ageDays": 116,
+          "location": "Kitchener-Waterloo, ON; Toronto, ON / Waterloo, Ontario, Canada / New York, New York, United States / San Francisco, California, United States / Toronto, Ontario, Canada"
+        },
+        {
+          "title": "Senior Applied ML/AI Scientist - Search",
+          "list": "conditional",
+          "ageDays": 87,
+          "location": "New York City, NY; San Francisco, CA / Waterloo, Ontario, Canada / New York, New York, United States / San Francisco, California, United States / Toronto, Ontario, Canada"
+        },
+        {
+          "title": "Senior Applied ML/AI Scientist - Search",
+          "list": "conditional",
+          "ageDays": 116,
+          "location": "New York City, NY; San Francisco, CA / Waterloo, Ontario, Canada / New York, New York, United States / San Francisco, California, United States / Toronto, Ontario, Canada"
+        },
+        {
+          "title": "Senior Technical Recruiter, AI/ML",
+          "list": "ambiguous",
+          "ageDays": 370,
+          "location": "San Francisco, CA / San Francisco, California, United States"
+        },
+        {
+          "title": "Staff Applied AI/ML Scientist",
+          "list": "conditional",
+          "ageDays": 62,
+          "location": "San Francisco, CA / San Francisco, California, United States"
+        }
+      ]
+    },
+    {
+      "company": "Toast",
+      "domain": "toasttab.com",
+      "segment": "enterprise_cx",
+      "ats": "greenhouse",
+      "token": "toast",
+      "jobs": 333,
+      "inScope": 266,
+      "recent": 159,
+      "matches": [
+        {
+          "title": "AI Operations Lead, Toast IQ",
+          "list": "keep",
+          "ageDays": 104,
+          "location": "Remote, US  / Boston, MA, United States"
+        },
+        {
+          "title": "Staff/Senior Software Engineer, Voice AI Platform",
+          "list": "drop",
+          "ageDays": 71,
+          "location": "Remote, US / Remote - USA"
+        },
+        {
+          "title": "Staff Software Engineer - AI/Agent Engineer, Care Automation",
+          "list": "conditional",
+          "ageDays": 55,
+          "location": "Remote, USA / Remote - USA"
+        },
+        {
+          "title": "Staff Software Engineer, GTM & AI Strategy",
+          "list": "ambiguous",
+          "ageDays": 48,
+          "location": "Remote, US / Remote - USA"
+        }
+      ]
+    },
+    {
+      "company": "Oscar Health",
+      "domain": "hioscar.com",
+      "segment": "enterprise_cx",
+      "ats": "greenhouse",
+      "token": "oscar",
+      "jobs": 229,
+      "inScope": 229,
+      "recent": 151,
+      "matches": [
+        {
+          "title": "Senior Data Scientist, AI Enablement",
+          "list": "ambiguous",
+          "ageDays": 40,
+          "location": "New York, New York, United States"
+        },
+        {
+          "title": "Staff AI Engineer",
+          "list": "ambiguous",
+          "ageDays": 76,
+          "location": "New York, New York, United States"
+        }
+      ]
+    },
+    {
+      "company": "Navan",
+      "domain": "navan.com",
+      "segment": "enterprise_cx",
+      "ats": "greenhouse",
+      "token": "tripactions",
+      "jobs": 222,
+      "inScope": 137,
+      "recent": 79,
+      "matches": [
+        {
+          "title": "Director, AI Enablement",
+          "list": "ambiguous",
+          "ageDays": 70,
+          "location": "New York, NY / New York, United States"
+        },
+        {
+          "title": "Sr. Software Engineer, AI",
+          "list": "ambiguous",
+          "ageDays": 59,
+          "location": "New York, NY / New York, United States"
+        }
+      ]
+    },
+    {
+      "company": "Nubank",
+      "domain": "nubank.com.br",
+      "segment": "enterprise_cx",
+      "ats": "ashby",
+      "token": "nubank",
+      "jobs": 93,
+      "inScope": 42,
+      "recent": 24,
+      "matches": [
+        {
+          "title": "Engineering Director, AI Developer Experience (AIDE)",
+          "list": "ambiguous",
+          "ageDays": 25,
+          "location": "Palo Alto (United States)"
+        },
+        {
+          "title": "AI Research Manager - Machine Learning",
+          "list": "drop",
+          "ageDays": 99,
+          "location": "Palo Alto (United States)"
+        },
+        {
+          "title": "Head of Design, AI Private Banker",
+          "list": "ambiguous",
+          "ageDays": 66,
+          "location": "Palo Alto (United States)"
+        },
+        {
+          "title": "Staff Mobile Software Engineer (AI Private Banker, SV) - US - IC7 - 2026",
+          "list": "ambiguous",
+          "ageDays": 61,
+          "location": "Palo Alto (United States)"
+        },
+        {
+          "title": "Nu AI Core Summer PhD Research Internship",
+          "list": "ambiguous",
+          "ageDays": 7,
+          "location": "Palo Alto (United States) / Virginia (United States) / Miami (United States)"
+        }
+      ]
+    },
+    {
+      "company": "Pinterest",
+      "domain": "pinterest.com",
+      "segment": "enterprise_cx",
+      "ats": "greenhouse",
+      "token": "pinterest",
+      "jobs": 160,
+      "inScope": 125,
+      "recent": 85,
+      "matches": [
+        {
+          "title": "Machine Learning Engineer II, Responsible AI",
+          "list": "ambiguous",
+          "ageDays": 60,
+          "location": "San Francisco, CA, US; Remote, US / San Francisco, CA, US"
+        },
+        {
+          "title": "Machine Learning Engineer II, Visual AI",
+          "list": "ambiguous",
+          "ageDays": 230,
+          "location": "San Francisco, CA, US; Remote, US / San Francisco, CA, US"
+        },
+        {
+          "title": "Principal Engineer, AI Platform",
+          "list": "drop",
+          "ageDays": 34,
+          "location": "San Francisco, CA, US; Remote, US / San Francisco, CA, US"
+        },
+        {
+          "title": "Sr. Staff Software Engineer, AI Platform",
+          "list": "drop",
+          "ageDays": 20,
+          "location": "Palo Alto, CA, US; Remote, US / Palo Alto, CA, US"
+        },
+        {
+          "title": "Sr. Staff Software Engineer, Product ML Infrastructure",
+          "list": "drop",
+          "ageDays": 26,
+          "location": "Palo Alto, CA, US; San Francisco, CA, US / Palo Alto, CA, US"
+        },
+        {
+          "title": "Staff Machine Learning Engineer, Content Visual AI",
+          "list": "ambiguous",
+          "ageDays": 18,
+          "location": "San Francisco, CA, US; New York City, NY, US; Seattle, WA, US; Remote, US / Seattle, WA, US"
+        }
+      ]
+    },
+    {
+      "company": "Cartesia",
+      "domain": "cartesia.ai",
+      "segment": "agent_native",
+      "ats": "ashby",
+      "token": "cartesia",
+      "jobs": 23,
+      "inScope": 21,
+      "recent": 10,
+      "matches": [
+        {
+          "title": "Researcher, Evals",
+          "list": "keep",
+          "ageDays": 371,
+          "location": "*HQ - San Francisco, CA (United States)"
+        },
+        {
+          "title": "Software Engineer, Agent Harness",
+          "list": "ambiguous",
+          "ageDays": 164,
+          "location": "*HQ - San Francisco, CA (United States)"
+        },
+        {
+          "title": "Research Engineer, Data Infrastructure (Language Modeling)",
+          "list": "drop",
+          "ageDays": 32,
+          "location": "*HQ - San Francisco, CA (United States)"
+        }
+      ]
+    },
+    {
+      "company": "Rasa",
+      "domain": "rasa.com",
+      "segment": "agent_platform",
+      "ats": "ashby",
+      "token": "rasa",
+      "jobs": 4,
+      "inScope": 3,
+      "recent": 3,
+      "matches": []
+    },
+    {
+      "company": "Deepgram",
+      "domain": "deepgram.com",
+      "segment": "agent_native",
+      "ats": "ashby",
+      "token": "deepgram",
+      "jobs": 82,
+      "inScope": 58,
+      "recent": 28,
+      "matches": [
+        {
+          "title": "Research Staff, Voice AI Foundations",
+          "list": "ambiguous",
+          "ageDays": 64,
+          "location": "USA - Remote (United States) / San Francisco, CA (United States) / Ann Arbor, Michigan (United States)"
+        },
+        {
+          "title": "People AI & Automation Engineer",
+          "list": "ambiguous",
+          "ageDays": 45,
+          "location": "USA - Remote (United States)"
+        },
+        {
+          "title": "Research Staff, LLMs",
+          "list": "ambiguous",
+          "ageDays": 64,
+          "location": "USA - Remote (United States) / San Francisco, CA (United States) / Ann Arbor, Michigan (United States)"
+        },
+        {
+          "title": "Software Engineer - Applied AI (Senior or Staff Level)",
+          "list": "ambiguous",
+          "ageDays": 115,
+          "location": "San Francisco, CA (United States) / New York City, NY (United States)"
+        },
+        {
+          "title": "Research Engineer, Machine Learning Systems",
+          "list": "drop",
+          "ageDays": 64,
+          "location": "USA - Remote (United States) / San Francisco, CA (United States) / Ann Arbor, Michigan (United States)"
+        },
+        {
+          "title": "Backend Software Engineer - Engine Team (Voice Agent)",
+          "list": "ambiguous",
+          "ageDays": 250,
+          "location": "USA - Remote (United States)"
+        },
+        {
+          "title": "Software Engineer, Voice Agents & AI (Senior or Staff Level)",
+          "list": "ambiguous",
+          "ageDays": 115,
+          "location": "San Francisco, CA (United States) / New York City, NY (United States)"
+        },
+        {
+          "title": "Senior Forward-Deployed Engineer, Federal",
+          "list": "conditional",
+          "ageDays": 234,
+          "location": "Washington D.C. (United States)"
+        },
+        {
+          "title": "ML Ops Infrastructure Engineer",
+          "list": "ambiguous",
+          "ageDays": 204,
+          "location": "USA - Remote (United States)"
+        },
+        {
+          "title": "Applied ML Engineer -  Edge Devices",
+          "list": "ambiguous",
+          "ageDays": 42,
+          "location": "USA - Remote (United States)"
+        },
+        {
+          "title": "Embedded AI Engineer, On-Device Models",
+          "list": "ambiguous",
+          "ageDays": 111,
+          "location": "USA - Remote (United States)"
+        },
+        {
+          "title": "Staff Product Manager, Agentic Experiences (Former Engineer)",
+          "list": "ambiguous",
+          "ageDays": 90,
+          "location": "USA - Remote (United States)"
+        },
+        {
+          "title": "Senior Product Marketing Manager, Voice Agent",
+          "list": "ambiguous",
+          "ageDays": 81,
+          "location": "USA - Remote (United States)"
+        },
+        {
+          "title": "Forward-Deployed Engineer (FDE), Strategic Accounts",
+          "list": "conditional",
+          "ageDays": 66,
+          "location": "San Francisco, CA (United States) / New York City, NY (United States)"
+        },
+        {
+          "title": "Senior Forward Deployed Engineer (FDE), Strategic Accounts",
+          "list": "conditional",
+          "ageDays": 56,
+          "location": "New York City, NY (United States) / San Francisco, CA (United States)"
+        },
+        {
+          "title": "Staff Conversational Designer",
+          "list": "conditional",
+          "ageDays": 38,
+          "location": "San Francisco, CA (United States)"
+        },
+        {
+          "title": "Staff Product Manager, AI Applications",
+          "list": "conditional",
+          "ageDays": 17,
+          "location": "USA - Remote (United States)"
+        },
+        {
+          "title": "Research Staff, Applied Voice AI",
+          "list": "ambiguous",
+          "ageDays": 7,
+          "location": "USA - Remote (United States) / San Francisco, CA (United States) / New York City, NY (United States)"
+        },
+        {
+          "title": "Research Engineer, Post-Training",
+          "list": "drop",
+          "ageDays": 7,
+          "location": "USA - Remote (United States) / San Francisco, CA (United States) / New York City, NY (United States)"
+        },
+        {
+          "title": "Staff Sales Engineer, Voice AI",
+          "list": "ambiguous",
+          "ageDays": 6,
+          "location": "USA - Remote (United States)"
+        }
+      ]
+    },
+    {
+      "company": "Plain",
+      "domain": "plain.com",
+      "segment": "agent_native",
+      "ats": "ashby",
+      "token": "plain",
+      "jobs": 5,
+      "inScope": 2,
+      "recent": 1,
+      "matches": [
+        {
+          "title": "Forward Deployed Engineer",
+          "list": "conditional",
+          "ageDays": 0,
+          "location": "San Francisco office (USA)"
+        }
+      ]
+    },
+    {
+      "company": "Tavus",
+      "domain": "tavus.io",
+      "segment": "agent_native",
+      "ats": "ashby",
+      "token": "tavus",
+      "jobs": 19,
+      "inScope": 19,
+      "recent": 6,
+      "matches": [
+        {
+          "title": "AI Researcher (Multimodal Audio/Video Generation)",
+          "list": "drop",
+          "ageDays": 165,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Forward Deployed Engineer",
+          "list": "conditional",
+          "ageDays": 217,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Conversational Modelling Research Engineer",
+          "list": "drop",
+          "ageDays": 187,
+          "location": "Remote (United States)"
+        },
+        {
+          "title": "Multimodal AI Model Optimization Research Engineer",
+          "list": "drop",
+          "ageDays": 29,
+          "location": "Remote (United States)"
+        }
+      ]
+    },
+    {
+      "company": "Netomi",
+      "domain": "netomi.com",
+      "segment": "agent_native",
+      "ats": "lever",
+      "token": "netomi",
+      "jobs": 20,
+      "inScope": 20,
+      "recent": 10,
+      "matches": [
+        {
+          "title": "Agentic Engineer Level II/III",
+          "list": "ambiguous",
+          "ageDays": 64,
+          "location": "Remote - India (IN)"
+        },
+        {
+          "title": "Agentic Product Manager",
+          "list": "ambiguous",
+          "ageDays": 117,
+          "location": "Gurugram (IN)"
+        },
+        {
+          "title": "Product Support Engineer (AI Platform)",
+          "list": "drop",
+          "ageDays": 14,
+          "location": "Gurugram (IN)"
+        },
+        {
+          "title": "Senior Data Scientist (Agentic Solutions)",
+          "list": "ambiguous",
+          "ageDays": 92,
+          "location": "Remote - India (IN)"
+        },
+        {
+          "title": "Senior Technical PM, Applied AI",
+          "list": "ambiguous",
+          "ageDays": 12,
+          "location": "Remote - India (IN)"
+        },
+        {
+          "title": "Sr. Agentic Product Manager (North America)",
+          "list": "ambiguous",
+          "ageDays": 322,
+          "location": "Toronto , Canada (CA)"
+        },
+        {
+          "title": "Staff Agentic AI Engineer - Marketing",
+          "list": "ambiguous",
+          "ageDays": 47,
+          "location": "Toronto/North America (Remote) (US)"
+        }
+      ]
+    },
+    {
+      "company": "Replicant",
+      "domain": "replicant.com",
+      "segment": "agent_native",
+      "ats": "ashby",
+      "token": "replicant",
+      "jobs": 11,
+      "inScope": 10,
+      "recent": 4,
+      "matches": [
+        {
+          "title": "Senior Software Engineer, Agents",
+          "list": "ambiguous",
+          "ageDays": 81,
+          "location": "Remote (Canada) / Canada / United States"
+        },
+        {
+          "title": "AI Enablement Engineer",
+          "list": "ambiguous",
+          "ageDays": 63,
+          "location": "United States / Canada"
+        }
+      ]
+    },
+    {
+      "company": "Kustomer",
+      "domain": "kustomer.com",
+      "segment": "saas_copilot",
+      "ats": "ashby",
+      "token": "kustomer",
+      "jobs": 2,
+      "inScope": 2,
+      "recent": 1,
+      "matches": []
+    },
+    {
+      "company": "Ironclad",
+      "domain": "ironcladapp.com",
+      "segment": "vertical_ai",
+      "ats": "ashby",
+      "token": "ironcladhq",
+      "jobs": 28,
+      "inScope": 27,
+      "recent": 22,
+      "matches": [
+        {
+          "title": "Senior Software Engineer, Agentic Search",
+          "list": "ambiguous",
+          "ageDays": 38,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Technical Lead Manager, AI",
+          "list": "ambiguous",
+          "ageDays": 103,
+          "location": "San Francisco (United States) / New York City (United States)"
+        },
+        {
+          "title": "Staff Product Manager, AI Data Experience",
+          "list": "conditional",
+          "ageDays": 47,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Staff/Senior Staff Software Engineer, Agentic Search",
+          "list": "ambiguous",
+          "ageDays": 21,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Technical Lead Manager, AI Platform",
+          "list": "drop",
+          "ageDays": 7,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Staff Product Manager - Procurement AI",
+          "list": "conditional",
+          "ageDays": 24,
+          "location": "San Francisco (United States)"
+        }
+      ]
+    },
+    {
+      "company": "Level AI",
+      "domain": "thelevel.ai",
+      "segment": "agent_native",
+      "ats": "lever",
+      "token": "levelai",
+      "jobs": 19,
+      "inScope": 19,
+      "recent": 0,
+      "matches": [
+        {
+          "title": "AI Analyst",
+          "list": "ambiguous",
+          "ageDays": 474,
+          "location": "Noida (IN)"
+        },
+        {
+          "title": "Forward Deployed Engineer - Agents(Remote)",
+          "list": "conditional",
+          "ageDays": 173,
+          "location": "India (IN)"
+        },
+        {
+          "title": "Lead Software Engineer - AI Agents",
+          "list": "ambiguous",
+          "ageDays": 808,
+          "location": "Noida (IN) / Bangalore (IN)"
+        },
+        {
+          "title": "SDET (Noida, India)",
+          "list": "drop",
+          "ageDays": 398,
+          "location": "Noida (IN)"
+        },
+        {
+          "title": "Senior Backend Engineer- AI Agents",
+          "list": "ambiguous",
+          "ageDays": 715,
+          "location": "Noida (IN) / Bangalore (IN)"
+        },
+        {
+          "title": "Sr. Machine Learning Engineer (Speech) - AI (Bangalore/Noida Locations)",
+          "list": "ambiguous",
+          "ageDays": 1071,
+          "location": "Noida (IN) / Bengaluru (IN)"
+        }
+      ]
+    },
+    {
+      "company": "Ema",
+      "domain": "ema.co",
+      "segment": "agent_platform",
+      "ats": "ashby",
+      "token": "ema",
+      "jobs": 39,
+      "inScope": 12,
+      "recent": 5,
+      "matches": [
+        {
+          "title": "AI Strategist",
+          "list": "ambiguous",
+          "ageDays": 426,
+          "location": "San Francisco Bay Area (USA)"
+        },
+        {
+          "title": "AI Resident",
+          "list": "ambiguous",
+          "ageDays": 87,
+          "location": "San Francisco Bay Area (USA)"
+        },
+        {
+          "title": "AI Application Engineer (Contractor role)",
+          "list": "ambiguous",
+          "ageDays": 69,
+          "location": "San Francisco Bay Area (USA)"
+        }
+      ]
+    },
+    {
+      "company": "Pylon",
+      "domain": "usepylon.com",
+      "segment": "agent_native",
+      "ats": "ashby",
+      "token": "pylon",
+      "jobs": 18,
+      "inScope": 18,
+      "recent": 6,
+      "matches": [
+        {
+          "title": "Senior Agent Product Manager",
+          "list": "conditional",
+          "ageDays": 210,
+          "location": "New York, NY (United States) / Palo Alto (United States)"
+        }
+      ]
+    },
+    {
+      "company": "Hex",
+      "domain": "hex.tech",
+      "segment": "saas_copilot",
+      "ats": "ashby",
+      "token": "hex",
+      "jobs": 38,
+      "inScope": 38,
+      "recent": 19,
+      "matches": [
+        {
+          "title": "AI Research Engineer",
+          "list": "drop",
+          "ageDays": 257,
+          "location": "New York (United States) / San Francisco (United States)"
+        },
+        {
+          "title": "Software Engineer, AI Agent",
+          "list": "ambiguous",
+          "ageDays": 250,
+          "location": "San Francisco (United States) / New York (United States)"
+        },
+        {
+          "title": "AI Engineer Intern",
+          "list": "ambiguous",
+          "ageDays": 14,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Engineering Director, AI Engineering",
+          "list": "ambiguous",
+          "ageDays": 19,
+          "location": "San Francisco (United States) / New York (United States)"
+        }
+      ]
+    },
+    {
+      "company": "Sardine",
+      "domain": "sardine.ai",
+      "segment": "vertical_ai",
+      "ats": "ashby",
+      "token": "sardine",
+      "jobs": 47,
+      "inScope": 30,
+      "recent": 18,
+      "matches": [
+        {
+          "title": "Forward Deployed AI Engineer",
+          "list": "conditional",
+          "ageDays": 137,
+          "location": "North America (United States) / United States / Canada"
+        },
+        {
+          "title": "Senior Applied AI Research Scientist",
+          "list": "drop",
+          "ageDays": 52,
+          "location": "North America (United States) / United States / Canada"
+        },
+        {
+          "title": "Forward Deployed Engineer, Integrations",
+          "list": "conditional",
+          "ageDays": 3,
+          "location": "United States / Canada"
+        }
+      ]
+    },
+    {
+      "company": "Fieldguide",
+      "domain": "fieldguide.io",
+      "segment": "vertical_ai",
+      "ats": "ashby",
+      "token": "fieldguide",
+      "jobs": 45,
+      "inScope": 40,
+      "recent": 28,
+      "matches": [
+        {
+          "title": "Senior AI Engineer, Quality",
+          "list": "ambiguous",
+          "ageDays": 189,
+          "location": "San Francisco, CA or Remote (USA) (United States)"
+        },
+        {
+          "title": "Agent Architect, Agents",
+          "list": "ambiguous",
+          "ageDays": 73,
+          "location": "San Francisco, CA or Remote (USA) (United States)"
+        },
+        {
+          "title": "Software Engineer, Agents (Internal Audit)",
+          "list": "ambiguous",
+          "ageDays": 40,
+          "location": "San Francisco, CA (United States)"
+        },
+        {
+          "title": "Senior Software Engineer, Agents (Foundation Agents)",
+          "list": "ambiguous",
+          "ageDays": 41,
+          "location": "San Francisco, CA (United States)"
+        },
+        {
+          "title": "Lead/Principal Product Manager, Audit Agents",
+          "list": "conditional",
+          "ageDays": 73,
+          "location": "San Francisco, CA (United States)"
+        },
+        {
+          "title": "Lead/Principal Product Manager, Tax Agents",
+          "list": "conditional",
+          "ageDays": 62,
+          "location": "San Francisco, CA or Remote (USA) (United States)"
+        },
+        {
+          "title": "Software Engineer, Agents (Foundation Agents)",
+          "list": "ambiguous",
+          "ageDays": 41,
+          "location": "San Francisco, CA (United States)"
+        }
+      ]
+    },
+    {
+      "company": "Speak",
+      "domain": "speak.com",
+      "segment": "agent_native",
+      "ats": "ashby",
+      "token": "speak",
+      "jobs": 34,
+      "inScope": 21,
+      "recent": 4,
+      "matches": [
+        {
+          "title": "AI Product Engineer",
+          "list": "ambiguous",
+          "ageDays": 1134,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Product Manager - AI Content Generation",
+          "list": "conditional",
+          "ageDays": 26,
+          "location": "San Francisco (United States)"
+        }
+      ]
+    },
+    {
+      "company": "Typeface",
+      "domain": "typeface.ai",
+      "segment": "saas_copilot",
+      "ats": "greenhouse",
+      "token": "typeface",
+      "jobs": 19,
+      "inScope": 19,
+      "recent": 10,
+      "matches": [
+        {
+          "title": "Senior ML Engineer",
+          "list": "ambiguous",
+          "ageDays": 433,
+          "location": "Palo Alto, CA / Palo Alto, California, United States"
+        }
+      ]
+    },
+    {
+      "company": "Zip",
+      "domain": "ziphq.com",
+      "segment": "saas_copilot",
+      "ats": "ashby",
+      "token": "zip",
+      "jobs": 109,
+      "inScope": 58,
+      "recent": 29,
+      "matches": [
+        {
+          "title": "Principal Product Manager, AI",
+          "list": "conditional",
+          "ageDays": 116,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "Staff Product Designer, AI Agents & Chat",
+          "list": "ambiguous",
+          "ageDays": 48,
+          "location": "San Francisco (United States)"
+        }
+      ]
+    },
+    {
+      "company": "Sola",
+      "domain": "sola.ai",
+      "segment": "agent_native",
+      "ats": "ashby",
+      "token": "sola",
+      "jobs": 7,
+      "inScope": 7,
+      "recent": 3,
+      "matches": [
+        {
+          "title": "Software Engineer, Windows AI Automation",
+          "list": "ambiguous",
+          "ageDays": 201,
+          "location": "Remote (United States)"
+        },
+        {
+          "title": "Software Engineer, ML Platform",
+          "list": "drop",
+          "ageDays": 215,
+          "location": "New York City (United States)"
+        },
+        {
+          "title": "Forward Deployed Engineer",
+          "list": "conditional",
+          "ageDays": 3,
+          "location": "New York City (United States)"
+        }
+      ]
+    },
+    {
+      "company": "Hebbia",
+      "domain": "hebbia.ai",
+      "segment": "vertical_ai",
+      "ats": "ashby",
+      "token": "hebbia-ai",
+      "jobs": 22,
+      "inScope": 21,
+      "recent": 2,
+      "matches": [
+        {
+          "title": "Forward Deployed Banker (AI Strategist)",
+          "list": "ambiguous",
+          "ageDays": 201,
+          "location": "NYC (United States)"
+        },
+        {
+          "title": "Forward Deployed Investor (AI Strategist)",
+          "list": "ambiguous",
+          "ageDays": 201,
+          "location": "NYC (United States)"
+        },
+        {
+          "title": "Backend Engineer, Agent Collaboration Platform",
+          "list": "ambiguous",
+          "ageDays": 474,
+          "location": "NYC (United States) / San Francisco (United States)"
+        },
+        {
+          "title": "Backend Engineer, Agents",
+          "list": "ambiguous",
+          "ageDays": 474,
+          "location": "NYC (United States) / San Francisco (United States)"
+        },
+        {
+          "title": "Applied Research Engineer, Agents",
+          "list": "drop",
+          "ageDays": 473,
+          "location": "NYC (United States) / San Francisco (United States)"
+        },
+        {
+          "title": "AI Strategist, Principal",
+          "list": "ambiguous",
+          "ageDays": 390,
+          "location": "NYC (United States)"
+        },
+        {
+          "title": "AI Strategist",
+          "list": "ambiguous",
+          "ageDays": 318,
+          "location": "NYC (United States)"
+        },
+        {
+          "title": "Forward Deployed Engineer",
+          "list": "conditional",
+          "ageDays": 210,
+          "location": "NYC (United States) / San Francisco (United States)"
+        },
+        {
+          "title": "AI Strategist, Corporate Law",
+          "list": "ambiguous",
+          "ageDays": 136,
+          "location": "NYC (United States)"
+        },
+        {
+          "title": "Frontend Engineer, Agents",
+          "list": "ambiguous",
+          "ageDays": 21,
+          "location": "NYC (United States)"
+        }
+      ]
+    },
+    {
+      "company": "Anterior",
+      "domain": "anterior.com",
+      "segment": "vertical_ai",
+      "ats": "ashby",
+      "token": "anterior",
+      "jobs": 4,
+      "inScope": 4,
+      "recent": 0,
+      "matches": []
+    },
+    {
+      "company": "Cohere Health",
+      "domain": "coherehealth.com",
+      "segment": "vertical_ai",
+      "ats": "greenhouse",
+      "token": "coherehealth",
+      "jobs": 71,
+      "inScope": 34,
+      "recent": 18,
+      "matches": [
+        {
+          "title": "Sr. Forward Deployed Engineer",
+          "list": "conditional",
+          "ageDays": 94,
+          "location": "United States"
+        }
+      ]
+    },
+    {
+      "company": "Otter.ai",
+      "domain": "otter.ai",
+      "segment": "saas_copilot",
+      "ats": "greenhouse",
+      "token": "otter",
+      "jobs": 21,
+      "inScope": 16,
+      "recent": 5,
+      "matches": []
+    },
+    {
+      "company": "Gamma",
+      "domain": "gamma.app",
+      "segment": "saas_copilot",
+      "ats": "ashby",
+      "token": "gamma",
+      "jobs": 21,
+      "inScope": 21,
+      "recent": 3,
+      "matches": [
+        {
+          "title": "AI Engineer",
+          "list": "ambiguous",
+          "ageDays": 354,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "AI Data Scientist",
+          "list": "ambiguous",
+          "ageDays": 351,
+          "location": "San Francisco (United States)"
+        },
+        {
+          "title": "AI Creative Strategist",
+          "list": "ambiguous",
+          "ageDays": 116,
+          "location": "San Francisco (United States)"
+        }
+      ]
+    },
+    {
+      "company": "Lovable",
+      "domain": "lovable.dev",
+      "segment": "agent_native",
+      "ats": "ashby",
+      "token": "lovable",
+      "jobs": 80,
+      "inScope": 16,
+      "recent": 8,
+      "matches": [
+        {
+          "title": "AI Scaled Customer Success Programs",
+          "list": "ambiguous",
+          "ageDays": 12,
+          "location": "Boston (United States) / San Francisco  (United States) / New York City (United States)"
+        }
+      ]
+    },
+    {
+      "company": "Bolt (StackBlitz)",
+      "domain": "bolt.new",
+      "segment": "agent_native",
+      "ats": "greenhouse",
+      "token": "stackblitz",
+      "jobs": 6,
+      "inScope": 6,
+      "recent": 0,
+      "matches": [
+        {
+          "title": "Senior Applied AI Engineer",
+          "list": "conditional",
+          "ageDays": 489,
+          "location": "Remote / Remote "
+        },
+        {
+          "title": "Staff Applied AI Engineer",
+          "list": "conditional",
+          "ageDays": 269,
+          "location": "Remote / Remote "
+        }
+      ]
+    },
+    {
+      "company": "Imbue",
+      "domain": "imbue.com",
+      "segment": "agent_native",
+      "ats": "greenhouse",
+      "token": "imbue",
+      "jobs": 2,
+      "inScope": 2,
+      "recent": 1,
+      "matches": []
+    },
+    {
+      "company": "Hightouch",
+      "domain": "hightouch.com",
+      "segment": "saas_copilot",
+      "ats": "ashby",
+      "token": "hightouch",
+      "jobs": 1,
+      "inScope": 1,
+      "recent": 0,
+      "matches": []
+    }
+  ],
+  "missing": [
+    "Synthflow",
+    "11x",
+    "Lindy",
+    "Crescendo",
+    "Forethought",
+    "ASAPP",
+    "Assembled",
+    "Micro1",
+    "Jasper",
+    "Spellbook",
+    "Clio",
+    "EvenUp",
+    "Hippocratic AI",
+    "Hinge Health",
+    "Corgi",
+    "Pilot",
+    "Truebill / Rocket Money",
+    "Klarna",
+    "Aisera",
+    "Kore.ai",
+    "Moveworks",
+    "Yellow.ai",
+    "CrewAI",
+    "Sana",
+    "Writer",
+    "Contextual AI",
+    "Retool",
+    "Qualified",
+    "Talkdesk",
+    "Regal",
+    "Grammarly",
+    "Canva",
+    "Rippling",
+    "Deel",
+    "Atlassian",
+    "Zendesk",
+    "Freshworks",
+    "Sprinklr",
+    "Superhuman",
+    "Turo",
+    "Zillow",
+    "Uniphore",
+    "Front",
+    "Robin AI",
+    "Cognigy",
+    "Luminance",
+    "Hippocratic AI",
+    "EvenUp",
+    "Moveworks",
+    "Ambient.ai",
+    "Ironclad",
+    "Thoughtful AI",
+    "Fireflies"
+  ]
+}

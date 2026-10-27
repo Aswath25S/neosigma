@@ -1,0 +1,4 @@
+{
+  "_note": "Triggers a person adds by hand in v1, such as public complaints about a company's agent quality. kind is one of: public_complaints, funding, agent_launch, acquisition. Each entry needs a date and a public link.",
+  "triggers": []
+}

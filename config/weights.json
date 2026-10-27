@@ -1,0 +1,62 @@
+{
+  "parts": {
+    "overlap": 40,
+    "live_agent": 25,
+    "fit": 15,
+    "timing": 20
+  },
+  "overlap": {
+    "points_per_extra_role": 5,
+    "max_extra_points": 10
+  },
+  "live_agent_points": {
+    "none": 0,
+    "in_production": 15,
+    "volume_or_named_product": 25
+  },
+  "fit": {
+    "segment_share": 0.75,
+    "size_share": 0.25,
+    "segment_scores": {
+      "agent_native": 1.0,
+      "vertical_ai": 0.85,
+      "agent_platform": 0.7,
+      "enterprise_cx": 0.6,
+      "saas_copilot": 0.5
+    },
+    "size_scores": {
+      "1-50": 0.6,
+      "51-200": 1.0,
+      "201-1000": 0.9,
+      "1001-5000": 0.7,
+      "5001+": 0.5,
+      "unknown": 0.6
+    },
+    "agent_platform_cap_points": 8
+  },
+  "timing": {
+    "window_days": 90,
+    "model_release_window_days": 30,
+    "triggers": {
+      "first_eval_hire": 20,
+      "funding": 15,
+      "agent_launch": 15,
+      "model_release": 10,
+      "multiple_roles": 10,
+      "public_complaints": 10,
+      "acquisition": 10
+    }
+  },
+  "tiers": {
+    "hot": 75,
+    "warm": 55
+  },
+  "cost": {
+    "load_factor": 1.25,
+    "min_same_title_postings": 5
+  },
+  "fetch": {
+    "max_posting_age_days": 60,
+    "dedupe_similarity": 0.9
+  }
+}
