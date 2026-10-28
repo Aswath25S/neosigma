@@ -8,6 +8,8 @@ import { money, pct, shortDate } from "@/lib/format";
 import { TierChip } from "@/components/ui";
 import type { LeadRow } from "@/lib/data";
 import { downloadCsv } from "@/lib/csv";
+import { Collapse } from "@/components/Collapse";
+import { TASK_IDS, taskShort } from "@/lib/config";
 
 interface RejectedRow {
   id: string; title: string; company: string; companySlug: string; reason: string; reasonText: string;
@@ -196,48 +198,57 @@ export function LeadsView({ leads, rejected, initial }: { leads: LeadRow[]; reje
                 <tbody>
                   {rows.map((l) => (
                     <Fragment key={l.id}>
-                      <tr>
-                        <td><Link href={`/companies/${l.slug}`} className="text-ink hover:underline underline-offset-4">{l.name}</Link>
-                          <div className="mono !text-[11px] text-muted">{l.postings.length} role{l.postings.length > 1 ? "s" : ""}</div></td>
+                      {/* Clicking a row opens its summary; links inside the row still navigate. */}
+                      <tr onClick={() => setOpen(open === l.id ? null : l.id)} className={`cursor-pointer ${open === l.id ? "!bg-surface" : ""}`}>
+                        <td>
+                          <div className="flex items-start gap-2.5">
+                            <button onClick={(e) => { e.stopPropagation(); setOpen(open === l.id ? null : l.id); }} aria-expanded={open === l.id}
+                              aria-controls={`lead-${l.id}`} aria-label={`${open === l.id ? "Hide" : "Show"} summary for ${l.name}`}
+                              className="mt-1 text-muted hover:text-ink">
+                              <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"
+                                className={`transition-transform duration-300 ${open === l.id ? "rotate-90" : ""}`}>
+                                <path d="M4 2.5 L8 6 L4 9.5" stroke="currentColor" strokeWidth="1.6" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+                              </svg>
+                            </button>
+                            <div>
+                              <Link href={`/companies/${l.slug}`} onClick={(e) => e.stopPropagation()} className="text-ink font-medium hover:underline underline-offset-4">{l.name}</Link>
+                              <div className="mono !text-[11px] text-muted">{l.postings.length} role{l.postings.length > 1 ? "s" : ""}</div>
+                            </div>
+                          </div>
+                        </td>
                         <td className="text-[14px]">{segmentName(l.segment)}</td>
                         <td><TierChip tier={l.b.tier} /></td>
+                        <td className="text-right font-display text-[20px] text-ink">{Math.round(l.b.total)}</td>
                         <td className="text-right">
-                          <button onClick={() => setOpen(open === l.id ? null : l.id)} aria-expanded={open === l.id}
-                            className="font-display text-[20px] text-ink underline decoration-line-strong underline-offset-4 hover:decoration-ink"
-                            title="Show score breakdown">
-                            {Math.round(l.b.total)}
-                          </button>
-                        </td>
-                        <td className="text-right">
-                          <Link href={`/postings/${l.b.overlap.bestPostingId}`} className="text-ink hover:underline underline-offset-4" title="Best posting">
+                          <Link href={`/postings/${l.b.overlap.bestPostingId}`} onClick={(e) => e.stopPropagation()} className="text-ink hover:underline underline-offset-4" title="Best posting">
                             {pct(l.b.overlap.bestOverlap)}
                           </Link>
                         </td>
                         <td className="text-right">
-                          <Link href={`/postings/${l.b.live.postingId}#e0`} className="text-ink hover:underline underline-offset-4" title={LIVE_STRENGTH_TEXT[l.b.live.strength]}>
+                          <Link href={`/postings/${l.b.live.postingId}#e0`} onClick={(e) => e.stopPropagation()} className="text-ink hover:underline underline-offset-4" title={LIVE_STRENGTH_TEXT[l.b.live.strength]}>
                             {l.b.live.strength}<span className="text-muted">/25</span>
                           </Link>
                         </td>
                         <td className="text-[14px]">
                           {l.b.timing.topTrigger ? (
-                            <a href={l.b.timing.topTrigger.url ?? "#"} target={l.b.timing.topTrigger.url?.startsWith("http") ? "_blank" : undefined} rel="noreferrer" className="hover:text-ink" title={l.b.timing.topTrigger.title}>
+                            <a href={l.b.timing.topTrigger.url ?? "#"} onClick={(e) => e.stopPropagation()} target={l.b.timing.topTrigger.url?.startsWith("http") ? "_blank" : undefined} rel="noreferrer" className="hover:text-ink" title={l.b.timing.topTrigger.title}>
                               {TRIGGER_NAMES[l.b.timing.topTrigger.kind]} <span className="text-muted">· {shortDate(l.b.timing.topTrigger.date).replace(/, \d{4}$/, "")}</span>
                             </a>
                           ) : <span className="text-muted">None</span>}
                         </td>
                         <td className="text-right">
                           {l.cost != null ? (
-                            <Link href={`/companies/${l.slug}#cost`} className="text-ink hover:underline underline-offset-4">{money(l.cost, { compact: true })}</Link>
+                            <Link href={`/companies/${l.slug}#cost`} onClick={(e) => e.stopPropagation()} className="text-ink hover:underline underline-offset-4">{money(l.cost, { compact: true })}</Link>
                           ) : <span className="text-muted" title="No salary data for these roles">—</span>}
                         </td>
                       </tr>
-                      {open === l.id && (
-                        <tr className="!bg-surface">
-                          <td colSpan={8} className="!h-auto !py-5">
-                            <Breakdown l={l} />
-                          </td>
-                        </tr>
-                      )}
+                      <tr className="lead-detail" id={`lead-${l.id}`}>
+                        <td colSpan={8} className={`!p-0 !h-auto ${open === l.id ? "" : "!border-b-0"}`}>
+                          <Collapse open={open === l.id}>
+                            <LeadSummary l={l} />
+                          </Collapse>
+                        </td>
+                      </tr>
                     </Fragment>
                   ))}
                 </tbody>
@@ -304,6 +315,40 @@ function Th({ k, sort, dir, onSort, children, className = "" }: {
         </button>
       ) : children}
     </th>
+  );
+}
+
+// The dropdown under a lead row: the facts worth reading before opening the
+// brief, the four score parts, and a link to the full company page.
+function LeadSummary({ l }: { l: LeadRow & { b: ReturnType<typeof scoreCompany> } }) {
+  const best = l.postings.find((p) => p.id === l.b.overlap.bestPostingId);
+  const tasks = TASK_IDS.filter((t) => l.taskWeights[t]).sort((a, b) => l.taskWeights[b] - l.taskWeights[a]).slice(0, 3);
+  const fact = (label: string, body: React.ReactNode) => (
+    <div className="min-w-0">
+      <div className="label mb-1.5">{label}</div>
+      <div className="text-[14.5px] text-body leading-snug">{body}</div>
+    </div>
+  );
+  return (
+    <div className="bg-surface px-4 sm:px-6 py-6">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+        {fact("Best role", <><Link className="text-ink underline underline-offset-4 decoration-line-strong hover:decoration-ink" href={`/postings/${best?.id}`}>{best?.title}</Link> · {pct(l.b.overlap.bestOverlap)} overlap</>)}
+        {fact("Live-agent proof", l.bestQuote
+          ? <Link className="text-ink live-underline" href={`/postings/${l.bestQuote.postingId}#e${l.bestQuote.idx}`}>“{l.bestQuote.quote}”</Link>
+          : "No quote stored")}
+        {fact("Doing by hand", tasks.length
+          ? <ul className="flex flex-col gap-0.5">{tasks.map((t) => <li key={t}><span className="mono text-covered">{t}</span> {taskShort(t)}</li>)}</ul>
+          : "—")}
+        {fact("Manual-work cost", l.cost != null ? <><span className="text-ink">{money(l.cost)}</span> a year across {l.costRoles} role{l.costRoles > 1 ? "s" : ""} with salary data</> : "No salary data")}
+      </div>
+      <div className="border-t border-line pt-6">
+        <Breakdown l={l} />
+      </div>
+      <div className="mt-6 flex flex-wrap items-center gap-4">
+        <Link href={`/companies/${l.slug}`} className="btn btn-primary btn-sm">Full breakdown →</Link>
+        <span className="mono !text-[11px] text-muted">Brief, every role, triggers, tools, cost and gaps</span>
+      </div>
+    </div>
   );
 }
 

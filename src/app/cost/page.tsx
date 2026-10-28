@@ -25,7 +25,7 @@ export default function CostPage() {
       };
     });
   return (
-    <div className="mx-auto max-w-[960px] px-4 sm:px-6">
+    <div className="mx-auto max-w-[1200px] px-4 sm:px-6">
       <PageHeader eyebrow="The money" title="What the manual work costs">
         A minimum estimate of what each lead spends doing NeoSigma&apos;s work by hand, from posted salary ranges. This is the
         cost of the work, <span className="text-ink">not a NeoSigma price or a guaranteed saving</span>.

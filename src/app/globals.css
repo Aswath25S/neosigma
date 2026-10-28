@@ -2,22 +2,22 @@
 
 /* Design tokens. Dark theme only in v1. */
 :root {
-  --bg: #0c0c0d;
-  --surface: #161618;
-  --surface-2: #1e1e21;
-  --border: #26262a;
-  --border-strong: #3a3a40;
-  --text: #f4f4f5;
-  --text-body: #b4b4ba;
-  --text-muted: #7a7a82;
+  --bg: #050506;
+  --surface: #121214;
+  --surface-2: #1b1b1f;
+  --border: #2e2e34;
+  --border-strong: #4a4a52;
+  --text: #ffffff;
+  --text-body: #dcdce0;
+  --text-muted: #a8a8b0;
   --covered: #4fd1b5;
   --assisted: #f2a65a;
-  --not-covered: #5a5a62;
+  --not-covered: #6e6e78;
   --hot-from: #e8572a;
   --hot-to: #f4a259;
   --hot: linear-gradient(90deg, var(--hot-from), var(--hot-to));
   --warm: #f2a65a;
-  --watch: #5a5a62;
+  --watch: #6e6e78;
   --t1: #8be8d4;
   --t2: #6fdcc4;
   --t3: #4fd1b5;
@@ -57,6 +57,7 @@ body {
   font-family: var(--font-sans);
   font-size: 16px;
   line-height: 1.65;
+  font-weight: 420;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -81,7 +82,7 @@ a {
 /* ---- type roles ---- */
 .display {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 500;
   font-size: clamp(40px, 7vw, 64px);
   line-height: 1.1;
   letter-spacing: -0.01em;
@@ -89,7 +90,7 @@ a {
 }
 .h-page {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 500;
   font-size: clamp(28px, 4.5vw, 36px);
   line-height: 1.2;
   letter-spacing: -0.01em;
@@ -98,31 +99,35 @@ a {
 .h-card {
   font-family: var(--font-sans);
   font-size: 20px;
-  font-weight: 400;
+  font-weight: 500;
   color: var(--text);
   line-height: 1.35;
 }
 .mono {
   font-family: var(--font-mono);
   font-size: 13px;
+  font-weight: 500;
   letter-spacing: 0.04em;
 }
 .label {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-weight: 500;
+  font-size: 11.5px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--text-muted);
 }
 .secnum {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-weight: 500;
+  font-size: 11.5px;
   letter-spacing: 0.12em;
   color: var(--text-muted);
 }
 
 /* ---- buttons ---- */
 .btn {
+  font-weight: 500;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -167,8 +172,8 @@ a {
 .table { width: 100%; border-collapse: collapse; }
 .table th {
   font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 400;
+  font-size: 11.5px;
+  font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--text-muted);
@@ -185,6 +190,7 @@ a {
 }
 .table tbody tr { transition: background-color 150ms ease; }
 .table tbody tr:hover { background: var(--surface); }
+.table tbody tr.lead-detail:hover { background: transparent; }
 
 /* ---- highlights on the posting page ---- */
 .hl {
@@ -253,4 +259,25 @@ select, input[type="text"], input[type="number"], textarea {
 select:focus, input:focus, textarea:focus {
   outline: none;
   border-color: var(--text-muted);
+}
+
+/* Montserrat reads thin on near-black; give it a heavier default. */
+.font-display { font-weight: 500; }
+
+/* ---- page transitions (React ViewTransition, see app/template.tsx) ---- */
+::view-transition-old(.page-out) {
+  animation: 140ms ease-in both page-fade-out;
+}
+::view-transition-new(.page-in) {
+  animation: 240ms cubic-bezier(0.2, 0.8, 0.2, 1) 60ms both page-fade-in;
+}
+@keyframes page-fade-out {
+  to { opacity: 0; }
+}
+@keyframes page-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(.page-out),
+  ::view-transition-new(.page-in) { animation: none; }
 }

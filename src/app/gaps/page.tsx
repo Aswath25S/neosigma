@@ -18,7 +18,7 @@ export default async function GapsPage({ searchParams }: { searchParams: Promise
     })),
   }));
   return (
-    <div className="mx-auto max-w-[960px] px-4 sm:px-6">
+    <div className="mx-auto max-w-[1200px] px-4 sm:px-6">
       <PageHeader eyebrow="Roadmap" title="What NeoSigma doesn't cover yet">
         Duties that fall outside T1–T6, grouped into themes by Claude. Ranked by how many Hot and Warm leads have them, not by raw
         counts. The themes listed in the build spec are hypotheses to confirm, not findings.

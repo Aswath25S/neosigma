@@ -91,6 +91,9 @@ export interface LeadRow {
   cost: number | null;
   costRoles: number;
   failReasons: string[];
+  // For the row dropdown on the Leads page.
+  bestQuote: { quote: string; postingId: string; idx: number } | null;
+  taskWeights: Record<string, number>;
 }
 
 export function getLeadRows(): { leads: LeadRow[]; rejectedPostings: (Posting & { companyName: string; companySlug: string })[] } {
@@ -98,6 +101,12 @@ export function getLeadRows(): { leads: LeadRow[]; rejectedPostings: (Posting & 
   const postings = db().select().from(schema.postings).all();
   const triggers = db().select().from(schema.triggers).all();
   const global = triggers.filter((t) => t.companyId == null);
+  const qualifyingIds = new Set(postings.filter((p) => p.passedGates).map((p) => p.id));
+  const dutiesByPosting = new Map<string, DutyRow[]>();
+  for (const d of db().select().from(schema.duties).all()) {
+    if (!qualifyingIds.has(d.postingId)) continue;
+    dutiesByPosting.set(d.postingId, [...(dutiesByPosting.get(d.postingId) ?? []), d]);
+  }
   const leads: LeadRow[] = companies
     .filter((c) => c.status === "lead" || c.status === "rejected")
     .map((c) => {
@@ -116,6 +125,16 @@ export function getLeadRows(): { leads: LeadRow[]; rejectedPostings: (Posting & 
         })),
         cost: costs.length ? costs.reduce((s, r) => s + r.cost!, 0) : null,
         costRoles: costs.length,
+        bestQuote: (() => {
+          // Strongest quote first: volume or named product, then any.
+          const quotes = qualifying.flatMap((p) => (extractionOf(p)?.verified_evidence ?? []).map((e, idx) => ({ e, p, idx })));
+          const q = quotes.find((x) => x.e.kind === "volume" || x.e.kind === "named_product") ?? quotes[0];
+          return q ? { quote: q.e.quote, postingId: q.p.id, idx: q.idx } : null;
+        })(),
+        taskWeights: qualifying.flatMap((p) => dutiesByPosting.get(p.id) ?? []).reduce<Record<string, number>>((w, d) => {
+          if (d.label !== "not_covered" && d.taskId) w[d.taskId] = (w[d.taskId] ?? 0) + (d.label === "covered" ? 1 : 0.5);
+          return w;
+        }, {}),
         failReasons: [...new Set(mine.map((p) => p.failReason).filter((x): x is string => !!x))],
       };
     });
@@ -197,17 +216,12 @@ export function getHeadline() {
   const live = leads.filter((l) => l.status === "lead");
   const roles = live.reduce((s, l) => s + l.postings.length, 0);
   const cost = live.reduce((s, l) => s + (l.cost ?? 0), 0);
-  // The "NEW" pill links the newest model-release or funding trigger.
-  const newTrigger = db().select().from(schema.triggers).all()
-    .filter((t) => t.kind === "model_release" || t.kind === "funding")
-    .sort((a, b) => b.date.localeCompare(a.date))[0] ?? null;
   return {
     companies: live.length,
     hot: live.filter((l) => l.tier === "Hot").length,
     roles,
     cost,
-    newTrigger,
-    top: [...live].sort((a, b) => (b.leadScore ?? 0) - (a.leadScore ?? 0)).slice(0, 6),
+    top: [...live].sort((a, b) => (b.leadScore ?? 0) - (a.leadScore ?? 0)).slice(0, 10),
   };
 }
 

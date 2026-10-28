@@ -40,7 +40,7 @@ export default function MethodPage() {
 
   return (
     <div className="mx-auto max-w-[1200px] px-4 sm:px-6">
-      <div className="pt-14 pb-12 max-w-[760px]">
+      <div className="pt-14 pb-12 max-w-[900px]">
         <div className="label mb-4">Method</div>
         <h1 className="display !text-[clamp(36px,6vw,52px)]">How every number is made</h1>
         <p className="mt-5 text-body text-[17px]">
@@ -49,7 +49,7 @@ export default function MethodPage() {
         </p>
       </div>
 
-      <div className="grid lg:grid-cols-[200px_minmax(0,960px)] gap-10 lg:gap-14">
+      <div className="grid lg:grid-cols-[200px_minmax(0,1fr)] gap-10 lg:gap-14">
         <nav className="hidden lg:block"><div className="sticky top-24">
           <div className="label mb-4">On this page</div>
           <ol>{toc.map(([id, n, t]) => (

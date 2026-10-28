@@ -124,7 +124,7 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
         </div>
       )}
 
-      <div className="grid lg:grid-cols-[220px_minmax(0,680px)] gap-10 lg:gap-16">
+      <div className="grid lg:grid-cols-[220px_minmax(0,1fr)] gap-10 lg:gap-16">
         <aside className="order-first"><BriefRail items={sections} csvHref={`/api/export/company/${company.slug}`} readTime={readTime} /></aside>
 
         <article className="min-w-0 flex flex-col gap-16">

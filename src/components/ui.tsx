@@ -11,7 +11,7 @@ export function SectionHeading({ num, title, id, sub }: { num: string; title: st
     <div id={id} className="scroll-mt-24 mb-6">
       <div className="secnum mb-2">{num}</div>
       <h2 className="h-page">{title}</h2>
-      {sub && <p className="mt-3 text-body max-w-[680px]">{sub}</p>}
+      {sub && <p className="mt-3 text-body max-w-[900px]">{sub}</p>}
     </div>
   );
 }
@@ -21,7 +21,7 @@ export function PageHeader({ eyebrow, title, children }: { eyebrow: string; titl
     <div className="pt-14 pb-10">
       <div className="label mb-4">{eyebrow}</div>
       <h1 className="h-page !text-[clamp(32px,5vw,44px)]">{title}</h1>
-      {children && <div className="mt-4 text-body max-w-[720px]">{children}</div>}
+      {children && <div className="mt-4 text-body max-w-[900px] text-[17px]">{children}</div>}
     </div>
   );
 }

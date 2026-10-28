@@ -2,8 +2,8 @@ import Link from "next/link";
 import { getHeadline } from "@/lib/data";
 import { segmentName, taskShort, TASK_IDS } from "@/lib/config";
 import { money, shortDate } from "@/lib/format";
+import { TierChip } from "@/components/ui";
 import { TRIGGER_NAMES } from "@/lib/scoring";
-import { GradientThumb, TierChip } from "@/components/ui";
 import { getDb, schema } from "@/lib/db/client";
 import { inArray } from "drizzle-orm";
 
@@ -35,30 +35,18 @@ export default function Home() {
     { n: String(h.roles), label: "Qualifying roles", href: "/leads?sort=overlap" },
     { n: money(h.cost, { compact: true }), label: "Yearly manual-work cost", href: "/cost" },
   ];
-  const t = h.newTrigger;
 
   return (
     <div className="relative overflow-hidden">
       <BackgroundArcs />
-      <section className="relative mx-auto max-w-[960px] px-4 sm:px-6 pt-20 sm:pt-28 pb-16">
-        {t && (
-          <a href={t.url ?? "#"} target={t.url?.startsWith("http") ? "_blank" : undefined} rel="noreferrer"
-            className="relative grain inline-flex max-w-full items-center gap-3 rounded-full pl-1.5 pr-4 py-1.5 mb-10 border border-[#3a2a1c] overflow-hidden hover:border-[#5a4026]"
-            style={{ background: "linear-gradient(90deg, #2a1a0f, #3b2614 55%, #1d140d)" }}>
-            <span className="mono !text-[11px] text-ink border border-[#6b4a2b] rounded-full px-2.5 py-0.5 shrink-0">NEW</span>
-            <span className="text-[14px] text-muted shrink-0 hidden sm:inline">Latest trigger:</span>
-            <span className="text-[14px] text-ink truncate">{TRIGGER_NAMES[t.kind]} · {t.title}</span>
-            <span className="text-ink shrink-0" aria-hidden="true">→</span>
-          </a>
-        )}
-        <h1 className="display max-w-[780px]">Find the teams doing NeoSigma&apos;s work by hand.</h1>
-        <p className="mt-6 text-[18px] text-body max-w-[620px]">
+      <section className="relative mx-auto max-w-[1200px] px-4 sm:px-6 pt-20 sm:pt-28 pb-16">
+        <h1 className="display max-w-[1040px]">Find the teams doing NeoSigma&apos;s work by hand.</h1>
+        <p className="mt-6 text-[19px] text-body max-w-[900px]">
           Job postings for people who review agent conversations, build eval sets from failures, and sign off releases. Each one is
           split into duties, matched to NeoSigma&apos;s six tasks, checked for a live agent, and ranked.
         </p>
         <div className="mt-10 flex flex-wrap gap-3">
           <Link href="/leads" className="btn btn-primary">See leads</Link>
-          <Link href="/try" className="btn btn-secondary">Try a posting</Link>
         </div>
 
         <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-px bg-line rounded-[14px] overflow-hidden border border-line">
@@ -71,36 +59,52 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="relative mx-auto max-w-[960px] px-4 sm:px-6 pb-8">
+      <section className="relative mx-auto max-w-[1200px] px-4 sm:px-6 pb-8">
         <div className="flex items-end mb-6">
           <div>
             <div className="secnum mb-2">01</div>
-            <h2 className="h-page">Top leads this week</h2>
+            <h2 className="h-page">Top leads</h2>
           </div>
-          <Link href="/leads" className="ml-auto mono text-muted hover:text-ink">All leads →</Link>
+          <Link href="/leads" className="ml-auto mono text-body hover:text-ink">All {h.companies} leads →</Link>
         </div>
         {h.top.length ? (
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {h.top.map((l) => {
-              const task = topTask(l.postings.map((p) => p.id));
-              const best = [...l.postings].sort((a, b) => b.overlap - a.overlap)[0];
-              return (
-                <Link key={l.id} href={`/companies/${l.slug}`} className="group rounded-[14px] bg-surface p-3 hover:bg-surface-2 transition-colors">
-                  <GradientThumb segment={l.segment} seed={l.id} label={task ? `${task} · ${taskShort(task)}` : undefined} className="aspect-[16/10]" />
-                  <div className="px-1 pt-4 pb-1">
-                    <div className="flex items-center gap-2">
-                      <div className="h-card truncate">{l.name}</div>
-                      <span className="ml-auto"><TierChip tier={l.tier} /></span>
-                    </div>
-                    <div className="text-[14px] text-body mt-1 truncate">{best?.title}</div>
-                    <div className="mono !text-[11px] text-muted mt-2">
-                      {segmentName(l.segment)} • Score {Math.round(l.leadScore ?? 0)}
-                      {l.breakdown?.timing.topTrigger && <> • {shortDate(l.breakdown.timing.topTrigger.date).replace(/, \d{4}$/, "")}</>}
-                    </div>
-                  </div>
-                </Link>
-              );
-            })}
+          <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
+            <table className="table min-w-[860px]">
+              <thead>
+                <tr>
+                  <th className="w-10">#</th>
+                  <th>Company</th>
+                  <th>Segment</th>
+                  <th>Tier</th>
+                  <th className="text-right">Score</th>
+                  <th>Best role</th>
+                  <th>Top task</th>
+                  <th>Top trigger</th>
+                </tr>
+              </thead>
+              <tbody>
+                {h.top.map((l, i) => {
+                  const task = topTask(l.postings.map((p) => p.id));
+                  const best = [...l.postings].sort((a, b) => b.overlap - a.overlap)[0];
+                  const trig = l.breakdown?.timing.topTrigger;
+                  return (
+                    <tr key={l.id} className="relative">
+                      <td className="mono text-muted">{String(i + 1).padStart(2, "0")}</td>
+                      <td>
+                        {/* The whole row links to the brief; the stretched link sits on the name. */}
+                        <Link href={`/companies/${l.slug}`} className="text-ink font-medium after:absolute after:inset-0 hover:underline underline-offset-4">{l.name}</Link>
+                      </td>
+                      <td className="text-[14px]">{segmentName(l.segment)}</td>
+                      <td><TierChip tier={l.tier} /></td>
+                      <td className="text-right font-display text-[20px] text-ink">{Math.round(l.leadScore ?? 0)}</td>
+                      <td className="text-[14px] max-w-[280px] truncate" title={best?.title}>{best?.title} <span className="text-muted">· {Math.round((best?.overlap ?? 0) * 100)}%</span></td>
+                      <td className="text-[14px] whitespace-nowrap">{task ? <><span className="mono text-covered">{task}</span> {taskShort(task)}</> : "—"}</td>
+                      <td className="text-[14px] whitespace-nowrap">{trig ? <>{TRIGGER_NAMES[trig.kind]} <span className="text-muted">· {shortDate(trig.date).replace(/, \d{4}$/, "")}</span></> : <span className="text-muted">None</span>}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
           </div>
         ) : (
           <div className="rounded-[14px] border border-line bg-surface p-8 text-body">

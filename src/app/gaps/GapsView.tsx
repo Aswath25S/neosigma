@@ -6,6 +6,7 @@ import { downloadCsv } from "@/lib/csv";
 import { pct } from "@/lib/format";
 import { EmptyState, TierChip } from "@/components/ui";
 import { useHash } from "@/components/useHash";
+import { Collapse } from "@/components/Collapse";
 
 export interface GapThemeView {
   id: number; name: string; kind: string; description: string | null; status: string;
@@ -25,8 +26,13 @@ function ThemeRow({ t, onStatus }: { t: GapThemeView; onStatus: (id: number, s: 
     <li id={`g${t.id}`} className="border-b border-line scroll-mt-24">
       <div className="py-4 grid grid-cols-[1fr_auto] sm:grid-cols-[minmax(0,1fr)_90px_90px_100px_170px] gap-x-4 gap-y-2 items-center">
         <button onClick={() => setOpen(!open)} aria-expanded={open} className="text-left min-w-0 col-span-2 sm:col-span-1">
-          <div className="text-ink text-[16px]">{open ? "▾" : "▸"} {t.name}</div>
-          {t.exampleQuote && <div className="text-[13px] text-muted truncate">“{t.exampleQuote}”</div>}
+          <div className="text-ink text-[16px] font-medium flex items-center gap-2.5">
+            <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" className={`shrink-0 text-muted transition-transform duration-300 ${open ? "rotate-90" : ""}`}>
+              <path d="M4 2.5 L8 6 L4 9.5" stroke="currentColor" strokeWidth="1.6" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            {t.name}
+          </div>
+          {t.exampleQuote && <div className="text-[13px] text-muted truncate pl-[22px]">“{t.exampleQuote}”</div>}
         </button>
         <button onClick={() => setOpen(true)} className="text-left sm:text-right text-[14px]" title="Share of Hot and Warm lead companies with this theme">
           <span className="text-ink underline underline-offset-4 decoration-line-strong">{pct(t.hotWarmShare)}</span>
@@ -44,8 +50,8 @@ function ThemeRow({ t, onStatus }: { t: GapThemeView; onStatus: (id: number, s: 
           {STATUSES.map((s) => <option key={s}>{s}</option>)}
         </select>
       </div>
-      {open && (
-        <div className="pb-6 pl-4 fade-in">
+      <Collapse open={open}>
+        <div className="pb-6 pl-6">
           {t.description && <p className="text-[14px] text-body mb-4">{t.description}</p>}
           <div className="label mb-2">Quotes</div>
           <ul className="flex flex-col gap-2 mb-5">
@@ -74,7 +80,7 @@ function ThemeRow({ t, onStatus }: { t: GapThemeView; onStatus: (id: number, s: 
             </div>
           </div>
         </div>
-      )}
+      </Collapse>
     </li>
   );
 }
@@ -83,6 +89,7 @@ export function GapsView({ themes: initial, initialStatus }: { themes: GapThemeV
   const [themes, setThemes] = useState(initial);
   const [status, setStatus] = useState(STATUSES.includes(initialStatus) ? initialStatus : "");
   const [error, setError] = useState<string | null>(null);
+  const [humanOpen, setHumanOpen] = useState(false);
 
   useEffect(() => {
     const q = status ? `?status=${encodeURIComponent(status)}` : "";
@@ -134,13 +141,18 @@ export function GapsView({ themes: initial, initialStatus }: { themes: GapThemeV
       {!gaps.length && <p className="text-muted py-8">No themes with this status.</p>}
 
       {human.length > 0 && (
-        <details className="mt-14">
-          <summary className="cursor-pointer">
+        <div className="mt-14">
+          <button onClick={() => setHumanOpen((o) => !o)} aria-expanded={humanOpen} className="flex items-center gap-3 text-left">
+            <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" className={`text-muted transition-transform duration-300 ${humanOpen ? "rotate-90" : ""}`}>
+              <path d="M4 2.5 L8 6 L4 9.5" stroke="currentColor" strokeWidth="1.6" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
             <span className="h-card">Human work</span>
-            <span className="text-muted text-[14px] ml-3">{human.length} themes · managing people, calls, roadmaps; never automated</span>
-          </summary>
-          <ul className="mt-4">{human.map((t) => <ThemeRow key={t.id} t={t} onStatus={onStatus} />)}</ul>
-        </details>
+            <span className="text-muted text-[14px]">{human.length} themes · managing people, calls, roadmaps; never automated</span>
+          </button>
+          <Collapse open={humanOpen}>
+            <ul className="mt-4">{human.map((t) => <ThemeRow key={t.id} t={t} onStatus={onStatus} />)}</ul>
+          </Collapse>
+        </div>
       )}
     </div>
   );

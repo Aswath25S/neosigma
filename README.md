@@ -1,4 +1,4 @@
-# Eval Hiring Radar
+# Potential Market for Neosigma
 
 Finds companies paying people to do, by hand, the work NeoSigma automates, and ranks them as sales leads.
 
