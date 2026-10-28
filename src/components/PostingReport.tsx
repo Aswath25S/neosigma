@@ -1,9 +1,9 @@
-import Link from "next/link";
 import { PostingEvidence, type EvDuty, type EvQuote } from "./PostingEvidence";
-import { OverlapBar, TaskLegend } from "./ui";
-import { money, pct, shortDate } from "@/lib/format";
+import { DutySplit, ShareLegend } from "./ui";
+import { money, pct } from "@/lib/format";
 import { LIVE_STRENGTH_TEXT } from "@/lib/scoring";
 import roles from "../../config/roles.json";
+import weights from "../../config/weights.json";
 
 export interface ReportGates {
   titleList: string;
@@ -54,6 +54,10 @@ export interface ReportData {
     source: string | null;
     ranges: { min: number | null; max: number | null; currency: string | null; interval: string | null; location: string | null }[];
     midpointNote?: string | null;
+    // Midpoint in USD (posted, converted or same-title median) and the cost.
+    midpoint?: number | null;
+    estimated?: boolean;
+    cost?: number | null;
   };
   gates: ReportGates;
 }
@@ -62,7 +66,7 @@ function Check({ ok, label, detail }: { ok: boolean | null; label: string; detai
   if (ok === null) return null;
   return (
     <div className="flex gap-3 py-3 border-b border-line last:border-b-0">
-      <span className={`mono !text-[12px] w-12 shrink-0 ${ok ? "text-covered" : "text-assisted"}`}>{ok ? "PASS" : "FAIL"}</span>
+      <span className={`font-mono text-[12px] font-semibold w-12 shrink-0 ${ok ? "text-covered" : "text-assisted"}`}>{ok ? "PASS" : "FAIL"}</span>
       <div>
         <div className="text-ink text-[14px]">{label}</div>
         <div className="text-muted text-[13px]">{detail}</div>
@@ -71,120 +75,94 @@ function Check({ ok, label, detail }: { ok: boolean | null; label: string; detai
   );
 }
 
-function Field({ k, children }: { k: string; children: React.ReactNode }) {
+function Stat({ value, label, note }: { value: React.ReactNode; label: string; note: React.ReactNode }) {
   return (
-    <div className="py-2.5 border-b border-line grid grid-cols-[130px_1fr] gap-3 text-[14px]">
-      <div className="label !text-[10.5px] pt-0.5">{k}</div>
-      <div className="text-body min-w-0 break-words">{children}</div>
+    <div className="rounded-[14px] border border-line bg-surface p-5">
+      <div className="font-display leading-none tracking-[-0.02em] text-ink">{value}</div>
+      <div className="label mt-2">{label}</div>
+      <div className="mt-2 text-[13px] text-muted leading-snug">{note}</div>
     </div>
   );
 }
 
-export function PostingReport({ data }: { data: ReportData }) {
+export function PostingReport({ data, ats }: { data: ReportData; ats?: string }) {
   const g = data.gates;
-  const hasDuties = data.duties.length > 0;
+  const c = g.counts;
+  const hasDuties = c.total > 0;
+  const denom = Math.max(1, c.total - c.unclear);
+  const s = data.salary;
+  const salaryText = s.min != null
+    ? `${money(s.min, { compact: true })}${s.max && s.max !== s.min ? `–${money(s.max, { compact: true }).replace("$", "")}` : ""}${s.currency && s.currency !== "USD" ? ` ${s.currency}` : ""}`
+    : "Not stated";
+
   return (
-    <div>
-      {/* Verdict */}
-      <div className="grid md:grid-cols-3 gap-4 mb-10">
-        <div className="rounded-[14px] border border-line bg-surface p-5">
-          <div className="label mb-2">Overlap</div>
-          <div className="font-display text-[40px] leading-none text-ink">{hasDuties ? pct(g.overlap) : "—"}</div>
-          <div className="text-[13px] text-muted mt-2">
-            ({g.counts.covered} covered + 0.5 × {g.counts.assisted} assisted) ÷ ({g.counts.total} duties − {g.counts.unclear} unclear)
-          </div>
-          {hasDuties && <OverlapBar duties={data.duties} className="mt-4" />}
-        </div>
-        <div className="rounded-[14px] border border-line bg-surface p-5">
-          <div className="label mb-2">Live-agent strength</div>
-          <div className="font-display text-[40px] leading-none text-ink">{g.liveAgentStrength}<span className="text-muted text-[20px]"> / 25</span></div>
-          <div className="text-[13px] text-muted mt-2">{LIVE_STRENGTH_TEXT[g.liveAgentStrength] ?? ""}</div>
-          {data.quotes[0] && (
-            <a href="#e0" className="block text-[13px] text-ink mt-3 live-underline">“{data.quotes[0].quote}”</a>
-          )}
-        </div>
-        <div className={`rounded-[14px] border p-5 ${g.passed ? "border-[color-mix(in_srgb,var(--covered)_40%,transparent)] bg-[color-mix(in_srgb,var(--covered)_6%,var(--surface))]" : "border-line bg-surface"}`}>
-          <div className="label mb-2">Result</div>
-          <div className={`font-display text-[28px] leading-tight ${g.passed ? "text-covered" : "text-ink"}`}>{g.passed ? "Qualifying lead role" : "Not a lead"}</div>
-          {!g.passed && (g.failText || g.failDetail) && (
-            <p className="text-[14px] text-body mt-2">{g.failText} {g.failDetail && <span className="text-muted">{g.failDetail}</span>}</p>
-          )}
-        </div>
+    <div className="flex flex-col gap-8">
+      {/* Summary strip */}
+      <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+        <Stat value={<span className="text-[44px]">{hasDuties ? pct(g.overlap) : "—"}</span>} label="Overlap"
+          note={<>({c.covered} covered + 0.5 × {c.assisted} assisted) ÷ ({c.total} duties − {c.unclear} unclear)</>} />
+        <Stat value={<span className="text-[44px]">{hasDuties ? pct(c.covered / denom) : "—"}</span>} label="NeoSigma does it"
+          note="Duties that are one of the six tasks done in a repeatable way" />
+        <Stat value={<span className="text-[30px]">{salaryText}</span>} label={`Salary (yearly)${s.ranges.length > 1 ? " · varies by location" : ""}`}
+          note={s.min != null ? `From the ${s.source === "board" ? "job board" : "posting text"}` : "No salary in the posting"} />
+        <Stat value={<span className="text-[30px]">{s.cost != null ? money(s.cost) : "—"}</span>} label="Manual-work cost a year"
+          note={s.cost != null && s.midpoint != null
+            ? <>{money(s.midpoint, { compact: true })}{s.estimated ? " (estimated)" : ""} midpoint × {weights.cost.load_factor} load × {pct(g.overlap)} overlap</>
+            : s.midpointNote ?? "No salary posted, so no figure."} />
       </div>
 
-      {hasDuties && (
-        <section className="mb-12">
-          <div className="flex flex-wrap items-end justify-between gap-4 mb-5">
-            <h2 className="h-page !text-[28px]">The posting, duty by duty</h2>
-            <TaskLegend />
-          </div>
-          <PostingEvidence text={data.text} duties={data.duties} quotes={data.quotes} />
-        </section>
-      )}
-      {!hasDuties && (
-        <section className="mb-12">
-          <h2 className="h-page !text-[28px] mb-5">Posting text</h2>
-          <div className="rounded-[14px] border border-line p-6 whitespace-pre-wrap text-[15px] text-body">{data.text}</div>
-        </section>
-      )}
+      {hasDuties && <DutySplit covered={c.covered} assisted={c.assisted} total={c.total} />}
 
-      <div className="grid lg:grid-cols-2 gap-10">
-        <section>
-          <h3 className="label mb-3">Filter checks</h3>
-          <div className="rounded-[14px] border border-line px-4">
-            <Check ok={g.titleList !== "drop" && g.titleList !== "screen"} label={`Stage 1: ${g.titleList === "screen" ? "screened out" : g.titleList}`} detail={g.titleNote ?? "Matched by the stage-1 title lists."} />
-            {hasDuties && (
-              <>
-                <Check ok={g.stage2} label="Stage 2: at least 3 duties Covered or Assisted" detail={`${g.counts.covered + g.counts.assisted} of ${g.counts.total} duties.`} />
-                <Check ok={g.conditional} label={`Conditional title: at least ${roles.conditional.min_distinct_tasks} of T1–T6`} detail={`Tasks present: ${g.distinctTasks.join(", ") || "none"}.`} />
-                <Check ok={g.overlapGate} label={`Gate 1: at least ${Math.round(roles.gate_overlap_min_share * 100)}% of duties Covered or Assisted`} detail={`${pct(g.coveredOrAssistedShare)} of duties.`} />
-                <Check ok={g.liveGate} label="Gate 2: an agent already used by real customers" detail={data.quotes.length ? `${data.quotes.length} verified quote${data.quotes.length > 1 ? "s" : ""}.` : "No verified quote."} />
-              </>
-            )}
+      {/* Why it does or doesn't qualify */}
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:items-start">
+        <div className={`rounded-[14px] border p-5 ${g.passed ? "border-[color-mix(in_srgb,var(--covered)_45%,transparent)] bg-[color-mix(in_srgb,var(--covered)_7%,var(--surface))]" : "border-line bg-surface"}`}>
+          <div className="flex flex-wrap items-baseline justify-between gap-2 mb-1">
+            <span className="label">Filter checks</span>
+            <span className={`font-mono text-[12px] font-semibold ${g.passed ? "text-covered" : "text-assisted"}`}>{g.passed ? "QUALIFYING LEAD ROLE" : "NOT A LEAD"}</span>
           </div>
+          {!g.passed && (g.failText || g.failDetail) && <p className="text-[14px] text-ink mt-1 mb-2">{g.failText} {g.failDetail && <span className="text-muted">{g.failDetail}</span>}</p>}
+          <Check ok={g.titleList !== "drop" && g.titleList !== "screen"} label={`Stage 1: ${g.titleList === "screen" ? "screened out" : g.titleList}`} detail={g.titleNote ?? "Matched by the stage-1 title lists."} />
+          {hasDuties && (
+            <>
+              <Check ok={g.stage2} label={`Stage 2: at least ${roles.stage2_min_covered_or_assisted} duties Covered or Assisted`} detail={`${c.covered + c.assisted} of ${c.total} duties.`} />
+              <Check ok={g.conditional} label={`Conditional title: at least ${roles.conditional.min_distinct_tasks} of T1–T6`} detail={`Tasks present: ${g.distinctTasks.join(", ") || "none"}.`} />
+              <Check ok={g.overlapGate} label={`Gate 1: at least ${Math.round(roles.gate_overlap_min_share * 100)}% of duties Covered or Assisted`} detail={`${pct(g.coveredOrAssistedShare)} of duties.`} />
+              <Check ok={g.liveGate} label="Gate 2: an agent already used by real customers" detail={data.quotes.length ? `${data.quotes.length} verified quote${data.quotes.length > 1 ? "s" : ""}.` : "No verified quote."} />
+            </>
+          )}
+        </div>
 
-          <h3 className="label mt-8 mb-3">Live-agent evidence</h3>
+        <div className="rounded-[14px] border border-line bg-surface p-5">
+          <div className="flex flex-wrap items-baseline justify-between gap-2 mb-3">
+            <span className="label">Proof of a live agent</span>
+            <span className="font-mono text-[12px] text-ink">{g.liveAgentStrength} / 25 · {LIVE_STRENGTH_TEXT[g.liveAgentStrength] ?? ""}</span>
+          </div>
           {data.quotes.length ? (
-            <ul className="flex flex-col gap-2">
+            <ul className="flex flex-col gap-2.5">
               {data.quotes.map((q, i) => (
-                <li key={i}><a href={`#e${i}`} className="text-ink text-[14px] live-underline">“{q.quote}”</a> <span className="mono !text-[11px] text-muted ml-1">{q.kind.replace(/_/g, " ")}</span></li>
+                <li key={i} className="text-[15px]">
+                  <a href={`#e${i}`} className="text-ink live-underline">“{q.quote}”</a>
+                  <span className="label ml-2 !normal-case">{q.kind.replace(/_/g, " ")}</span>
+                </li>
               ))}
             </ul>
-          ) : <p className="text-[14px] text-muted">None found in the posting.</p>}
-          {data.notLive.length > 0 && (
-            <p className="text-[13px] text-muted mt-3">Signals of no live agent yet: {data.notLive.map((q) => `“${q}”`).join(", ")}</p>
-          )}
-          {data.droppedQuotes.length > 0 && (
-            <p className="text-[13px] text-muted mt-2">Quotes not found verbatim and ignored: {data.droppedQuotes.map((q) => `“${q}”`).join(", ")}</p>
-          )}
-        </section>
-
-        <section>
-          <h3 className="label mb-3">Extracted fields</h3>
-          <div>
-            <Field k="Company">{data.companySlug ? <Link className="text-ink hover:underline" href={`/companies/${data.companySlug}`}>{data.company}</Link> : data.company}</Field>
-            <Field k="Seniority">{data.fields.seniority ?? "—"}</Field>
-            <Field k="Location">{data.locations.length ? data.locations.join(" · ") : data.fields.location ?? "—"}{data.fields.remote ? " (remote)" : ""}</Field>
-            <Field k="Agent type">{data.fields.agentType ?? "—"}</Field>
-            <Field k="Tools named">{data.fields.tools.length ? data.fields.tools.join(", ") : "None named"}</Field>
-            <Field k="Volume">{data.fields.volumeHint ?? "—"}</Field>
-            <Field k="Pain phrases">{data.fields.pain.length ? data.fields.pain.map((p) => `“${p}”`).join(", ") : "—"}</Field>
-            <Field k="First eval hire">{data.fields.firstEvalHire.value ? `Yes · “${data.fields.firstEvalHire.quote}”` : "No"}</Field>
-            <Field k="Salary">
-              {data.salary.min != null ? `${money(data.salary.min)} – ${money(data.salary.max)} ${data.salary.currency ?? ""} (from ${data.salary.source === "board" ? "job board" : "posting text"})` : "Not stated"}
-              {data.salary.ranges.length > 1 && (
-                <ul className="mt-1 text-[13px] text-muted">
-                  {data.salary.ranges.map((r, i) => <li key={i}>{r.location ?? "Range"}: {money(r.min)} – {money(r.max)} {r.currency}</li>)}
-                </ul>
-              )}
-              {data.salary.midpointNote && <div className="text-[13px] text-muted mt-1">{data.salary.midpointNote}</div>}
-            </Field>
-            {data.postedAt !== undefined && <Field k="Posted">{shortDate(data.postedAt)}</Field>}
-            {data.fetchedAt && <Field k="Fetched">{shortDate(data.fetchedAt)}</Field>}
-            {data.url && <Field k="Source"><a className="text-ink hover:underline break-all" href={data.url} target="_blank" rel="noreferrer">{data.url}</a></Field>}
-          </div>
-        </section>
+          ) : <p className="text-[14px] text-muted">No quote in the posting shows an agent already in front of real users.</p>}
+          {data.notLive.length > 0 && <p className="text-[13px] text-muted mt-4">Signals of no live agent yet: {data.notLive.map((q) => `“${q}”`).join(", ")}</p>}
+          {data.droppedQuotes.length > 0 && <p className="text-[13px] text-muted mt-2">Quotes not found word for word and ignored: {data.droppedQuotes.map((q) => `“${q}”`).join(", ")}</p>}
+        </div>
       </div>
+
+      {hasDuties ? (
+        <div>
+          <ShareLegend className="mb-4" />
+          <PostingEvidence data={data} ats={ats} />
+        </div>
+      ) : (
+        <div className="rounded-[14px] border border-line bg-surface p-6 sm:p-8 whitespace-pre-wrap text-[15px] text-body">
+          <span className="label block mb-4">Original posting · not read by Claude ({g.failText ?? "filtered out before extraction"})</span>
+          {data.text}
+        </div>
+      )}
     </div>
   );
 }

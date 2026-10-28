@@ -86,7 +86,7 @@ export interface LeadRow {
   leadScore: number | null;
   tier: string | null;
   breakdown: Breakdown | null;
-  postings: { id: string; title: string; overlap: number; liveAgentStrength: number; agentType: string | null; hasSalary: boolean }[];
+  postings: LeadRole[];
   triggers: ScoreTrigger[];
   cost: number | null;
   costRoles: number;
@@ -94,6 +94,47 @@ export interface LeadRow {
   // For the row dropdown on the Leads page.
   bestQuote: { quote: string; postingId: string; idx: number } | null;
   taskWeights: Record<string, number>;
+  domain: string;
+  sizeSourceUrl: string | null;
+  tools: string[];
+  avgSalary: number | null;
+  salaryRoles: number;
+}
+
+// One qualifying role as the Leads dropdown and case page list it.
+export interface LeadRole {
+  id: string;
+  title: string;
+  url: string;
+  overlap: number;
+  liveAgentStrength: number;
+  agentType: string | null;
+  hasSalary: boolean;
+  salaryMin: number | null;
+  salaryMax: number | null;
+  currency: string | null;
+  cost: number | null;
+  postedAt: string | null;
+  counts: DutyCounts;
+}
+
+export interface DutyCounts {
+  covered: number;
+  assisted: number;
+  total: number;
+  unclear: number;
+  // Bar shares: covered, and assisted at half weight, of (total − unclear),
+  // so the bar ends at the overlap score.
+  coveredShare: number;
+  assistedShare: number;
+}
+
+export function dutyCounts(duties: { label: string; notCoveredKind: string | null }[]): DutyCounts {
+  const covered = duties.filter((d) => d.label === "covered").length;
+  const assisted = duties.filter((d) => d.label === "assisted").length;
+  const unclear = duties.filter((d) => d.label === "not_covered" && d.notCoveredKind === "unclear").length;
+  const denom = Math.max(1, duties.length - unclear);
+  return { covered, assisted, total: duties.length, unclear, coveredShare: covered / denom, assistedShare: (0.5 * assisted) / denom };
 }
 
 export function getLeadRows(): { leads: LeadRow[]; rejectedPostings: (Posting & { companyName: string; companySlug: string })[] } {
@@ -112,13 +153,17 @@ export function getLeadRows(): { leads: LeadRow[]; rejectedPostings: (Posting & 
     .map((c) => {
       const mine = postings.filter((p) => p.companyId === c.id);
       const qualifying = mine.filter((p) => p.passedGates);
-      const costs = roleCosts(qualifying).filter((r) => r.cost != null);
+      const allCosts = roleCosts(qualifying);
+      const costs = allCosts.filter((r) => r.cost != null);
+      const mids = allCosts.filter((r) => r.midpoint.value != null && !r.midpoint.estimated).map((r) => r.midpoint.value!);
       return {
         id: c.id, name: c.name, slug: c.slug, segment: c.segment, employeeBand: c.employeeBand, status: c.status,
         leadScore: c.leadScore, tier: c.tier, breakdown: c.scoreBreakdown as Breakdown | null,
-        postings: qualifying.map((p) => ({
-          id: p.id, title: p.title, overlap: p.overlap ?? 0, liveAgentStrength: p.liveAgentStrength ?? 0,
-          agentType: p.agentType, hasSalary: p.salaryMin != null,
+        postings: qualifying.sort((a, b) => (b.overlap ?? 0) - (a.overlap ?? 0)).map((p) => ({
+          id: p.id, title: p.title, url: p.url, overlap: p.overlap ?? 0, liveAgentStrength: p.liveAgentStrength ?? 0,
+          agentType: p.agentType, hasSalary: p.salaryMin != null, salaryMin: p.salaryMin, salaryMax: p.salaryMax,
+          currency: p.currency, cost: allCosts.find((r) => r.postingId === p.id)?.cost ?? null, postedAt: p.postedAt,
+          counts: dutyCounts(dutiesByPosting.get(p.id) ?? []),
         })),
         triggers: [...triggers.filter((t) => t.companyId === c.id), ...global].map((t) => ({
           id: t.id, kind: t.kind, date: t.date, title: t.title, url: t.url, source: t.source,
@@ -136,6 +181,11 @@ export function getLeadRows(): { leads: LeadRow[]; rejectedPostings: (Posting & 
           return w;
         }, {}),
         failReasons: [...new Set(mine.map((p) => p.failReason).filter((x): x is string => !!x))],
+        domain: c.domain,
+        sizeSourceUrl: c.sizeSourceUrl,
+        tools: [...new Set(qualifying.flatMap((p) => extractionOf(p)?.agent_tools ?? []))],
+        avgSalary: mids.length ? mids.reduce((a, b) => a + b, 0) / mids.length : null,
+        salaryRoles: mids.length,
       };
     });
   const bySlug = new Map(companies.map((c) => [c.id, c]));
@@ -183,7 +233,8 @@ export function getPosting(id: string) {
   const company = db().select().from(schema.companies).where(eq(schema.companies.id, posting.companyId)).get()!;
   const duties = db().select().from(schema.duties).where(eq(schema.duties.postingId, id)).all().sort((a, b) => a.idx - b.idx);
   const mid = allMidpoints().get(id) ?? null;
-  return { posting, company, duties, midpoint: mid };
+  const themes = new Map(db().select().from(schema.gapThemes).all().map((t) => [t.id, t.name]));
+  return { posting, company, duties, midpoint: mid, themes };
 }
 
 // ---- gaps ----

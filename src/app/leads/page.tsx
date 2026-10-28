@@ -10,6 +10,7 @@ export const metadata: Metadata = { title: "Leads" };
 export default async function LeadsPage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
   const sp = await searchParams;
   const { leads, rejectedPostings } = getLeadRows();
+  const live = leads.filter((l) => l.status === "lead");
   const initial = Object.fromEntries(Object.entries(sp).map(([k, v]) => [k, Array.isArray(v) ? v[0] : v ?? ""]));
   const rejected = rejectedPostings.map((p) => ({
     id: p.id,
@@ -25,11 +26,12 @@ export default async function LeadsPage({ searchParams }: { searchParams: Promis
 
   return (
     <div className="mx-auto max-w-[1200px] px-4 sm:px-6">
-      <PageHeader eyebrow="Ranked leads" title="Who to contact this week">
-        Companies with at least one open role whose main job is NeoSigma&apos;s work, with an agent already in front of real users.
-        Scores are computed in code from the extracted fields; move the weights to re-rank.
+      <PageHeader eyebrow="The leads" title={`${live.length} companies are paying people to do NeoSigma's work by hand.`}>
+        Each has at least one open role whose main job is checking and improving a live AI agent, and proof in the posting that the agent is
+        already in front of real users. Every company gets a lead score from 0 to 100, computed in code from the extracted fields.
+        Click any row to see its qualifying roles and why it scores what it does.
       </PageHeader>
-      <LeadsView leads={leads.filter((l) => l.status === "lead")} rejected={rejected} initial={initial} />
+      <LeadsView leads={live} rejected={rejected} initial={initial} />
     </div>
   );
 }

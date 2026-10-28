@@ -281,3 +281,5 @@ select:focus, input:focus, textarea:focus {
   ::view-transition-old(.page-out),
   ::view-transition-new(.page-in) { animation: none; }
 }
+
+.hl-active { outline: 2px solid var(--text); outline-offset: 1px; }

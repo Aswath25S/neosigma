@@ -117,3 +117,113 @@ export function NumLink({ href, children, title }: { href: string; children: Rea
     </Link>
   );
 }
+
+// ---- shared pieces for the leads dropdown, case page and role breakdown ----
+
+/** Overlap as one bar: covered share in teal, assisted (counted at half) in amber. */
+export function ShareBar({ covered, assisted, className = "" }: { covered: number; assisted: number; className?: string }) {
+  return (
+    <div className={`flex h-2 w-full overflow-hidden rounded-full bg-surface-2 ring-1 ring-line ${className}`} aria-hidden="true">
+      <div className="bg-covered" style={{ width: `${Math.max(0, covered) * 100}%` }} />
+      <div className="bg-assisted" style={{ width: `${Math.max(0, assisted) * 100}%` }} />
+    </div>
+  );
+}
+
+export function ShareLegend({ className = "" }: { className?: string }) {
+  return (
+    <div className={`flex flex-wrap items-center gap-x-5 gap-y-1.5 text-[13px] text-body ${className}`}>
+      <span className="inline-flex items-center gap-2"><span className="h-2.5 w-5 rounded-sm bg-covered" />NeoSigma does it (Covered)</span>
+      <span className="inline-flex items-center gap-2"><span className="h-2.5 w-5 rounded-sm bg-assisted" />NeoSigma prepares, a person decides (Assisted, counts half)</span>
+      <span className="inline-flex items-center gap-2"><span className="h-2.5 w-5 rounded-sm bg-surface-2 ring-1 ring-line" />Not NeoSigma&apos;s work</span>
+    </div>
+  );
+}
+
+const CHIP: Record<string, { cls: string; text: string }> = {
+  covered: { cls: "border-[color-mix(in_srgb,var(--covered)_45%,transparent)] bg-[color-mix(in_srgb,var(--covered)_14%,transparent)] text-covered", text: "NeoSigma does it" },
+  assisted: { cls: "border-[color-mix(in_srgb,var(--assisted)_45%,transparent)] bg-[color-mix(in_srgb,var(--assisted)_14%,transparent)] text-assisted", text: "NeoSigma prepares" },
+  human_work: { cls: "border-line-strong text-body", text: "Needs a person" },
+  possible_gap: { cls: "border-line-strong border-dashed text-body", text: "Possible gap" },
+  unclear: { cls: "border-line-strong text-muted italic", text: "Too vague" },
+};
+
+/** Duty label as a chip. Not-covered duties show their kind. */
+export function LabelChip({ label, kind }: { label: string; kind?: string | null }) {
+  const m = CHIP[label === "not_covered" ? kind ?? "unclear" : label] ?? CHIP.unclear;
+  return <span className={`inline-flex items-center whitespace-nowrap rounded-full border px-2 py-0.5 font-mono text-[10.5px] font-medium uppercase tracking-[0.08em] ${m.cls}`}>{m.text}</span>;
+}
+
+export function StatBlock({ value, label, href, note }: { value: React.ReactNode; label: string; href?: string; note?: React.ReactNode }) {
+  const body = (
+    <>
+      <div className="font-display text-[34px] sm:text-[44px] leading-none tracking-[-0.02em] text-ink [overflow-wrap:anywhere]">{value}</div>
+      <div className="label mt-3">{label}</div>
+      {note && <div className="mt-2 text-[13px] text-muted leading-snug">{note}</div>}
+    </>
+  );
+  return href ? (
+    <Link href={href} className="block min-w-0 rounded-[14px] border border-line bg-surface p-5 sm:p-6 transition-[transform,border-color] duration-150 hover:-translate-y-0.5 hover:border-line-strong">{body}</Link>
+  ) : (
+    <div className="min-w-0 rounded-[14px] border border-line bg-surface p-5 sm:p-6">{body}</div>
+  );
+}
+
+/** Page section: mono number + a headline that states a finding. */
+export function Section({ id, num, eyebrow, title, children, action }: {
+  id?: string; num?: string; eyebrow: string; title: React.ReactNode; children: React.ReactNode; action?: React.ReactNode;
+}) {
+  return (
+    <section id={id} className="scroll-mt-24 border-t border-line py-14 sm:py-16">
+      <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div className="max-w-[900px]">
+          <div className="label mb-3">{num ? `${num} · ` : ""}{eyebrow}</div>
+          <h2 className="h-page">{title}</h2>
+        </div>
+        {action}
+      </div>
+      {children}
+    </section>
+  );
+}
+
+export function Note({ children }: { children: React.ReactNode }) {
+  return <p className="text-[13px] leading-relaxed text-muted">{children}</p>;
+}
+
+/** One stacked bar across all of a role's duties, with a legend that counts them. */
+export function DutySplit({ covered, assisted, total }: { covered: number; assisted: number; total: number }) {
+  const rest = total - covered - assisted;
+  const parts = [
+    { key: "covered", count: covered, label: "NeoSigma does it", bar: "bg-covered text-[#06231d]", dot: "bg-covered", hint: "Teal highlight in the posting" },
+    { key: "assisted", count: assisted, label: "NeoSigma prepares, a person decides", bar: "bg-assisted text-[#2a1606]", dot: "bg-assisted", hint: "Amber highlight in the posting" },
+    { key: "rest", count: rest, label: "not NeoSigma's work", bar: "bg-surface-2 text-body", dot: "bg-surface-2 ring-1 ring-line-strong", hint: "Grey highlight in the posting" },
+  ];
+  return (
+    <div className="rounded-[14px] border border-line bg-surface p-5 sm:p-6">
+      <div className="flex flex-wrap items-baseline justify-between gap-2">
+        <p className="h-card !text-[17px]">What NeoSigma could do in this role</p>
+        <span className="label">{total} duties in total</span>
+      </div>
+      <div className="mt-4 flex h-11 gap-[3px] overflow-hidden rounded-[8px] ring-1 ring-line" role="img"
+        aria-label={`${covered} of ${total} duties covered, ${assisted} assisted, ${rest} not NeoSigma's work`}>
+        {parts.filter((x) => x.count > 0).map((x) => (
+          <div key={x.key} className={`flex min-w-[2.25rem] items-center justify-center font-mono text-[13px] font-semibold ${x.bar}`} style={{ flexGrow: x.count, flexBasis: 0 }}>
+            {x.count}
+          </div>
+        ))}
+      </div>
+      <ul className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
+        {parts.map((x) => (
+          <li key={x.key} className="flex items-start gap-2.5">
+            <span className={`mt-1 h-3 w-3 shrink-0 rounded-sm ${x.dot}`} />
+            <span className="text-[14px] leading-snug text-body">
+              <b className="text-ink">{x.count} of {total}</b> {x.label}
+              <span className="block text-[12.5px] text-muted">{x.hint}</span>
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}

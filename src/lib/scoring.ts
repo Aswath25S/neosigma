@@ -117,3 +117,9 @@ export const LIVE_STRENGTH_TEXT: Record<number, string> = {
   15: "In production",
   25: "Volume or named product",
 };
+
+// Model releases apply to every lead, so lists show only the newest one.
+export function shownTriggers<T extends { kind: string; date: string }>(active: T[]): T[] {
+  const newest = active.filter((t) => t.kind === "model_release").sort((a, b) => b.date.localeCompare(a.date))[0];
+  return active.filter((t) => t.kind !== "model_release" || t === newest);
+}
