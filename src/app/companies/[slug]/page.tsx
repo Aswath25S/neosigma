@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getCompanyBySlug, extractionOf, dutyCounts, getLeadRows, type DutyRow } from "@/lib/data";
-import { coverageMap, segmentName, TASK_IDS } from "@/lib/config";
+import { coverageMap, roles, segmentName, TASK_IDS } from "@/lib/config";
 import { activeTriggers, DEFAULT_WEIGHTS, LIVE_STRENGTH_TEXT, shownTriggers, TRIGGER_NAMES } from "@/lib/scoring";
 import { pickProof, type RenderedBrief, type Ref } from "@/lib/brief";
 import { money, pct, shortDate } from "@/lib/format";
@@ -44,25 +44,18 @@ function Cites({ ids, refs }: { ids: string[]; refs: Record<string, Ref> }) {
 
 // One short card per brief field, in the style of a case summary: a label and
 // one or two sentences, with citation chips.
-function BriefCard({ title, items, refs, empty, wide = false, children }: { title: string; items?: { text: string; cites: string[]; task_id?: string }[]; refs: Record<string, Ref>; empty?: string; wide?: boolean; children?: React.ReactNode }) {
+function BriefCard({ title, items, refs, empty, wide = false, children }: { title: string; items?: { text: string; cites: string[] }[]; refs: Record<string, Ref>; empty?: string; wide?: boolean; children?: React.ReactNode }) {
   return (
     <div className={`rounded-[14px] border border-line bg-surface p-5 ${wide ? "md:col-span-2" : ""}`}>
       <span className="label">{title}</span>
       <div className="mt-2 text-[16px] leading-relaxed text-body">
         {children ?? (items?.length ? items.map((s, i) => (
-          <span key={i}>{i > 0 && " "}{s.task_id && <span className="font-mono text-[12px] text-covered mr-1.5">{s.task_id}</span>}{s.text}<Cites ids={s.cites} refs={refs} /></span>
+          <span key={i}>{i > 0 && " "}{s.text}<Cites ids={s.cites} refs={refs} /></span>
         )) : <span className="text-muted">{empty}</span>)}
       </div>
     </div>
   );
 }
-
-// What the live-agent number means, in the words of the posting check.
-const LIVE_NOTE: Record<number, string> = {
-  0: "The postings don't show the agent is live yet",
-  15: "A posting says the agent is in production",
-  25: "A posting names the product or its usage volume",
-};
 
 export default async function CompanyPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -107,7 +100,7 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
   const single = qualifying.length === 1;
   const headline = isLead
     ? `${company.name} is hiring ${qualifying.length} ${single ? "role" : "roles"} for NeoSigma's work, ${single ? "with a" : "the best at"} ${pct(breakdown!.overlap.bestOverlap)} overlap.`
-    : `No role at ${company.name} passed both gates.`;
+    : `No role at ${company.name} qualifies yet.`;
 
   return (
     <div className="mx-auto max-w-[1200px] px-4 sm:px-6">
@@ -132,10 +125,9 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
       {isLead && (
         <>
           {/* Stat strip */}
-          <div className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-5 pb-14">
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-4 pb-14">
             <StatBlock value={Math.round(breakdown!.total)} label="Lead score" href="#score" note="Out of 100. See the breakdown below." />
             <StatBlock value={pct(breakdown!.overlap.bestOverlap)} label={single ? "Role overlap" : "Best overlap"} href="#roles" note={single ? "Share of the role's duties NeoSigma can do or prepare" : `Best of ${qualifying.length} qualifying roles`} />
-            <StatBlock value={<>{breakdown!.live.strength}<span className="text-muted text-[0.55em]"> of 25 pts</span></>} label="Live agent proof" href="#score" note={LIVE_NOTE[breakdown!.live.strength] ?? LIVE_STRENGTH_TEXT[breakdown!.live.strength]} />
             <StatBlock value={avgPay != null ? money(avgPay, { compact: true }) : "–"} label="Avg. salary" href="#roles" note={posted.length ? `${posted.length} of ${salaries.length} ${salaries.length === 1 ? "role lists" : "roles list"} a salary; middle of each posted range` : "No salary posted"} />
             <StatBlock value={<span className="block text-[18px] sm:text-[24px] leading-tight [overflow-wrap:normal] [word-break:keep-all]">{PROOF_SHORT[proofKey]}</span>} label="Lead with" href="#tasks" note={proof.name} />
           </div>
@@ -151,7 +143,7 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
                     {rendered.brief.by_hand.length ? (
                       <ul className="flex flex-col gap-1">
                         {rendered.brief.by_hand.slice(0, 3).map((s, i) => (
-                          <li key={i}><span className="font-mono text-[12px] text-covered mr-1.5">{s.task_id}</span>{s.text}<Cites ids={s.cites} refs={refs} /></li>
+                          <li key={i}>{s.text}<Cites ids={s.cites} refs={refs} /></li>
                         ))}
                       </ul>
                     ) : <span className="text-muted">No covered duties stored.</span>}
@@ -196,7 +188,11 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
       )}
 
       {/* Qualifying roles */}
-      <Section id="roles" num={isLead ? "03" : "01"} eyebrow="Qualifying roles" title={qualifying.length ? `${qualifying.length} ${qualifying.length === 1 ? "role passes" : "roles pass"} both gates.` : "No role passes both gates."}>
+      <Section id="roles" num={isLead ? "03" : "01"} eyebrow="Qualifying roles" title={qualifying.length ? `${qualifying.length} ${qualifying.length === 1 ? "role qualifies" : "roles qualify"}.` : "No role qualifies."}>
+        <p className="mb-5 max-w-[900px] text-[15px] leading-relaxed text-body">
+          A role qualifies when at least {Math.round(roles.gate_overlap_min_share * 100)}% of its duties are work NeoSigma can do or prepare, and
+          the posting shows the AI agent is already used by real customers.
+        </p>
         {qualifying.length > 0 && (
           <>
             <ShareLegend className="mb-4" />

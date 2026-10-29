@@ -150,7 +150,7 @@ export function briefMarkdown(companyName: string, r: RenderedBrief): string {
     `# ${companyName}`,
     sec("Why them", r.brief.why_them, "No qualifying evidence stored."),
     sec("Why now", r.brief.why_now, "No active triggers in the last 90 days."),
-    sec("What they're doing by hand", r.brief.by_hand.map((s) => ({ ...s, text: `${s.task_id} · ${s.text}` })), "No covered duties stored."),
+    sec("Done by hand today", r.brief.by_hand, "No covered duties stored."),
     `## Which proof to lead with\n\n**${proof.name}.** ${r.brief.proof.text} ${link(r.brief.proof.cites)}\n`,
     `## Draft opening message\n\n${r.brief.draft_message}\n`,
     r.brief.missing.length ? `## Missing data\n\n${r.brief.missing.map((m) => `- ${m}`).join("\n")}\n` : "",

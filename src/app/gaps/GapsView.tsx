@@ -1,12 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { Fragment, useEffect, useMemo, useState } from "react";
+import { Fragment, useMemo, useState } from "react";
 import { downloadCsv } from "@/lib/csv";
 import { money, pct } from "@/lib/format";
 import { useHash } from "@/components/useHash";
 import { Collapse } from "@/components/Collapse";
-import { Select } from "@/components/Select";
 
 export interface GapThemeView {
   id: number; name: string; kind: string; description: string | null; status: string;
@@ -15,7 +14,6 @@ export interface GapThemeView {
   duties: { id: number; text: string; span: string; postingId: string; idx: number; title: string; company: string; companySlug: string; isLead: boolean }[];
 }
 
-const STATUSES = ["Unreviewed", "Real gap", "Already covered", "Not relevant"];
 const MAX_EXAMPLES = 8;
 
 function Chevron({ open }: { open: boolean }) {
@@ -26,10 +24,10 @@ function Chevron({ open }: { open: boolean }) {
   );
 }
 
-function ThemeTable({ list, strongTotal, open, setOpen, onStatus }: {
-  list: GapThemeView[]; strongTotal: number; open: number | null; setOpen: (id: number | null) => void; onStatus: (id: number, s: string) => void;
+function ThemeTable({ list, strongTotal, open, setOpen }: {
+  list: GapThemeView[]; strongTotal: number; open: number | null; setOpen: (id: number | null) => void;
 }) {
-  const head = ["Theme", "Strong leads", "Postings", "Companies", "Salary attached", "Status", ""];
+  const head = ["Theme", "Strong leads", "Postings", "Companies", "Salary attached", ""];
   return (
     <div className="rounded-[14px] border border-line bg-bg">
       <table className="w-full table-fixed border-collapse text-[14px]">
@@ -41,14 +39,13 @@ function ThemeTable({ list, strongTotal, open, setOpen, onStatus }: {
           <col className="w-0 md:w-[6.5rem]" />
           <col className="w-0 md:w-[7rem]" />
           <col className="w-0 md:w-[8.5rem]" />
-          <col className="w-0 md:w-[11rem]" />
           <col className="w-[3.25rem] md:w-[3.75rem]" />
         </colgroup>
         <thead className="border-b border-line">
           <tr>
             {head.map((h, i) => (
-              <th key={i} className={`px-3 md:px-4 py-3 font-normal whitespace-nowrap ${i > 0 && i < 5 ? "text-right" : "text-left"} ${i >= 2 && i <= 5 ? "max-md:!p-0" : ""}`}>
-                {h && <span className={`label !text-[11.5px] ${i >= 2 && i <= 5 ? "max-md:hidden" : ""}`}>{h}</span>}
+              <th key={i} className={`px-3 md:px-4 py-3 font-normal whitespace-nowrap ${i > 0 && i < 5 ? "text-right" : "text-left"} ${i >= 2 && i <= 4 ? "max-md:!p-0" : ""}`}>
+                {h && <span className={`label !text-[11.5px] ${i >= 2 && i <= 4 ? "max-md:hidden" : ""}`}>{h}</span>}
               </th>
             ))}
           </tr>
@@ -68,7 +65,6 @@ function ThemeTable({ list, strongTotal, open, setOpen, onStatus }: {
                       <span>{t.postingCount} postings</span><span aria-hidden="true">·</span><span>{t.companyCount} companies</span>
                       {t.salaryPostings > 0 && <><span aria-hidden="true">·</span><span>{money(t.salaryAttached, { compact: true })} salary</span></>}
                     </div>
-                    <div className="mt-2 md:hidden"><Select size="sm" hideLabel label={`Status for ${t.name}`} value={t.status} onChange={(v) => onStatus(t.id, v)} options={STATUSES.map((s) => [s, s])} /></div>
                   </td>
                   <td className="px-3 md:px-4 py-4 text-right">
                     <span className="font-display text-[20px] leading-none text-ink">{pct(t.hotWarmShare)}</span>
@@ -82,11 +78,6 @@ function ThemeTable({ list, strongTotal, open, setOpen, onStatus }: {
                       {t.salaryPostings > 0 && <div className="mt-1 font-mono text-[11px] text-muted">indicative</div>}
                     </div>
                   </td>
-                  <td className="px-4 py-3 max-md:!p-0">
-                    <div className="max-md:hidden">
-                      <Select size="sm" hideLabel label={`Status for ${t.name}`} value={t.status} onChange={(v) => onStatus(t.id, v)} options={STATUSES.map((s) => [s, s])} />
-                    </div>
-                  </td>
                   <td className="px-2 py-3 text-right">
                     <button className="inline-flex h-9 w-9 items-center justify-center rounded-[10px] border border-line-strong bg-surface-2 text-body hover:border-muted hover:text-ink"
                       aria-expanded={isOpen} aria-label={isOpen ? `Hide details for ${t.name}` : `Show details for ${t.name}`}
@@ -96,7 +87,7 @@ function ThemeTable({ list, strongTotal, open, setOpen, onStatus }: {
                   </td>
                 </tr>
                 <tr className={isOpen ? "bg-surface" : ""} aria-hidden={!isOpen}>
-                  <td colSpan={7} className="p-0">
+                  <td colSpan={6} className="p-0">
                     <Collapse open={isOpen}>
                       <div className="px-3 md:px-4 pb-5 pt-1">
                         <div className="grid grid-cols-1 gap-4 md:grid-cols-[2fr_1fr]">
@@ -135,64 +126,39 @@ function ThemeTable({ list, strongTotal, open, setOpen, onStatus }: {
               </Fragment>
             );
           })}
-          {!list.length && <tr><td colSpan={7} className="px-4 py-8 text-center text-muted">No themes with this status.</td></tr>}
+          {!list.length && <tr><td colSpan={6} className="px-4 py-8 text-center text-muted">No themes yet.</td></tr>}
         </tbody>
       </table>
     </div>
   );
 }
 
-export function GapsView({ themes: initial, strongTotal, initialStatus }: { themes: GapThemeView[]; strongTotal: number; initialStatus: string }) {
-  const [themes, setThemes] = useState(initial);
-  const [status, setStatus] = useState(STATUSES.includes(initialStatus) ? initialStatus : "");
-  const [error, setError] = useState<string | null>(null);
+export function GapsView({ themes, strongTotal }: { themes: GapThemeView[]; strongTotal: number }) {
   const [picked, setOpen] = useState<number | null | undefined>(undefined);
   const [humanOpen, setHumanOpen] = useState(false);
   const hash = useHash();
   const hashId = hash.match(/^#g(\d+)$/)?.[1];
   const open = picked !== undefined ? picked : hashId ? Number(hashId) : null;
 
-  useEffect(() => {
-    const q = status ? `?status=${encodeURIComponent(status)}` : "";
-    window.history.replaceState(null, "", `${window.location.pathname}${q}${window.location.hash}`);
-  }, [status]);
-
-  async function onStatus(id: number, s: string) {
-    const prev = themes;
-    setThemes((ts) => ts.map((t) => (t.id === id ? { ...t, status: s } : t)));
-    const res = await fetch(`/api/gaps/${id}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ status: s }) });
-    if (!res.ok) {
-      setThemes(prev);
-      setError("Could not save the status.");
-    }
-  }
-
-  const gaps = useMemo(() => themes.filter((t) => t.kind === "possible_gap" && (!status || t.status === status)), [themes, status]);
+  const gaps = useMemo(() => themes.filter((t) => t.kind === "possible_gap"), [themes]);
   const human = useMemo(() => themes.filter((t) => t.kind === "human_work"), [themes]);
 
   function exportCsv() {
-    downloadCsv("gap-themes.csv", ["theme", "kind", "status", "description", "strong_lead_share_pct", "strong_lead_companies", "postings", "companies", "salary_attached_indicative", "roles", "example_phrases"],
-      themes.map((t) => [t.name, t.kind, t.status, t.description ?? "", Math.round(t.hotWarmShare * 100), t.hotWarmCompanies, t.postingCount, t.companyCount,
+    downloadCsv("gap-themes.csv", ["theme", "kind", "description", "strong_lead_share_pct", "strong_lead_companies", "postings", "companies", "salary_attached_indicative", "roles", "example_phrases"],
+      themes.map((t) => [t.name, t.kind, t.description ?? "", Math.round(t.hotWarmShare * 100), t.hotWarmCompanies, t.postingCount, t.companyCount,
         t.salaryPostings ? Math.round(t.salaryAttached) : "", t.roles.join("; "), t.duties.slice(0, 5).map((d) => `${d.company}: ${d.span}`).join(" | ")]));
   }
 
   return (
     <div className="flex flex-col gap-10">
       <div>
-        <div className="flex flex-wrap items-center gap-x-6 gap-y-2 border-b border-line pb-3 mb-4" role="tablist">
-          {["", ...STATUSES].map((s) => (
-            <button key={s || "all"} role="tab" aria-selected={status === s} onClick={() => setStatus(s)}
-              className={`mono py-1 border-b-2 ${status === s ? "text-ink border-ink" : "text-muted border-transparent hover:text-ink"}`}>
-              {s || "All"} <span className="text-muted">{themes.filter((t) => t.kind === "possible_gap" && (!s || t.status === s)).length}</span>
-            </button>
-          ))}
-          <button className="ml-auto btn btn-secondary btn-sm" onClick={exportCsv}>Export CSV</button>
+        <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <p className="max-w-[900px] text-[14px] text-muted">
+            Ranked by share of strong leads: of the {strongTotal} lead companies scoring 55 or more, how many have the theme in their postings. Click a row for verbatim phrases, companies and roles.
+          </p>
+          <button className="btn btn-secondary btn-sm shrink-0" onClick={exportCsv}>Export CSV</button>
         </div>
-        <p className="mb-4 max-w-[900px] text-[14px] text-muted">
-          Ranked by share of strong leads: of the {strongTotal} lead companies scoring 55 or more, how many have the theme in their postings. Click a row for verbatim phrases, companies and roles; set a status as you review.
-        </p>
-        {error && <p role="alert" className="text-assisted text-[13px] mb-3">{error}</p>}
-        <ThemeTable list={gaps} strongTotal={strongTotal} open={open} setOpen={setOpen} onStatus={onStatus} />
+        <ThemeTable list={gaps} strongTotal={strongTotal} open={open} setOpen={setOpen} />
       </div>
 
       {human.length > 0 && (
@@ -207,7 +173,7 @@ export function GapsView({ themes: initial, strongTotal, initialStatus }: { them
             </span>
           </button>
           <Collapse open={humanOpen}>
-            <div className="pt-4"><ThemeTable list={human} strongTotal={strongTotal} open={open} setOpen={setOpen} onStatus={onStatus} /></div>
+            <div className="pt-4"><ThemeTable list={human} strongTotal={strongTotal} open={open} setOpen={setOpen} /></div>
           </Collapse>
         </div>
       )}
