@@ -42,18 +42,27 @@ function Cites({ ids, refs }: { ids: string[]; refs: Record<string, Ref> }) {
   );
 }
 
-function BriefCard({ title, items, refs, empty, wide = false }: { title: string; items: { text: string; cites: string[]; task_id?: string }[]; refs: Record<string, Ref>; empty: string; wide?: boolean }) {
+// One short card per brief field, in the style of a case summary: a label and
+// one or two sentences, with citation chips.
+function BriefCard({ title, items, refs, empty, wide = false, children }: { title: string; items?: { text: string; cites: string[]; task_id?: string }[]; refs: Record<string, Ref>; empty?: string; wide?: boolean; children?: React.ReactNode }) {
   return (
     <div className={`rounded-[14px] border border-line bg-surface p-5 ${wide ? "md:col-span-2" : ""}`}>
       <span className="label">{title}</span>
-      <div className="mt-3 flex flex-col gap-2.5 text-[16px] leading-relaxed text-body">
-        {items.length ? items.map((s, i) => (
-          <p key={i}>{s.task_id && <span className="font-mono text-[12px] text-covered mr-2">{s.task_id}</span>}{s.text}<Cites ids={s.cites} refs={refs} /></p>
-        )) : <p className="text-muted">{empty}</p>}
+      <div className="mt-2 text-[16px] leading-relaxed text-body">
+        {children ?? (items?.length ? items.map((s, i) => (
+          <span key={i}>{i > 0 && " "}{s.task_id && <span className="font-mono text-[12px] text-covered mr-1.5">{s.task_id}</span>}{s.text}<Cites ids={s.cites} refs={refs} /></span>
+        )) : <span className="text-muted">{empty}</span>)}
       </div>
     </div>
   );
 }
+
+// What the live-agent number means, in the words of the posting check.
+const LIVE_NOTE: Record<number, string> = {
+  0: "The postings don't show the agent is live yet",
+  15: "A posting says the agent is in production",
+  25: "A posting names the product or its usage volume",
+};
 
 export default async function CompanyPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -95,8 +104,9 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
   const bestQuote = qualifying.map((p) => ({ p, e: extractionOf(p)?.verified_evidence?.[0] })).find((x) => x.e);
   const otherPostings = v.postings.filter((p) => !p.passedGates);
 
+  const single = qualifying.length === 1;
   const headline = isLead
-    ? `${company.name} is hiring ${qualifying.length} ${qualifying.length === 1 ? "role" : "roles"} for NeoSigma's work, the best at ${pct(breakdown!.overlap.bestOverlap)} overlap.`
+    ? `${company.name} is hiring ${qualifying.length} ${single ? "role" : "roles"} for NeoSigma's work, ${single ? "with a" : "the best at"} ${pct(breakdown!.overlap.bestOverlap)} overlap.`
     : `No role at ${company.name} passed both gates.`;
 
   return (
@@ -124,40 +134,41 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
           {/* Stat strip */}
           <div className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-5 pb-14">
             <StatBlock value={Math.round(breakdown!.total)} label="Lead score" href="#score" note="Out of 100. See the breakdown below." />
-            <StatBlock value={pct(breakdown!.overlap.bestOverlap)} label="Best overlap" href="#roles" note={`${qualifying.length} qualifying ${qualifying.length === 1 ? "role" : "roles"}`} />
-            <StatBlock value={`${breakdown!.live.strength}/25`} label="Agent already live" href="#roles" note={LIVE_STRENGTH_TEXT[breakdown!.live.strength]} />
-            <StatBlock value={avgPay != null ? money(avgPay, { compact: true }) : "–"} label="Avg. salary" href="#salary" note={posted.length ? `${posted.length} of ${salaries.length} ${salaries.length === 1 ? "role lists" : "roles list"} a salary; middle of each posted range` : "No salary posted"} />
+            <StatBlock value={pct(breakdown!.overlap.bestOverlap)} label={single ? "Role overlap" : "Best overlap"} href="#roles" note={single ? "Share of the role's duties NeoSigma can do or prepare" : `Best of ${qualifying.length} qualifying roles`} />
+            <StatBlock value={<>{breakdown!.live.strength}<span className="text-muted text-[0.55em]"> of 25 pts</span></>} label="Live agent proof" href="#score" note={LIVE_NOTE[breakdown!.live.strength] ?? LIVE_STRENGTH_TEXT[breakdown!.live.strength]} />
+            <StatBlock value={avgPay != null ? money(avgPay, { compact: true }) : "–"} label="Avg. salary" href="#roles" note={posted.length ? `${posted.length} of ${salaries.length} ${salaries.length === 1 ? "role lists" : "roles list"} a salary; middle of each posted range` : "No salary posted"} />
             <StatBlock value={<span className="block text-[18px] sm:text-[24px] leading-tight [overflow-wrap:normal] [word-break:keep-all]">{PROOF_SHORT[proofKey]}</span>} label="Lead with" href="#tasks" note={proof.name} />
           </div>
 
           {/* Brief */}
-          <Section id="brief" num="01" eyebrow="The brief" title="Why them, and what to say.">
+          <Section id="brief" num="01" eyebrow="The brief" title="Why them.">
             {rendered ? (
               <>
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                  <BriefCard title="Why them" items={rendered.brief.why_them} refs={refs} empty="No qualifying evidence stored." />
-                  <BriefCard title="Why now" items={rendered.brief.why_now} refs={refs} empty="No active triggers in the last 90 days." />
-                  <BriefCard title="What they're doing by hand" items={rendered.brief.by_hand} refs={refs} empty="No covered duties stored." />
+                  <BriefCard title="Why them" items={rendered.brief.why_them.slice(0, 1)} refs={refs} empty="No qualifying evidence stored." />
+                  <BriefCard title="Why now" items={rendered.brief.why_now.slice(0, 1)} refs={refs} empty="No active trigger in the last 90 days." />
+                  <BriefCard title="Done by hand today" refs={refs}>
+                    {rendered.brief.by_hand.length ? (
+                      <ul className="flex flex-col gap-1">
+                        {rendered.brief.by_hand.slice(0, 3).map((s, i) => (
+                          <li key={i}><span className="font-mono text-[12px] text-covered mr-1.5">{s.task_id}</span>{s.text}<Cites ids={s.cites} refs={refs} /></li>
+                        ))}
+                      </ul>
+                    ) : <span className="text-muted">No covered duties stored.</span>}
+                  </BriefCard>
                   <BriefCard title={`Lead with: ${proof.name}`} items={rendered.brief.proof.text ? [rendered.brief.proof] : []} refs={refs} empty={proof.claim} />
-                  <div className="rounded-[14px] border border-line bg-surface p-5 md:col-span-2">
-                    <div className="flex flex-wrap items-center justify-between gap-3">
-                      <span className="label">Draft opening message</span>
-                      <CopyButton text={brief!.draftMessage} label="Copy message" />
+                  <BriefCard wide title="Opening message" refs={refs}>
+                    <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
+                      <p className="text-ink whitespace-pre-wrap max-w-[900px]">{brief!.draftMessage}</p>
+                      <span className="shrink-0"><CopyButton text={brief!.draftMessage} label="Copy" /></span>
                     </div>
-                    <p className="mt-3 text-[16.5px] text-ink whitespace-pre-wrap leading-[1.7] max-w-[900px]">{brief!.draftMessage}</p>
-                    {rendered.brief.draft_message_duty && refs[rendered.brief.draft_message_duty] && (
-                      <Link href={refs[rendered.brief.draft_message_duty].href} className="mono !text-[12px] text-muted hover:text-ink mt-3 inline-block">
-                        References “{refs[rendered.brief.draft_message_duty].label.slice(0, 90)}{refs[rendered.brief.draft_message_duty].label.length > 90 ? "…" : ""}” →
-                      </Link>
-                    )}
-                    <p className="mono !text-[11px] text-muted mt-3">Draft only. Nothing is sent from this app; a person reviews and sends.</p>
-                  </div>
-                  {rendered.brief.missing.length > 0 && (
-                    <BriefCard wide title="Missing data" items={rendered.brief.missing.map((m) => ({ text: m, cites: [] }))} refs={refs} empty="" />
-                  )}
+                  </BriefCard>
                 </div>
                 <div className="mt-4">
-                  <Note>Written by {brief!.model} on {shortDate(brief!.generatedAt)} from the stored data on this page only. Every sentence cites the posting span or news item it came from (the chips); sentences without a valid citation are dropped. {brief!.reviewed ? "Reviewed by hand." : "Not yet reviewed by hand."}</Note>
+                  <Note>
+                    Written by {brief!.model} on {shortDate(brief!.generatedAt)} from the data on this page only; each chip links to the posting line or news item behind the sentence.
+                    {rendered.brief.missing.length > 0 && <> Missing: {rendered.brief.missing.slice(0, 2).join("; ").replace(/\.$/, "")}.</>} Draft only; nothing is sent from this app.
+                  </Note>
                 </div>
               </>
             ) : (
@@ -210,6 +221,7 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
               })}
             </div>
             <div className="mt-3 hidden sm:flex justify-end gap-10 pr-5"><span className="label">Posted range</span><span className="label">Midpoint (USD)</span></div>
+            <div className="mt-3"><Note>{avgPay != null ? `Average salary ${money(avgPay)} a year: the mean of each posted range's midpoint, across the ${posted.length} ${posted.length === 1 ? "role" : "roles"} that list one.` : "No qualifying role lists a salary, so nothing is shown; nothing is estimated."} Non-USD salaries are converted at the ECB reference rate.</Note></div>
           </>
         )}
         {otherPostings.length > 0 && (
@@ -317,7 +329,7 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               {([
                 ["NeoSigma can do the work", breakdown!.overlap.points, breakdown!.overlap.max, `The best qualifying role does ${pct(breakdown!.overlap.bestOverlap)} NeoSigma work${breakdown!.overlap.extraRoles ? `, plus ${breakdown!.overlap.bonus.toFixed(1)} points for ${breakdown!.overlap.extraRoles} more qualifying ${breakdown!.overlap.extraRoles === 1 ? "role" : "roles"}` : ""}.`],
-                ["Agent already live", breakdown!.live.points, breakdown!.live.max, `${LIVE_STRENGTH_TEXT[breakdown!.live.strength]} (${breakdown!.live.strength} of 25)${bestQuote?.e ? `: “${bestQuote.e.quote}”` : ""}.`],
+                ["Live agent proof", breakdown!.live.points, breakdown!.live.max, `${LIVE_STRENGTH_TEXT[breakdown!.live.strength]} (${breakdown!.live.strength} of 25)${bestQuote?.e ? `: “${bestQuote.e.quote}”` : ""}.`],
                 ["Looks like a buyer", breakdown!.fit.points, breakdown!.fit.max, `${segmentName(company.segment)} (${Math.round(breakdown!.fit.segmentScore * 100)}% segment fit), ${company.employeeBand === "unknown" ? "size unknown" : `${company.employeeBand} employees`}${breakdown!.fit.capped ? "; capped because agent platforms may build in-house" : ""}.`],
                 ["Reason to call now", breakdown!.timing.points, breakdown!.timing.max, breakdown!.timing.topTrigger ? `${TRIGGER_NAMES[breakdown!.timing.topTrigger.kind]} on ${shortDate(breakdown!.timing.topTrigger.date)}, the strongest of ${active.length} active ${active.length === 1 ? "trigger" : "triggers"}.` : "No active trigger in the last 90 days."],
               ] as const).map(([name, pts, max, text]) => (
@@ -331,35 +343,14 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
             <div className="mt-4"><Note>Default weights: 40 overlap, 25 live agent, 15 fit, 20 timing. <Link href="/method#weights" className="underline underline-offset-4">How scores are calculated</Link>.</Note></div>
           </Section>
 
-          {/* Salaries */}
-          <Section id="salary" num="07" eyebrow="Salaries" title={avgPay != null ? `Qualifying roles pay ${money(avgPay)} a year on average.` : "No salary posted, so no figure."}>
-            <div className="rounded-[14px] border border-line bg-surface overflow-x-auto">
-              <table className="w-full text-[14px] md:min-w-[560px]">
-                <thead className="border-b border-line">
-                  <tr>{["Role", "Posted range", "Midpoint (USD)"].map((h, i) => <th key={h} className={`px-4 py-3 font-normal ${i ? "text-right" : "text-left"}`}><span className="label">{h}</span></th>)}</tr>
-                </thead>
-                <tbody className="divide-y divide-line">
-                  {salaries.map((x) => (
-                    <tr key={x.postingId}>
-                      <td className="px-4 py-3"><Link href={`/postings/${x.postingId}`} className="text-ink underline decoration-line-strong underline-offset-4 hover:decoration-ink">{x.title}</Link></td>
-                      <td className="px-4 py-3 text-right text-body">{salaryRange(x) ?? <span className="text-muted">No salary posted</span>}</td>
-                      <td className="px-4 py-3 text-right text-ink">{x.salary ? money(x.salary.mid) : "–"}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            <div className="mt-3"><Note>Average salary = the mean of each role&apos;s posted-range midpoint, across roles that list a salary. Non-USD salaries are converted at the ECB reference rate. Nothing is estimated for roles without a salary.</Note></div>
-          </Section>
-
           {/* Tools */}
-          <Section num="08" eyebrow="Tools named" title={tools.length ? "What the team already uses." : "No tools named in the postings."}>
+          <Section num="07" eyebrow="Tools named" title={tools.length ? "What the team already uses." : "No tools named in the postings."}>
             {tools.length > 0 && <ul className="flex flex-wrap gap-2">{tools.map((t) => <li key={t} className="rounded-full border border-line-strong bg-surface px-3 py-1 text-[14px] text-ink">{t}</li>)}</ul>}
             <div className="mt-3"><Note>Shown for context, not scored.</Note></div>
           </Section>
 
           {/* Gaps */}
-          <Section num="09" eyebrow="The gaps" title={themes.length ? "Work in these roles that NeoSigma doesn't cover yet." : "No gap themes in these roles."}>
+          <Section num="08" eyebrow="The gaps" title={themes.length ? "Work in these roles that NeoSigma doesn't cover yet." : "No gap themes in these roles."}>
             <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
               {themes.map((t) => {
                 const count = qualDuties.filter((d) => d.gapThemeId === t.id).length;

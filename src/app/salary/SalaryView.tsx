@@ -83,13 +83,13 @@ export function SalaryView({ rows }: { rows: SalaryRow[] }) {
                 <Tooltip content={<BarTip />} cursor={{ fill: "var(--surface-2)" }} />
                 <Bar dataKey="value" fill="var(--covered)" radius={[0, 4, 4, 0]} maxBarSize={20} isAnimationActive={false}
                   label={{ position: "right", fill: "var(--text-body)", fontSize: 12, formatter: (v: unknown) => money(Number(v), { compact: true }) }}
-                  onClick={(d: unknown) => { const slug = (d as { payload?: CompanyBar }).payload?.slug; if (slug) router.push(`/companies/${slug}#salary`); }}
+                  onClick={(d: unknown) => { const slug = (d as { payload?: CompanyBar }).payload?.slug; if (slug) router.push(`/companies/${slug}#roles`); }}
                   style={{ cursor: "pointer" }} />
               </BarChart>
             </ResponsiveContainer>
           </div>
           <ul className="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-[13px]">
-            {byCompany.map((c) => <li key={c.slug}><Link href={`/companies/${c.slug}#salary`} className="text-ink underline underline-offset-4 decoration-line-strong">{c.company}</Link> <span className="text-muted">{money(c.value, { compact: true })}</span></li>)}
+            {byCompany.map((c) => <li key={c.slug}><Link href={`/companies/${c.slug}#roles`} className="text-ink underline underline-offset-4 decoration-line-strong">{c.company}</Link> <span className="text-muted">{money(c.value, { compact: true })}</span></li>)}
           </ul>
         </div>
       </section>

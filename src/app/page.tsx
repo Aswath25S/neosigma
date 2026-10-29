@@ -31,8 +31,9 @@ export default function Home() {
       <section className="relative mx-auto max-w-[1200px] px-4 sm:px-6 pt-20 sm:pt-28 pb-16">
         <h1 className="display max-w-[1040px]">Find the teams doing NeoSigma&apos;s work by hand.</h1>
         <p className="mt-6 text-[19px] text-body max-w-[900px]">
-          Job postings for people who review agent conversations, build eval sets from failures, and sign off releases. Each one is
-          split into duties, matched to NeoSigma&apos;s six tasks, checked for a live agent, and ranked.
+          NeoSigma automates the upkeep of live AI agents: finding failures, turning them into tests, and checking every change. Many
+          companies still hire people to do this by hand. This site reads job postings from {readSources().length} companies, uses Claude
+          to match each role to NeoSigma&apos;s six tasks, and ranks the companies as sales leads.
         </p>
         <div className="mt-10 flex flex-wrap gap-3">
           <Link href="/leads" className="btn btn-primary">See leads</Link>

@@ -96,7 +96,7 @@ export const BriefSchema = z.object({
   why_now: z.array(Cited),
   by_hand: z.array(Cited.extend({ task_id: TaskIdEnum })),
   proof: z.object({ text: z.string(), cites: z.array(z.string()) }),
-  draft_message: z.string().describe("4–6 sentences, plain language"),
+  draft_message: z.string().describe("2–3 sentences, plain language"),
   draft_message_duty: z.string().describe("The D id of the duty the draft message references"),
   missing: z.array(z.string()).describe("Fields that were empty, stated plainly"),
 });

@@ -21,7 +21,7 @@ type Tab = (typeof TABS)[number];
 // Plain-language names for the four score parts; formulas live on /method.
 const PARTS = [
   { key: "overlap", name: "NeoSigma can do the work", desc: "How much of the work in their best qualifying role is one of NeoSigma's six tasks, plus a bonus for each extra qualifying role." },
-  { key: "live_agent", name: "Agent already live", desc: "How clearly the posting shows an agent real customers already use. A volume number or named product scores highest." },
+  { key: "live_agent", name: "Live agent proof", desc: "How clearly the posting shows an agent real customers already use. A volume number or named product scores highest." },
   { key: "fit", name: "Looks like a buyer", desc: "Segment (agent-native companies first, agent platforms capped since they may build in-house) and company size." },
   { key: "timing", name: "Reason to call now", desc: "The strongest recent trigger: first eval hire, funding, an agent launch, a new model release, several roles open." },
 ] as const;
@@ -145,7 +145,7 @@ export function LeadsView({ leads, rejected, initial }: { leads: LeadRow[]; reje
   return (
     <div className="grid grid-cols-1 gap-8 lg:grid-cols-[260px_minmax(0,1fr)]">
       {/* What the score weighs */}
-      <aside className="lg:sticky lg:top-24 lg:self-start">
+      <aside className="lg:self-start">
         <div className="rounded-[14px] border border-line bg-surface p-5">
           <div className="flex items-baseline justify-between gap-3">
             <span className="label whitespace-nowrap">Score weights</span>
@@ -311,7 +311,7 @@ const LeadRowView = memo(function LeadRowView({ l, isOpen, custom, parts, totalW
             className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px] border border-line-strong bg-surface-2 text-body hover:border-muted hover:text-ink"
             aria-expanded={isOpen} aria-controls={`lead-${l.slug}`} aria-label={isOpen ? `Hide details for ${l.name}` : `Show details for ${l.name}`}
             onClick={(e) => { e.stopPropagation(); onToggle(l.slug); }}>
-            <svg aria-hidden="true" viewBox="0 0 16 16" className={`h-4 w-4 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}>
+            <svg aria-hidden="true" viewBox="0 0 16 16" className={`h-4 w-4 transition-transform duration-[550ms] ${isOpen ? "rotate-180" : ""}`}>
               <path d="M3.5 6l4.5 4.5L12.5 6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </button>
@@ -320,7 +320,7 @@ const LeadRowView = memo(function LeadRowView({ l, isOpen, custom, parts, totalW
       </tr>
       <tr id={`lead-${l.slug}`} className={isOpen ? "bg-surface" : ""} aria-hidden={!isOpen}>
         <td colSpan={6} className="p-0">
-          <div className={`grid transition-[grid-template-rows,opacity] duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)] ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
+          <div className={`grid transition-[grid-template-rows,opacity] duration-[550ms] ease-[cubic-bezier(0.45,0,0.2,1)] ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
             <div className="min-h-0 overflow-hidden">
               <div className="px-3 sm:px-5 pb-6 pt-2" inert={!isOpen}>
                 <Details l={l} parts={parts} totalWeight={totalWeight} />

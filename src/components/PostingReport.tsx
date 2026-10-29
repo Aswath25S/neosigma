@@ -104,7 +104,7 @@ export function PostingReport({ data, ats }: { data: ReportData; ats?: string })
           note={s.min != null
             ? <>From the {s.source === "board" ? "job board" : "posting text"}{s.midpoint != null ? <>; midpoint {money(s.midpoint, { compact: true })}{s.converted ? " in USD" : ""}</> : ""}</>
             : "No salary in the posting"} />
-        <Stat value={<span className="text-[44px]">{g.liveAgentStrength}<span className="text-muted text-[22px]">/25</span></span>} label="Agent already live"
+        <Stat value={<span className="text-[44px]">{g.liveAgentStrength}<span className="text-muted text-[22px]">/25</span></span>} label="Live agent proof"
           note={LIVE_STRENGTH_TEXT[g.liveAgentStrength] ?? ""} />
       </div>
 

@@ -29,8 +29,10 @@ export default async function LeadsPage({ searchParams }: { searchParams: Promis
     <div className="mx-auto max-w-[1200px] px-4 sm:px-6">
       <PageHeader eyebrow="The leads" title={`${live.length} companies are paying people to do NeoSigma's work by hand.`}>
         Each has at least one open role whose main job is checking and improving a live AI agent, and proof in the posting that the agent is
-        already in front of real users. Every company gets a lead score from 0 to 100, computed in code from the extracted fields.
-        Click any row to see its qualifying roles and why it scores what it does.
+        already in front of real users. Every company gets a lead score from 0 to 100. Claude reads the postings and the news; the score is
+        then fixed arithmetic on what it found, so the same data always gives the same score: how much of the role NeoSigma can do (40 points),
+        how clearly the agent is live (25), how well the company fits as a buyer (15), and whether recent news gives a reason to reach out
+        now (20). Move the weights to re-rank. Click any row to see its qualifying roles and why it scores what it does.
       </PageHeader>
     </div>
     {/* Wider than the page column: the weights box sits further left so the
