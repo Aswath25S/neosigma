@@ -257,12 +257,25 @@ select:focus, input:focus, textarea:focus {
 /* Montserrat reads thin on near-black; give it a heavier default. */
 .font-display { font-weight: 500; }
 
-/* ---- page transitions (React ViewTransition, see app/template.tsx) ---- */
+/* ---- page transitions (React ViewTransition, see components/PageTransition.tsx) ----
+   One timing for every navigation: the old page fades out quickly, then the
+   new one fades in and rises slightly. The nav bar is pinned so it never
+   flickers, and nothing else on the page runs the browser's own crossfade. */
+:root {
+  --page-exit: 150ms;
+  --page-enter: 260ms;
+}
+::view-transition { pointer-events: none; }
+::view-transition-old(root),
+::view-transition-new(root) { animation: none; }
+::view-transition-group(site-header) { animation: none; z-index: 100; }
+::view-transition-old(site-header) { display: none; }
+::view-transition-new(site-header) { animation: none; }
 ::view-transition-old(.page-out) {
-  animation: 140ms ease-in both page-fade-out;
+  animation: var(--page-exit) ease-in both page-fade-out;
 }
 ::view-transition-new(.page-in) {
-  animation: 240ms cubic-bezier(0.2, 0.8, 0.2, 1) 60ms both page-fade-in;
+  animation: var(--page-enter) cubic-bezier(0.2, 0.8, 0.2, 1) calc(var(--page-exit) * 0.6) both page-fade-in;
 }
 @keyframes page-fade-out {
   to { opacity: 0; }
@@ -271,8 +284,9 @@ select:focus, input:focus, textarea:focus {
   from { opacity: 0; transform: translateY(6px); }
 }
 @media (prefers-reduced-motion: reduce) {
-  ::view-transition-old(.page-out),
-  ::view-transition-new(.page-in) { animation: none; }
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) { animation-duration: 0s !important; animation-delay: 0s !important; }
 }
 
 .hl-active { outline: 2px solid var(--text); outline-offset: 1px; }

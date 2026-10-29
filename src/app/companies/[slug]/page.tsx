@@ -31,11 +31,12 @@ function Cites({ ids, refs }: { ids: string[]; refs: Record<string, Ref> }) {
       {ids.map((id) => {
         const r = refs[id];
         if (!r) return null;
-        return (
-          <a key={id} href={r.href} target={r.external ? "_blank" : undefined} rel="noreferrer" title={r.label}
-            className="ml-1.5 align-[2px] font-mono text-[10.5px] text-muted border border-line-strong rounded-full px-1.5 py-px hover:text-ink hover:border-muted">
-            {id}
-          </a>
+        const cls = "ml-1.5 align-[2px] font-mono text-[10.5px] text-muted border border-line-strong rounded-full px-1.5 py-px hover:text-ink hover:border-muted";
+        // In-site citations use Link so they navigate with the page transition.
+        return r.external ? (
+          <a key={id} href={r.href} target="_blank" rel="noreferrer" title={r.label} className={cls}>{id}</a>
+        ) : (
+          <Link key={id} href={r.href} title={r.label} className={cls}>{id}</Link>
         );
       })}
     </span>

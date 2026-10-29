@@ -1,3 +1,4 @@
+import Link from "next/link";
 import site from "../../config/site.json";
 
 function IconButton({ href, label, children }: { href: string; label: string; children: React.ReactNode }) {
@@ -19,7 +20,7 @@ export function Footer() {
     <footer className="border-t border-line mt-24">
       <div className="mx-auto max-w-[1200px] px-4 sm:px-6 py-8 flex flex-col sm:flex-row gap-6 sm:items-center">
         <p className="text-sm text-muted max-w-[760px] leading-relaxed">
-          <span className="text-ink">Independent prototype</span> by <a href="/about" className="text-ink underline underline-offset-4 decoration-line-strong hover:decoration-ink">{site.builder}</a>, built to study NeoSigma&apos;s market.{" "}
+          <span className="text-ink">Independent prototype</span> by <Link href="/about" className="text-ink underline underline-offset-4 decoration-line-strong hover:decoration-ink">{site.builder}</Link>, built to study NeoSigma&apos;s market.{" "}
           <span className="text-ink">Not affiliated with or endorsed by NeoSigma.</span> Coverage based on neosigma.ai as of{" "}
           {site.coverage_as_of}.
         </p>

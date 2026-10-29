@@ -25,7 +25,7 @@ export function Nav() {
   const active = (href: string) => path === href || path.startsWith(href + "/") || (href === "/leads" && path.startsWith("/companies")) || (href === "/salary" && path.startsWith("/postings"));
 
   return (
-    <header className="sticky top-0 z-40 bg-[color-mix(in_srgb,var(--bg)_92%,transparent)] backdrop-blur border-b border-line">
+    <header style={{ viewTransitionName: "site-header" }} className="sticky top-0 z-40 bg-[color-mix(in_srgb,var(--bg)_92%,transparent)] backdrop-blur border-b border-line">
       <div className="mx-auto max-w-[1200px] min-h-16 px-4 sm:px-6 py-3 flex flex-wrap items-center gap-x-8 gap-y-2">
         <Wordmark />
         <nav className="flex flex-wrap items-center gap-x-6 gap-y-2 sm:gap-x-9 sm:ml-auto" aria-label="Main">
