@@ -142,15 +142,25 @@ export function LeadsView({ leads, rejected, initial }: { leads: LeadRow[]; reje
     </th>
   );
 
+  const [weightsOpen, setWeightsOpen] = useState(false);
+
   return (
     <div className="grid grid-cols-1 gap-8 lg:grid-cols-[260px_minmax(0,1fr)]">
       {/* What the score weighs */}
       <aside className="lg:self-start">
         <div className="card card-pad">
-          <div className="flex items-baseline justify-between gap-3">
-            <span className="label whitespace-nowrap">Score weights</span>
-            <button onClick={() => setParts({ ...DEFAULT_WEIGHTS.parts })} className={`mono !text-[12px] ${isDefault ? "text-muted" : "text-ink underline underline-offset-4"}`}>Reset</button>
+          <div className="flex items-center justify-between gap-3">
+            {/* On phones the sliders fold away so the leads come first. */}
+            <button type="button" onClick={() => setWeightsOpen((o) => !o)} aria-expanded={weightsOpen}
+              className="flex items-center gap-2 lg:pointer-events-none" aria-controls="weights-body">
+              <span className="label whitespace-nowrap">Score weights</span>
+              <svg aria-hidden="true" viewBox="0 0 16 16" className={`h-4 w-4 text-muted transition-transform duration-300 lg:hidden ${weightsOpen ? "rotate-180" : ""}`}>
+                <path d="M3.5 6l4.5 4.5L12.5 6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+            <button onClick={() => setParts({ ...DEFAULT_WEIGHTS.parts })} className={`mono !text-[12px] py-1 ${isDefault ? "text-muted" : "text-ink underline underline-offset-4"}`}>Reset</button>
           </div>
+          <div id="weights-body" className={weightsOpen ? "" : "max-lg:hidden"}>
           <div className="mt-5 flex flex-col gap-5">
             {PARTS.map((p) => (
               <div key={p.key}>
@@ -169,6 +179,7 @@ export function LeadsView({ leads, rejected, initial }: { leads: LeadRow[]; reje
             Default: 40 / 25 / 15 / 20. Slide to re-rank instantly.{!isDefault && " Scores below use your weights."}
           </p>
           <Link href="/method#numbers" className="mono !text-[12px] text-body hover:text-ink mt-3 inline-block underline underline-offset-4 decoration-line-strong">How scores are calculated</Link>
+          </div>
         </div>
       </aside>
 

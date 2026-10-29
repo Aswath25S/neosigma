@@ -29,6 +29,15 @@ export function taskShort(id: string | null | undefined): string {
   return coverageMap.tasks.find((t) => t.id === id)?.short ?? "";
 }
 
+// Stored model text names the tasks by code ("partly matches T4", "outside
+// T1-T6"). Readers never see the codes, so they are swapped for names on display.
+export function plainTasks<T extends string | null | undefined>(text: T): T {
+  if (!text) return text;
+  return text
+    .replace(/\bT1\s*(?:[-–]|to)\s*T6\b/g, "NeoSigma's six tasks")
+    .replace(/\bT([1-6])\b/g, (_, n) => taskShort(`T${n}`).toLowerCase()) as T;
+}
+
 export const MODELS = {
   extract: "claude-sonnet-5-5",
   screen: "claude-haiku-5-5",

@@ -161,7 +161,7 @@ export const FAIL_REASON_TEXT: Record<FailReason, string> = {
   out_of_scope_location: "The role is outside the regions in scope.",
   too_old: `The posting is older than ${weights.fetch.max_posting_age_days} days.`,
   stage2_too_few_duties: "Fewer than 3 duties are Covered or Assisted.",
-  conditional_too_few_tasks: `A conditional title needs at least ${roles.conditional.min_distinct_tasks} of T1–T6 as Covered or Assisted.`,
+  conditional_too_few_tasks: `A conditional title needs at least ${roles.conditional.min_distinct_tasks} of NeoSigma's six tasks as Covered or Assisted.`,
   gate_overlap: `Fewer than ${Math.round(roles.gate_overlap_min_share * 100)}% of the duties are Covered or Assisted.`,
   gate_live_agent: "The posting shows no agent already used by real customers or users.",
   extraction_error: "The posting could not be read.",

@@ -58,15 +58,15 @@ export default function Home() {
           <Link href="/leads" className="ml-auto mono text-body hover:text-ink">All {h.companies} leads →</Link>
         </div>
         {h.top.length ? (
-          <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
-            <table className="table min-w-[720px]">
+          <div className="sm:overflow-x-auto">
+            <table className="table sm:min-w-[720px]">
               <thead>
                 <tr>
-                  <th className="w-12">#</th>
+                  <th className="w-10 sm:w-12">#</th>
                   <th>Company</th>
-                  <th>Segment</th>
+                  <th className="max-sm:hidden">Segment</th>
                   <th className="text-right">Score</th>
-                  <th className="pl-8">Relevant role</th>
+                  <th className="pl-8 max-sm:hidden">Relevant role</th>
                   <th className="text-right">Overlap</th>
                 </tr>
               </thead>
@@ -79,10 +79,11 @@ export default function Home() {
                       <td>
                         {/* The whole row links to the brief; the stretched link sits on the name. */}
                         <Link href={`/companies/${l.slug}`} className="text-ink font-medium after:absolute after:inset-0 hover:underline underline-offset-4">{l.name}</Link>
+                        <div className="mt-0.5 text-[13px] text-muted line-clamp-2 sm:hidden">{best?.title}</div>
                       </td>
-                      <td className="text-[14px]">{segmentName(l.segment)}</td>
+                      <td className="text-[14px] max-sm:hidden">{segmentName(l.segment)}</td>
                       <td className="text-right font-display text-[20px] text-ink">{Math.round(l.leadScore ?? 0)}</td>
-                      <td className="text-[14px] pl-8 max-w-[420px] truncate" title={best?.title}>{best?.title}</td>
+                      <td className="text-[14px] pl-8 max-w-[420px] truncate max-sm:hidden" title={best?.title}>{best?.title}</td>
                       <td className="text-right text-[14px] text-ink">{Math.round((best?.overlap ?? 0) * 100)}%</td>
                     </tr>
                   );

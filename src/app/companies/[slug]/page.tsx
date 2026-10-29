@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getCompanyBySlug, extractionOf, dutyCounts, getLeadRows, type DutyRow } from "@/lib/data";
-import { coverageMap, segmentName, TASK_IDS } from "@/lib/config";
+import { coverageMap, plainTasks, segmentName, TASK_IDS } from "@/lib/config";
 import { activeTriggers, DEFAULT_WEIGHTS, LIVE_STRENGTH_TEXT, shownTriggers, TRIGGER_NAMES } from "@/lib/scoring";
 import { pickProof, type RenderedBrief, type Ref } from "@/lib/brief";
 import { money, pct, shortDate } from "@/lib/format";
@@ -253,7 +253,7 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
                   <span><LabelChip label={d.label} kind={d.notCoveredKind} /></span>
                   <Link href={`/postings/${p.id}#d${d.idx}`} className="text-[14.5px] text-ink hover:underline underline-offset-4">{d.text}</Link>
                   <span className="text-[13px] text-muted">
-                    {d.taskId ? coverageMap.tasks.find((t) => t.id === d.taskId)?.does : d.rationale}
+                    {d.taskId ? coverageMap.tasks.find((t) => t.id === d.taskId)?.does : plainTasks(d.rationale)}
                   </span>
                 </li>
               );

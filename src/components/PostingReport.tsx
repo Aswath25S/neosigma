@@ -3,6 +3,7 @@ import { DutySplit, ShareLegend } from "./ui";
 import { money, pct } from "@/lib/format";
 import { LIVE_STRENGTH_TEXT } from "@/lib/scoring";
 import roles from "../../config/roles.json";
+import { plainTasks } from "@/lib/config";
 
 export interface ReportGates {
   titleList: string;
@@ -120,7 +121,7 @@ export function PostingReport({ data, ats, variant = "full" }: { data: ReportDat
             <span className="label">Filter checks</span>
             <span className={`font-mono text-[12px] font-semibold ${g.passed ? "text-covered" : "text-assisted"}`}>{g.passed ? "QUALIFYING LEAD ROLE" : "NOT A LEAD"}</span>
           </div>
-          {!g.passed && (g.failText || g.failDetail) && <p className="text-[14px] text-ink mt-1 mb-2">{g.failText} {g.failDetail && <span className="text-muted">{g.failDetail}</span>}</p>}
+          {!g.passed && (g.failText || g.failDetail) && <p className="text-[14px] text-ink mt-1 mb-2">{plainTasks(g.failText)} {g.failDetail && <span className="text-muted">{plainTasks(g.failDetail)}</span>}</p>}
           <Check ok={g.titleList !== "drop" && g.titleList !== "screen"} label={`Stage 1: ${g.titleList === "screen" ? "screened out" : g.titleList}`} detail={g.titleNote ?? "Matched by the stage-1 title lists."} />
           {hasDuties && (
             <>

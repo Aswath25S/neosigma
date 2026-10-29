@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { coverageMap } from "@/lib/config";
+import { coverageMap, plainTasks } from "@/lib/config";
 import { NC_KIND_NAMES } from "@/lib/format";
 import { useHash } from "./useHash";
 import { LabelChip } from "./ui";
@@ -183,7 +183,7 @@ export function PostingEvidence({ data, ats }: { data: ReportData; ats?: string 
 
       {/* Bottom sheet for phones */}
       <div role="dialog" aria-label="Duty details" aria-hidden={sheet === null} inert={sheet === null}
-        className={`fixed inset-x-0 bottom-0 z-50 max-h-[62vh] overflow-y-auto rounded-t-2xl border-t border-line-strong bg-surface px-5 pb-[calc(1.25rem+env(safe-area-inset-bottom))] pt-3 shadow-[0_-12px_40px_rgba(0,0,0,0.6)] transition-transform duration-300 ease-out lg:hidden ${sheet !== null ? "translate-y-0" : "translate-y-full"}`}>
+        className={`fixed inset-x-0 bottom-0 z-50 max-h-[62vh] overflow-y-auto rounded-t-2xl border-t border-line-strong bg-surface px-5 pb-[calc(1.25rem+env(safe-area-inset-bottom))] pt-3 transition-[transform,box-shadow] duration-300 ease-out lg:hidden ${sheet !== null ? "translate-y-0 shadow-[0_-12px_40px_rgba(0,0,0,0.6)]" : "translate-y-[calc(100%+4rem)] shadow-none"}`}>
         <div className="mb-2 flex justify-center"><span className="h-1 w-10 rounded-full bg-line-strong" aria-hidden="true" /></div>
         <button onClick={() => setSheet(null)} className="absolute right-3 top-3 inline-flex h-9 w-9 items-center justify-center rounded-[8px] border border-line-strong text-body" aria-label="Close duty details">
           <svg aria-hidden="true" viewBox="0 0 16 16" className="h-4 w-4"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" /></svg>
@@ -217,7 +217,7 @@ function DutyDetail({ d }: { d: EvDuty }) {
       )}
       <div>
         <span className="label">Rationale</span>
-        <p className="mt-1 text-[14px] text-body">{d.rationale}</p>
+        <p className="mt-1 text-[14px] text-body">{plainTasks(d.rationale)}</p>
       </div>
       {d.gapTheme && <p className="text-[13px] text-body">Gap theme: <Link href={`/gaps#g${d.gapTheme.id}`} className="text-ink underline underline-offset-4 decoration-line-strong">{d.gapTheme.name}</Link></p>}
       <div>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getLeadRows } from "@/lib/data";
 import { FAIL_REASON_TEXT, type FailReason } from "@/lib/analyze";
 import { LeadsView } from "./LeadsView";
+import { plainTasks } from "@/lib/config";
 import { PageHeader } from "@/components/ui";
 
 export const dynamic = "force-dynamic";
@@ -18,8 +19,8 @@ export default async function LeadsPage({ searchParams }: { searchParams: Promis
     company: p.companyName,
     companySlug: p.companySlug,
     reason: p.failReason!,
-    reasonText: FAIL_REASON_TEXT[p.failReason as FailReason] ?? p.failReason!,
-    detail: p.failDetail,
+    reasonText: plainTasks(FAIL_REASON_TEXT[p.failReason as FailReason] ?? p.failReason!),
+    detail: plainTasks(p.failDetail),
     overlap: p.overlap,
     extracted: !!p.extractedAt,
   }));

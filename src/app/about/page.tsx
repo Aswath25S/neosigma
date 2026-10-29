@@ -39,7 +39,7 @@ export default function AboutPage() {
         </a>
         <p className="mt-8 text-[19px] text-body max-w-[900px] leading-relaxed">
           I built {site.name} to study NeoSigma&apos;s market from the outside: which companies pay people to do NeoSigma&apos;s
-          work by hand, what that work costs them, and what the product doesn&apos;t cover yet.{" "}
+          work by hand, what they pay for it, and what the product doesn&apos;t cover yet.{" "}
           <span className="text-ink">I&apos;d like to be considered for the Founding Business Generalist role on NeoSigma&apos;s Product and Growth team.</span>
         </p>
       </div>
