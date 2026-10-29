@@ -20,7 +20,7 @@ export default function Home() {
   const h = getHeadline();
   const stats = [
     { n: String(h.companies), label: "Qualifying companies", href: "/leads" },
-    { n: String(readSources().length), label: "Companies screened", href: "/method#sources" },
+    { n: String(readSources().length), label: "Companies screened", href: "/method#data" },
     { n: String(h.roles), label: "Qualifying roles", href: "/leads?sort=overlap" },
     { n: h.salaryRoles ? money(h.totalSalary, { compact: true }) : "—", label: "Total salary of these roles", href: "/salary" },
   ];

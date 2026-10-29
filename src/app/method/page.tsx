@@ -1,201 +1,198 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { coverageMap, roles, weights, SEGMENTS, modelReleaseFeeds } from "@/lib/config";
+import { coverageMap, roles, weights } from "@/lib/config";
 import { getMeta } from "@/lib/meta";
 import { getDb, schema } from "@/lib/db/client";
-import { FAIL_REASON_TEXT, type FailReason } from "@/lib/analyze";
-import { TRIGGER_NAMES } from "@/lib/scoring";
-import { pct, shortDate } from "@/lib/format";
-import { SectionHeading } from "@/components/ui";
+import { shortDate } from "@/lib/format";
+import { Note, Section } from "@/components/ui";
 import { readSources } from "@/lib/sources";
 
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = { title: "Method" };
 
-interface EvalMeta {
-  at: string; labeller: string; method: string; postings: number; duties: number; agree: number; missed: number;
-  accuracy: number; taskAccuracy: number; confusion: Record<string, number>;
+const STEPS: { name: string; summary: string; detail: string }[] = [
+  {
+    name: "Collect",
+    summary: "Read open jobs from public job boards.",
+    detail: "Every company on the list publishes its jobs through a public board (Greenhouse, Lever, Ashby, Workable, SmartRecruiters or Workday) that is meant to be read this way. LinkedIn, Indeed and Glassdoor are never touched.",
+  },
+  {
+    name: "Screen",
+    summary: "Keep roles whose main job is checking and improving an AI agent.",
+    detail: "Clear titles such as AI Quality Analyst are kept and unrelated ones such as Account Executive are dropped. Every other posting is judged on its description: Claude reads it and decides whether the role is really about agent quality.",
+  },
+  {
+    name: "Split into duties",
+    summary: "Break each posting into single duties.",
+    detail: "Claude lists each separate task the posting describes, one action per duty, and keeps the exact sentence it came from. That sentence is what the role breakdown page highlights, and every one is checked word for word against the posting.",
+  },
+  {
+    name: "Match",
+    summary: "Compare every duty with NeoSigma's six tasks.",
+    detail: "Each duty is labelled as something NeoSigma does, something it prepares for a person to decide, or not NeoSigma's work. When unsure, the stricter label wins, so doubtful matches never inflate the numbers.",
+  },
+  {
+    name: "Qualify",
+    summary: "Keep roles with enough NeoSigma work at companies whose agent is live.",
+    detail: "A good part of the role has to be NeoSigma's work, and the posting has to show, in its own words, that the AI agent is already used by real customers. A company that is still building its first agent is not a lead yet.",
+  },
+  {
+    name: "Rank and brief",
+    summary: "Score each company and write a short brief.",
+    detail: "The score is plain arithmetic, so the same data always gives the same score. Recent news (funding, launches, new model releases) adds a reason to reach out now. Claude then writes a short brief from the stored evidence only, and every sentence links to its source.",
+  },
+  {
+    name: "Find gaps",
+    summary: "Group the work NeoSigma doesn't do into themes.",
+    detail: "Duties outside the six tasks are grouped into themes such as building custom agents. Themes are ranked by how often they appear at strong leads, since a gap inside a good lead is the one most likely to come up on a sales call.",
+  },
+];
+
+const LABELS = [
+  { id: "covered", name: "NeoSigma does it", text: "The duty is one of the six tasks, done in a repeatable way.", example: "Review a sample of agent conversations each week and log failures." },
+  { id: "assisted", name: "NeoSigma prepares, a person decides", text: "NeoSigma does the legwork; a person makes the final call.", example: "Decide which failures to prioritize with the clinical team." },
+  { id: "not_covered", name: "Not NeoSigma's work", text: "Managing people, customer calls, roadmaps, or work outside the six tasks.", example: "Present findings to leadership." },
+];
+
+function Formula({ title, children, note }: { title: string; children: React.ReactNode; note: React.ReactNode }) {
+  return (
+    <div className="card card-pad flex flex-col gap-3">
+      <p className="h-card !text-[17px]">{title}</p>
+      <div className="card-inset font-mono text-[14px] leading-relaxed text-ink">{children}</div>
+      <p className="text-[14px] leading-relaxed text-body">{note}</p>
+    </div>
+  );
 }
 
 export default function MethodPage() {
   const db = getDb();
-  const evalMeta = getMeta<EvalMeta>("eval");
-  const span = getMeta<{ duties: number; found: number; at: string }>("span_check");
-  const lastFetch = getMeta<{ at: string; boards: number; failedBoards: string[]; postingsSeen: number; candidates: number; merged: number }>("last_fetch");
-  const lastNews = getMeta<{ at: string; companies: number }>("last_news");
-  const lastExtract = getMeta<{ at: string }>("last_extract");
-  const postings = db.select({ failReason: schema.postings.failReason, passed: schema.postings.passedGates, extractedAt: schema.postings.extractedAt }).from(schema.postings).all();
-  const reasonCounts = new Map<string, number>();
-  for (const p of postings) if (p.failReason) reasonCounts.set(p.failReason, (reasonCounts.get(p.failReason) ?? 0) + 1);
-  const passed = postings.filter((p) => p.passed).length;
-  const extracted = postings.filter((p) => p.extractedAt).length;
+  const lastFetch = getMeta<{ at: string; postingsSeen: number }>("last_fetch");
+  const lastNews = getMeta<{ at: string }>("last_news");
+  const postings = db.select({ passed: schema.postings.passedGates }).from(schema.postings).all();
+  const leadCount = db.select({ status: schema.companies.status }).from(schema.companies).all().filter((c) => c.status === "lead").length;
+  const qualifying = postings.filter((p) => p.passed).length;
   const sources = readSources();
-  const byAts = sources.reduce<Record<string, number>>((a, s) => ({ ...a, [s.ats]: (a[s.ats] ?? 0) + 1 }), {});
-
-  const toc = [
-    ["coverage", "01", "Coverage map"], ["roles", "02", "Which roles count"], ["gates", "03", "Filters and gates"],
-    ["weights", "04", "Scoring"], ["accuracy", "05", "Extraction accuracy"], ["audit", "06", "Filter audit"],
-    ["sources", "07", "Data sources"], ["limits", "08", "Known limits"],
-  ];
+  const minShare = Math.round(roles.gate_overlap_min_share * 100);
+  const p = weights.parts;
 
   return (
     <div className="mx-auto max-w-[1200px] px-4 sm:px-6">
       <div className="pt-10 sm:pt-14 pb-10 max-w-[900px]">
         <div className="label mb-4">Method</div>
-        <h1 className="h-page !text-[clamp(32px,5vw,44px)]">How every number is made</h1>
+        <h1 className="h-page !text-[clamp(32px,5vw,44px)]">How this site finds the teams doing NeoSigma&apos;s work by hand.</h1>
         <p className="mt-4 text-body text-[17px]">
-          Claude reads postings and splits them into duties. Everything after that — gates, overlap, lead scores and
-          salaries — is computed in code from the stored fields, so it is repeatable and each number traces back to a quote.
+          Companies that run an AI agent for customers often hire people to keep it good: reading conversations, turning failures into
+          tests, checking every change before release. Their job postings say so. This site reads those postings, splits each role into
+          duties, compares them with what NeoSigma does, and ranks the companies as leads. Claude reads and labels; plain code does all
+          the arithmetic, so every number traces back to a line in a posting.
+        </p>
+        <p className="mono text-muted mt-5">
+          {sources.length} companies · {lastFetch ? `${lastFetch.postingsSeen.toLocaleString()} open jobs scanned` : "not fetched yet"} · {qualifying} qualifying roles at {leadCount} companies
+          {lastFetch ? ` · jobs fetched ${shortDate(lastFetch.at)}` : ""}{lastNews ? ` · news ${shortDate(lastNews.at)}` : ""}
         </p>
       </div>
 
-      <div className="grid lg:grid-cols-[200px_minmax(0,1fr)] gap-10 lg:gap-14">
-        <nav className="hidden lg:block"><div className="sticky top-24">
-          <div className="label mb-4">On this page</div>
-          <ol>{toc.map(([id, n, t]) => (
-            <li key={id}><a href={`#${id}`} className="flex gap-3 py-1.5 pl-3 border-l border-line text-[14px] text-muted hover:text-ink"><span className="secnum pt-0.5">{n}</span>{t}</a></li>
-          ))}</ol>
-        </div></nav>
+      <Section id="how" num="01" eyebrow="How it works" title="Seven steps from job posting to lead.">
+        <ol className="card divide-y divide-line">
+          {STEPS.map((s, i) => (
+            <li key={s.name} className="grid grid-cols-1 gap-2 px-5 py-5 sm:grid-cols-[3rem_14rem_1fr] sm:gap-6">
+              <span className="font-mono text-[13px] text-muted">{String(i + 1).padStart(2, "0")}</span>
+              <span>
+                <span className="block font-medium text-ink">{s.name}</span>
+                <span className="block text-[14px] text-muted mt-0.5">{s.summary}</span>
+              </span>
+              <p className="text-[15px] leading-relaxed text-body">{s.detail}</p>
+            </li>
+          ))}
+        </ol>
+      </Section>
 
-        <div className="min-w-0 flex flex-col gap-20">
-          <section>
-            <SectionHeading id="coverage" num="01" title="NeoSigma coverage map" sub={<>Six tasks from NeoSigma&apos;s own blog posts, stored in <code className="mono text-ink">config/coverage_map.json</code>. Every duty is matched against these.</>} />
-            <div className="overflow-x-auto"><table className="table min-w-[760px]">
-              <thead><tr><th>ID</th><th>What NeoSigma does</th><th>Done by hand</th><th>Typical phrasing</th><th>Source</th></tr></thead>
-              <tbody>{coverageMap.tasks.map((t) => (
-                <tr key={t.id}>
-                  <td className="mono text-ink">{t.id}</td>
-                  <td className="text-[14px] text-ink">{t.does}</td>
-                  <td className="text-[14px]">{t.by_hand}</td>
-                  <td className="text-[13px] text-muted">{t.phrasing.map((p) => `“${p}”`).join(", ")}</td>
-                  <td className="text-[13px]">{t.sources.map((s) => <a key={s.url} href={s.url} target="_blank" rel="noreferrer" className="block hover:text-ink underline decoration-line-strong underline-offset-4">{s.title}</a>)}</td>
+      <Section id="coverage" num="02" eyebrow="What NeoSigma does" title="Six tasks, taken from NeoSigma's own writing.">
+        <p className="mb-6 max-w-[900px] text-[15px] leading-relaxed text-body">
+          Our reading of NeoSigma&apos;s blog as of {shortDate(coverageMap.as_of)}, not NeoSigma&apos;s own list. Every duty in every posting is compared with these.
+        </p>
+        <div className="card overflow-x-auto">
+          <table className="w-full text-[14px] md:min-w-[760px]">
+            <thead className="border-b border-line">
+              <tr>{["What NeoSigma does", "Done by hand today", "Source"].map((h) => <th key={h} className="px-5 py-3 text-left font-normal"><span className="label">{h}</span></th>)}</tr>
+            </thead>
+            <tbody className="divide-y divide-line">
+              {coverageMap.tasks.map((t) => (
+                <tr key={t.id} className="align-top">
+                  <td className="px-5 py-4 text-ink">{t.does}</td>
+                  <td className="px-5 py-4 text-body">{t.by_hand}</td>
+                  <td className="px-5 py-4 text-[13px]">
+                    {t.sources.map((s) => <a key={s.url} href={s.url} target="_blank" rel="noreferrer" className="block text-body underline decoration-line-strong underline-offset-4 hover:text-ink">{s.title}</a>)}
+                  </td>
                 </tr>
-              ))}</tbody>
-            </table></div>
-            <div className="grid sm:grid-cols-3 gap-4 mt-8">
-              {coverageMap.labels.map((l) => (
-                <div key={l.id} className="card card-pad">
-                  <div className="flex items-center gap-2 mb-2"><span className={`hl hl-${l.id} inline-block w-5 h-3`} /><span className="text-ink">{l.name}</span></div>
-                  <p className="text-[14px]">{l.definition}</p>
-                  <p className="text-[13px] text-muted mt-2">e.g. “{l.example}”</p>
-                </div>
               ))}
-            </div>
-          </section>
-
-          <section>
-            <SectionHeading id="roles" num="02" title="Which roles count" sub={<>A posting is a lead only if its main job is NeoSigma&apos;s work. A title that merely suggests a company uses AI is never a lead on its own. Lists live in <code className="mono text-ink">config/roles.json</code>.</>} />
-            <div className="grid md:grid-cols-3 gap-4">
-              {(["keep", "conditional", "drop"] as const).map((k) => (
-                <div key={k} className="card card-pad">
-                  <div className="label mb-2">{k}</div>
-                  <p className="text-[13px] text-muted mb-3">{roles[k].rule}</p>
-                  <ul className="text-[14px] flex flex-col gap-1">{roles[k].titles.map((t) => <li key={t}>{t}</li>)}</ul>
-                  <p className="mono !text-[11px] text-muted mt-3">{roles[k].patterns.length} patterns</p>
-                </div>
-              ))}
-            </div>
-            <p className="text-[14px] mt-4">Lists are checked keep → drop → conditional, so “Founding Evals Engineer” stays while “Founding AI Engineer” is dropped. Drop-list titles are always discarded. <span className="text-ink">Every other posting is judged on its description, not its title:</span> if the title mentions AI, or the description mentions AI and at least {roles.description_screen.min_hits} of {roles.description_screen.phrases.length} duty phrases (eval sets, transcripts, failure analysis, regression, resolution rate…), a Claude screen (claude-haiku-5-5) reads the description and decides keep, conditional or drop.</p>
-          </section>
-
-          <section>
-            <SectionHeading id="gates" num="03" title="Filters and gates" />
-            <ol className="flex flex-col gap-4 text-[15px]">
-              <li><span className="text-ink">Scope.</span> {weights.fetch.regions === "global" ? "All regions" : "US or remote-from-the-US postings"}, English only, posted in the last {weights.fetch.max_posting_age_days} days. Duplicates (same company, same normalized title, descriptions ≥ {weights.fetch.dedupe_similarity * 100}% similar) are merged, keeping every location&apos;s salary.</li>
-              <li><span className="text-ink">Stage 1, title and description.</span> The lists above; then the keyword pre-screen and the Claude description screen for every posting not selected by its title.</li>
-              <li><span className="text-ink">Extraction.</span> One claude-sonnet-5-5 call per posting splits it into single duties, quotes each exact source span, and labels it. Output is validated with zod; every span is checked word for word against the posting.</li>
-              <li><span className="text-ink">Stage 2, duty check.</span> Dropped if fewer than {roles.stage2_min_covered_or_assisted} duties are Covered or Assisted. Conditional titles also need {roles.conditional.min_distinct_tasks} of T1–T6.</li>
-              <li><span className="text-ink">Gate 1, overlap.</span> At least {Math.round(roles.gate_overlap_min_share * 100)}% of all listed duties are Covered or Assisted. (The spec set 50%; lowered to {Math.round(roles.gate_overlap_min_share * 100)}% and conditional titles to {roles.conditional.min_distinct_tasks} of T1–T6 to widen the lead list. The live-agent gate is unchanged.)</li>
-              <li><span className="text-ink">Gate 2, live agent.</span> A verbatim quote showing an agent already used by real customers: {roles.live_agent_evidence.counts.join("; ")}. Not counted: {roles.live_agent_evidence.does_not_count.join("; ")}. Quotes not found verbatim are discarded.</li>
-            </ol>
-            <div className="card card-pad mt-6 font-mono text-[14px] text-ink">
-              overlap = (covered + 0.5 × assisted) ÷ (all duties − unclear)
-            </div>
-            <p className="text-[13px] text-muted mt-2">Worked example: 8 duties, 5 covered, 2 assisted, 1 human work → (5 + 1) ÷ 8 = 75%.</p>
-          </section>
-
-          <section>
-            <SectionHeading id="weights" num="04" title="Scoring" sub={<>Weights live in <code className="mono text-ink">config/weights.json</code> and can be changed with the sliders on the Leads page. Score = sum of parts ÷ sum of weights × 100.</>} />
-            <table className="table">
-              <thead><tr><th>Part</th><th className="text-right">Weight</th><th>How it is scored</th></tr></thead>
-              <tbody>
-                <tr><td className="text-ink">Overlap</td><td className="text-right mono">{weights.parts.overlap}</td><td className="text-[14px]">Best posting&apos;s overlap, plus {weights.overlap.points_per_extra_role} points per extra qualifying role (max +{weights.overlap.max_extra_points}).</td></tr>
-                <tr><td className="text-ink">Live-agent strength</td><td className="text-right mono">{weights.parts.live_agent}</td><td className="text-[14px]">0 = no evidence (never a lead), {weights.live_agent_points.in_production} = “in production” quote, {weights.live_agent_points.volume_or_named_product} = volume number or named agent product.</td></tr>
-                <tr><td className="text-ink">Fit</td><td className="text-right mono">{weights.parts.fit}</td><td className="text-[14px]">{weights.fit.segment_share * 100}% segment priority ({SEGMENTS.map((s) => `${s.name} ${Math.round((weights.fit.segment_scores as Record<string, number>)[s.id] * 100)}%`).join(", ")}), {weights.fit.size_share * 100}% size band. Agent platforms capped at {weights.fit.agent_platform_cap_points} points.</td></tr>
-                <tr><td className="text-ink">Timing</td><td className="text-right mono">{weights.parts.timing}</td><td className="text-[14px]">Highest active trigger in the last {weights.timing.window_days} days (model releases: {weights.timing.model_release_window_days} days): {Object.entries(weights.timing.triggers).map(([k, v]) => `${TRIGGER_NAMES[k]} ${v}`).join(", ")}.</td></tr>
-              </tbody>
-            </table>
-            <p className="text-[14px] mt-4">A company with zero live-agent evidence is never a lead; its roles are listed on the Rejected roles tab. On the Gaps page, “strong leads” are companies scoring {weights.tiers.warm} or more.</p>
-            <p className="text-[14px] mt-2">Salary: the middle of each role&apos;s posted range, from the job board or the posting text. Non-USD salaries are converted at the European Central Bank reference rate fetched on each run. A company&apos;s average salary is the mean across its qualifying roles that list one. Nothing is estimated: roles without a posted salary are left out.</p>
-          </section>
-
-          <section>
-            <SectionHeading id="accuracy" num="05" title="Extraction accuracy" sub="Duty labels are checked against hand labels for 20 postings before scaling. Bar: at least 85% of duty labels match, and every highlighted span is found word for word." />
-            <div className="grid sm:grid-cols-3 gap-4">
-              <div className="card card-pad">
-                <div className="label mb-1">Label agreement</div>
-                <div className={`font-display text-[44px] leading-none ${evalMeta ? (evalMeta.accuracy >= 0.85 ? "text-covered" : "text-assisted") : "text-muted"}`}>{evalMeta ? pct(evalMeta.accuracy) : "—"}</div>
-                <div className="text-[13px] text-muted mt-2">{evalMeta ? `${evalMeta.agree} of ${evalMeta.duties} hand-labelled duties across ${evalMeta.postings} postings; ${evalMeta.missed} not matched to an extracted duty.` : "Not measured yet. Run npm run eval."}</div>
-              </div>
-              <div className="card card-pad">
-                <div className="label mb-1">Task agreement</div>
-                <div className="font-display text-[44px] leading-none text-ink">{evalMeta ? pct(evalMeta.taskAccuracy) : "—"}</div>
-                <div className="text-[13px] text-muted mt-2">Same T1–T6, where both said Covered or Assisted.</div>
-              </div>
-              <div className="card card-pad">
-                <div className="label mb-1">Spans found verbatim</div>
-                <div className="font-display text-[44px] leading-none text-ink">{span ? pct(span.found / Math.max(1, span.duties)) : "—"}</div>
-                <div className="text-[13px] text-muted mt-2">{span ? `${span.found} of ${span.duties} duty spans. Spans not found are never highlighted.` : "No extraction yet."}</div>
-              </div>
-            </div>
-            {evalMeta && (
-              <p className="text-[13px] text-muted mt-4">Labelled by {evalMeta.labeller}. {evalMeta.method} Measured {shortDate(evalMeta.at)}. Confusion (hand → model): {Object.entries(evalMeta.confusion).map(([k, v]) => `${k.replace(/_/g, " ")} ${v}`).join(", ")}.</p>
-            )}
-          </section>
-
-          <section>
-            <SectionHeading id="audit" num="06" title="Filter audit" sub="Every posting that failed a filter stays in the database with its reason." />
-            <table className="table">
-              <thead><tr><th>Outcome</th><th className="text-right">Postings</th></tr></thead>
-              <tbody>
-                <tr><td className="text-ink">Passed both gates</td><td className="text-right"><Link className="text-ink underline underline-offset-4" href="/leads">{passed}</Link></td></tr>
-                {[...reasonCounts.entries()].sort((a, b) => b[1] - a[1]).map(([r, n]) => (
-                  <tr key={r}><td className="text-[14px]">{FAIL_REASON_TEXT[r as FailReason] ?? r}</td><td className="text-right"><Link className="text-ink underline underline-offset-4" href={`/leads?tab=rejected&reason=${r}`}>{n}</Link></td></tr>
-                ))}
-              </tbody>
-            </table>
-            <p className="text-[13px] text-muted mt-3">{extracted} postings read by Claude. Titles that matched no list and do not mention AI are not stored.</p>
-          </section>
-
-          <section>
-            <SectionHeading id="sources" num="07" title="Data sources" />
-            <ul className="flex flex-col gap-2 text-[15px]">
-              <li><span className="text-ink">{sources.length} seed companies</span> in <code className="mono text-ink">config/sources.csv</code>: {Object.entries(byAts).map(([k, v]) => `${v} ${k}`).join(", ")}. Built from a curated list of agent and vertical-AI companies probed on public boards, large companies on Workday and SmartRecruiters, and Hacker News “Who is hiring?” posts from the last six months (a Claude check keeps companies running a customer-facing agent).</li>
-              <li><span className="text-ink">Job boards:</span> Greenhouse (<code className="mono text-[13px]">boards-api.greenhouse.io/v1/boards/&#123;token&#125;/jobs?content=true</code>), Lever (<code className="mono text-[13px]">api.lever.co/v0/postings/&#123;site&#125;?mode=json</code>), Ashby (<code className="mono text-[13px]">api.ashbyhq.com/posting-api/job-board/&#123;name&#125;?includeCompensation=true</code>), Workable (<code className="mono text-[13px]">apply.workable.com/api/v1/widget/accounts/&#123;name&#125;?details=true</code>), SmartRecruiters (<code className="mono text-[13px]">api.smartrecruiters.com/v1/companies/&#123;id&#125;/postings</code>), Workday (<code className="mono text-[13px]">&#123;tenant&#125;.wdN.myworkdayjobs.com/wday/cxs/…/jobs</code>), plus manual imports in <code className="mono text-[13px]">data/raw/manual/</code>.</li>
-              <li><span className="text-ink">News:</span> Google News RSS per lead company, company blog feeds in <code className="mono text-[13px]">config/company_feeds.json</code>, and lab feeds for model releases ({modelReleaseFeeds.feeds.map((f) => f.lab).join(", ")}). Headlines are confirmed by a claude-haiku-5-5 check.</li>
-              <li><span className="text-ink">Company size:</span> a public source found with Claude web search (LinkedIn, Glassdoor and Indeed excluded), linked on each company page.</li>
-              <li><span className="text-ink">Fetching rules:</span> one request per second per host, an honest user agent, robots.txt respected on HTML pages, source URL and fetch time stored with every record. No names, emails or profiles of individuals are stored. LinkedIn, Indeed and Glassdoor are never scraped.</li>
-              <li><span className="text-ink">Last runs:</span> fetch {shortDate(lastFetch?.at)}{lastFetch ? ` (${lastFetch.postingsSeen} postings, ${lastFetch.candidates} title matches, ${lastFetch.merged} duplicates merged${lastFetch.failedBoards.length ? `, ${lastFetch.failedBoards.length} boards failed` : ""})` : ""}; extraction {shortDate(lastExtract?.at)}; news {shortDate(lastNews?.at)}.</li>
-            </ul>
-          </section>
-
-          <section>
-            <SectionHeading id="limits" num="08" title="Known limits" />
-            <ul className="flex flex-col gap-2 text-[15px] list-disc pl-5">
-              <li>Only companies on the seed list are seen. Boards other than Ashby, Greenhouse, Lever, Workable, SmartRecruiters and Workday (iCIMS, Taleo and others) are missed unless imported by hand.</li>
-              <li>On Workday and SmartRecruiters, descriptions are read only for jobs the board&apos;s own search returns for AI and eval terms (at most {weights.fetch.max_details_per_board} per board), to keep request volume polite.</li>
-              <li>A posting is only read by Claude when its title mentions AI or its description passes the keyword pre-screen; eval work described in unusual words can be missed.</li>
-              <li>The {weights.fetch.max_posting_age_days}-day cut-off uses the board&apos;s first-published date, so long-open roles drop out even while still open.</li>
-              <li>Duty labels come from the posting&apos;s words. Postings that describe the work vaguely score lower than the job may really be.</li>
-              <li>Salaries come from postings only. Many postings list none, so averages rest on the roles that do.</li>
-              <li>News triggers come from headlines only; funding amounts and launch details are not read.</li>
-              <li>Public complaints about agent quality are a manual flag in v1 (<code className="mono text-[13px]">config/manual_triggers.json</code>).</li>
-              <li>Size bands come from a web search and may be out of date; each links its source.</li>
-              <li>English-language postings only. Non-USD salaries are converted at the European Central Bank reference rate fetched on each run.</li>
-            </ul>
-          </section>
+            </tbody>
+          </table>
         </div>
-      </div>
+        <div className="grid grid-cols-1 gap-4 mt-4 md:grid-cols-3">
+          {LABELS.map((l) => (
+            <div key={l.id} className="card card-pad">
+              <div className="flex items-center gap-2 mb-2"><span className={`hl hl-${l.id} inline-block w-5 h-3`} /><span className="text-ink">{l.name}</span></div>
+              <p className="text-[14px] text-body">{l.text}</p>
+              <p className="text-[13px] text-muted mt-2">e.g. “{l.example}”</p>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      <Section id="numbers" num="03" eyebrow="The numbers" title="How each number is worked out.">
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+          <Formula title="Overlap of a role" note="The percentage shown across the site. A prepared duty counts half, because a person still finishes it.">
+            (duties NeoSigma does + ½ × duties it prepares) ÷ all duties
+          </Formula>
+          <Formula title="Which roles qualify" note={<>Here a prepared duty counts in full, so a role can qualify with an overlap below {minShare}%. The live-agent quote must appear word for word in the posting.</>}>
+            ≥ {minShare}% of duties NeoSigma does or prepares<br />+ proof the agent is live with customers
+          </Formula>
+          <Formula title="Lead score, 0 to 100" note={<>Overlap uses the company&apos;s best role, plus a little for each extra qualifying role. Live agent is stronger when the posting names the product or a usage number. Fit is the type and size of company. Timing is the strongest news in the last {weights.timing.window_days} days. The sliders on the Leads page change the weights.</>}>
+            {p.overlap} overlap + {p.live_agent} live agent<br />+ {p.fit} fit + {p.timing} timing
+          </Formula>
+          <Formula title="Salary" note="Posted salaries only; nothing is estimated for roles without one. Non-USD salaries are converted at the European Central Bank rate.">
+            middle of the posted range, averaged across roles
+          </Formula>
+          <Formula title="Ranking gaps" note={<>A strong lead is a company scoring {weights.tiers.warm} or more. A gap that appears in many strong leads is the one most likely to block a deal.</>}>
+            strong leads with the gap ÷ all strong leads
+          </Formula>
+          <Formula title="Which study to lead with" note="Chosen from the tasks a company does by hand: finding and grouping failures point to the verification study; tests, regression checks and setup fixes to the self-improvement study; model testing to the Scaffolding Tax.">
+            the study that matches the most duties
+          </Formula>
+        </div>
+        <div className="mt-4"><Note>See any company&apos;s score broken down on its <Link href="/leads" className="underline underline-offset-4">lead page</Link>.</Note></div>
+      </Section>
+
+      <Section id="limits" num="04" eyebrow="Known limits" title="What this can't tell you.">
+        <ul className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          {[
+            "A posting shows intent to hire, not budget or how the team really spends its week.",
+            "Duties are not weighted by time spent; a one-line duty counts the same as a big one.",
+            "The six tasks are our reading of NeoSigma's public writing and need checking with NeoSigma.",
+            "Only companies on the list are seen, and only boards with a public feed. Roles described in unusual words can be missed.",
+            "Duty labels come from Claude and have not yet been checked against a hand-labelled sample. Each label shows its reasoning, so it can be checked.",
+            "Many postings list no salary, so averages rest on the roles that do. News triggers are read from headlines only.",
+          ].map((l) => <li key={l} className="card card-pad text-[15px] leading-relaxed text-body">{l}</li>)}
+        </ul>
+      </Section>
+
+      <Section id="data" num="05" eyebrow="Data and privacy" title="Public sources only.">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          <div className="card card-pad text-[14px] leading-relaxed text-body">
+            <span className="label">Job postings</span>
+            <p className="mt-2">Public job-board feeds for {sources.length} companies, posted in the last {weights.fetch.max_posting_age_days} days, English only. Copies of one role in several locations are merged. One request per second per site, and robots.txt is respected.</p>
+          </div>
+          <div className="card card-pad text-[14px] leading-relaxed text-body">
+            <span className="label">News and company size</span>
+            <p className="mt-2">Google News, company blogs and AI lab release feeds, with each headline checked by Claude. Company size comes from a public source, linked on each lead page.</p>
+          </div>
+          <div className="card card-pad text-[14px] leading-relaxed text-body">
+            <span className="label">Privacy</span>
+            <p className="mt-2">Everything is kept at company level. No names, emails or profiles of individuals are stored, and nothing is sent from this site; briefs are drafts for a person to review.</p>
+          </div>
+        </div>
+      </Section>
     </div>
   );
 }

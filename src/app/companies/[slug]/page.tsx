@@ -336,7 +336,7 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
                 </div>
               ))}
             </div>
-            <div className="mt-4"><Note>Default weights: 40 overlap, 25 live agent, 15 fit, 20 timing. <Link href="/method#weights" className="underline underline-offset-4">How scores are calculated</Link>.</Note></div>
+            <div className="mt-4"><Note>Default weights: 40 overlap, 25 live agent, 15 fit, 20 timing. <Link href="/method#numbers" className="underline underline-offset-4">How scores are calculated</Link>.</Note></div>
           </Section>
 
           {/* Tools */}

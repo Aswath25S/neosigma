@@ -168,7 +168,7 @@ export function LeadsView({ leads, rejected, initial }: { leads: LeadRow[]; reje
           <p className="mt-5 text-[12.5px] leading-relaxed text-muted">
             Default: 40 / 25 / 15 / 20. Slide to re-rank instantly.{!isDefault && " Scores below use your weights."}
           </p>
-          <Link href="/method#weights" className="mono !text-[12px] text-body hover:text-ink mt-3 inline-block underline underline-offset-4 decoration-line-strong">How scores are calculated</Link>
+          <Link href="/method#numbers" className="mono !text-[12px] text-body hover:text-ink mt-3 inline-block underline underline-offset-4 decoration-line-strong">How scores are calculated</Link>
         </div>
       </aside>
 
