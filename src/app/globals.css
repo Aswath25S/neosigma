@@ -154,6 +154,12 @@ a {
 /* ---- tables ---- */
 /* In the components layer so utility classes (text-right, padding) override. */
 @layer components {
+/* One card system across the app: top-level cards, cards nested inside an
+   open row or another card, and the standard card padding. */
+.card { border-radius: 14px; border: 1px solid var(--border); background: var(--surface); }
+.card-inset { border-radius: 12px; border: 1px solid var(--border); background: var(--bg); padding: 16px; }
+.card-pad { padding: 20px; }
+@media (min-width: 640px) { .card-pad { padding: 24px; } }
 .table { width: 100%; border-collapse: collapse; }
 .table th {
   font-family: var(--font-mono);

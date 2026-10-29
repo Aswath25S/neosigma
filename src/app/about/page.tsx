@@ -12,7 +12,7 @@ export const metadata: Metadata = { title: "About" };
 function Contact({ href, label, value }: { href: string; label: string; value: string }) {
   return (
     <a href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noreferrer"
-      className="group rounded-[14px] border border-line bg-surface p-5 hover:border-line-strong hover:bg-surface-2 transition-colors min-w-0">
+      className="group card card-pad hover:border-line-strong hover:bg-surface-2 transition-colors min-w-0">
       <div className="label mb-2">{label}</div>
       <div className="text-ink text-[16px] break-all group-hover:underline underline-offset-4">{value}</div>
     </a>
@@ -26,9 +26,9 @@ export default function AboutPage() {
 
   return (
     <div className="mx-auto max-w-[1200px] px-4 sm:px-6">
-      <div className="pt-14 pb-12">
+      <div className="pt-10 sm:pt-14 pb-10">
         <div className="label mb-4">About</div>
-        <h1 className="display !text-[clamp(40px,6vw,56px)]">{site.builder}</h1>
+        <h1 className="h-page !text-[clamp(32px,5vw,44px)]">{site.builder}</h1>
         <p className="mono text-body mt-4">{site.location}</p>
         <a href={site.role_url} target="_blank" rel="noreferrer"
           className="mt-8 inline-flex flex-wrap items-center gap-x-3 gap-y-1 rounded-[14px] border border-line-strong bg-surface px-5 py-4 hover:border-muted transition-colors">

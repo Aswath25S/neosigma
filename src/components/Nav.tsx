@@ -22,7 +22,7 @@ export function Wordmark() {
 
 export function Nav() {
   const path = usePathname();
-  const active = (href: string) => path === href || path.startsWith(href + "/") || (href === "/leads" && path.startsWith("/companies"));
+  const active = (href: string) => path === href || path.startsWith(href + "/") || (href === "/leads" && path.startsWith("/companies")) || (href === "/salary" && path.startsWith("/postings"));
 
   return (
     <header className="sticky top-0 z-40 bg-[color-mix(in_srgb,var(--bg)_92%,transparent)] backdrop-blur border-b border-line">

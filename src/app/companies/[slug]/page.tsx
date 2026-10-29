@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getCompanyBySlug, extractionOf, dutyCounts, getLeadRows, type DutyRow } from "@/lib/data";
-import { coverageMap, roles, segmentName, TASK_IDS } from "@/lib/config";
+import { coverageMap, segmentName, TASK_IDS } from "@/lib/config";
 import { activeTriggers, DEFAULT_WEIGHTS, LIVE_STRENGTH_TEXT, shownTriggers, TRIGGER_NAMES } from "@/lib/scoring";
 import { pickProof, type RenderedBrief, type Ref } from "@/lib/brief";
 import { money, pct, shortDate } from "@/lib/format";
@@ -46,7 +46,7 @@ function Cites({ ids, refs }: { ids: string[]; refs: Record<string, Ref> }) {
 // one or two sentences, with citation chips.
 function BriefCard({ title, items, refs, empty, wide = false, children }: { title: string; items?: { text: string; cites: string[] }[]; refs: Record<string, Ref>; empty?: string; wide?: boolean; children?: React.ReactNode }) {
   return (
-    <div className={`rounded-[14px] border border-line bg-surface p-5 ${wide ? "md:col-span-2" : ""}`}>
+    <div className={`card card-pad ${wide ? "md:col-span-2" : ""}`}>
       <span className="label">{title}</span>
       <div className="mt-2 text-[16px] leading-relaxed text-body">
         {children ?? (items?.length ? items.map((s, i) => (
@@ -105,7 +105,7 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
   return (
     <div className="mx-auto max-w-[1200px] px-4 sm:px-6">
       {/* Hero */}
-      <div className="pt-10 sm:pt-14 pb-12 flex flex-col gap-5">
+      <div className="pt-10 sm:pt-14 pb-10 flex flex-col gap-5">
         <div><BackLink href="/leads" label="All lead companies" /></div>
         <div className="flex flex-wrap items-center gap-3">
           <span className="label">The case</span>
@@ -114,7 +114,7 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
             {rank ? ` · rank ${rank} of ${leadRanks.length}` : ""} · {segmentName(company.segment)}
           </span>
         </div>
-        <h1 className="display !text-[clamp(32px,5vw,52px)] max-w-[1100px]">{headline}</h1>
+        <h1 className="h-page !text-[clamp(32px,5vw,48px)] max-w-[1100px]">{headline}</h1>
         {!isLead && (
           <p className="max-w-[900px] text-[15px] text-body">
             {otherPostings.length ? "Every role checked is listed below with the reason it was not a lead." : "No AI quality roles were found on its board."}
@@ -125,7 +125,7 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
       {isLead && (
         <>
           {/* Stat strip */}
-          <div className="grid grid-cols-2 gap-3 md:grid-cols-4 pb-14">
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-4 pb-14">
             <StatBlock value={Math.round(breakdown!.total)} label="Lead score" href="#score" note="Out of 100. See the breakdown below." />
             <StatBlock value={pct(breakdown!.overlap.bestOverlap)} label={single ? "Role overlap" : "Best overlap"} href="#roles" note={single ? "Share of the role's duties NeoSigma can do or prepare" : `Best of ${qualifying.length} qualifying roles`} />
             <StatBlock value={avgPay != null ? money(avgPay, { compact: true }) : "–"} label="Avg. salary" href="#roles" note={posted.length ? `${posted.length} of ${salaries.length} ${salaries.length === 1 ? "role lists" : "roles list"} a salary; middle of each posted range` : "No salary posted"} />
@@ -173,7 +173,7 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
 
           {/* Timing */}
           <Section id="now" num="02" eyebrow="Why now" title={active.length ? `${active.length} active ${active.length === 1 ? "trigger" : "triggers"}.` : "No active trigger."}>
-            <ul className="rounded-[14px] border border-line bg-surface divide-y divide-line">
+            <ul className="card divide-y divide-line">
               {active.length ? active.map((t) => (
                 <li key={t.id} className="px-5 py-4 grid grid-cols-1 sm:grid-cols-[8rem_12rem_1fr_5rem] gap-1 sm:gap-4 sm:items-center text-[14px]">
                   <span className="mono text-muted">{shortDate(t.date)}</span>
@@ -190,13 +190,13 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
       {/* Qualifying roles */}
       <Section id="roles" num={isLead ? "03" : "01"} eyebrow="Qualifying roles" title={qualifying.length ? `${qualifying.length} ${qualifying.length === 1 ? "role qualifies" : "roles qualify"}.` : "No role qualifies."}>
         <p className="mb-5 max-w-[900px] text-[15px] leading-relaxed text-body">
-          A role qualifies when at least {Math.round(roles.gate_overlap_min_share * 100)}% of its duties are work NeoSigma can do or prepare, and
-          the posting shows the AI agent is already used by real customers.
+          Roles where a good part of the work is NeoSigma&apos;s, at a company whose AI agent is already live with customers.{" "}
+          <Link href="/method" className="text-ink underline underline-offset-4 decoration-line-strong">How roles are checked</Link>.
         </p>
         {qualifying.length > 0 && (
           <>
             <ShareLegend className="mb-4" />
-            <div className="rounded-[14px] border border-line bg-surface overflow-hidden divide-y divide-line">
+            <div className="card overflow-hidden divide-y divide-line">
               {qualifying.map((p) => {
                 const n = dutyCounts(byPosting.get(p.id) ?? []);
                 const sx = salaries.find((x) => x.postingId === p.id)!;
@@ -221,7 +221,7 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
           </>
         )}
         {otherPostings.length > 0 && (
-          <div className="mt-6 rounded-[14px] border border-line bg-surface overflow-hidden">
+          <div className="mt-6 card overflow-hidden">
             <Disclosure show={`Show ${otherPostings.length} other ${otherPostings.length === 1 ? "role" : "roles"} checked`} hide={`Hide ${otherPostings.length} other ${otherPostings.length === 1 ? "role" : "roles"} checked`}>
               <ul className="divide-y divide-line border-t border-line">
                 {otherPostings.map((p) => (
@@ -252,12 +252,12 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
                   <span><LabelChip label={d.label} kind={d.notCoveredKind} /></span>
                   <Link href={`/postings/${p.id}#d${d.idx}`} className="text-[14.5px] text-ink hover:underline underline-offset-4">{d.text}</Link>
                   <span className="text-[13px] text-muted">
-                    {d.taskId ? <><span className="font-mono text-covered">{d.taskId}</span> · {coverageMap.tasks.find((t) => t.id === d.taskId)?.does}</> : d.rationale}
+                    {d.taskId ? coverageMap.tasks.find((t) => t.id === d.taskId)?.does : d.rationale}
                   </span>
                 </li>
               );
               return (
-                <div key={p.id} className="rounded-[14px] border border-line bg-surface overflow-hidden">
+                <div key={p.id} className="card overflow-hidden">
                   <div className="flex flex-col gap-3 border-b border-line px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
                     <div>
                       <p className="h-card !text-[17px]">{p.title}</p>
@@ -294,7 +294,7 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
               <a href={proof.url} target="_blank" rel="noreferrer" className="text-ink underline underline-offset-4 decoration-line-strong">Read the study ↗</a>
             </p>
             <ShareLegend className="mb-4" />
-            <div className="rounded-[14px] border border-line bg-surface divide-y divide-line">
+            <div className="card divide-y divide-line">
               {split.map((x) => {
                 const total = x.covered + x.assisted;
                 const t = coverageMap.tasks.find((k) => k.id === x.t)!;
@@ -303,7 +303,7 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
                   <div key={x.t} className={`grid grid-cols-1 gap-3 px-5 py-4 md:grid-cols-[18rem_1fr] md:items-center md:gap-6 ${lead ? "bg-surface-2" : ""}`}>
                     <div>
                       <p className="flex flex-wrap items-center gap-2 text-[15px] font-medium text-ink">
-                        <span className="font-mono text-covered">{x.t}</span> {t.short}
+                        {t.short}
                         {lead && <span className="rounded-full border border-line-strong px-2 py-0.5 font-mono text-[10.5px] uppercase tracking-[0.08em] text-ink">Lead proof</span>}
                       </p>
                       <p className="mt-0.5 text-[13px] text-muted">{total ? `${x.covered} done by NeoSigma · ${x.assisted} prepared for a person` : "No matching duties"}</p>
@@ -317,7 +317,7 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
                 );
               })}
             </div>
-            <div className="mt-3"><Note>Bars share one scale: the longest bar is the task with the most matching duties ({maxSplit}). T1/T2 point to the verification study, T3/T4/T6 to the self-improvement study, T5 to the Scaffolding Tax.</Note></div>
+            <div className="mt-3"><Note>Bars share one scale: the longest bar is the task with the most matching duties ({maxSplit}). Finding and grouping failures point to the verification study; tests, regression checks and setup fixes to the self-improvement study; model testing to the Scaffolding Tax.</Note></div>
           </Section>
 
           {/* Score */}
@@ -329,7 +329,7 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
                 ["Looks like a buyer", breakdown!.fit.points, breakdown!.fit.max, `${segmentName(company.segment)} (${Math.round(breakdown!.fit.segmentScore * 100)}% segment fit), ${company.employeeBand === "unknown" ? "size unknown" : `${company.employeeBand} employees`}${breakdown!.fit.capped ? "; capped because agent platforms may build in-house" : ""}.`],
                 ["Reason to call now", breakdown!.timing.points, breakdown!.timing.max, breakdown!.timing.topTrigger ? `${TRIGGER_NAMES[breakdown!.timing.topTrigger.kind]} on ${shortDate(breakdown!.timing.topTrigger.date)}, the strongest of ${active.length} active ${active.length === 1 ? "trigger" : "triggers"}.` : "No active trigger in the last 90 days."],
               ] as const).map(([name, pts, max, text]) => (
-                <div key={name} className="rounded-[14px] border border-line bg-surface p-5">
+                <div key={name} className="card card-pad">
                   <div className="flex items-baseline justify-between gap-2"><span className="font-medium text-ink">{name}</span><span className="font-mono text-[12px] text-ink">{pts.toFixed(1)} of {max} pts</span></div>
                   <div className="mt-2 h-1.5 rounded-full bg-surface-2 ring-1 ring-line"><div className="h-full rounded-full bg-covered" style={{ width: `${Math.min(1, max ? pts / max : 0) * 100}%` }} /></div>
                   <p className="mt-3 text-[14px] leading-relaxed text-body">{text}</p>
@@ -347,11 +347,11 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
 
           {/* Gaps */}
           <Section num="08" eyebrow="The gaps" title={themes.length ? "Work in these roles that NeoSigma doesn't cover yet." : "No gap themes in these roles."}>
-            <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
               {themes.map((t) => {
                 const count = qualDuties.filter((d) => d.gapThemeId === t.id).length;
                 return (
-                  <Link key={t.id} href={`/gaps#g${t.id}`} className="block rounded-[12px] border border-line bg-surface p-4 hover:bg-surface-2 transition-colors">
+                  <Link key={t.id} href={`/gaps#g${t.id}`} className="block card card-pad hover:bg-surface-2 transition-colors">
                     <div className="flex items-center justify-between gap-2"><LabelChip label="not_covered" kind={t.kind} /><span className="label">{count} {count === 1 ? "duty" : "duties"}</span></div>
                     <p className="mt-2 font-medium text-ink">{t.name}</p>
                   </Link>

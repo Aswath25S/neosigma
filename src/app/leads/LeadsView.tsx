@@ -146,7 +146,7 @@ export function LeadsView({ leads, rejected, initial }: { leads: LeadRow[]; reje
     <div className="grid grid-cols-1 gap-8 lg:grid-cols-[260px_minmax(0,1fr)]">
       {/* What the score weighs */}
       <aside className="lg:self-start">
-        <div className="rounded-[14px] border border-line bg-surface p-5">
+        <div className="card card-pad">
           <div className="flex items-baseline justify-between gap-3">
             <span className="label whitespace-nowrap">Score weights</span>
             <button onClick={() => setParts({ ...DEFAULT_WEIGHTS.parts })} className={`mono !text-[12px] ${isDefault ? "text-muted" : "text-ink underline underline-offset-4"}`}>Reset</button>
@@ -295,7 +295,7 @@ const LeadRowView = memo(function LeadRowView({ l, isOpen, custom, parts, totalW
         <td className="px-3 md:pl-6 md:pr-4 py-4 max-md:!p-0">
           <div className="max-md:hidden">
             <ShareBar covered={best?.counts.coveredShare ?? 0} assisted={best?.counts.assistedShare ?? 0} />
-            <div className="label mt-1.5 !normal-case !tracking-[0.04em]">{pct(l.b.overlap.bestOverlap)} of best role</div>
+            <div className="label mt-1.5 !normal-case !tracking-[0.04em]">{pct(l.b.overlap.bestOverlap)}{l.postings.length > 1 ? ` · best of ${l.postings.length}` : ""}</div>
           </div>
         </td>
         <td className="px-3 md:pr-6 py-4 text-right max-md:!p-0">
@@ -340,7 +340,7 @@ function Details({ l, parts, totalWeight }: { l: Scored; parts: Record<PartKey, 
     const p = PARTS.find((x) => x.key === k)!;
     const v = max ? pts / max : 0;
     return (
-      <div className="rounded-[12px] border border-line bg-bg p-4">
+      <div className="card-inset">
         <div className="flex items-baseline justify-between gap-2">
           <span className="text-[14px] font-medium text-ink">{p.name}</span>
           <span className="font-mono text-[12px] text-ink whitespace-nowrap">{pts.toFixed(1)} pts</span>
@@ -375,7 +375,7 @@ function Details({ l, parts, totalWeight }: { l: Scored; parts: Record<PartKey, 
 
       <div>
         <span className="label">Qualifying roles</span>
-        <ul className="mt-2 divide-y divide-line rounded-[12px] border border-line bg-bg">
+        <ul className="mt-2 divide-y divide-line card-inset !p-0">
           {l.postings.map((x) => (
             <li key={x.id} className="grid grid-cols-1 gap-3 px-5 py-4 sm:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)] sm:items-center sm:gap-6">
               <span>
@@ -401,7 +401,7 @@ function Details({ l, parts, totalWeight }: { l: Scored; parts: Record<PartKey, 
 
       <div>
         <span className="label">Why it scores {Math.round(b.total)}</span>
-        <div className="mt-2 grid grid-cols-1 gap-3 md:grid-cols-2">
+        <div className="mt-2 grid grid-cols-1 gap-4 md:grid-cols-2">
           {part("overlap", b.overlap.points, b.overlap.max, <>
             Best role does {pct(b.overlap.bestOverlap)} NeoSigma work{b.overlap.extraRoles > 0 ? `, plus ${b.overlap.bonus.toFixed(1)} for ${b.overlap.extraRoles} more qualifying ${b.overlap.extraRoles === 1 ? "role" : "roles"}` : ""}.
           </>)}

@@ -26,7 +26,7 @@ export default async function PostingPage({ params }: { params: Promise<{ id: st
     ? "This posting was not read duty by duty."
     : c.covered + c.assisted === 0
       ? `None of this role's ${c.total} duties are NeoSigma's work.`
-      : `${c.covered + c.assisted} of this role's ${c.total} duties are work NeoSigma automates.`;
+      : `${c.covered + c.assisted} of this role's ${c.total} duties are work NeoSigma does or prepares.`;
 
   return (
     <div className="mx-auto max-w-[1200px] px-4 sm:px-6">
@@ -52,7 +52,7 @@ export default async function PostingPage({ params }: { params: Promise<{ id: st
           </p>
         )}
       </div>
-      <PostingReport data={data} ats={v.posting.ats} />
+      <PostingReport data={data} ats={v.posting.ats} variant="role" />
     </div>
   );
 }

@@ -40,12 +40,12 @@ export default function MethodPage() {
 
   return (
     <div className="mx-auto max-w-[1200px] px-4 sm:px-6">
-      <div className="pt-14 pb-12 max-w-[900px]">
+      <div className="pt-10 sm:pt-14 pb-10 max-w-[900px]">
         <div className="label mb-4">Method</div>
-        <h1 className="display !text-[clamp(36px,6vw,52px)]">How every number is made</h1>
-        <p className="mt-5 text-body text-[17px]">
-          Claude reads postings and splits them into duties. Everything after that — gates, overlap, lead scores, tiers and
-          cost — is computed in code from the stored fields, so it is repeatable and each number traces back to a quote.
+        <h1 className="h-page !text-[clamp(32px,5vw,44px)]">How every number is made</h1>
+        <p className="mt-4 text-body text-[17px]">
+          Claude reads postings and splits them into duties. Everything after that — gates, overlap, lead scores and
+          salaries — is computed in code from the stored fields, so it is repeatable and each number traces back to a quote.
         </p>
       </div>
 
@@ -74,7 +74,7 @@ export default function MethodPage() {
             </table></div>
             <div className="grid sm:grid-cols-3 gap-4 mt-8">
               {coverageMap.labels.map((l) => (
-                <div key={l.id} className="rounded-[14px] border border-line p-4">
+                <div key={l.id} className="card card-pad">
                   <div className="flex items-center gap-2 mb-2"><span className={`hl hl-${l.id} inline-block w-5 h-3`} /><span className="text-ink">{l.name}</span></div>
                   <p className="text-[14px]">{l.definition}</p>
                   <p className="text-[13px] text-muted mt-2">e.g. “{l.example}”</p>
@@ -87,7 +87,7 @@ export default function MethodPage() {
             <SectionHeading id="roles" num="02" title="Which roles count" sub={<>A posting is a lead only if its main job is NeoSigma&apos;s work. A title that merely suggests a company uses AI is never a lead on its own. Lists live in <code className="mono text-ink">config/roles.json</code>.</>} />
             <div className="grid md:grid-cols-3 gap-4">
               {(["keep", "conditional", "drop"] as const).map((k) => (
-                <div key={k} className="rounded-[14px] border border-line p-4">
+                <div key={k} className="card card-pad">
                   <div className="label mb-2">{k}</div>
                   <p className="text-[13px] text-muted mb-3">{roles[k].rule}</p>
                   <ul className="text-[14px] flex flex-col gap-1">{roles[k].titles.map((t) => <li key={t}>{t}</li>)}</ul>
@@ -108,7 +108,7 @@ export default function MethodPage() {
               <li><span className="text-ink">Gate 1, overlap.</span> At least {Math.round(roles.gate_overlap_min_share * 100)}% of all listed duties are Covered or Assisted. (The spec set 50%; lowered to {Math.round(roles.gate_overlap_min_share * 100)}% and conditional titles to {roles.conditional.min_distinct_tasks} of T1–T6 to widen the lead list. The live-agent gate is unchanged.)</li>
               <li><span className="text-ink">Gate 2, live agent.</span> A verbatim quote showing an agent already used by real customers: {roles.live_agent_evidence.counts.join("; ")}. Not counted: {roles.live_agent_evidence.does_not_count.join("; ")}. Quotes not found verbatim are discarded.</li>
             </ol>
-            <div className="rounded-[14px] border border-line bg-surface p-5 mt-6 font-mono text-[14px] text-ink">
+            <div className="card card-pad mt-6 font-mono text-[14px] text-ink">
               overlap = (covered + 0.5 × assisted) ÷ (all duties − unclear)
             </div>
             <p className="text-[13px] text-muted mt-2">Worked example: 8 duties, 5 covered, 2 assisted, 1 human work → (5 + 1) ÷ 8 = 75%.</p>
@@ -132,17 +132,17 @@ export default function MethodPage() {
           <section>
             <SectionHeading id="accuracy" num="05" title="Extraction accuracy" sub="Duty labels are checked against hand labels for 20 postings before scaling. Bar: at least 85% of duty labels match, and every highlighted span is found word for word." />
             <div className="grid sm:grid-cols-3 gap-4">
-              <div className="rounded-[14px] border border-line bg-surface p-5">
+              <div className="card card-pad">
                 <div className="label mb-1">Label agreement</div>
                 <div className={`font-display text-[44px] leading-none ${evalMeta ? (evalMeta.accuracy >= 0.85 ? "text-covered" : "text-assisted") : "text-muted"}`}>{evalMeta ? pct(evalMeta.accuracy) : "—"}</div>
                 <div className="text-[13px] text-muted mt-2">{evalMeta ? `${evalMeta.agree} of ${evalMeta.duties} hand-labelled duties across ${evalMeta.postings} postings; ${evalMeta.missed} not matched to an extracted duty.` : "Not measured yet. Run npm run eval."}</div>
               </div>
-              <div className="rounded-[14px] border border-line bg-surface p-5">
+              <div className="card card-pad">
                 <div className="label mb-1">Task agreement</div>
                 <div className="font-display text-[44px] leading-none text-ink">{evalMeta ? pct(evalMeta.taskAccuracy) : "—"}</div>
                 <div className="text-[13px] text-muted mt-2">Same T1–T6, where both said Covered or Assisted.</div>
               </div>
-              <div className="rounded-[14px] border border-line bg-surface p-5">
+              <div className="card card-pad">
                 <div className="label mb-1">Spans found verbatim</div>
                 <div className="font-display text-[44px] leading-none text-ink">{span ? pct(span.found / Math.max(1, span.duties)) : "—"}</div>
                 <div className="text-[13px] text-muted mt-2">{span ? `${span.found} of ${span.duties} duty spans. Spans not found are never highlighted.` : "No extraction yet."}</div>

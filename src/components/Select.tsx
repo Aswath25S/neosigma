@@ -84,7 +84,7 @@ export function Select({ label, value, options, onChange, allLabel, hideLabel = 
               aria-selected={selected}
               onMouseEnter={() => setActive(i)}
               onMouseDown={(e) => { e.preventDefault(); choose(i); }}
-              className={`flex cursor-pointer items-center justify-between gap-2 rounded-[6px] px-2.5 py-2 text-[13.5px] ${i === active ? "bg-surface" : ""} ${selected ? "font-medium text-ink" : "text-body"}`}
+              className={`flex cursor-pointer items-center justify-between gap-2 rounded-[8px] px-2.5 py-2 text-[13.5px] ${i === active ? "bg-surface" : ""} ${selected ? "font-medium text-ink" : "text-body"}`}
             >
               <span className="truncate">{l}</span>
               {selected && (

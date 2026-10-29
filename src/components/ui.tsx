@@ -13,7 +13,7 @@ export function SectionHeading({ num, title, id, sub }: { num: string; title: st
 
 export function PageHeader({ eyebrow, title, children }: { eyebrow: string; title: string; children?: React.ReactNode }) {
   return (
-    <div className="pt-14 pb-10">
+    <div className="pt-10 sm:pt-14 pb-10">
       <div className="label mb-4">{eyebrow}</div>
       <h1 className="h-page !text-[clamp(32px,5vw,44px)]">{title}</h1>
       {children && <div className="mt-4 text-body max-w-[900px] text-[17px]">{children}</div>}
@@ -98,7 +98,7 @@ export function GradientThumb({ segment, label, seed = 0, className = "" }: { se
 
 export function EmptyState({ title, children }: { title: string; children?: React.ReactNode }) {
   return (
-    <div className="rounded-[14px] border border-line bg-surface p-8">
+    <div className="card card-pad">
       <div className="h-card mb-2">{title}</div>
       <div className="text-body text-[15px]">{children}</div>
     </div>
@@ -158,9 +158,9 @@ export function StatBlock({ value, label, href, note }: { value: React.ReactNode
     </>
   );
   return href ? (
-    <Link href={href} className="block min-w-0 rounded-[14px] border border-line bg-surface p-5 sm:p-6 transition-[transform,border-color] duration-150 hover:-translate-y-0.5 hover:border-line-strong">{body}</Link>
+    <Link href={href} className="block min-w-0 card card-pad transition-[transform,border-color] duration-150 hover:-translate-y-0.5 hover:border-line-strong">{body}</Link>
   ) : (
-    <div className="min-w-0 rounded-[14px] border border-line bg-surface p-5 sm:p-6">{body}</div>
+    <div className="min-w-0 card card-pad">{body}</div>
   );
 }
 
@@ -195,7 +195,7 @@ export function DutySplit({ covered, assisted, total }: { covered: number; assis
     { key: "rest", count: rest, label: "not NeoSigma's work", bar: "bg-surface-2 text-body", dot: "bg-surface-2 ring-1 ring-line-strong", hint: "Grey highlight in the posting" },
   ];
   return (
-    <div className="rounded-[14px] border border-line bg-surface p-5 sm:p-6">
+    <div className="card card-pad">
       <div className="flex flex-wrap items-baseline justify-between gap-2">
         <p className="h-card !text-[17px]">What NeoSigma could do in this role</p>
         <span className="label">{total} duties in total</span>

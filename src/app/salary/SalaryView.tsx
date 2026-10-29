@@ -73,7 +73,7 @@ export function SalaryView({ rows }: { rows: SalaryRow[] }) {
       {/* Per company */}
       <section>
         <h3 className="h-page !text-[28px]">Top companies by average salary.</h3>
-        <div className="mt-5 rounded-[14px] border border-line bg-surface p-4 sm:p-6">
+        <div className="mt-5 card card-pad">
           <div style={{ height: Math.max(240, byCompany.length * 34) }}>
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={byCompany} layout="vertical" margin={{ top: 0, right: 56, bottom: 0, left: 8 }} barCategoryGap={6}>
@@ -97,7 +97,7 @@ export function SalaryView({ rows }: { rows: SalaryRow[] }) {
       {/* By role family */}
       <section>
         <h3 className="h-page !text-[28px]">Where the pay sits, by role family.</h3>
-        <div className="mt-5 rounded-[14px] border border-line bg-surface overflow-x-auto">
+        <div className="mt-5 card overflow-x-auto">
           <table className="w-full text-[14px] md:min-w-[620px]">
             <thead className="border-b border-line">
               <tr>{["Role family", "Roles", "With salary", "Average", "", "Median"].map((h, i) => <th key={i} className={`px-4 py-3 font-normal ${i === 0 || i === 4 ? "text-left" : "text-right"} ${i === 4 ? "hidden sm:table-cell" : ""}`}><span className="label">{h}</span></th>)}</tr>
@@ -122,7 +122,7 @@ export function SalaryView({ rows }: { rows: SalaryRow[] }) {
       <section id="roles">
         <h3 className="h-page !text-[28px]">Every role, with its breakdown.</h3>
         <p className="mt-2 text-[14px] text-muted">Click a row to open that role&apos;s duty-by-duty breakdown.</p>
-        <div className="mt-5 rounded-[14px] border border-line bg-surface overflow-x-auto">
+        <div className="mt-5 card overflow-x-auto">
           <table className="w-full text-[14px] md:min-w-[900px]">
             <thead className="border-b border-line">
               <tr>{["Role", "Company", "Overlap", "Posted range", "Midpoint (USD)"].map((h, i) => (

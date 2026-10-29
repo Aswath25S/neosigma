@@ -102,7 +102,7 @@ export function TryView() {
 
   return (
     <div>
-      <div className="grid lg:grid-cols-[minmax(0,1fr)_300px] gap-6">
+      <div className="grid lg:grid-cols-[minmax(0,1fr)_300px] gap-8">
         <div>
           <label htmlFor="posting" className="label block mb-2">Posting text</label>
           <textarea id="posting" value={text} onChange={(e) => setText(e.target.value.slice(0, MAX))} rows={16}
@@ -137,7 +137,7 @@ export function TryView() {
         </div>
       )}
 
-      {error && <p role="alert" className="mt-6 rounded-[12px] border border-line bg-surface p-4 text-[14px] text-ink">{error}</p>}
+      {error && <p role="alert" className="mt-6 card card-pad text-[14px] text-ink">{error}</p>}
 
       {result && (
         <div ref={resultRef} className="mt-14 scroll-mt-24 fade-in">

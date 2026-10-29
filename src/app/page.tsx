@@ -91,7 +91,7 @@ export default function Home() {
             </table>
           </div>
         ) : (
-          <div className="rounded-[14px] border border-line bg-surface p-8 text-body">
+          <div className="card card-pad text-body">
             No leads yet. Run <code className="mono text-ink">npm run all</code> to fetch postings, extract duties and score companies.
           </div>
         )}

@@ -94,9 +94,9 @@ export function PostingEvidence({ data, ats }: { data: ReportData; ats?: string 
   const f = data.fields;
 
   return (
-    <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_380px]">
+    <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_380px]">
       {/* Original text */}
-      <div className="min-w-0 rounded-[14px] border border-line bg-surface p-5 sm:p-8">
+      <div className="min-w-0 card card-pad">
         <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
           <span className="label">Original posting<span className="lg:hidden"> · tap a highlight</span></span>
           {data.url && <a href={data.url} target="_blank" rel="noreferrer" className="text-[13px] text-ink underline underline-offset-4 decoration-line-strong hover:decoration-ink">View on {ATS_NAMES[ats ?? ""] ?? "source"} ↗</a>}
@@ -127,20 +127,20 @@ export function PostingEvidence({ data, ats }: { data: ReportData; ats?: string 
 
       {/* Side panel */}
       <aside className="flex flex-col gap-4 [&>*]:shrink-0 lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:self-start lg:overflow-y-auto">
-        <div className="rounded-[14px] border border-line bg-surface-2 px-5 py-3.5">
+        <div className="card !bg-surface-2 px-5 py-4">
           <span className="label">Role</span>
           <p className="text-[15px] font-medium leading-snug text-ink">{data.title}</p>
           <span className="label mt-2 block">Company</span>
           <p className="text-[15px] leading-snug">{data.companySlug ? <Link href={`/companies/${data.companySlug}`} className="text-ink underline underline-offset-4 decoration-line-strong hover:decoration-ink">{data.company}</Link> : <span className="text-ink">{data.company}</span>}</p>
         </div>
 
-        <div className="rounded-[14px] border border-line bg-surface p-5 lg:min-h-[260px]">
+        <div className="card card-pad lg:min-h-[260px]">
           {active ? <DutyDetail d={active} /> : (
             <p className="text-[14px] text-muted">Hover over a highlight in the posting, or click a duty in the list below, to see its label, task and rationale.</p>
           )}
         </div>
 
-        <div className="rounded-[14px] border border-line bg-surface p-2">
+        <div className="card p-2">
           <div className="px-3 pb-1 pt-2"><span className="label">{duties.length} duties</span></div>
           <ul>
             {list.map((d) => (
@@ -150,7 +150,7 @@ export function PostingEvidence({ data, ats }: { data: ReportData; ats?: string 
                   <span className={`mt-1.5 h-2 w-2 shrink-0 rounded-full ${d.label === "covered" ? "bg-covered" : d.label === "assisted" ? "bg-assisted" : "border border-muted"}`} />
                   <span className="min-w-0 flex-1">
                     {d.text}
-                    {d.taskId && <span className="ml-1.5 font-mono text-[11px] text-muted">{d.taskId}</span>}
+                    
                     {d.spanStart == null && <span className="ml-1 text-[11px] text-assisted">(span not found)</span>}
                   </span>
                 </button>
@@ -159,7 +159,7 @@ export function PostingEvidence({ data, ats }: { data: ReportData; ats?: string 
           </ul>
         </div>
 
-        <div className="rounded-[14px] border border-line bg-surface p-5 text-[13.5px]">
+        <div className="card card-pad text-[13.5px]">
           <span className="label">Extracted fields</span>
           <dl className="mt-3 grid grid-cols-[110px_1fr] gap-x-3 gap-y-1.5">
             <dt className="text-muted">Seniority</dt><dd className="text-body">{f.seniority ?? "—"}</dd>
@@ -206,7 +206,7 @@ function DutyDetail({ d }: { d: EvDuty }) {
       {task && (
         <div>
           <span className="label">NeoSigma task</span>
-          <p className="mt-1 text-[14px] text-body"><span className="font-mono text-[12px] text-covered">{task.id}</span> · {task.does}</p>
+          <p className="mt-1 text-[14px] text-body">{task.does}</p>
         </div>
       )}
       {d.label === "not_covered" && d.notCoveredKind && (

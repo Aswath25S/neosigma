@@ -91,7 +91,7 @@ function ThemeTable({ list, strongTotal, open, setOpen }: {
                     <Collapse open={isOpen}>
                       <div className="px-3 md:px-4 pb-5 pt-1">
                         <div className="grid grid-cols-1 gap-4 md:grid-cols-[2fr_1fr]">
-                          <div className="rounded-[12px] border border-line bg-bg p-4">
+                          <div className="card-inset">
                             <span className="label">Example phrases (verbatim)</span>
                             <ul className="mt-3 flex flex-col gap-2.5">
                               {t.duties.slice(0, MAX_EXAMPLES).map((d) => (
@@ -103,7 +103,7 @@ function ThemeTable({ list, strongTotal, open, setOpen }: {
                             </ul>
                             {t.duties.length > MAX_EXAMPLES && <p className="mt-3 text-[12.5px] text-muted">+{t.duties.length - MAX_EXAMPLES} more duties in this theme.</p>}
                           </div>
-                          <div className="rounded-[12px] border border-line bg-bg p-4">
+                          <div className="card-inset">
                             <span className="label">Companies</span>
                             <ul className="mt-3 flex flex-wrap gap-1.5">
                               {companies.map((d) => (
