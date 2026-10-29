@@ -116,7 +116,8 @@ function extractJson(text: string): string {
   return text.slice(start, end + 1);
 }
 
-const CACHE_DIR = path.join(process.cwd(), "data", "cache", "claude");
+// Vercel's deployed files are read-only, so the live demo caches in /tmp there.
+const CACHE_DIR = process.env.VERCEL ? path.join("/tmp", "claude-cache") : path.join(process.cwd(), "data", "cache", "claude");
 
 // Pipeline results are cached by a hash of (kind, model, prompt, input) so a
 // re-run only pays for postings or prompts that changed.

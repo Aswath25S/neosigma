@@ -4,6 +4,11 @@ import type { NextConfig } from "next";
 // time, and the data changes whenever the pipeline is re-run.
 const nextConfig: NextConfig = {
   serverExternalPackages: ["better-sqlite3"],
+  // Pages read these at request time, so they must ship with every function
+  // on Vercel: the database, its migrations, the config and the prompts.
+  outputFileTracingIncludes: {
+    "/**": ["./data/radar.db", "./drizzle/**/*", "./config/**/*", "./prompts/**/*"],
+  },
   // Cost became Roles & Savings, then Salary & Roles; keep old links working.
   async redirects() {
     return [

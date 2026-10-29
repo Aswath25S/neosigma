@@ -45,5 +45,7 @@ next-env.d.ts
 /data/raw/boards/
 /data/cache/
 /data/*.db
+# The site's database ships with the deploy (public, company-level data only).
+!/data/radar.db
 /data/*.db-*
 /data/pipeline.*

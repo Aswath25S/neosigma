@@ -36,6 +36,8 @@ export async function GET() {
 
 // Runs `npm run all` in the background. One run at a time.
 export async function POST() {
+  // The pipeline runs locally (npm run all); a deployed copy only serves the results.
+  if (process.env.VERCEL) return Response.json({ error: "Refreshing is only available when running locally." }, { status: 403 });
   if (!hasApiKey()) return Response.json({ error: "Set ANTHROPIC_API_KEY in .env.local before refreshing." }, { status: 503 });
   if (readStatus().running) return Response.json({ error: "A refresh is already running." }, { status: 409 });
   fs.mkdirSync(DATA, { recursive: true });
