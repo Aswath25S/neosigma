@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { coverageMap, MODELS, roles, weights, TASK_IDS } from "./config";
 import { cached, structuredCall } from "./claude";
-import { descriptionHits, matchTitle, type TitleList } from "./filters";
+import type { TitleList } from "./filters";
 import { ExtractionSchema, ScreenSchema, type Duty, type Extraction, type LiveEvidence, type Screen } from "./schemas";
 import { findSpan, sha256 } from "./text";
 
@@ -45,19 +45,6 @@ export interface Stage1 {
   pattern: string | null;
   prescreen_hits: string[];
   screen: Screen | null;
-}
-
-// Stage 1 as the live demo runs it: Drop-list titles are dropped and
-// keep/conditional titles pass; every other posting is judged on its
-// description by Claude.
-export async function judgePosting(title: string, text: string, opts: { cache?: boolean } = {}): Promise<{ list: TitleList; stage1: Stage1 }> {
-  const m = matchTitle(title);
-  const hits = descriptionHits(text);
-  if (m.list === "keep" || m.list === "conditional" || m.list === "drop") {
-    return { list: m.list, stage1: { via: "title", pattern: m.pattern, prescreen_hits: hits, screen: null } };
-  }
-  const screen = await screenDescription(title, text, opts);
-  return { list: screen.decision, stage1: { via: "description", pattern: null, prescreen_hits: hits, screen } };
 }
 
 // ---------- extraction ----------

@@ -54,9 +54,9 @@ npm run eval                    # needs ≥ 85%; result shows on /method
 
 ## Pages
 
-`/` landing · `/leads` ranked table, live weight sliders, Rejected tab with reasons · `/companies/[slug]` brief · `/postings/[id]` evidence with highlighted spans · `/gaps` · `/salary` (Salary & Roles: posted salaries by role, company and role family) · `/try` live demo (`POST /api/analyze`, streams progress, stores nothing, 10/hour per IP + `LIVE_DEMO_DAILY_LIMIT`) · `/method`.
+`/` landing · `/leads` ranked table, live weight sliders, Rejected tab with reasons · `/companies/[slug]` brief · `/postings/[id]` evidence with highlighted spans · `/gaps` · `/salary` (Salary & Roles: posted salaries by role, company and role family) · `/method`.
 
-"Refresh data" in the nav runs `npm run all` in the background (log in `data/pipeline.log`).
+`POST /api/refresh` runs `npm run all` in the background when running locally (log in `data/pipeline.log`); it is disabled on Vercel.
 
 ## Changes from the build spec
 

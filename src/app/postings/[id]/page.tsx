@@ -52,7 +52,7 @@ export default async function PostingPage({ params }: { params: Promise<{ id: st
           </p>
         )}
       </div>
-      <PostingReport data={data} ats={v.posting.ats} variant="role" />
+      <PostingReport data={data} ats={v.posting.ats} />
     </div>
   );
 }
