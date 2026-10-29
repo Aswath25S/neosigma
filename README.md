@@ -46,7 +46,7 @@ npm run eval                    # needs ≥ 85%; result shows on /method
 
 - `config/coverage_map.json`: T1–T6, labels, proof studies
 - `config/roles.json`: keep / conditional / drop title lists and patterns, gate thresholds
-- `config/weights.json`: score weights, trigger points, tiers, load factor, 60-day cut-off
+- `config/weights.json`: score weights, trigger points, tiers, salary basis, posting age cut-off
 - `config/sources.csv`: seed companies
 - `config/model_release_feeds.json`, `config/company_feeds.json`, `config/manual_triggers.json` (manual "public complaints" flags)
 - `config/site.json`: builder name for the footer, optional GitHub/LinkedIn URLs for the footer buttons
@@ -54,7 +54,7 @@ npm run eval                    # needs ≥ 85%; result shows on /method
 
 ## Pages
 
-`/` landing · `/leads` ranked table, live weight sliders, Rejected tab with reasons · `/companies/[slug]` brief · `/postings/[id]` evidence with highlighted spans · `/gaps` · `/cost` · `/try` live demo (`POST /api/analyze`, streams progress, stores nothing, 10/hour per IP + `LIVE_DEMO_DAILY_LIMIT`) · `/method`.
+`/` landing · `/leads` ranked table, live weight sliders, Rejected tab with reasons · `/companies/[slug]` brief · `/postings/[id]` evidence with highlighted spans · `/gaps` · `/salary` (Salary & Roles: posted salaries by role, company and role family) · `/try` live demo (`POST /api/analyze`, streams progress, stores nothing, 10/hour per IP + `LIVE_DEMO_DAILY_LIMIT`) · `/method`.
 
 "Refresh data" in the nav runs `npm run all` in the background (log in `data/pipeline.log`).
 

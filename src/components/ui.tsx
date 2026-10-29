@@ -1,11 +1,6 @@
 import Link from "next/link";
 import { TASK_IDS, taskShort } from "@/lib/config";
 
-export function TierChip({ tier }: { tier: string | null }) {
-  const t = (tier ?? "rejected").toLowerCase();
-  return <span className={`tier tier-${t}`}>{tier ?? "Rejected"}</span>;
-}
-
 export function SectionHeading({ num, title, id, sub }: { num: string; title: string; id?: string; sub?: React.ReactNode }) {
   return (
     <div id={id} className="scroll-mt-24 mb-6">

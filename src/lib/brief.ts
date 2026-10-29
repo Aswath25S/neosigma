@@ -3,7 +3,7 @@ import path from "node:path";
 import { coverageMap, MODELS, TASK_IDS, taskShort, segmentName } from "./config";
 import { cached, structuredCall } from "./claude";
 import { BriefSchema, type Brief } from "./schemas";
-import { activeTriggers, DEFAULT_WEIGHTS, TRIGGER_NAMES, type Breakdown } from "./scoring";
+import { activeTriggers, DEFAULT_WEIGHTS, shownTriggers, TRIGGER_NAMES, type Breakdown } from "./scoring";
 import type { CompanyView, StoredExtraction } from "./data";
 import { sha256 } from "./text";
 
@@ -36,20 +36,20 @@ export function pickProof(taskWeights: Record<string, number>): keyof typeof cov
 export function buildEvidence(view: CompanyView) {
   const refs: Record<string, Ref> = {};
   const lines: string[] = [];
-  const { company, qualifying, duties, triggers, themes, costs } = view;
+  const { company, qualifying, duties, triggers, themes, salaries } = view;
   const breakdown = view.breakdown as Breakdown | null;
 
   lines.push(`Company: ${company.name} (${company.domain}), segment: ${segmentName(company.segment)}, size: ${company.employeeBand} employees.`);
   if (breakdown) {
-    lines.push(`Lead score ${Math.round(breakdown.total)} (${breakdown.tier}). Live-agent strength ${breakdown.live.strength}/25.`);
+    lines.push(`Lead score ${Math.round(breakdown.total)} of 100. Live-agent strength ${breakdown.live.strength}/25.`);
   }
   lines.push("\nQualifying postings:");
   qualifying.forEach((p, i) => {
     const id = `P${i + 1}`;
     refs[id] = { id, kind: "posting", label: p.title, href: `/postings/${p.id}`, external: false };
-    const c = costs.find((x) => x.postingId === p.id);
+    const sal = salaries.find((x) => x.postingId === p.id)?.salary;
     const salary = p.salaryMin ? `salary ${p.currency ?? "USD"} ${p.salaryMin}–${p.salaryMax}` : "no salary in posting";
-    lines.push(`${id}: "${p.title}", overlap ${Math.round((p.overlap ?? 0) * 100)}%, posted ${p.postedAt?.slice(0, 10) ?? "date unknown"}, ${salary}${c?.cost ? `, manual-work cost about $${Math.round(c.cost / 1000)}k a year` : ""}.`);
+    lines.push(`${id}: "${p.title}", overlap ${Math.round((p.overlap ?? 0) * 100)}%, posted ${p.postedAt?.slice(0, 10) ?? "date unknown"}, ${salary}${sal?.converted ? ` (about $${Math.round(sal.mid / 1000)}k USD midpoint)` : ""}.`);
   });
 
   const taskWeights: Record<string, number> = {};
@@ -82,8 +82,7 @@ export function buildEvidence(view: CompanyView) {
     DEFAULT_WEIGHTS,
     new Date(),
   );
-  const newestRelease = allActive.filter((t) => t.kind === "model_release").sort((a, b) => b.date.localeCompare(a.date))[0];
-  const active = allActive.filter((t) => t.kind !== "model_release" || t === newestRelease);
+  const active = shownTriggers(allActive);
   const globalIds = new Set(triggers.filter((t) => t.companyId == null).map((t) => t.id));
   lines.push("\nActive timing triggers (last 90 days; model releases last 30 days):");
   if (!active.length) lines.push("None.");
@@ -103,6 +102,8 @@ export function buildEvidence(view: CompanyView) {
   }
 
   const tools = [...new Set(qualifying.flatMap((p) => (p.extraction as StoredExtraction | null)?.agent_tools ?? []))];
+  const mids = salaries.map((x) => x.salary?.mid).filter((m): m is number => m != null);
+  lines.push(`\nAverage salary of qualifying roles: ${mids.length ? `$${Math.round(mids.reduce((a, b) => a + b, 0) / mids.length / 1000)}k across ${mids.length} of ${salaries.length} roles that list a salary` : "no role lists a salary"}.`);
   lines.push(`\nTools named in postings: ${tools.length ? tools.join(", ") : "none"}.`);
 
   const proofKey = pickProof(taskWeights);

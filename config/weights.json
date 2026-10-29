@@ -51,15 +51,15 @@
     "hot": 75,
     "warm": 55
   },
-  "cost": {
-    "load_factor": 1.25,
-    "min_same_title_postings": 5
-  },
   "fetch": {
     "max_posting_age_days": 180,
     "dedupe_similarity": 0.9,
     "regions": "global",
     "english_only": true,
     "max_details_per_board": 150
+  },
+  "salary": {
+    "basis": "midpoint",
+    "include_converted": true
   }
 }

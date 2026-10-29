@@ -5,7 +5,8 @@ import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import { DEFAULT_WEIGHTS, scoreCompany, shownTriggers, TRIGGER_NAMES, LIVE_STRENGTH_TEXT, type Weights } from "@/lib/scoring";
 import { SEGMENTS, segmentName } from "@/lib/config";
 import { money, pct, shortDate } from "@/lib/format";
-import { ShareBar, ShareLegend, TierChip, Note } from "@/components/ui";
+import { ShareBar, ShareLegend, Note } from "@/components/ui";
+import { Select } from "@/components/Select";
 import type { LeadRow } from "@/lib/data";
 import { downloadCsv } from "@/lib/csv";
 
@@ -14,7 +15,7 @@ interface RejectedRow {
   detail: string | null; overlap: number | null; extracted: boolean;
 }
 
-const TABS = ["all", "hot", "warm", "watch", "rejected"] as const;
+const TABS = ["all", "rejected"] as const;
 type Tab = (typeof TABS)[number];
 
 // Plain-language names for the four score parts; formulas live on /method.
@@ -25,7 +26,7 @@ const PARTS = [
   { key: "timing", name: "Reason to call now", desc: "The strongest recent trigger: first eval hire, funding, an agent launch, a new model release, several roles open." },
 ] as const;
 type PartKey = (typeof PARTS)[number]["key"];
-const SORTS = ["score", "overlap", "cost", "name", "rank"] as const;
+const SORTS = ["score", "overlap", "salary", "name", "rank"] as const;
 type SortKey = (typeof SORTS)[number];
 const AGENT_TYPES = ["support", "voice", "coding", "research", "sales", "healthcare", "legal", "finance", "internal", "other"];
 
@@ -43,7 +44,6 @@ export function LeadsView({ leads, rejected, initial }: { leads: LeadRow[]; reje
   const [segment, setSegment] = useState(initial.segment ?? "");
   const [agentType, setAgentType] = useState(initial.agent ?? "");
   const [hasSalary, setHasSalary] = useState(initial.salary === "1");
-  const [trigger, setTrigger] = useState(initial.trigger ?? "");
   const [reason, setReason] = useState(initial.reason ?? "");
   const [sort, setSort] = useState<SortKey>((SORTS as readonly string[]).includes(initial.sort) ? (initial.sort as SortKey) : "score");
   const [dir, setDir] = useState<"asc" | "desc">(initial.dir === "asc" ? "asc" : "desc");
@@ -61,14 +61,13 @@ export function LeadsView({ leads, rejected, initial }: { leads: LeadRow[]; reje
     if (segment) q.set("segment", segment);
     if (agentType) q.set("agent", agentType);
     if (hasSalary) q.set("salary", "1");
-    if (trigger) q.set("trigger", trigger);
     if (reason) q.set("reason", reason);
     if (sort !== "score") q.set("sort", sort);
     if (dir !== "desc") q.set("dir", dir);
     if (!isDefault) q.set("w", PARTS.map((p) => parts[p.key]).join(","));
     const qs = q.toString();
     window.history.replaceState(null, "", qs ? `?${qs}` : window.location.pathname);
-  }, [tab, segment, agentType, hasSalary, trigger, reason, sort, dir, parts, isDefault]);
+  }, [tab, segment, agentType, hasSalary, reason, sort, dir, parts, isDefault]);
 
   const scored: Scored[] = useMemo(() => {
     const w: Weights = { ...DEFAULT_WEIGHTS, parts };
@@ -82,15 +81,14 @@ export function LeadsView({ leads, rejected, initial }: { leads: LeadRow[]; reje
   }, [leads, parts]);
 
   const rows = useMemo(() => {
-    let r = scored.filter((l) => tab === "all" || tab === "rejected" || l.b.tier.toLowerCase() === tab);
+    let r = [...scored];
     if (segment) r = r.filter((l) => l.segment === segment);
     if (agentType) r = r.filter((l) => l.postings.some((p) => p.agentType === agentType));
     if (hasSalary) r = r.filter((l) => l.postings.some((p) => p.hasSalary));
-    if (trigger) r = r.filter((l) => l.b.timing.active.some((t) => t.kind === trigger));
     const val = (l: Scored): number | string => {
       switch (sort) {
         case "overlap": return l.b.overlap.bestOverlap;
-        case "cost": return l.cost ?? -1;
+        case "salary": return l.avgSalary ?? -1;
         case "name": return l.name.toLowerCase();
         case "rank": return -l.rank;
         default: return l.b.total;
@@ -101,7 +99,7 @@ export function LeadsView({ leads, rejected, initial }: { leads: LeadRow[]; reje
       const c = typeof x === "string" ? x.localeCompare(y as string) : (x as number) - (y as number);
       return dir === "asc" ? c : -c;
     });
-  }, [scored, tab, segment, agentType, hasSalary, trigger, sort, dir]);
+  }, [scored, segment, agentType, hasSalary, sort, dir]);
 
   const rejectedRows = useMemo(() => rejected.filter((r) => !reason || r.reason === reason), [rejected, reason]);
   const reasons = useMemo(() => {
@@ -112,9 +110,6 @@ export function LeadsView({ leads, rejected, initial }: { leads: LeadRow[]; reje
 
   const counts = useMemo(() => ({
     all: scored.length,
-    hot: scored.filter((l) => l.b.tier === "Hot").length,
-    warm: scored.filter((l) => l.b.tier === "Warm").length,
-    watch: scored.filter((l) => l.b.tier === "Watch").length,
     rejected: rejected.length,
   }), [scored, rejected]);
 
@@ -130,15 +125,15 @@ export function LeadsView({ leads, rejected, initial }: { leads: LeadRow[]; reje
       return;
     }
     downloadCsv("leads.csv",
-      ["rank", "company", "domain", "segment", "tier", "lead_score", "overlap_pct", "live_agent_strength", "fit_points", "timing_points", "top_trigger", "top_trigger_date", "manual_work_cost_usd", "avg_salary_usd", "qualifying_roles", "company_url", "job_links"],
-      rows.map((l) => [l.rank, l.name, l.domain, segmentName(l.segment), l.b.tier, Math.round(l.b.total), Math.round(l.b.overlap.bestOverlap * 100), l.b.live.strength,
+      ["rank", "company", "domain", "segment", "lead_score", "overlap_pct", "live_agent_strength", "fit_points", "timing_points", "top_trigger", "top_trigger_date", "avg_salary_usd", "qualifying_roles", "company_url", "job_links"],
+      rows.map((l) => [l.rank, l.name, l.domain, segmentName(l.segment), Math.round(l.b.total), Math.round(l.b.overlap.bestOverlap * 100), l.b.live.strength,
         l.b.fit.points.toFixed(1), l.b.timing.points.toFixed(1), l.b.timing.topTrigger ? TRIGGER_NAMES[l.b.timing.topTrigger.kind] : "",
-        l.b.timing.topTrigger?.date.slice(0, 10) ?? "", l.cost != null ? Math.round(l.cost) : "", l.avgSalary != null ? Math.round(l.avgSalary) : "",
+        l.b.timing.topTrigger?.date.slice(0, 10) ?? "", l.avgSalary != null ? Math.round(l.avgSalary) : "",
         l.postings.length, `${location.origin}/companies/${l.slug}`, l.postings.map((p) => p.url).join(" ")]));
   }
 
   const th = (k: SortKey | null, label: React.ReactNode, cls = "") => (
-    <th scope="col" className={`px-2 sm:px-3 py-3 font-normal text-left ${cls}`}>
+    <th scope="col" className={`px-2 sm:px-3 py-3 font-normal ${cls.includes("text-right") ? "" : "text-left"} ${cls}`}>
       {k ? (
         <button onClick={() => sortBy(k)} className={`label !text-[11.5px] hover:!text-ink ${sort === k ? "!text-ink" : ""}`}>
           {label}{sort === k ? (dir === "desc" ? " ↓" : " ↑") : ""}
@@ -148,12 +143,12 @@ export function LeadsView({ leads, rejected, initial }: { leads: LeadRow[]; reje
   );
 
   return (
-    <div className="grid grid-cols-1 gap-8 lg:grid-cols-[290px_minmax(0,1fr)]">
+    <div className="grid grid-cols-1 gap-8 lg:grid-cols-[260px_minmax(0,1fr)]">
       {/* What the score weighs */}
       <aside className="lg:sticky lg:top-24 lg:self-start">
         <div className="rounded-[14px] border border-line bg-surface p-5">
-          <div className="flex items-baseline justify-between">
-            <span className="label">What the score weighs</span>
+          <div className="flex items-baseline justify-between gap-3">
+            <span className="label whitespace-nowrap">Score weights</span>
             <button onClick={() => setParts({ ...DEFAULT_WEIGHTS.parts })} className={`mono !text-[12px] ${isDefault ? "text-muted" : "text-ink underline underline-offset-4"}`}>Reset</button>
           </div>
           <div className="mt-5 flex flex-col gap-5">
@@ -171,7 +166,7 @@ export function LeadsView({ leads, rejected, initial }: { leads: LeadRow[]; reje
             ))}
           </div>
           <p className="mt-5 text-[12.5px] leading-relaxed text-muted">
-            Default: 40 / 25 / 15 / 20. Slide to re-rank instantly.{!isDefault && " Scores below use your weights."} Hot ≥ {DEFAULT_WEIGHTS.tiers.hot}, Warm ≥ {DEFAULT_WEIGHTS.tiers.warm}.
+            Default: 40 / 25 / 15 / 20. Slide to re-rank instantly.{!isDefault && " Scores below use your weights."}
           </p>
           <Link href="/method#weights" className="mono !text-[12px] text-body hover:text-ink mt-3 inline-block underline underline-offset-4 decoration-line-strong">How scores are calculated</Link>
         </div>
@@ -182,8 +177,8 @@ export function LeadsView({ leads, rejected, initial }: { leads: LeadRow[]; reje
         <div className="flex flex-wrap items-center gap-x-6 gap-y-2 border-b border-line pb-3 mb-5" role="tablist">
           {TABS.map((t) => (
             <button key={t} role="tab" aria-selected={tab === t} onClick={() => setTab(t)}
-              className={`mono capitalize ${tab === t ? "text-ink" : "text-muted hover:text-ink"}`}>
-              {t === "all" ? "Leads" : t} <span className="text-muted">{counts[t]}</span>
+              className={`mono py-1 border-b-2 ${tab === t ? "text-ink border-ink" : "text-muted border-transparent hover:text-ink"}`}>
+              {t === "all" ? "Leads" : "Rejected roles"} <span className="text-muted">{counts[t]}</span>
             </button>
           ))}
           <button className="ml-auto btn btn-secondary btn-sm" onClick={exportCsv}>Export CSV</button>
@@ -191,23 +186,16 @@ export function LeadsView({ leads, rejected, initial }: { leads: LeadRow[]; reje
 
         {tab !== "rejected" ? (
           <>
-            <div className="grid grid-cols-2 xl:grid-cols-4 gap-3 mb-4">
-              <select className="h-10 px-3 text-[13.5px]" value={segment} onChange={(e) => setSegment(e.target.value)} aria-label="Segment">
-                <option value="">All segments</option>
-                {SEGMENTS.map((s) => <option key={s.id} value={s.id}>{s.name}</option>)}
-              </select>
-              <select className="h-10 px-3 text-[13.5px]" value={agentType} onChange={(e) => setAgentType(e.target.value)} aria-label="Agent type">
-                <option value="">All agent types</option>
-                {AGENT_TYPES.map((a) => <option key={a} value={a}>{a}</option>)}
-              </select>
-              <select className="h-10 px-3 text-[13.5px]" value={trigger} onChange={(e) => setTrigger(e.target.value)} aria-label="Trigger type">
-                <option value="">Any trigger</option>
-                {Object.entries(TRIGGER_NAMES).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
-              </select>
-              <label className="mono !text-[12.5px] text-body inline-flex items-center gap-2 h-10 px-3 rounded-[10px] border border-line-strong bg-surface-2 cursor-pointer">
-                <input type="checkbox" checked={hasSalary} onChange={(e) => setHasSalary(e.target.checked)} className="accent-[var(--covered)]" />
-                Has salary
-              </label>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+              <Select label="Segment" value={segment} onChange={setSegment} allLabel="All segments" options={SEGMENTS.map((x) => [x.id, x.name])} />
+              <Select label="Agent type" value={agentType} onChange={setAgentType} allLabel="All agent types" options={AGENT_TYPES.map((x) => [x, x[0].toUpperCase() + x.slice(1)])} />
+              <div className="flex flex-col gap-1.5">
+                <span className="label">Salary</span>
+                <label className="text-[14px] text-body inline-flex items-center gap-2.5 h-10 px-3.5 rounded-[10px] border border-line-strong bg-surface-2 cursor-pointer hover:border-muted">
+                  <input type="checkbox" checked={hasSalary} onChange={(e) => setHasSalary(e.target.checked)} className="accent-[var(--covered)]" />
+                  Has a posted salary
+                </label>
+              </div>
             </div>
             <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
               <span className="label">Showing {rows.length} of {scored.length} lead companies · click a row for details</span>
@@ -219,20 +207,20 @@ export function LeadsView({ leads, rejected, initial }: { leads: LeadRow[]; reje
                 {/* Fixed widths so headers never shift when a row opens. On phones,
                     tier, overlap and cost move under the company name. */}
                 <colgroup>
-                  <col className="w-[2.5rem] md:w-[3.25rem]" />
+                  <col className="w-[2.5rem] md:w-[4rem]" />
                   <col />
-                  <col className="w-[4rem] md:w-[5.5rem]" />
+                  <col className="w-[4rem] md:w-[8rem]" />
+                  <col className="w-0 md:w-[15rem]" />
                   <col className="w-0 md:w-[10rem]" />
-                  <col className="w-0 md:w-[7.5rem]" />
-                  <col className="w-[3rem] md:w-[9.5rem]" />
+                  <col className="w-[3.25rem] md:w-[12.5rem]" />
                 </colgroup>
                 <thead className="border-b border-line">
                   <tr>
                     {th("rank", "#")}
                     {th("name", "Company")}
-                    {th("score", "Score", "text-right")}
-                    {th("overlap", "Overlap", "max-md:!p-0 max-md:[&>*]:hidden")}
-                    {th("cost", "Manual work", "text-right max-md:!p-0 max-md:[&>*]:hidden")}
+                    {th("score", "Score", "text-right md:!pr-8")}
+                    {th("overlap", "Overlap", "md:!pl-6 max-md:!p-0 max-md:[&>*]:hidden")}
+                    {th("salary", "Avg. salary", "text-right md:!pr-6 max-md:!p-0 max-md:[&>*]:hidden")}
                     <th scope="col" className="px-2 sm:px-3 py-3"><span className="sr-only">Actions</span></th>
                   </tr>
                 </thead>
@@ -248,17 +236,15 @@ export function LeadsView({ leads, rejected, initial }: { leads: LeadRow[]; reje
             </div>
             <div className="mt-4">
               <Note>
-                <b>Manual work</b> is the yearly cost of the duties NeoSigma covers in each qualifying role: salary midpoint × 1.25 load × overlap, summed. Every role behind it is on the <Link href="/cost" className="underline underline-offset-4">Cost</Link> page.
+                <b>Avg. salary</b> is the average yearly pay across the company&apos;s qualifying roles that list a salary, using the middle of each posted range
+                (non-USD salaries converted at the ECB rate). Every role is on <Link href="/salary" className="underline underline-offset-4">Salary &amp; Roles</Link>.
               </Note>
             </div>
           </>
         ) : (
           <>
             <div className="flex flex-wrap gap-3 mb-6">
-              <select className="h-10 px-3 text-[13.5px]" value={reason} onChange={(e) => setReason(e.target.value)} aria-label="Fail reason">
-                <option value="">All fail reasons</option>
-                {reasons.map(([k, v]) => <option key={k} value={k}>{v.text} ({v.n})</option>)}
-              </select>
+              <Select className="w-full sm:w-[420px]" label="Fail reason" value={reason} onChange={setReason} allLabel="All fail reasons" options={reasons.map(([k, v]) => [k, `${v.text} (${v.n})`])} />
             </div>
             <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
               <table className="table min-w-[760px]">
@@ -292,45 +278,44 @@ const LeadRowView = memo(function LeadRowView({ l, isOpen, custom, parts, totalW
       <tr className={`cursor-pointer border-t border-line transition-colors duration-150 hover:bg-surface ${isOpen ? "bg-surface" : ""}`} onClick={() => onToggle(l.slug)}>
         <td className="px-2 sm:px-3 py-4 align-top md:align-middle font-mono text-[12.5px] text-muted">{String(l.rank).padStart(2, "0")}</td>
         <td className="px-2 sm:px-3 py-4">
-          <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
-            <span className="text-[15px] font-medium text-ink">{l.name}</span>
-            <TierChip tier={l.b.tier} />
-          </div>
+          <span className="text-[15px] font-medium text-ink">{l.name}</span>
           <div className="mt-1 font-mono text-[12px] text-muted">{l.postings.length} qualifying {l.postings.length === 1 ? "role" : "roles"} · {segmentName(l.segment)}</div>
           <div className="md:hidden mt-2.5">
             <ShareBar covered={best?.counts.coveredShare ?? 0} assisted={best?.counts.assistedShare ?? 0} />
             <div className="label mt-1.5 !normal-case !tracking-[0.04em] flex flex-wrap gap-x-2">
               <span>{pct(l.b.overlap.bestOverlap)} overlap</span><span aria-hidden="true">·</span>
-              <span>{l.cost != null ? `${money(l.cost, { compact: true })} manual work` : "no salary posted"}</span>
+              <span>{l.avgSalary != null ? `${money(l.avgSalary, { compact: true })} avg. salary` : "no salary posted"}</span>
             </div>
           </div>
         </td>
-        <td className="px-2 sm:px-3 py-4 text-right align-top md:align-middle">
+        <td className="px-2 sm:px-3 md:pr-8 py-4 text-right align-top md:align-middle">
           <span className="font-display text-[24px] leading-none text-ink">{Math.round(l.b.total)}</span>
           {custom && <div className="label mt-1 !normal-case">default {Math.round(l.defaultScore)}</div>}
         </td>
-        <td className="px-3 py-4 max-md:!p-0">
+        <td className="px-3 md:pl-6 md:pr-4 py-4 max-md:!p-0">
           <div className="max-md:hidden">
             <ShareBar covered={best?.counts.coveredShare ?? 0} assisted={best?.counts.assistedShare ?? 0} />
             <div className="label mt-1.5 !normal-case !tracking-[0.04em]">{pct(l.b.overlap.bestOverlap)} of best role</div>
           </div>
         </td>
-        <td className="px-3 py-4 text-right max-md:!p-0">
+        <td className="px-3 md:pr-6 py-4 text-right max-md:!p-0">
           <div className="max-md:hidden">
-            {l.cost != null ? <span className="text-ink">{money(l.cost, { compact: true })}</span> : <span className="text-[13px] text-muted">No salary</span>}
-            {l.cost != null && l.costRoles < l.postings.length && <div className="label mt-1 !normal-case">{l.costRoles} of {l.postings.length} roles</div>}
+            {l.avgSalary != null ? <span className="text-ink">{money(l.avgSalary, { compact: true })}</span> : <span className="text-[13px] text-muted">No salary posted</span>}
+            {l.avgSalary != null && l.salaryRoles < l.postings.length && <div className="label mt-1 !normal-case">{l.salaryRoles} of {l.postings.length} roles</div>}
           </div>
         </td>
-        <td className="px-2 sm:px-3 py-4 text-right whitespace-nowrap align-top md:align-middle">
-          <Link href={`/companies/${l.slug}`} onClick={(e) => e.stopPropagation()} className="btn btn-secondary btn-sm !hidden md:!inline-flex">View case</Link>
+        <td className="px-2 sm:px-3 py-4 align-top md:align-middle">
+          <div className="flex items-center justify-end gap-2.5">
+          <Link href={`/companies/${l.slug}`} onClick={(e) => e.stopPropagation()} className="btn btn-secondary !h-9 !px-3.5 !text-[12.5px] !rounded-[10px] !hidden md:!inline-flex">View case</Link>
           <button
-            className="inline-flex h-9 w-9 md:ml-2 md:h-8 md:w-8 items-center justify-center rounded-[8px] border border-line-strong text-body hover:border-muted hover:text-ink"
+            className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px] border border-line-strong bg-surface-2 text-body hover:border-muted hover:text-ink"
             aria-expanded={isOpen} aria-controls={`lead-${l.slug}`} aria-label={isOpen ? `Hide details for ${l.name}` : `Show details for ${l.name}`}
             onClick={(e) => { e.stopPropagation(); onToggle(l.slug); }}>
             <svg aria-hidden="true" viewBox="0 0 16 16" className={`h-4 w-4 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}>
               <path d="M3.5 6l4.5 4.5L12.5 6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </button>
+          </div>
         </td>
       </tr>
       <tr id={`lead-${l.slug}`} className={isOpen ? "bg-surface" : ""} aria-hidden={!isOpen}>
@@ -403,7 +388,7 @@ function Details({ l, parts, totalWeight }: { l: Scored; parts: Record<PartKey, 
               </span>
               <span className="text-[13px] leading-snug text-body">
                 {x.salaryMin != null ? <>Salary {money(x.salaryMin, { compact: true })}{x.salaryMax && x.salaryMax !== x.salaryMin ? `–${money(x.salaryMax, { compact: true })}` : ""}{x.currency && x.currency !== "USD" ? ` ${x.currency}` : ""}</> : <span className="text-muted">No salary posted</span>}
-                {x.cost != null && <span className="block text-muted">{money(x.cost, { compact: true })} a year of manual work</span>}
+                {x.salaryMid != null && x.currency && x.currency !== "USD" && <span className="block text-muted">≈ {money(x.salaryMid, { compact: true })} USD midpoint</span>}
               </span>
               <span className="flex flex-wrap gap-x-4 gap-y-1 text-[13px]">
                 <Link href={`/postings/${x.id}`} className="text-ink underline underline-offset-4 decoration-line-strong hover:decoration-ink whitespace-nowrap">Role breakdown</Link>

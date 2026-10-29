@@ -1,9 +1,9 @@
 import { eq } from "drizzle-orm";
 import { getDb, schema } from "./db/client";
 
-// Recounts postings, companies and Hot/Warm share for every gap theme.
-// Themes are ranked by the share of Hot and Warm lead companies whose
-// postings contain the theme, not by raw posting counts.
+// Recounts postings, companies and strong-lead share for every gap theme.
+// Themes are ranked by the share of strong lead companies (score at or above
+// the Warm threshold) whose postings contain the theme, not by raw counts.
 export function refreshThemeStats(): void {
   const db = getDb();
   const companies = db.select().from(schema.companies).all();

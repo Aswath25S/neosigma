@@ -126,7 +126,7 @@ export function PostingEvidence({ data, ats }: { data: ReportData; ats?: string 
       </div>
 
       {/* Side panel */}
-      <aside className="flex flex-col gap-4 lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:self-start lg:overflow-y-auto">
+      <aside className="flex flex-col gap-4 [&>*]:shrink-0 lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:self-start lg:overflow-y-auto">
         <div className="rounded-[14px] border border-line bg-surface-2 px-5 py-3.5">
           <span className="label">Role</span>
           <p className="text-[15px] font-medium leading-snug text-ink">{data.title}</p>

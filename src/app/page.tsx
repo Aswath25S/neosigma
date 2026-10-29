@@ -1,11 +1,8 @@
 import Link from "next/link";
 import { getHeadline } from "@/lib/data";
-import { segmentName, taskShort, TASK_IDS } from "@/lib/config";
-import { money, shortDate } from "@/lib/format";
-import { TierChip } from "@/components/ui";
-import { TRIGGER_NAMES } from "@/lib/scoring";
-import { getDb, schema } from "@/lib/db/client";
-import { inArray } from "drizzle-orm";
+import { segmentName } from "@/lib/config";
+import { money } from "@/lib/format";
+import { readSources } from "@/lib/sources";
 
 export const dynamic = "force-dynamic";
 
@@ -19,21 +16,13 @@ function BackgroundArcs() {
   );
 }
 
-function topTask(postingIds: string[]): string | null {
-  if (!postingIds.length) return null;
-  const duties = getDb().select().from(schema.duties).where(inArray(schema.duties.postingId, postingIds)).all();
-  const w: Record<string, number> = {};
-  for (const d of duties) if (d.taskId && d.label !== "not_covered") w[d.taskId] = (w[d.taskId] ?? 0) + (d.label === "covered" ? 1 : 0.5);
-  return TASK_IDS.filter((t) => w[t]).sort((a, b) => w[b] - w[a])[0] ?? null;
-}
-
 export default function Home() {
   const h = getHeadline();
   const stats = [
     { n: String(h.companies), label: "Qualifying companies", href: "/leads" },
-    { n: String(h.hot), label: "Hot leads", href: "/leads?tab=hot" },
+    { n: String(readSources().length), label: "Companies screened", href: "/method#sources" },
     { n: String(h.roles), label: "Qualifying roles", href: "/leads?sort=overlap" },
-    { n: money(h.cost, { compact: true }), label: "Yearly manual-work cost", href: "/cost" },
+    { n: h.salaryRoles ? money(h.totalSalary, { compact: true }) : "—", label: "Total salary of these roles", href: "/salary" },
   ];
 
   return (
@@ -69,24 +58,20 @@ export default function Home() {
         </div>
         {h.top.length ? (
           <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
-            <table className="table min-w-[860px]">
+            <table className="table min-w-[720px]">
               <thead>
                 <tr>
-                  <th className="w-10">#</th>
+                  <th className="w-12">#</th>
                   <th>Company</th>
                   <th>Segment</th>
-                  <th>Tier</th>
                   <th className="text-right">Score</th>
-                  <th>Best role</th>
-                  <th>Top task</th>
-                  <th>Top trigger</th>
+                  <th className="pl-8">Relevant role</th>
+                  <th className="text-right">Overlap</th>
                 </tr>
               </thead>
               <tbody>
                 {h.top.map((l, i) => {
-                  const task = topTask(l.postings.map((p) => p.id));
                   const best = [...l.postings].sort((a, b) => b.overlap - a.overlap)[0];
-                  const trig = l.breakdown?.timing.topTrigger;
                   return (
                     <tr key={l.id} className="relative">
                       <td className="mono text-muted">{String(i + 1).padStart(2, "0")}</td>
@@ -95,11 +80,9 @@ export default function Home() {
                         <Link href={`/companies/${l.slug}`} className="text-ink font-medium after:absolute after:inset-0 hover:underline underline-offset-4">{l.name}</Link>
                       </td>
                       <td className="text-[14px]">{segmentName(l.segment)}</td>
-                      <td><TierChip tier={l.tier} /></td>
                       <td className="text-right font-display text-[20px] text-ink">{Math.round(l.leadScore ?? 0)}</td>
-                      <td className="text-[14px] max-w-[280px] truncate" title={best?.title}>{best?.title} <span className="text-muted">· {Math.round((best?.overlap ?? 0) * 100)}%</span></td>
-                      <td className="text-[14px] whitespace-nowrap">{task ? <><span className="mono text-covered">{task}</span> {taskShort(task)}</> : "—"}</td>
-                      <td className="text-[14px] whitespace-nowrap">{trig ? <>{TRIGGER_NAMES[trig.kind]} <span className="text-muted">· {shortDate(trig.date).replace(/, \d{4}$/, "")}</span></> : <span className="text-muted">None</span>}</td>
+                      <td className="text-[14px] pl-8 max-w-[420px] truncate" title={best?.title}>{best?.title}</td>
+                      <td className="text-right text-[14px] text-ink">{Math.round((best?.overlap ?? 0) * 100)}%</td>
                     </tr>
                   );
                 })}

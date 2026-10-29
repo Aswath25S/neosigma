@@ -20,7 +20,7 @@ export default async function PostingPage({ params }: { params: Promise<{ id: st
   const { id } = await params;
   const v = getPosting(id);
   if (!v) notFound();
-  const data = reportFromStored(v.posting, v.company.name, v.company.slug, v.duties, v.midpoint, v.themes);
+  const data = reportFromStored(v.posting, v.company.name, v.company.slug, v.duties, v.salary, v.themes);
   const c = data.gates.counts;
   const headline = c.total === 0
     ? "This posting was not read duty by duty."

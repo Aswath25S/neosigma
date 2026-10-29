@@ -2,7 +2,7 @@ import { eq, isNull, or, inArray } from "drizzle-orm";
 import { getDb, schema } from "./db/client";
 import { weights } from "./config";
 import { getMeta } from "./meta";
-import { midpoints, yearlyCost, type Midpoint } from "./cost";
+import { mean, postedSalary, type Salary } from "./salary";
 import type { Breakdown, ScoreTrigger } from "./scoring";
 import type { VerifiedEvidence } from "./analyze";
 import type { Brief } from "./schemas";
@@ -36,42 +36,24 @@ function db() {
   return getDb();
 }
 
-// ---- cost ----
+// ---- salaries ----
 
-let midpointCache: { at: number; map: Map<string, Midpoint> } | null = null;
+let salaryCache: { at: number; map: Map<string, Salary | null> } | null = null;
 
-export function allMidpoints(): Map<string, Midpoint> {
-  if (midpointCache && Date.now() - midpointCache.at < 5000) return midpointCache.map;
-  const rows = db().select().from(schema.postings).all().filter((p) => p.extractedAt);
-  const map = midpoints(
-    rows.map((p) => ({
-      id: p.id, companyId: p.companyId, title: p.title, normalizedTitle: p.normalizedTitle,
-      salaryMin: p.salaryMin, salaryMax: p.salaryMax, currency: p.currency, overlap: p.overlap ?? 0,
-    })),
-    weights.cost.min_same_title_postings,
-    getMeta<{ rates: Record<string, number> }>("fx")?.rates ?? {},
-  );
-  midpointCache = { at: Date.now(), map };
+// Posted salary per posting, in USD. Nothing is estimated: a posting with no
+// salary, or in a currency without an exchange rate, maps to null.
+export function allSalaries(): Map<string, Salary | null> {
+  if (salaryCache && Date.now() - salaryCache.at < 5000) return salaryCache.map;
+  const fx = getMeta<{ rates: Record<string, number> }>("fx")?.rates ?? {};
+  const map = new Map(db().select().from(schema.postings).all().map((p) => [p.id, postedSalary(p, fx)]));
+  salaryCache = { at: Date.now(), map };
   return map;
 }
 
-export interface RoleCost {
-  postingId: string;
-  title: string;
-  overlap: number;
-  midpoint: Midpoint;
-  cost: number | null;
-}
-
-export function roleCosts(postings: Posting[], loadFactor = weights.cost.load_factor): RoleCost[] {
-  const mids = allMidpoints();
-  return postings.map((p) => {
-    const m = mids.get(p.id) ?? { value: null, estimated: false, basis: "not extracted" };
-    return {
-      postingId: p.id, title: p.title, overlap: p.overlap ?? 0, midpoint: m,
-      cost: m.value != null ? yearlyCost(m.value, loadFactor, p.overlap ?? 0) : null,
-    };
-  });
+export function avgSalary(postingIds: string[]): { avg: number | null; roles: number } {
+  const all = allSalaries();
+  const mids = postingIds.map((id) => all.get(id)).filter((s): s is Salary => !!s).map((s) => s.mid);
+  return { avg: mean(mids), roles: mids.length };
 }
 
 // ---- leads ----
@@ -88,8 +70,6 @@ export interface LeadRow {
   breakdown: Breakdown | null;
   postings: LeadRole[];
   triggers: ScoreTrigger[];
-  cost: number | null;
-  costRoles: number;
   failReasons: string[];
   // For the row dropdown on the Leads page.
   bestQuote: { quote: string; postingId: string; idx: number } | null;
@@ -113,7 +93,7 @@ export interface LeadRole {
   salaryMin: number | null;
   salaryMax: number | null;
   currency: string | null;
-  cost: number | null;
+  salaryMid: number | null; // USD
   postedAt: string | null;
   counts: DutyCounts;
 }
@@ -153,23 +133,20 @@ export function getLeadRows(): { leads: LeadRow[]; rejectedPostings: (Posting & 
     .map((c) => {
       const mine = postings.filter((p) => p.companyId === c.id);
       const qualifying = mine.filter((p) => p.passedGates);
-      const allCosts = roleCosts(qualifying);
-      const costs = allCosts.filter((r) => r.cost != null);
-      const mids = allCosts.filter((r) => r.midpoint.value != null && !r.midpoint.estimated).map((r) => r.midpoint.value!);
+      const sal = allSalaries();
+      const avg = avgSalary(qualifying.map((p) => p.id));
       return {
         id: c.id, name: c.name, slug: c.slug, segment: c.segment, employeeBand: c.employeeBand, status: c.status,
         leadScore: c.leadScore, tier: c.tier, breakdown: c.scoreBreakdown as Breakdown | null,
         postings: qualifying.sort((a, b) => (b.overlap ?? 0) - (a.overlap ?? 0)).map((p) => ({
           id: p.id, title: p.title, url: p.url, overlap: p.overlap ?? 0, liveAgentStrength: p.liveAgentStrength ?? 0,
           agentType: p.agentType, hasSalary: p.salaryMin != null, salaryMin: p.salaryMin, salaryMax: p.salaryMax,
-          currency: p.currency, cost: allCosts.find((r) => r.postingId === p.id)?.cost ?? null, postedAt: p.postedAt,
+          currency: p.currency, salaryMid: sal.get(p.id)?.mid ?? null, postedAt: p.postedAt,
           counts: dutyCounts(dutiesByPosting.get(p.id) ?? []),
         })),
         triggers: [...triggers.filter((t) => t.companyId === c.id), ...global].map((t) => ({
           id: t.id, kind: t.kind, date: t.date, title: t.title, url: t.url, source: t.source,
         })),
-        cost: costs.length ? costs.reduce((s, r) => s + r.cost!, 0) : null,
-        costRoles: costs.length,
         bestQuote: (() => {
           // Strongest quote first: volume or named product, then any.
           const quotes = qualifying.flatMap((p) => (extractionOf(p)?.verified_evidence ?? []).map((e, idx) => ({ e, p, idx })));
@@ -184,8 +161,8 @@ export function getLeadRows(): { leads: LeadRow[]; rejectedPostings: (Posting & 
         domain: c.domain,
         sizeSourceUrl: c.sizeSourceUrl,
         tools: [...new Set(qualifying.flatMap((p) => extractionOf(p)?.agent_tools ?? []))],
-        avgSalary: mids.length ? mids.reduce((a, b) => a + b, 0) / mids.length : null,
-        salaryRoles: mids.length,
+        avgSalary: avg.avg,
+        salaryRoles: avg.roles,
       };
     });
   const bySlug = new Map(companies.map((c) => [c.id, c]));
@@ -219,7 +196,7 @@ export function getCompanyBySlug(slug: string) {
     triggers,
     brief: brief ? { ...brief, content: brief.content as Brief & { rendered?: unknown } } : null,
     themes,
-    costs: roleCosts(qualifying),
+    salaries: qualifying.map((p) => ({ postingId: p.id, title: p.title, salaryMin: p.salaryMin, salaryMax: p.salaryMax, currency: p.currency, salary: allSalaries().get(p.id) ?? null })),
   };
 }
 
@@ -232,32 +209,54 @@ export function getPosting(id: string) {
   if (!posting) return null;
   const company = db().select().from(schema.companies).where(eq(schema.companies.id, posting.companyId)).get()!;
   const duties = db().select().from(schema.duties).where(eq(schema.duties.postingId, id)).all().sort((a, b) => a.idx - b.idx);
-  const mid = allMidpoints().get(id) ?? null;
+  const salary = allSalaries().get(id) ?? null;
   const themes = new Map(db().select().from(schema.gapThemes).all().map((t) => [t.id, t.name]));
-  return { posting, company, duties, midpoint: mid, themes };
+  return { posting, company, duties, salary, themes };
 }
 
 // ---- gaps ----
 
 export function getGaps() {
   const themes = db().select().from(schema.gapThemes).all();
-  const duties = db().select({ d: schema.duties, title: schema.postings.title, companyId: schema.postings.companyId, passed: schema.postings.passedGates })
-    .from(schema.duties).innerJoin(schema.postings, eq(schema.duties.postingId, schema.postings.id)).all()
-    .filter((r) => r.d.gapThemeId != null);
+  const allDuties = db().select({ d: schema.duties, title: schema.postings.title, companyId: schema.postings.companyId, passed: schema.postings.passedGates })
+    .from(schema.duties).innerJoin(schema.postings, eq(schema.duties.postingId, schema.postings.id)).all();
+  const totalByPosting = new Map<string, number>();
+  for (const r of allDuties) totalByPosting.set(r.d.postingId, (totalByPosting.get(r.d.postingId) ?? 0) + 1);
+  const duties = allDuties.filter((r) => r.d.gapThemeId != null);
   const companies = new Map(db().select().from(schema.companies).all().map((c) => [c.id, c]));
-  return themes
-    .map((t) => {
-      const mine = duties.filter((r) => r.d.gapThemeId === t.id);
-      return {
-        ...t,
-        duties: mine.map((r) => ({
-          id: r.d.id, text: r.d.text, span: r.d.sourceSpan, postingId: r.d.postingId, idx: r.d.idx, title: r.title,
-          company: companies.get(r.companyId)!, qualifying: r.passed,
-        })),
-        roles: [...new Set(mine.map((r) => r.title))],
-      };
-    })
-    .sort((a, b) => b.hotWarmShare - a.hotWarmShare || b.postingCount - a.postingCount);
+  const sal = allSalaries();
+  // "Strong leads" are lead companies at or above the Warm threshold.
+  const strongTotal = [...companies.values()].filter((c) => c.status === "lead" && (c.leadScore ?? 0) >= weights.tiers.warm).length;
+  return {
+    strongTotal,
+    themes: themes
+      .map((t) => {
+        const mine = duties.filter((r) => r.d.gapThemeId === t.id);
+        // Salary attached: each role's salary midpoint × the share of its duties
+        // in this theme, summed over roles with a salary. Indicative only.
+        const perPosting = new Map<string, number>();
+        for (const r of mine) perPosting.set(r.d.postingId, (perPosting.get(r.d.postingId) ?? 0) + 1);
+        let salaryAttached = 0;
+        let salaryPostings = 0;
+        for (const [pid, n] of perPosting) {
+          const m = sal.get(pid)?.mid;
+          if (m == null) continue;
+          salaryAttached += m * (n / (totalByPosting.get(pid) ?? n));
+          salaryPostings++;
+        }
+        return {
+          ...t,
+          salaryAttached,
+          salaryPostings,
+          duties: mine.map((r) => ({
+            id: r.d.id, text: r.d.text, span: r.d.sourceSpan, postingId: r.d.postingId, idx: r.d.idx, title: r.title,
+            company: companies.get(r.companyId)!, qualifying: r.passed,
+          })),
+          roles: [...new Set(mine.map((r) => r.title))],
+        };
+      })
+      .sort((a, b) => b.hotWarmShare - a.hotWarmShare || b.postingCount - a.postingCount),
+  };
 }
 
 // ---- headline numbers ----
@@ -266,12 +265,16 @@ export function getHeadline() {
   const { leads } = getLeadRows();
   const live = leads.filter((l) => l.status === "lead");
   const roles = live.reduce((s, l) => s + l.postings.length, 0);
-  const cost = live.reduce((s, l) => s + (l.cost ?? 0), 0);
+  const ids = live.flatMap((l) => l.postings.map((p) => p.id));
+  const avg = avgSalary(ids);
+  const sal = allSalaries();
+  const totalSalary = ids.reduce((s, id) => s + (sal.get(id)?.mid ?? 0), 0);
   return {
+    totalSalary,
     companies: live.length,
-    hot: live.filter((l) => l.tier === "Hot").length,
     roles,
-    cost,
+    avgSalary: avg.avg,
+    salaryRoles: avg.roles,
     top: [...live].sort((a, b) => (b.leadScore ?? 0) - (a.leadScore ?? 0)).slice(0, 10),
   };
 }

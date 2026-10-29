@@ -22,7 +22,8 @@ function main() {
   db.delete(schema.triggers).where(inArray(schema.triggers.source, ["posting", "manual"])).run();
   for (const c of companies) {
     const qualifying = postings.filter((p) => p.companyId === c.id && p.passedGates);
-    for (const p of qualifying.filter((p) => p.isFirstEvalHire)) {
+    // One "first eval hire" trigger per company: the newest such role.
+    for (const p of qualifying.filter((p) => p.isFirstEvalHire).sort((a, b) => (b.postedAt ?? "").localeCompare(a.postedAt ?? "")).slice(0, 1)) {
       const quote = (p.extraction as { is_first_eval_hire?: { quote?: string | null } } | null)?.is_first_eval_hire?.quote;
       db.insert(schema.triggers).values({
         companyId: c.id, kind: "first_eval_hire", points: weights.timing.triggers.first_eval_hire,

@@ -4,7 +4,13 @@ import type { NextConfig } from "next";
 // time, and the data changes whenever the pipeline is re-run.
 const nextConfig: NextConfig = {
   serverExternalPackages: ["better-sqlite3"],
-  turbopack: {
+  // Cost became Roles & Savings, then Salary & Roles; keep old links working.
+  async redirects() {
+    return [
+      { source: "/cost", destination: "/salary", permanent: true },
+      { source: "/savings", destination: "/salary", permanent: true },
+    ];
+  },  turbopack: {
     rules: {
       "*.css": {
         loaders: ["@tailwindcss/turbopack"],

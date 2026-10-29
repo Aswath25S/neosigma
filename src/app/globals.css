@@ -151,24 +151,9 @@ a {
 .btn-outline:hover:not(:disabled) { border-color: var(--text-muted); }
 .btn-sm { height: 34px; padding: 0 14px; border-radius: 10px; font-size: 12px; }
 
-/* ---- tier chips ---- */
-.tier {
-  display: inline-flex;
-  align-items: center;
-  height: 22px;
-  padding: 0 10px;
-  border-radius: 999px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-.tier-hot { background: var(--hot); color: #160b05; }
-.tier-warm { background: var(--warm); color: #1a1006; }
-.tier-watch { background: var(--watch); color: var(--text); }
-.tier-rejected { background: transparent; border: 1px solid var(--border-strong); color: var(--text-muted); }
-
 /* ---- tables ---- */
+/* In the components layer so utility classes (text-right, padding) override. */
+@layer components {
 .table { width: 100%; border-collapse: collapse; }
 .table th {
   font-family: var(--font-mono);
@@ -191,6 +176,8 @@ a {
 .table tbody tr { transition: background-color 150ms ease; }
 .table tbody tr:hover { background: var(--surface); }
 .table tbody tr.lead-detail:hover { background: transparent; }
+
+}
 
 /* ---- highlights on the posting page ---- */
 .hl {

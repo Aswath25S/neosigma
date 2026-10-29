@@ -29,11 +29,18 @@ export default function AboutPage() {
       <div className="pt-14 pb-12">
         <div className="label mb-4">About</div>
         <h1 className="display !text-[clamp(40px,6vw,56px)]">{site.builder}</h1>
-        <p className="mono text-body mt-4">{site.role} · {site.location}</p>
+        <p className="mono text-body mt-4">{site.location}</p>
+        <a href={site.role_url} target="_blank" rel="noreferrer"
+          className="mt-8 inline-flex flex-wrap items-center gap-x-3 gap-y-1 rounded-[14px] border border-line-strong bg-surface px-5 py-4 hover:border-muted transition-colors">
+          <span className="label">Applying for</span>
+          <span className="text-[17px] font-medium text-ink">{site.role_title}</span>
+          <span className="text-[14px] text-body">{site.role_team} · {site.role_location}</span>
+          <span className="text-[14px] text-ink underline underline-offset-4 decoration-line-strong">View the posting ↗</span>
+        </a>
         <p className="mt-8 text-[19px] text-body max-w-[900px] leading-relaxed">
           I built {site.name} to study NeoSigma&apos;s market from the outside: which companies pay people to do NeoSigma&apos;s
           work by hand, what that work costs them, and what the product doesn&apos;t cover yet.{" "}
-          <span className="text-ink">I&apos;d like to be considered for a role at NeoSigma.</span>
+          <span className="text-ink">I&apos;d like to be considered for the Founding Business Generalist role on NeoSigma&apos;s Product and Growth team.</span>
         </p>
       </div>
 
@@ -65,8 +72,8 @@ export default function AboutPage() {
             {" "}{h.roles} qualifying roles, and writes a cited brief and a draft opening message for the strongest.
           </li>
           <li>
-            Estimates <Link href="/cost" className="text-ink underline underline-offset-4 decoration-line-strong hover:decoration-ink">{money(h.cost, { compact: true })} a year</Link> of
-            manual work at those leads, and groups <Link href="/gaps" className="text-ink underline underline-offset-4 decoration-line-strong hover:decoration-ink">work NeoSigma doesn&apos;t cover yet</Link> into themes.
+            Shows the pay behind that work: qualifying roles average <Link href="/salary" className="text-ink underline underline-offset-4 decoration-line-strong hover:decoration-ink">{h.avgSalary != null ? money(h.avgSalary, { compact: true }) : "—"} a year</Link> where
+            a salary is posted. It also groups <Link href="/gaps" className="text-ink underline underline-offset-4 decoration-line-strong hover:decoration-ink">work NeoSigma doesn&apos;t cover yet</Link> into themes.
           </li>
           <li>
             Shows how every number is made on the <Link href="/method" className="text-ink underline underline-offset-4 decoration-line-strong hover:decoration-ink">Method</Link> page.

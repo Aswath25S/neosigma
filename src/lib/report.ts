@@ -1,14 +1,13 @@
 import { applyGates, FAIL_REASON_TEXT, type FailReason, type Stage1, type VerifiedDuty } from "./analyze";
 import type { ReportData } from "@/components/PostingReport";
 import { extractionOf, type DutyRow, type Posting } from "./data";
-import { yearlyCost, type Midpoint } from "./cost";
-import { weights } from "./config";
+import type { Salary } from "./salary";
 import type { SalaryRange } from "./fetchers/types";
 
 // Builds the evidence-page view of a stored posting. Gate results are
 // recomputed from the stored duties so the page shows the same checks the
 // pipeline ran.
-export function reportFromStored(posting: Posting, companyName: string, companySlug: string, duties: DutyRow[], midpoint: Midpoint | null, themes: Map<number, string> = new Map()): ReportData {
+export function reportFromStored(posting: Posting, companyName: string, companySlug: string, duties: DutyRow[], salary: Salary | null, themes: Map<number, string> = new Map()): ReportData {
   const ex = extractionOf(posting);
   const vDuties: VerifiedDuty[] = duties.map((d) => ({
     idx: d.idx, text: d.text, source_span: d.sourceSpan, label: d.label as VerifiedDuty["label"],
@@ -51,10 +50,8 @@ export function reportFromStored(posting: Posting, companyName: string, companyS
     salary: {
       min: posting.salaryMin, max: posting.salaryMax, currency: posting.currency, source: posting.salarySource,
       ranges: (posting.salaries as SalaryRange[]) ?? [],
-      midpoint: midpoint?.value ?? null,
-      estimated: midpoint?.estimated ?? false,
-      cost: midpoint?.value != null && posting.overlap != null ? yearlyCost(midpoint.value, weights.cost.load_factor, posting.overlap) : null,
-      midpointNote: midpoint?.estimated ? `Estimated midpoint ${Math.round(midpoint.value! / 1000)}k: ${midpoint.basis}.` : midpoint?.value == null ? `Cost not estimated: ${midpoint?.basis ?? "no salary"}.` : null,
+      midpoint: salary?.mid ?? null,
+      converted: salary?.converted ?? false,
     },
     gates: {
       ...g,

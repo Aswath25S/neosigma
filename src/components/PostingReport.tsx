@@ -3,7 +3,6 @@ import { DutySplit, ShareLegend } from "./ui";
 import { money, pct } from "@/lib/format";
 import { LIVE_STRENGTH_TEXT } from "@/lib/scoring";
 import roles from "../../config/roles.json";
-import weights from "../../config/weights.json";
 
 export interface ReportGates {
   titleList: string;
@@ -53,11 +52,9 @@ export interface ReportData {
     currency: string | null;
     source: string | null;
     ranges: { min: number | null; max: number | null; currency: string | null; interval: string | null; location: string | null }[];
-    midpointNote?: string | null;
-    // Midpoint in USD (posted, converted or same-title median) and the cost.
+    // Middle of the posted range in USD (converted at the ECB rate if needed).
     midpoint?: number | null;
-    estimated?: boolean;
-    cost?: number | null;
+    converted?: boolean;
   };
   gates: ReportGates;
 }
@@ -104,11 +101,11 @@ export function PostingReport({ data, ats }: { data: ReportData; ats?: string })
         <Stat value={<span className="text-[44px]">{hasDuties ? pct(c.covered / denom) : "—"}</span>} label="NeoSigma does it"
           note="Duties that are one of the six tasks done in a repeatable way" />
         <Stat value={<span className="text-[30px]">{salaryText}</span>} label={`Salary (yearly)${s.ranges.length > 1 ? " · varies by location" : ""}`}
-          note={s.min != null ? `From the ${s.source === "board" ? "job board" : "posting text"}` : "No salary in the posting"} />
-        <Stat value={<span className="text-[30px]">{s.cost != null ? money(s.cost) : "—"}</span>} label="Manual-work cost a year"
-          note={s.cost != null && s.midpoint != null
-            ? <>{money(s.midpoint, { compact: true })}{s.estimated ? " (estimated)" : ""} midpoint × {weights.cost.load_factor} load × {pct(g.overlap)} overlap</>
-            : s.midpointNote ?? "No salary posted, so no figure."} />
+          note={s.min != null
+            ? <>From the {s.source === "board" ? "job board" : "posting text"}{s.midpoint != null ? <>; midpoint {money(s.midpoint, { compact: true })}{s.converted ? " in USD" : ""}</> : ""}</>
+            : "No salary in the posting"} />
+        <Stat value={<span className="text-[44px]">{g.liveAgentStrength}<span className="text-muted text-[22px]">/25</span></span>} label="Agent already live"
+          note={LIVE_STRENGTH_TEXT[g.liveAgentStrength] ?? ""} />
       </div>
 
       {hasDuties && <DutySplit covered={c.covered} assisted={c.assisted} total={c.total} />}

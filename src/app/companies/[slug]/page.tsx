@@ -3,13 +3,13 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getCompanyBySlug, extractionOf, dutyCounts, getLeadRows, type DutyRow } from "@/lib/data";
 import { coverageMap, segmentName, TASK_IDS } from "@/lib/config";
-import { activeTriggers, DEFAULT_WEIGHTS, LIVE_STRENGTH_TEXT, TRIGGER_NAMES } from "@/lib/scoring";
+import { activeTriggers, DEFAULT_WEIGHTS, LIVE_STRENGTH_TEXT, shownTriggers, TRIGGER_NAMES } from "@/lib/scoring";
 import { pickProof, type RenderedBrief, type Ref } from "@/lib/brief";
 import { money, pct, shortDate } from "@/lib/format";
 import { CopyButton } from "@/components/CopyButton";
 import { BackLink } from "@/components/BackLink";
 import { Disclosure } from "@/components/Disclosure";
-import { EmptyState, LabelChip, Note, Section, ShareBar, ShareLegend, StatBlock, TierChip } from "@/components/ui";
+import { EmptyState, LabelChip, Note, Section, ShareBar, ShareLegend, StatBlock } from "@/components/ui";
 
 export const dynamic = "force-dynamic";
 
@@ -59,7 +59,7 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
   const { slug } = await params;
   const v = getCompanyBySlug(slug);
   if (!v) notFound();
-  const { company, qualifying, duties, breakdown, brief, themes, costs } = v;
+  const { company, qualifying, duties, breakdown, brief, themes, salaries } = v;
   const isLead = company.status === "lead" && !!breakdown;
   const rendered = brief?.content as unknown as RenderedBrief | undefined;
   const refs = rendered?.refs ?? {};
@@ -84,12 +84,13 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
   const maxSplit = Math.max(1, ...split.map((x) => x.covered + x.assisted));
 
   const allActive = activeTriggers(v.triggers.map((t) => ({ id: t.id, kind: t.kind, date: t.date, title: t.title, url: t.url, source: t.source })), DEFAULT_WEIGHTS, new Date());
-  const newestRelease = allActive.filter((t) => t.kind === "model_release").sort((a, b) => b.date.localeCompare(a.date))[0];
-  const active = allActive.filter((t) => t.kind !== "model_release" || t === newestRelease);
+  const active = shownTriggers(allActive);
 
   const tools = [...new Set(qualifying.flatMap((p) => extractionOf(p)?.agent_tools ?? []))];
-  const totalCost = costs.reduce((s, c) => s + (c.cost ?? 0), 0);
-  const costCount = costs.filter((c) => c.cost != null).length;
+  const posted = salaries.filter((x) => x.salary);
+  const avgPay = posted.length ? posted.reduce((a, x) => a + x.salary!.mid, 0) / posted.length : null;
+  const salaryRange = (x: { salaryMin: number | null; salaryMax: number | null; currency: string | null }) =>
+    x.salaryMin == null ? null : `${money(x.salaryMin, { compact: true })}${x.salaryMax && x.salaryMax !== x.salaryMin ? `–${money(x.salaryMax, { compact: true }).replace("$", "")}` : ""}${x.currency && x.currency !== "USD" ? ` ${x.currency}` : ""}`;
   const best = qualifying[0];
   const bestQuote = qualifying.map((p) => ({ p, e: extractionOf(p)?.verified_evidence?.[0] })).find((x) => x.e);
   const otherPostings = v.postings.filter((p) => !p.passedGates);
@@ -109,7 +110,6 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
             {company.name} · <a href={`https://${company.domain}`} target="_blank" rel="noreferrer" className="hover:text-ink">{company.domain} ↗</a>
             {rank ? ` · rank ${rank} of ${leadRanks.length}` : ""} · {segmentName(company.segment)}
           </span>
-          <TierChip tier={isLead ? company.tier : null} />
         </div>
         <h1 className="display !text-[clamp(32px,5vw,52px)] max-w-[1100px]">{headline}</h1>
         {!isLead && (
@@ -126,7 +126,7 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
             <StatBlock value={Math.round(breakdown!.total)} label="Lead score" href="#score" note="Out of 100. See the breakdown below." />
             <StatBlock value={pct(breakdown!.overlap.bestOverlap)} label="Best overlap" href="#roles" note={`${qualifying.length} qualifying ${qualifying.length === 1 ? "role" : "roles"}`} />
             <StatBlock value={`${breakdown!.live.strength}/25`} label="Agent already live" href="#roles" note={LIVE_STRENGTH_TEXT[breakdown!.live.strength]} />
-            <StatBlock value={costCount ? money(totalCost, { compact: true }) : "–"} label="Manual work a year" href="#cost" note={costCount ? `${costCount} of ${costs.length} roles list a salary` : "No salary posted"} />
+            <StatBlock value={avgPay != null ? money(avgPay, { compact: true }) : "–"} label="Avg. salary" href="#salary" note={posted.length ? `${posted.length} of ${salaries.length} ${salaries.length === 1 ? "role lists" : "roles list"} a salary; middle of each posted range` : "No salary posted"} />
             <StatBlock value={<span className="block text-[18px] sm:text-[24px] leading-tight [overflow-wrap:normal] [word-break:keep-all]">{PROOF_SHORT[proofKey]}</span>} label="Lead with" href="#tasks" note={proof.name} />
           </div>
 
@@ -192,9 +192,9 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
             <div className="rounded-[14px] border border-line bg-surface overflow-hidden divide-y divide-line">
               {qualifying.map((p) => {
                 const n = dutyCounts(byPosting.get(p.id) ?? []);
-                const c = costs.find((x) => x.postingId === p.id);
+                const sx = salaries.find((x) => x.postingId === p.id)!;
                 return (
-                  <Link key={p.id} href={`/postings/${p.id}`} className="grid grid-cols-1 gap-3 px-5 py-4 transition-colors hover:bg-surface-2 sm:grid-cols-[1.6fr_1fr_8rem_8rem] sm:items-center">
+                  <Link key={p.id} href={`/postings/${p.id}`} className="grid grid-cols-1 gap-3 px-5 py-4 transition-colors hover:bg-surface-2 sm:grid-cols-[1.6fr_1fr_9rem_8rem] sm:items-center">
                     <span>
                       <span className="h-card !text-[17px] block">{p.title}</span>
                       <span className="mono !text-[12px] text-muted">{p.agentType ? `${p.agentType} agent · ` : ""}{extractionOf(p)?.seniority ?? ""} · posted {shortDate(p.postedAt)} · live agent {p.liveAgentStrength}/25</span>
@@ -203,13 +203,13 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
                       <ShareBar covered={n.coveredShare} assisted={n.assistedShare} />
                       <span className="mono !text-[12px] text-muted mt-1 block">{pct(p.overlap)} overlap · {n.covered} covered, {n.assisted} assisted of {n.total}</span>
                     </span>
-                    <span className="text-[14px] sm:text-right text-ink">{p.salaryMin != null ? money(p.salaryMin, { compact: true }) : <span className="text-muted">No salary</span>}</span>
-                    <span className="text-[14px] sm:text-right text-ink">{c?.cost != null ? money(c.cost, { compact: true }) : <span className="text-muted">–</span>}</span>
+                    <span className="text-[14px] sm:text-right text-ink">{salaryRange(sx) ?? <span className="text-muted">No salary</span>}</span>
+                    <span className="text-[14px] sm:text-right text-ink">{sx.salary ? money(sx.salary.mid, { compact: true }) : <span className="text-muted">–</span>}</span>
                   </Link>
                 );
               })}
             </div>
-            <div className="mt-3 hidden sm:flex justify-end gap-10 pr-5"><span className="label">Salary min</span><span className="label">Manual work / yr</span></div>
+            <div className="mt-3 hidden sm:flex justify-end gap-10 pr-5"><span className="label">Posted range</span><span className="label">Midpoint (USD)</span></div>
           </>
         )}
         {otherPostings.length > 0 && (
@@ -331,27 +331,25 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
             <div className="mt-4"><Note>Default weights: 40 overlap, 25 live agent, 15 fit, 20 timing. <Link href="/method#weights" className="underline underline-offset-4">How scores are calculated</Link>.</Note></div>
           </Section>
 
-          {/* Cost */}
-          <Section id="cost" num="07" eyebrow="The money" title={costCount ? `About ${money(totalCost)} a year of manual work across ${costCount} ${costCount === 1 ? "role" : "roles"}.` : "No salary posted, so no figure."}>
+          {/* Salaries */}
+          <Section id="salary" num="07" eyebrow="Salaries" title={avgPay != null ? `Qualifying roles pay ${money(avgPay)} a year on average.` : "No salary posted, so no figure."}>
             <div className="rounded-[14px] border border-line bg-surface overflow-x-auto">
-              <table className="w-full text-[14px] md:min-w-[640px]">
+              <table className="w-full text-[14px] md:min-w-[560px]">
                 <thead className="border-b border-line">
-                  <tr>{["Role", "Salary midpoint", "Load", "Overlap", "Cost a year"].map((h, i) => <th key={h} className={`px-4 py-3 font-normal ${i ? "text-right" : "text-left"} ${i === 2 ? "hidden sm:table-cell" : ""}`}><span className="label">{h}</span></th>)}</tr>
+                  <tr>{["Role", "Posted range", "Midpoint (USD)"].map((h, i) => <th key={h} className={`px-4 py-3 font-normal ${i ? "text-right" : "text-left"}`}><span className="label">{h}</span></th>)}</tr>
                 </thead>
                 <tbody className="divide-y divide-line">
-                  {costs.map((c) => (
-                    <tr key={c.postingId}>
-                      <td className="px-4 py-3"><Link href={`/postings/${c.postingId}`} className="text-ink underline decoration-line-strong underline-offset-4 hover:decoration-ink">{c.title}</Link></td>
-                      <td className="px-4 py-3 text-right">{c.midpoint.value != null ? <>{money(c.midpoint.value)}{c.midpoint.estimated && <span className="font-mono text-[10px] text-assisted ml-1" title={c.midpoint.basis}>EST</span>}</> : <span className="text-muted" title={c.midpoint.basis}>None</span>}</td>
-                      <td className="hidden sm:table-cell px-4 py-3 text-right text-body">× {DEFAULT_WEIGHTS.cost.load_factor}</td>
-                      <td className="px-4 py-3 text-right text-body">× {pct(c.overlap)}</td>
-                      <td className="px-4 py-3 text-right text-ink">{c.cost != null ? money(c.cost) : <span className="text-muted">No salary posted</span>}</td>
+                  {salaries.map((x) => (
+                    <tr key={x.postingId}>
+                      <td className="px-4 py-3"><Link href={`/postings/${x.postingId}`} className="text-ink underline decoration-line-strong underline-offset-4 hover:decoration-ink">{x.title}</Link></td>
+                      <td className="px-4 py-3 text-right text-body">{salaryRange(x) ?? <span className="text-muted">No salary posted</span>}</td>
+                      <td className="px-4 py-3 text-right text-ink">{x.salary ? money(x.salary.mid) : "–"}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
-            <div className="mt-3"><Note>The cost of the work done by hand, not a NeoSigma price or a guaranteed saving. Non-USD salaries are converted at the ECB reference rate; EST marks a same-title median.</Note></div>
+            <div className="mt-3"><Note>Average salary = the mean of each role&apos;s posted-range midpoint, across roles that list a salary. Non-USD salaries are converted at the ECB reference rate. Nothing is estimated for roles without a salary.</Note></div>
           </Section>
 
           {/* Tools */}

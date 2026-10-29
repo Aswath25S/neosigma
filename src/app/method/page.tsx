@@ -125,8 +125,8 @@ export default function MethodPage() {
                 <tr><td className="text-ink">Timing</td><td className="text-right mono">{weights.parts.timing}</td><td className="text-[14px]">Highest active trigger in the last {weights.timing.window_days} days (model releases: {weights.timing.model_release_window_days} days): {Object.entries(weights.timing.triggers).map(([k, v]) => `${TRIGGER_NAMES[k]} ${v}`).join(", ")}.</td></tr>
               </tbody>
             </table>
-            <p className="text-[14px] mt-4">Tiers: {weights.tiers.hot}+ Hot, {weights.tiers.warm}–{weights.tiers.hot - 1} Warm, under {weights.tiers.warm} Watch. A company with zero live-agent evidence is only ever shown on the Rejected tab.</p>
-            <p className="text-[14px] mt-2">Cost: salary midpoint × load factor ({weights.cost.load_factor}) × overlap. No salary → median of same-title postings, marked estimated, only with ≥ {weights.cost.min_same_title_postings} such postings.</p>
+            <p className="text-[14px] mt-4">A company with zero live-agent evidence is never a lead; its roles are listed on the Rejected roles tab. On the Gaps page, “strong leads” are companies scoring {weights.tiers.warm} or more.</p>
+            <p className="text-[14px] mt-2">Salary: the middle of each role&apos;s posted range, from the job board or the posting text. Non-USD salaries are converted at the European Central Bank reference rate fetched on each run. A company&apos;s average salary is the mean across its qualifying roles that list one. Nothing is estimated: roles without a posted salary are left out.</p>
           </section>
 
           <section>
@@ -187,7 +187,7 @@ export default function MethodPage() {
               <li>A posting is only read by Claude when its title mentions AI or its description passes the keyword pre-screen; eval work described in unusual words can be missed.</li>
               <li>The {weights.fetch.max_posting_age_days}-day cut-off uses the board&apos;s first-published date, so long-open roles drop out even while still open.</li>
               <li>Duty labels come from the posting&apos;s words. Postings that describe the work vaguely score lower than the job may really be.</li>
-              <li>The cost is a minimum estimate of manual work, from posted salary ranges only. Many postings have no salary, so totals undercount.</li>
+              <li>Salaries come from postings only. Many postings list none, so averages rest on the roles that do.</li>
               <li>News triggers come from headlines only; funding amounts and launch details are not read.</li>
               <li>Public complaints about agent quality are a manual flag in v1 (<code className="mono text-[13px]">config/manual_triggers.json</code>).</li>
               <li>Size bands come from a web search and may be out of date; each links its source.</li>

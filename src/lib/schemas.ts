@@ -64,6 +64,7 @@ export const NewsCheckSchema = z.object({
     index: z.number(),
     about_company: z.boolean(),
     kind: z.enum(["funding", "agent_launch", "acquisition", "public_complaints", "none"]),
+    event: z.string().describe("Short name of the underlying event; headlines about the same event get the same name"),
     reason: z.string(),
   })),
 });
@@ -73,6 +74,7 @@ export const ModelReleaseCheckSchema = z.object({
     index: z.number(),
     is_major_model_release: z.boolean(),
     model_name: z.string().nullable(),
+    release: z.string().nullable().describe("Name of the release event; variants or sizes announced together share it"),
   })),
 });
 

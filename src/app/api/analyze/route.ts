@@ -1,7 +1,5 @@
 import { applyGates, extractPosting, FAIL_REASON_TEXT, judgePosting, type FailReason } from "@/lib/analyze";
 import { stage1Note } from "@/lib/report";
-import { yearlyCost } from "@/lib/cost";
-import { weights } from "@/lib/config";
 import { hasApiKey } from "@/lib/claude";
 import { normalizeWhitespace } from "@/lib/text";
 import type { ReportData } from "@/components/PostingReport";
@@ -109,14 +107,10 @@ export async function POST(req: Request) {
             firstEvalHire: ex.is_first_eval_hire, remote: ex.remote, location: ex.location,
           },
           salary: (() => {
-            // Cost for USD salaries only; the demo has no exchange rates or same-title medians.
+            // The demo has no exchange rates, so only USD salaries get a midpoint.
             const usd = !ex.currency || ex.currency.toUpperCase() === "USD";
             const mid = ex.salary_min != null && usd ? (ex.salary_min + (ex.salary_max ?? ex.salary_min)) / 2 : null;
-            return {
-              min: ex.salary_min, max: ex.salary_max, currency: ex.currency, source: ex.salary_source, ranges: [],
-              midpoint: mid, estimated: false, cost: mid != null ? yearlyCost(mid, weights.cost.load_factor, g.overlap) : null,
-              midpointNote: ex.salary_min == null ? "No salary posted, so no figure." : usd ? null : "Salary is not in USD; the demo does not convert it.",
-            };
+            return { min: ex.salary_min, max: ex.salary_max, currency: ex.currency, source: ex.salary_source, ranges: [], midpoint: mid, converted: false };
           })(),
           gates: {
             ...g,
